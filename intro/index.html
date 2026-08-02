@@ -94,7 +94,10 @@ h2 em{font-style:normal;color:var(--accent)}
 .row p{color:var(--sub);font-size:.94rem;max-width:520px}
 .row p b{color:var(--text);font-weight:600}
 .row .q{grid-column:3;margin-top:4px;font-size:.86rem;color:var(--dim);border-left:2px solid var(--accent);padding-left:14px;line-height:1.75;max-width:520px}
-@media(max-width:860px){.row{grid-template-columns:60px 1fr;gap:16px}.row p,.row .q{grid-column:2}}
+.row .fig{grid-column:3;margin-top:22px}
+.row .fig img{width:100%;max-width:430px;display:block;border:1px solid var(--border)}
+.row .fig figcaption{font-size:.78rem;color:var(--dim);margin-top:10px}
+@media(max-width:860px){.row{grid-template-columns:60px 1fr;gap:16px}.row p,.row .q,.row .fig{grid-column:2}}
 .statement{margin-top:88px;padding-top:64px;border-top:1px solid var(--border)}
 .statement p{font-size:clamp(1.25rem,2.6vw,1.7rem);font-weight:600;letter-spacing:-.02em;line-height:1.7;max-width:780px}
 .statement em{font-style:normal;color:var(--accent)}
@@ -265,6 +268,10 @@ footer b{color:var(--sub)}
         <h3>개별 리포트<small>학생별 데이터 관리</small></h3>
         <p>모든 테스트와 오답이 학생별 데이터로 쌓이고, 리포트로 전달됩니다. 다음 과제와 보강은 그 기록에서 나옵니다.</p>
         <div class="q">"리포트 같은 시스템은 어느 학원을 봐도 없어서 너무 만족스럽습니다." — 용인고 2학년 · 기말 전교 1등</div>
+        <figure class="fig">
+          <img src="report_sample.jpg" alt="데일리 리포트 실제 예시" loading="lazy">
+          <figcaption>실제 데일리 리포트 — 매 수업 후 전달됩니다. (학생명 비공개 처리)</figcaption>
+        </figure>
       </div>
     </div>
 
