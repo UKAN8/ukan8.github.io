@@ -370,7 +370,7 @@ function bgmStart(){
     dg.gain.value = 0.12;
     o1.connect(dg); o2.connect(dg); dg.connect(filt);
     o1.start(); o2.start();
-    master.gain.exponentialRampToValueAtTime(0.55, a.currentTime + 1.4);
+    master.gain.exponentialRampToValueAtTime(0.27, a.currentTime + 1.8);  /* 배경음 볼륨 — 효과음과 별개 */
     bgm = { master, filt, o1, o2, timer:null };
     pulse();
   }catch(e){ bgm = null; }
