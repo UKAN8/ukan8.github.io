@@ -48,9 +48,7 @@ body{
   color:var(--text); font-family:inherit; font-size:.98rem; font-weight:700;
   padding:17px; cursor:pointer; transition:.18s; text-align:center; line-height:1.4;
 }
-.btn:hover{border-color:var(--accent); transform:translateY(-2px)}
 .btn.key{background:var(--accent); border-color:var(--accent); color:#0a0a0f}
-.btn.key:hover{filter:brightness(1.08)}
 .btn+.btn{margin-top:12px}
 .tiny{font-size:.75rem; color:var(--dim); line-height:1.8}
 
@@ -111,7 +109,6 @@ body{
   font-family:inherit; font-size:.94rem; font-weight:600; line-height:1.5;
   padding:16px 17px; cursor:pointer; transition:.14s; word-break:keep-all;
 }
-.ch:hover:not(:disabled){border-color:var(--accent); transform:translateY(-2px)}
 .ch:disabled{cursor:default}
 .ch .k{flex:0 0 20px; color:var(--dim); font-size:.85rem; font-weight:800}
 .ch.ox{justify-content:center; font-size:1.7rem; font-weight:900; padding:24px}
@@ -172,13 +169,27 @@ body{
 
 .foot{margin-top:26px; text-align:center}
 .foot a{color:var(--dim); text-decoration:none; border-bottom:1px solid transparent; transition:.18s}
-.foot a:hover{color:var(--sub); border-color:var(--sub)}
 .sound{
   position:fixed; right:16px; top:16px; width:34px; height:34px;
   background:transparent; border:1px solid var(--border); color:var(--dim);
   font-size:.85rem; cursor:pointer; z-index:20; font-family:inherit;
 }
-.sound:hover{border-color:var(--accent); color:var(--accent)}
+/* 마우스가 있는 기기에서만 호버를 적용한다.
+   모바일에서 :hover 를 그냥 쓰면 손가락을 뗀 뒤에도 표시가 남아 오답을 유발한다. */
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{border-color:var(--accent); transform:translateY(-2px)}
+  .btn.key:hover{filter:brightness(1.08)}
+  .ch:hover:not(:disabled){border-color:var(--accent); transform:translateY(-2px)}
+  .sound:hover{border-color:var(--accent); color:var(--accent)}
+  .foot a:hover{color:var(--sub); border-color:var(--sub)}
+}
+/* 터치 기기: 누르고 있는 동안에만 반응 */
+@media (hover:none){
+  .ch:active:not(:disabled){border-color:var(--accent); background:var(--card2)}
+  .btn:active{border-color:var(--accent)}
+}
+.ch,.btn,.tab{touch-action:manipulation}
+
 @media (max-width:400px){
   .brand h1{font-size:2.2rem}
   .qtext{font-size:1.04rem}
@@ -609,13 +620,14 @@ $("#shareBtn").onclick = async ()=>{
   const url = location.origin + location.pathname;
   const f = lastRun ? lastRun.floor : 0;
   const txt = f >= 100
-    ? "개념의 탑 100층 정복. 너도 올라와 봐."
-    : "개념의 탑 "+f+"층에서 떨어졌다. 너는 몇 층까지 오를 수 있어?";
+    ? "난 100층 정복. 넌 몇 층?"
+    : "난 "+f+"층에서 떨어짐. 넌 몇 층?";
+  const msg = txt + " " + url;   /* 줄바꿈 없이 한 줄로 */
   if(navigator.share){
-    try{ await navigator.share({ title:"개념의 탑 — 수학은유강", text:txt, url:url }); return; }
+    try{ await navigator.share({ title:"개념의 탑 — 수학은유강", text:msg }); return; }
     catch(e){ if(e.name === "AbortError") return; }
   }
-  try{ await navigator.clipboard.writeText(txt+"\n"+url); toast("링크를 복사했다. 붙여넣기 하면 돼"); }
+  try{ await navigator.clipboard.writeText(msg); toast("링크를 복사했다. 붙여넣기 하면 돼"); }
   catch(e){ toast("복사에 실패했다"); }
 };
 
