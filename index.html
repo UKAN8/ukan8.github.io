@@ -39,7 +39,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
 .link{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--card);border:1px solid var(--border);padding:18px 24px;transition:.18s}
 .link:hover{border-color:var(--accent);transform:translateY(-2px)}
 .link .t{font-weight:700;font-size:.98rem}
-.link .d{font-size:.8rem;color:var(--dim);margin-top:1px}
+.link .d{font-size:.8rem;color:var(--dim);margin-top:1px;word-break:keep-all}
 .link .arrow{color:var(--dim);font-size:1.05rem;transition:.18s}
 .link:hover .arrow{color:var(--accent)}
 .link.primary{background:var(--accent);border-color:var(--accent)}
@@ -47,6 +47,10 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
 .link.primary .d{color:rgba(10,10,15,.6)}
 .link.primary:hover{filter:brightness(1.08)}
 .link.soon{opacity:.45;pointer-events:none}
+.link.tower{border-color:var(--accent);background:rgba(245,160,160,.07)}
+.link.tower .t{display:flex;align-items:center;gap:9px}
+.link.tower .badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;color:#0a0a0f;background:var(--accent);padding:2px 7px;line-height:1.5}
+.link.tower .arrow{color:var(--accent)}
 .sub-links{margin-top:34px;display:flex;justify-content:center;gap:26px;font-size:.8rem;color:var(--dim)}
 .sub-links a{border-bottom:1px solid transparent;padding-bottom:2px;transition:.18s}
 .sub-links a:hover{color:var(--sub);border-color:var(--sub)}
@@ -62,6 +66,10 @@ footer{padding:26px;text-align:center;font-size:.75rem;color:var(--dim)}
     <p class="quote">제대로 이해하고 반복하고 반복하여 <b>완성한다.</b></p>
 
     <div class="links">
+      <a class="link tower" href="/tower/">
+        <div><div class="t">개념의 탑<span class="badge">NEW</span></div><div class="d">10초 개념 퀴즈 100층 · 시즌1 1위 선물</div></div>
+        <div class="arrow">→</div>
+      </a>
       <a class="link primary" href="/intro/">
         <div><div class="t">수업 안내</div><div class="d">시스템 · 2026 1학기 기록 · 학생 후기</div></div>
         <div class="arrow">→</div>
