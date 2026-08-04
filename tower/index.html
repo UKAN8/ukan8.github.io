@@ -149,6 +149,8 @@ body{
 }
 .nick input::placeholder{color:var(--dim); font-weight:500}
 .nick input:focus{border-color:var(--accent)}
+.nick+.nick{margin-top:10px}
+#pinInput{letter-spacing:.28em}
 .nick button{flex:0 0 84px; margin:0; padding:16px 0}
 
 /* ---------- 랭킹 ---------- */
@@ -253,9 +255,13 @@ body{
       <div class="cmt" id="overCmt"></div>
       <div class="review" id="review"></div>
       <div class="tiny" id="prizeNote" style="margin-bottom:10px">시즌 1 <b style="color:var(--accent)">학년별 1위</b>에게 선물이 있습니다.</div>
-      <div class="nick" id="nickBox">
-        <input id="nickInput" maxlength="10" placeholder="닉네임 (최대 10자)" autocomplete="off">
-        <button class="btn key" id="submitBtn">등록</button>
+      <div id="nickBox">
+        <div class="nick"><input id="nickInput" maxlength="10" placeholder="닉네임 (최대 10자)" autocomplete="off"></div>
+        <div class="nick">
+          <input id="pinInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="비밀번호 숫자 4자리" autocomplete="off">
+          <button class="btn key" id="submitBtn">등록</button>
+        </div>
+        <div class="tiny" style="text-align:left;margin:-2px 0 12px">선물 받을 때 본인 확인에 씁니다. 잊지 마세요.</div>
       </div>
       <div class="tiny" id="submitMsg" style="margin-bottom:12px"></div>
       <button class="btn key" id="shareBtn">기록 공유하기</button>
@@ -553,6 +559,7 @@ function finish(reached, reason, q){
   $("#nickBox").style.display = reached > 0 ? "" : "none";
   $("#submitMsg").textContent = "";
   $("#nickInput").value = localStorage.getItem("tower_nick")||"";
+  $("#pinInput").value  = localStorage.getItem("tower_pin")||"";
   $("#submitBtn").disabled = false;
   $("#submitBtn").textContent = "등록";
   lastRun = { grade:G.grade, floor:reached };
@@ -571,7 +578,7 @@ function comment(f){
 }
 
 /* ---------- 랭킹 ---------- */
-async function postScore(nick, grade, floor){
+async function postScore(nick, grade, floor, pin){
   if(!online()){
     const k = "tower_rank_"+grade;
     const arr = JSON.parse(localStorage.getItem(k)||"[]");
@@ -579,7 +586,8 @@ async function postScore(nick, grade, floor){
     localStorage.setItem(k, JSON.stringify(arr));
     return;
   }
-  const url = RANK_API+"?action=add&nick="+encodeURIComponent(nick)+"&grade="+grade+"&floor="+floor;
+  const url = RANK_API+"?action=add&nick="+encodeURIComponent(nick)+"&grade="+grade+"&floor="+floor+
+              "&pin="+encodeURIComponent(pin||"");
   const r = await fetch(url);
   const j = await r.json();
   if(!j.ok) throw new Error(j.error||"fail");
@@ -643,11 +651,14 @@ document.querySelectorAll(".tab").forEach(t=> t.onclick = ()=> renderRank(Number
 
 $("#submitBtn").onclick = async ()=>{
   const nick = $("#nickInput").value.trim().replace(/\s+/g," ").slice(0,10);
+  const pin  = $("#pinInput").value.replace(/[^0-9]/g,"").slice(0,4);
   if(!nick){ $("#submitMsg").textContent = "닉네임을 입력해 주세요."; return; }
+  if(pin.length !== 4){ $("#submitMsg").textContent = "비밀번호는 숫자 4자리로 입력해 주세요."; return; }
   const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = "등록 중";
   try{
-    await postScore(nick, lastRun.grade, lastRun.floor);
+    await postScore(nick, lastRun.grade, lastRun.floor, pin);
     localStorage.setItem("tower_nick", nick);
+    localStorage.setItem("tower_pin", pin);
     myMark = { g:lastRun.grade, n:nick, f:lastRun.floor };
     $("#submitMsg").textContent = "등록되었습니다.";
     btn.textContent = "완료";
@@ -657,7 +668,9 @@ $("#submitBtn").onclick = async ()=>{
     btn.disabled = false; btn.textContent = "등록";
   }
 };
-$("#nickInput").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#submitBtn").click(); });
+$("#nickInput").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#pinInput").focus(); });
+$("#pinInput").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#submitBtn").click(); });
+$("#pinInput").addEventListener("input", e=>{ e.target.value = e.target.value.replace(/[^0-9]/g,"").slice(0,4); });
 
 /* 키보드: 1~5, O/X */
 document.addEventListener("keydown", e=>{
