@@ -117,6 +117,8 @@ section{padding:64px 0}
   box-shadow:0 8px 20px rgba(0,0,0,.35)}
 .nd .h{font-size:13.5px;font-weight:800;letter-spacing:-.03em;display:block;line-height:1.3}
 .nd .s{font-size:10px;color:var(--ink3);display:block;margin-top:3px;line-height:1.35}
+.pcbr{display:none}
+@media(min-width:760px){.pcbr{display:inline}}
 .nd.plain{cursor:default;background:transparent;border-style:dashed}
 .nd.plain:hover{transform:none;border-color:var(--line);background:transparent;box-shadow:none}
 .nd.key{border-color:var(--tint2);background:linear-gradient(180deg,var(--tint),var(--card))}
@@ -270,7 +272,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
   <div class="eyebrow">필탑학원 고등수학 · 유강T</div>
   <h1>수업은 한 번으로 끝나지 않습니다.<br>어제의 기록이 <em>오늘의 문제</em>가 됩니다.</h1>
   <p class="lede">교재와 과제, 테스트, 리포트를 전부 직접 만듭니다.
-  아래 도식에서 <strong style="color:var(--ink)">아무 칸이나 눌러보세요.</strong> 아이가 실제로 받는 자료가 그대로 열립니다.</p>
+  아래 도식에서 <strong style="color:var(--ink)">아무 칸이나 눌러보세요.</strong> 학생이 실제로 받는 자료가 그대로 열립니다.</p>
   <div class="stats">
     <div><b>11<i>회</i></b><span>전교 1등<br>(중간 6 · 기말 5)</span></div>
     <div><b>9<i>회</i></b><span>지필 100점<br>(중간 6 · 기말 3)</span></div>
@@ -284,7 +286,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
   <div class="shead">
     <div class="k">SYSTEM MAP</div>
     <h2>매일, 매주, 그리고 한 학기</h2>
-    <p>수업 하나가 끝나도 그날로 끝나지 않습니다. 매일 도는 흐름 위에 주 단위 점검이 얹히고,
+    <p>수업은 하루로 끝나지 않습니다. 매일 도는 흐름 위에 주 단위 점검이 얹히고,<br class="pcbr">
       그게 모여 시험까지 갑니다. 칸을 누르면 그 자료가 열립니다.</p>
   </div>
 
@@ -312,7 +314,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
         <span class="arr">→</span>
         <button class="nd" data-open="daily"><i class="dot"></i><span class="h">배포</span><span class="s">팀톡 · 문자</span></button>
         <span class="arr">→</span>
-        <button class="nd" data-open="circuit"><i class="dot"></i><span class="h">과제</span><span class="s">다음 범위 배정</span></button>
+        <div class="nd plain"><span class="h">과제</span><span class="s">다음 범위 배정</span></div>
         <div class="brrow" style="grid-column:9/14">
           <span class="bl">↳</span>
           <button class="nd key" data-open="daily"><i class="dot"></i><span class="h">데일리 리포트</span></button>
@@ -344,7 +346,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
         <div class="brace" style="grid-column:1/4">회차마다</div>
         <button class="nd key" data-open="weektest" style="grid-column:1"><i class="dot"></i><span class="h">주간고사</span><span class="s">25문항 · 학년 공통</span></button>
         <span class="arr">→</span>
-        <button class="nd" data-open="weektest"><i class="dot"></i><span class="h">개인 리포트</span><span class="s">문항별 + 누적</span></button>
+        <div class="nd plain"><span class="h">개인 리포트</span><span class="s">문항별 + 누적</span></div>
       </div>
       <span class="arr">&amp;</span>
       <div class="grp">
@@ -393,7 +395,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       </div>
     </div>
     <div class="loopback"><span class="ic">↻</span>
-      <span>시험이 어떻게 나왔는지, 아이들이 무엇을 불편해했는지가 <b>다음 학기 교재를 바꿉니다.</b></span></div>
+      <span>시험이 어떻게 나왔는지, 학생들이 무엇을 불편해했는지가 <b>다음 학기 교재를 바꿉니다.</b></span></div>
   </div>
 </div></section>
 
@@ -449,7 +451,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
   <div class="shead">
     <div class="k">CONTACT</div>
     <h2>상담 문의</h2>
-    <p>아이의 지금 상태를 듣고 반 배정과 진행 계획을 안내드립니다. 반은 상담과 레벨테스트로 정합니다.</p>
+    <p>학생의 지금 상태를 듣고 반 배정과 진행 계획을 안내드립니다. 반은 상담과 레벨테스트로 정합니다.</p>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
     <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px">
@@ -517,13 +519,14 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
 
 /* stepper */
 .stepper{display:grid;gap:0}
-.stp{display:grid;grid-template-columns:30px 1fr;gap:13px;opacity:.32;transition:.35s}
+.stp{display:grid;grid-template-columns:46px 1fr;gap:13px;opacity:.32;transition:.35s}
 .stp.on{opacity:1}
-.stp .no{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line2);display:grid;place-items:center;
-  font-size:12px;font-weight:800;color:var(--ink3);transition:.35s;background:var(--bg2)}
+.stp .no{width:46px;height:30px;border-radius:999px;border:1.5px solid var(--line2);display:grid;place-items:center;
+  font-size:11.5px;font-weight:800;letter-spacing:-.02em;white-space:nowrap;
+  color:var(--ink3);transition:.35s;background:var(--bg2)}
 .stp.on .no{border-color:var(--key);color:var(--key);background:var(--tint)}
 .stp .bd{padding-bottom:18px;position:relative}
-.stp:not(:last-child) .bd::before{content:"";position:absolute;left:-28px;top:34px;bottom:2px;width:1.5px;
+.stp:not(:last-child) .bd::before{content:"";position:absolute;left:-36px;top:34px;bottom:2px;width:1.5px;
   background:var(--line);transition:.35s}
 .stp.on:not(:last-child) .bd::before{background:var(--tint2)}
 .stp .bd b{display:block;font-size:14.5px;font-weight:800;letter-spacing:-.02em}
@@ -935,7 +938,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <h3>학부모님께</h3>
     <ul class="sell">
       <li><i>1</i><div><b>다음 주로 넘기지 않습니다.</b><span>못 넘긴 유형은 기억이 남아 있을 때 잡는 게 가장 빠릅니다. 일주일 뒤에는 처음부터 다시 해야 합니다.</span></div></li>
-      <li><i>2</i><div><b>언제 오는지 문자로 갑니다.</b><span>날짜·시간·사유가 함께 갑니다. 아이가 전달하는 것에 기대지 않습니다.</span></div></li>
+      <li><i>2</i><div><b>언제 오는지 문자로 갑니다.</b><span>날짜·시간·사유가 함께 갑니다. 학생이 전달하는 것에 기대지 않습니다.</span></div></li>
       <li><i>3</i><div><b>얼마나 자주 남는지도 봅니다.</b><span>특정 학생의 추가학습이 늘어나기 시작하면, 그 자체가 상담이 필요하다는 신호입니다.</span></div></li>
     </ul>
   </div>
@@ -970,15 +973,15 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="dhero">
     <div class="k">매일 · 05</div>
     <h2>메타루프</h2>
-    <p class="one">수업이 끝난 날 밤, 아이 폰으로 링크가 하나 갑니다.
+    <p class="one">수업이 끝난 날 밤, 학생 폰으로 링크가 하나 갑니다.
       <strong style="color:var(--ink)">누워서 엄지로 3분.</strong> 계산은 미리 해두고 판단만 묻습니다.</p>
-    <div class="facts"><span>3분</span><span>다음날 21시까지</span><span>아이마다 다른 문항</span></div>
+    <div class="facts"><span>3분</span><span>다음날 21시까지</span><span>학생마다 다른 문항</span></div>
   </div>
 
   <div class="blk">
     <h3>학부모님께</h3>
     <ul class="sell">
-      <li><i>1</i><div><b>문항 수가 곧 아이의 상태입니다.</b><span>다 잡은 학생은 3문항, 밀린 게 있으면 8문항이 갑니다. 벌이 아니라 표시입니다. 오늘 몇 개가 갔는지만 봐도 알 수 있습니다.</span></div></li>
+      <li><i>1</i><div><b>문항 수가 곧 학생의 상태입니다.</b><span>다 잡은 학생은 3문항, 밀린 게 있으면 8문항이 갑니다. 벌이 아니라 표시입니다. 오늘 몇 개가 갔는지만 봐도 알 수 있습니다.</span></div></li>
       <li><i>2</i><div><b>한 번 맞혔다고 끝나지 않습니다.</b><span>두 번 연속 맞혀야 넘어가고, 그 뒤에도 시간이 지나면 다시 나옵니다. 많이 틀린 유형은 일주일쯤 뒤에, 잘 잡은 유형은 세 주쯤 뒤에 돌아옵니다.</span></div></li>
       <li><i>3</i><div><b>계산을 시키지 않으니까 실제로 합니다.</b><span>밤 11시에 종이와 펜을 꺼내라고 하면 안 합니다. 그래서 계산은 미리 해두고 "왜 그렇게 되는지"만 묻습니다.</span></div></li>
     </ul>
@@ -987,7 +990,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="blk">
     <h3>직접 풀어보세요</h3>
     <div class="demo">
-      <div class="dl">아이가 보는 화면 그대로입니다</div>
+      <div class="dl">학생이 보는 화면 그대로입니다</div>
       <div class="phone"><div class="scr" id="lpScr">
         <div class="lp-h">
           <div class="br">META LOOP</div>
@@ -1076,7 +1079,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
             <div id="lpNext">채점 결과에 따라 정해집니다.</div></div>
         </div>
       </div></div>
-      <div class="cap">아이마다 링크가 다릅니다. 중간에 껐다 켜도 푼 데까지 남습니다.</div>
+      <div class="cap">학생마다 링크가 다릅니다. 중간에 껐다 켜도 푼 데까지 남습니다.</div>
     </div>
   </div>
 
@@ -1098,7 +1101,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       </div>
       <div class="track"><i id="lpMark"></i></div>
       <div class="trackx"><span>오늘</span><span>2주 뒤</span><span>한 달 뒤</span></div>
-      <div class="cap">손대지 않아도 아이마다 나오는 문제가 자동으로 벌어집니다.
+      <div class="cap">손대지 않아도 학생마다 나오는 문제가 자동으로 벌어집니다.
         많이 틀린 건 자주, 잘 잡은 건 뜸하게.</div>
     </div>
   </div>
@@ -1109,7 +1112,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="dhero">
     <div class="k">매일 · 06</div>
     <h2>데일리 리포트</h2>
-    <p class="one">매 수업 후 아이 한 명당 한 장. 점수와 과제 이행률, 코멘트, 다음 과제가
+    <p class="one">매 수업 후 학생 한 명당 한 장. 점수와 과제 이행률, 코멘트, 다음 과제가
       <strong style="color:var(--ink)">한 화면에 들어옵니다.</strong></p>
     <div class="facts"><span>수업 당일 밤</span><span>학생 · 학부모 · 데스크 동시</span><span>한 명당 한 장</span></div>
   </div>
@@ -1232,7 +1235,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <ul class="sell">
       <li><i>1</i><div><b>내신 서술형에서 깎이는 건 대부분 계산이 아닙니다.</b><span>근거를 안 쓴 것입니다. 주간지는 그것만 훈련합니다.</span></div></li>
       <li><i>2</i><div><b>설명하지 못하면 안 배운 것입니다.</b><span>맞혔는데 왜 그런지 못 쓰는 학생은 다음 단원에서 반드시 다시 걸립니다. 여기서 미리 걸러집니다.</span></div></li>
-      <li><i>3</i><div><b>해설은 손글씨로 나갑니다.</b><span>인쇄체 해설은 아이들이 안 읽습니다. 실제로 푸는 순서 그대로 보여줍니다.</span></div></li>
+      <li><i>3</i><div><b>해설은 손글씨로 나갑니다.</b><span>인쇄체 해설은 학생들이 안 읽습니다. 실제로 푸는 순서 그대로 보여줍니다.</span></div></li>
     </ul>
   </div>
 
@@ -1269,6 +1272,14 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       </div>
       <div class="cap">답만 맞히면 되는 문제가 아닙니다.
         <strong style="color:var(--ink2)">"이므로", "따라서"가 빠지면 깎인다</strong>는 걸 학교 시험 전에 여기서 먼저 겪습니다.</div>
+    </div>
+
+    <div class="demo" style="margin-top:16px">
+      <div class="dl">손글씨 해설 — 실제 배포본</div>
+      <a href="handwriting_sample.jpg" target="_blank" rel="noopener" style="display:block">
+        <img src="handwriting_sample.jpg" alt="주간지 손글씨 해설 예시"
+             style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)"></a>
+      <div class="cap">인쇄체로 답만 적어 두지 않습니다. 핵심 아이디어를 먼저 세우고, 단계별로 손으로 풀어 나간 순서를 그대로 보여줍니다.</div>
     </div>
   </div>
 </article>
@@ -1366,7 +1377,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         <div class="stp"><div class="no">2</div><div class="bd"><b>변형 문제지</b>
           <span>같은 구조에 다른 숫자. 학교가 시험에 낼 만한 변형을 미리 겪게 합니다.</span></div></div>
         <div class="stp"><div class="no">3</div><div class="bd"><b>손글씨 해설</b>
-          <span>실제로 푸는 순서 그대로 씁니다. 답만 있는 해설은 아이들이 안 봅니다.</span></div></div>
+          <span>실제로 푸는 순서 그대로 씁니다. 답만 있는 해설은 학생들이 안 봅니다.</span></div></div>
       </div>
       <div style="display:flex;gap:8px;margin-top:6px">
         <button class="btn" data-pst="next">다음 →</button>
@@ -1399,7 +1410,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="blk">
     <h3>파이널 라운드 (예시)</h3>
     <div class="demo">
-      <div class="dl">시험 전날 아이가 하는 점검입니다. 눌러서 체크해보세요</div>
+      <div class="dl">시험 전날 학생이 하는 점검입니다. 눌러서 체크해보세요</div>
       <div id="fnList"></div>
       <div style="margin-top:13px;padding:12px 14px;background:var(--card);border:1px solid var(--line);
            border-radius:11px;font-size:13.2px;color:var(--ink2)">
@@ -1427,7 +1438,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <ul class="sell">
       <li><i>1</i><div><b>시험장에서 첫 문제를 푸는 상태를 만들지 않습니다.</b><span>아침에 이미 한 세트를 풀고 들어가면 손이 굳지 않습니다. 실수의 상당 부분이 여기서 사라집니다.</span></div></li>
       <li><i>2</i><div><b>전날은 새 문제가 아니라 범위 전체를 훑습니다.</b><span>이 시점에 필요한 건 "빠뜨린 게 없다"는 확인입니다.</span></div></li>
-      <li><i>3</i><div><b>강제하지 않습니다.</b><span>원하는 학생이 많으면 엽니다. 시험 전날 컨디션은 아이마다 다르니까요.</span></div></li>
+      <li><i>3</i><div><b>강제하지 않습니다.</b><span>원하는 학생이 많으면 엽니다. 시험 전날 컨디션은 학생마다 다르니까요.</span></div></li>
     </ul>
   </div>
 
@@ -1454,7 +1465,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <div class="k">학기 · 시험 직후</div>
     <h2>내신 분석지</h2>
     <p class="one">시험이 끝나면 <strong style="color:var(--ink)">그 시험 자체를 뜯어봅니다.</strong>
-      아이 점수가 아니라, 그 점수가 어떤 시험에서 나온 점수인지를 봅니다.</p>
+      학생 점수가 아니라, 그 점수가 어떤 시험에서 나온 점수인지를 봅니다.</p>
     <div class="facts"><span>학교·학년별</span><span>예상 등급컷</span><span>변별문항</span><span>주제별 정답률</span></div>
   </div>
 
@@ -1974,10 +1985,10 @@ INIT.eval=function(){
          ["26-1학기 기말 · 고1",95.8,24],["26-1학기 기말 · 고2",88.9,9]];
   $("#evCmp").innerHTML=E.map(function(r){
     var low=r[1]<90;
-    return '<div class="row" title="'+r[0]+' — 추천 '+r[1]+'% ('+r[2]+'명 응답)"><span class="lb">'+r[0]+'</span>'+
+    return '<div class="row"><span class="lb">'+r[0]+'</span>'+
       '<span class="tr"><i style="width:'+r[1]+'%;background:'+(low?"#D2635F":"#EA9090")+'"></i></span>'+
       '<span class="vv">'+r[1]+'%</span></div>';
-  }).join("")+'<div style="font-size:11.5px;color:var(--ink3);margin-top:4px">막대 위에 올리면 회차별 응답 수가 보입니다.</div>';
+  }).join("")+'<div style="font-size:11.5px;color:var(--ink3);margin-top:4px">붉은 막대가 90% 아래로 내려간 회차입니다.</div>';
 };
 
 /* 최초 진입 시 해시 처리 */
