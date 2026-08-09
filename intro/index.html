@@ -54,12 +54,11 @@ h1{font-size:clamp(2.8rem,8vw,5.2rem);font-weight:700;letter-spacing:-.04em;line
 h1 span{color:var(--accent)}
 .hero-attr{margin-top:26px;font-size:.92rem;color:var(--dim)}
 .hero-attr b{color:var(--sub);font-weight:500}
-.hero-strip{margin-top:80px;display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--line)}
-.hs{padding:26px 30px 26px 0;margin-right:30px}
-@media(min-width:1100px){.hs{padding-right:36px;margin-right:36px}}
-.hs .n{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+.hero-strip{margin-top:80px;display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--line)}
+.hs{padding:24px 14px 24px 0}
+.hs .n{font-size:1.42rem;font-weight:700;letter-spacing:-.02em}
 .hs .n em{font-style:normal;color:var(--accent)}
-.hs .l{font-size:.8rem;color:var(--dim);margin-top:2px}
+.hs .l{font-size:.74rem;color:var(--dim);margin-top:4px;line-height:1.5}
 .hero-links{margin-top:64px;display:flex;gap:36px;align-items:center}
 .btn-fill{background:var(--accent);color:#0a0a0f;padding:15px 36px;font-weight:700;font-size:.92rem;letter-spacing:.02em;transition:.2s}
 .btn-fill:hover{background:var(--text)}
@@ -197,11 +196,11 @@ footer b{color:var(--sub)}
     <p class="hero-attr">학생들이 강의평가에 남긴 문장입니다. <b>서로 다른 두 명이, 같은 문장을.</b></p>
 
     <div class="hero-strip">
-      <div class="hs"><div class="n"><em>11</em>회</div><div class="l">전교 1등 · 중간 6 · 기말 5</div></div>
-      <div class="hs"><div class="n"><em>4</em> / 4</div><div class="l">담당 전 반에서 전교 1등</div></div>
-      <div class="hs"><div class="n"><em>9</em>회</div><div class="l">지필 100점 · 중간 6 · 기말 3</div></div>
-      <div class="hs"><div class="n"><em>62</em>%</div><div class="l">1학기 종합 1등급 비율</div></div>
-      <div class="hs"><div class="n"><em>95.5</em>%</div><div class="l">친구에게 추천 · 강의평가</div></div>
+      <div class="hs"><div class="n"><em>11</em>회</div><div class="l">전교 1등<br>중간 6 · 기말 5</div></div>
+      <div class="hs"><div class="n"><em>4</em> / 4</div><div class="l">담당 전 반에서<br>전교 1등</div></div>
+      <div class="hs"><div class="n"><em>9</em>회</div><div class="l">지필 100점<br>중간 6 · 기말 3</div></div>
+      <div class="hs"><div class="n"><em>62</em>%</div><div class="l">1학기 종합<br>1등급 비율</div></div>
+      <div class="hs"><div class="n"><em>95.5</em>%</div><div class="l">친구에게 추천<br>강의평가 기준</div></div>
     </div>
 
     <div class="hero-links">
