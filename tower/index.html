@@ -313,6 +313,7 @@ const BANK = JSON.parse(_d("Ig5FBhwGSRFNTVReWwAJCBpFF1aE/MGf7NiL6vNFAVYbHgAAW09W
 
 const TOP = 100, LIMIT = 10.0, PRIZE = 5;
 const SEASON_END = new Date("2026-08-12T23:59:59+09:00").getTime();
+const seasonOver = () => Date.now() > SEASON_END;
 function renderSeason(){
   const ms = SEASON_END - Date.now();
   const d = Math.ceil(ms / 86400000);
@@ -320,8 +321,22 @@ function renderSeason(){
   document.querySelectorAll(".dday").forEach(e => e.textContent = txt);
   const pn = document.getElementById("prizeNote");
   if(pn && ms <= 0) pn.style.display = "none";
+  if(ms <= 0) lockSeason();
+}
+/* 시즌이 끝나면 등반을 잠근다. 순위표는 계속 열어 둔다(선물 대상 확인용). */
+function lockSeason(){
+  document.querySelectorAll(".snote").forEach(e => e.innerHTML =
+    "<b>시즌 1이 종료되었습니다.</b> 더 이상 등반할 수 없습니다. 최종 순위는 아래 <b>명예의 전당</b>에서 확인하세요. 시즌 2를 준비하고 있습니다.");
+  const pick = document.querySelector(".pick");
+  if(pick) pick.style.display = "none";
+  const tr = document.getElementById("toRank");
+  if(tr){ tr.textContent = "최종 순위 보기"; tr.classList.add("key"); }
+  const ag = document.getElementById("againBtn");
+  if(ag) ag.style.display = "none";
 }
 renderSeason();
+/* 자정을 넘기면 새로고침 없이도 잠기게 한다(탭을 열어둔 학생 대비). */
+setInterval(renderSeason, 20000);
 const $ = s => document.querySelector(s);
 const online = () => RANK_API.indexOf("http") === 0;
 
@@ -462,6 +477,12 @@ function buildDeck(grade){
 }
 
 function start(grade){
+  if(seasonOver()){
+    lockSeason();
+    toast("시즌 1이 종료됐다. 최종 순위를 확인해 보자");
+    show("s-rank"); renderRank(grade || 1);
+    return;
+  }
   G.grade = grade;
   G.deck = buildDeck(grade);
   G.floor = 0;
