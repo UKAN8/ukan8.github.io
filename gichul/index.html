@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기출테스트 학습 시스템 — 수학은유강</title>
+<meta name="description" content="시험 그대로 치르고, 그날 바로 처방합니다. 고1·고2 내신 기출테스트 학습 시스템 안내.">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="기출테스트 학습 시스템 — 수학은유강">
+<meta property="og:description" content="시험 그대로 치르고, 그날 바로 처방합니다. 테스트 → 진단 → 맞춤 과제, 하루 안에 끝나는 사이클.">
+<meta property="og:url" content="https://ukan8.github.io/gichul/">
+<meta property="og:image" content="https://ukan8.github.io/gichul/og_gichul.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --card:rgba(255,255,255,.025);
+  --card2:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.06);
+  --text:#f5f5fa;
+  --sub:#b8b8c5;
+  --dim:#8a8a98;
+  --accent:#f5a0a0;
+  --accent-bg:rgba(245,160,160,.12);
+  --point:#e03060;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Paperlogy',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;font-weight:400;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+nav{position:sticky;top:0;background:rgba(10,10,15,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.logo span{color:var(--accent)}
+.nav-cta{font-size:.85rem;font-weight:600;color:var(--accent)}
+
+header{padding:88px 0 64px;text-align:left}
+.eyebrow{font-size:.76rem;font-weight:600;letter-spacing:.24em;color:var(--dim);margin-bottom:28px}
+h1{font-size:clamp(1.9rem,7vw,3rem);font-weight:700;letter-spacing:-.035em;line-height:1.32}
+h1 span{color:var(--accent)}
+.hero-sub{margin-top:24px;font-size:1rem;color:var(--sub);line-height:1.9}
+.hero-note{margin-top:18px;display:inline-block;padding:8px 16px;border:1px solid var(--border);border-radius:99px;font-size:.85rem;color:var(--sub)}
+.hero-note b{color:var(--accent);font-weight:600}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-label{font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--accent);margin-bottom:14px}
+h2{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;line-height:1.4;margin-bottom:14px}
+.sec-desc{font-size:.95rem;color:var(--sub);line-height:1.9}
+.sec-desc b{color:var(--text);font-weight:600}
+
+/* 타임라인 */
+.tl{margin-top:40px;position:relative}
+.tl::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:1px;background:var(--border)}
+.step{position:relative;padding:0 0 40px 56px}
+.step:last-child{padding-bottom:0}
+.step .num{position:absolute;left:0;top:0;width:35px;height:35px;border-radius:50%;background:var(--bg);border:1px solid var(--accent);color:var(--accent);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.step h3 em{font-style:normal;font-size:.78rem;font-weight:600;color:var(--dim);margin-left:8px;letter-spacing:.04em}
+.step p{font-size:.93rem;color:var(--sub);line-height:1.85}
+.step p b{color:var(--text);font-weight:600}
+
+/* 처방 3분기 카드 */
+.rx{margin-top:22px;display:grid;gap:12px}
+.rx-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px}
+.rx-card .tag{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--accent);background:var(--accent-bg);border-radius:6px;padding:3px 10px;margin-bottom:10px}
+.rx-card h4{font-size:.98rem;font-weight:700;margin-bottom:5px;letter-spacing:-.01em}
+.rx-card p{font-size:.88rem;color:var(--sub);line-height:1.8}
+
+/* 원칙 */
+.principles{margin-top:36px;display:grid;gap:0;border-top:1px solid var(--border)}
+.pr{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.pr .k{flex:0 0 96px;font-size:.8rem;font-weight:600;color:var(--accent);letter-spacing:.02em;padding-top:2px}
+.pr .v{font-size:.92rem;color:var(--sub);line-height:1.85}
+.pr .v b{color:var(--text);font-weight:600}
+
+/* 가정 안내 */
+.home-grid{margin-top:30px;display:grid;gap:12px}
+.home-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px}
+.home-card h4{font-size:.96rem;font-weight:700;margin-bottom:5px}
+.home-card p{font-size:.88rem;color:var(--sub);line-height:1.8}
+
+/* contact */
+.contact{background:var(--card2);border:1px solid var(--border);border-radius:18px;padding:30px 26px;margin-top:36px;text-align:center}
+.contact .big{font-size:1.3rem;font-weight:700;letter-spacing:-.01em;margin:6px 0 2px}
+.contact p{font-size:.87rem;color:var(--dim)}
+.btn-fill{display:inline-block;margin-top:18px;background:var(--point);color:#fff;font-weight:600;font-size:.92rem;border-radius:99px;padding:13px 34px;letter-spacing:.01em}
+
+footer{padding:44px 0 60px;border-top:1px solid var(--line);font-size:.82rem;color:var(--dim)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer b{color:var(--sub);font-weight:600}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/intro/">수학은<span>유강</span></a>
+    <a class="nav-cta" href="https://pf.kakao.com/_xeqibn/chat" target="_blank" rel="noopener">상담하기</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">2학기 중간고사 대비 — 고1 · 고2</div>
+    <h1>시험 그대로 치르고,<br><span>그날 바로</span> 처방합니다</h1>
+    <p class="hero-sub">
+      중간고사 대비 기간, 고1·고2 전 반이 <b>기출테스트 학습 체제</b>로 전환합니다.
+      학교별 실제 기출로 실전처럼 시험을 치르고, 채점 결과를 그 자리에서 진단해
+      학생마다 다른 과제가 <b>당일</b> 손에 쥐어지는 사이클입니다.
+    </p>
+    <div class="hero-note">테스트 → 진단 → 맞춤 과제, <b>하루 안에</b> 끝납니다</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">WHY</div>
+    <h2>왜 기출테스트인가</h2>
+    <p class="sec-desc">
+      내신은 학교마다 출제 결이 다릅니다. 담당 학교의 실제 기출을 학원이 직접 수집·복원해
+      시험지 형태 그대로 응시하기 때문에, 점수 자체보다 <b>어느 유형에서 왜 막혔는지</b>가
+      정확하게 드러납니다. 기출테스트의 목적은 등수 매기기가 아니라 <b>처방</b>입니다.
+      틀린 문항 하나하나가 그날 저녁 과제의 재료가 됩니다.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">CYCLE</div>
+    <h2>하루 사이클, 다섯 단계</h2>
+
+    <div class="tl">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>실전 기출테스트 <em>수업 중</em></h3>
+        <p>학교별 기출 시험지로 실전 형식 그대로 응시합니다. 시간 배분까지 실제 시험과 동일하게 훈련합니다.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>채점 즉시 개념 진단 <em>15분</em></h3>
+        <p>채점이 끝나면 틀린 문항의 유형마다 짧은 개념 문답을 진행합니다.
+        <b>개념이 비어서 틀렸는지, 알고 있는데 꺼내지 못했는지</b> — 같은 오답이라도 원인이 다르면 처방이 완전히 달라지기 때문입니다.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>학생별 맞춤 처방</h3>
+        <p>진단 결과에 따라 유형 하나하나 단위로 과제가 구성됩니다.</p>
+        <div class="rx">
+          <div class="rx-card">
+            <span class="tag">개념이 흔들릴 때</span>
+            <h4>기본부터 다시 쌓는 단계 사다리</h4>
+            <p>해당 유형을 기본 → 표준 → 심화 순서로 차근히 다시 올라갑니다. 한 유형을 몰아서 학습해 개념의 뼈대부터 세웁니다.</p>
+          </div>
+          <div class="rx-card">
+            <span class="tag">알지만 응용에서 막힐 때</span>
+            <h4>변형·혼합 훈련</h4>
+            <p>개념은 있는데 조건이 섞이면 어떤 도구를 꺼낼지 헷갈리는 단계. 겉모습만 다른 변형 문제를 여러 유형과 섞어 배치해 <b>유형을 알아보는 눈</b>을 훈련합니다.</p>
+          </div>
+          <div class="rx-card">
+            <span class="tag">고난도만 막힐 때</span>
+            <h4>아이디어 분해 + 풀이 전략 훈련</h4>
+            <p>쉬운 문제 반복은 시키지 않습니다. 틀린 문항의 핵심 아이디어를 분해하고, 발문을 보고 첫 수를 고르는 전략 훈련과 유사 고난도 문항의 손풀이로 잇습니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>당일 퍼스널트레이닝 수령</h3>
+        <p>진단이 끝나면 과제 제작이 자동으로 진행되어, 풀이 수업이 끝날 무렵 <b>자기 이름이 적힌 맞춤 과제</b>가 출력됩니다. 테스트를 본 그날, 과제를 손에 들고 귀가합니다.</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <h3>졸업 검증</h3>
+        <p>과제의 맨 마지막은 <b>틀렸던 바로 그 문제</b>입니다. 훈련을 마친 뒤 다시 풀어 통과하면 그 유형은 졸업. 이틀 뒤 짧은 재확인 문제로 완전히 자기 것이 되었는지 한 번 더 점검합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">PRINCIPLES</div>
+    <h2>운영 원칙</h2>
+    <div class="principles">
+      <div class="pr">
+        <div class="k">학생 × 유형</div>
+        <div class="v">처방의 단위는 학생이 아니라 <b>학생 × 유형</b>입니다. 같은 학생이라도 유형 A는 기본부터, 유형 B는 고난도 전략만 — 유형마다 다른 깊이로 학습합니다.</div>
+      </div>
+      <div class="pr">
+        <div class="k">양보다 깊이</div>
+        <div class="v">과제 총량에는 상한이 있습니다. 취약한 유형부터 우선순위를 매겨, 소화할 수 있는 만큼만 정확하게 나갑니다.</div>
+      </div>
+      <div class="pr">
+        <div class="k">실수는 실수로</div>
+        <div class="v">개념 진단을 통과하고 확인 문제를 바로 맞히면 단순 실수로 판정하고 짧게 끝냅니다. 계산 실수에 전체 훈련 과정을 다시 시키지 않습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">HOME</div>
+    <h2>가정에서 확인하실 수 있는 것</h2>
+    <div class="home-grid">
+      <div class="home-card">
+        <h4>개인 포털</h4>
+        <p>자녀 전용 링크에서 테스트 점수 추이, 취약 유형, 과제 이행 현황을 확인하실 수 있습니다.</p>
+      </div>
+      <div class="home-card">
+        <h4>데일리 리포트</h4>
+        <p>수업일마다 그날의 학습 내용과 결과를 정리한 리포트가 발송됩니다.</p>
+      </div>
+      <div class="home-card">
+        <h4>과제 알림</h4>
+        <p>복습 과제가 나가고 제출되는 과정이 알림톡으로 안내됩니다.</p>
+      </div>
+    </div>
+
+    <div class="contact">
+      <p>궁금하신 점은 편하게 문의해 주세요</p>
+      <div class="big">010 - 6456 - 8959</div>
+      <p>상담 가능 시간 — 12:00 – 24:00</p>
+      <a class="btn-fill" href="https://pf.kakao.com/_xeqibn/chat" target="_blank" rel="noopener">카카오톡 상담</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>수학은유강</b> — 필탑학원 고등수학</div>
+    <div>© 2026 수학은유강</div>
+  </div>
+</footer>
+
+<script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
