@@ -1,0 +1,313 @@
+<title>나의 인생게임 TOP10</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --desk:#008080; --win:#c0c0c0; --hi:#ffffff; --sh:#808080; --dk:#404040;
+  --bar1:#000080; --bar2:#1084d0; --ink:#000; --sel:#000080; --selink:#fff;
+  --paper:#fff; --mute:#5a5a5a; --gold:#ffe27a;
+  --g-M:#6a4bd8; --g-A:#d8542b; --g-F:#2b7bd8; --g-C:#e3b214; --g-S:#2fa36b; --g-P:#c93d7c;
+  --font:"Noto Sans KR",system-ui,sans-serif; --px:"Press Start 2P",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;min-height:100vh;padding:12px 8px 64px}
+.window{background:var(--win);max-width:640px;margin:0 auto;border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);box-shadow:inset 1px 1px 0 var(--win),inset -1px -1px 0 var(--sh),4px 4px 0 rgba(0,0,0,.35)}
+.tbar{display:flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--bar1),var(--bar2));color:#fff;padding:4px 6px;font-weight:700;font-size:14px;margin:3px}
+.tbar .ico{width:16px;height:16px;background:#fff;border:1px solid #000;display:inline-block;flex:none}
+.tbar .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbar .x{width:18px;height:16px;background:var(--win);color:#000;font-size:11px;line-height:14px;text-align:center;border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);font-weight:700;cursor:pointer}
+.body{padding:14px 12px 12px}
+.year{font-family:var(--px);font-size:24px;letter-spacing:-1px;margin:0 0 2px}
+.age{font-size:13px;color:var(--mute);margin:0 0 6px;min-height:20px}
+.hint{font-size:12px;color:var(--mute);margin:0 0 12px}
+.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 4px}
+@media(min-width:560px){.icons{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}}
+.gi{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;background:none;border:0;padding:6px 2px;font:inherit;color:inherit;min-height:96px;justify-content:flex-start}
+.pic{width:48px;height:48px;border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);display:grid;place-items:center;font-family:var(--px);font-size:9px;color:#fff;text-shadow:1px 1px 0 rgba(0,0,0,.5);position:relative;flex:none;overflow:visible;background:var(--sh)}
+.pic img{width:100%;height:100%;object-fit:contain;background:#fff;display:block}
+.gi .lab{font-size:13px;line-height:1.25;text-align:center;padding:1px 3px;border:1px dotted transparent;word-break:keep-all}
+.gi.in .lab{background:var(--sel);color:var(--selink);border-color:#fff}
+.gi.in .pic::after{content:"#" attr(data-r);position:absolute;right:-8px;bottom:-7px;height:16px;padding:0 4px;background:var(--gold);color:#000;border:1px solid #000;font:700 10px/14px var(--font)}
+@media(hover:hover){.gi:hover .lab{border-color:var(--sh)}}
+.gi:focus-visible .lab{border-color:#000}
+.pic.M{background:var(--g-M)}.pic.A{background:var(--g-A)}.pic.F{background:var(--g-F)}.pic.C{background:var(--g-C)}.pic.S{background:var(--g-S)}.pic.P{background:var(--g-P)}
+.empty{padding:28px 8px;text-align:center;color:var(--mute);border:1px dashed var(--sh);font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px 10px;border-top:1px solid var(--hi);box-shadow:0 -1px 0 var(--sh);position:sticky;bottom:40px;background:var(--win);z-index:4}
+.btn{font:inherit;font-size:15px;font-weight:500;padding:9px 12px;background:var(--win);border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);box-shadow:inset -1px -1px 0 var(--sh);cursor:pointer;color:#000;flex:1;min-width:0}
+.btn:active{border-color:var(--dk) var(--hi) var(--hi) var(--dk);box-shadow:none}
+.btn.pri{outline:1px solid #000;outline-offset:-4px}
+.btn.sm{flex:0 0 auto;padding:4px 10px;font-size:13px}
+.cnt{font-size:12px;color:var(--mute);text-align:center;flex:0 0 auto;font-variant-numeric:tabular-nums}
+.task{position:fixed;left:0;right:0;bottom:0;height:40px;background:var(--win);border-top:2px solid var(--hi);display:flex;align-items:center;gap:6px;padding:0 6px;z-index:5}
+.start{font-weight:700;font-size:13px;padding:3px 8px;border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);display:flex;align-items:center;gap:5px;background:var(--win);cursor:pointer;font-family:var(--font)}
+.start i{width:14px;height:14px;background:linear-gradient(135deg,#f00 50%,#0a0 50%);display:inline-block}
+.prog{flex:1;height:22px;border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);display:flex;gap:2px;padding:2px;overflow:hidden}
+.prog b{flex:1;background:var(--bar1);display:none;min-width:0}
+.prog b.done{display:block}
+.top{font-size:13px;font-weight:700;padding:3px 10px;border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);background:var(--win);cursor:pointer;font-family:var(--font);white-space:nowrap;font-variant-numeric:tabular-nums}
+.top.open{border-color:var(--dk) var(--hi) var(--hi) var(--dk);background:#d8d8d8}
+/* intro */
+.intro{padding:20px 14px 8px}
+.intro h1{font-family:var(--px);font-size:15px;line-height:1.8;margin:0 0 14px;text-wrap:balance}
+.intro p{margin:0 0 10px;max-width:60ch}
+.intro small{color:var(--mute);display:block;margin-top:8px}
+.field{display:flex;gap:8px;align-items:center;margin:14px 0 4px;flex-wrap:wrap}
+.field input{font:inherit;font-size:16px;padding:5px 8px;width:110px;background:var(--paper);color:#000;-webkit-text-fill-color:#000;color-scheme:light;border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);box-shadow:inset 1px 1px 0 #000}
+/* rank window */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:20;display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:560px){.ov{align-items:center;padding:20px}}
+.rw{width:100%;max-width:520px;max-height:88vh;display:flex;flex-direction:column}
+.rw .list{background:var(--paper);border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);box-shadow:inset 1px 1px 0 #000;margin:0 10px;overflow-y:auto;overscroll-behavior:contain;flex:1}
+.row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-bottom:1px solid #e4e4e4;background:#fff;position:relative;touch-action:pan-y}
+.row.drag{opacity:.35}
+.row.ghost{position:fixed;left:0;right:0;z-index:30;box-shadow:0 4px 0 rgba(0,0,0,.35);border:1px solid #000;pointer-events:none;width:auto;margin:0 12px}
+.row .rk{font-family:var(--px);font-size:11px;width:28px;text-align:right;color:var(--bar1);flex:none}
+.row.r1 .rk,.row.r2 .rk,.row.r3 .rk{color:#b8860b}
+.row .pic{width:32px;height:32px;font-size:7px}
+.row .nm{flex:1;min-width:0;font-size:14px;line-height:1.2}
+.row .nm small{display:block;color:var(--mute);font-size:11px}
+.row .hd{width:36px;height:36px;display:grid;place-items:center;cursor:grab;color:var(--sh);font-size:18px;touch-action:none;user-select:none;flex:none}
+.row .mv{display:flex;flex-direction:column;gap:2px;flex:none}
+.row .mv button,.row .rm{font:inherit;font-size:11px;line-height:1;width:26px;height:16px;padding:0;background:var(--win);border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);cursor:pointer;color:#000}
+.row .rm{width:26px;height:34px;font-size:14px;flex:none}
+.slot{padding:8px;color:var(--sh);font-size:13px;border-bottom:1px dashed #ddd;display:flex;gap:8px;align-items:center}
+.slot .rk{font-family:var(--px);font-size:11px;width:28px;text-align:right;color:#bbb}
+.rw .foot{position:static;padding:8px 10px 10px}
+/* result */
+.note{background:var(--paper);border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);box-shadow:inset 1px 1px 0 #000;padding:14px;font-size:14px;overflow-x:auto}
+.note h2{font-family:var(--px);font-size:13px;line-height:1.7;margin:0 0 6px;text-wrap:balance}
+.note .sub{color:var(--mute);margin:0 0 14px;font-size:13px}
+.champ{display:flex;gap:12px;align-items:center;border:2px solid var(--gold);background:#fff9dc;padding:10px;margin:0 0 12px}
+.champ .pic{width:64px;height:64px;font-size:10px}
+.champ .rk{font-family:var(--px);font-size:11px;color:#b8860b;margin-bottom:4px}
+.champ .nm{font-weight:700;font-size:18px;line-height:1.2}
+.champ small{color:var(--mute)}
+.rl{margin:0 0 14px;padding:0;list-style:none}
+.rl li{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eee;font-size:14px}
+.rl .rk{font-family:var(--px);font-size:10px;width:26px;text-align:right;color:var(--bar1);flex:none}
+.rl .pic{width:28px;height:28px;font-size:6px}
+.rl small{color:var(--mute);margin-left:auto;font-size:12px;white-space:nowrap}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.stat{border:1px solid var(--sh);padding:8px 10px}
+.stat b{display:block;font-family:var(--px);font-size:12px;margin-bottom:4px}
+.stat span{font-size:12px;color:var(--mute)}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;margin:0 0 14px}
+.bars .n{font-size:13px;white-space:nowrap}
+.bars .tr{height:14px;border:1px solid var(--sh);padding:1px;background:#f0f0f0}
+.bars .tr i{display:block;height:100%;background:repeating-linear-gradient(90deg,var(--c) 0 6px,transparent 6px 8px)}
+.bars .v{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.taste{border-left:4px solid var(--bar1);padding:6px 12px;margin:0 0 14px;background:#eef0f8}
+.toast{position:fixed;left:50%;bottom:52px;transform:translateX(-50%);background:#ffffe1;border:1px solid #000;padding:6px 12px;font-size:13px;box-shadow:2px 2px 0 rgba(0,0,0,.4);opacity:0;transition:opacity .2s;pointer-events:none;z-index:40;max-width:92vw;display:flex;gap:10px;align-items:center}
+.toast.show{opacity:1;pointer-events:auto}
+.toast button{font:inherit;font-size:12px;padding:2px 8px;background:var(--win);border:1px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);cursor:pointer}
+@media(prefers-reduced-motion:reduce){.toast{transition:none}}
+/* persistent TOP10 */
+.strip{position:sticky;top:0;z-index:3;background:var(--win);border-bottom:1px solid var(--sh);box-shadow:0 1px 0 var(--hi);padding:6px 8px 4px}
+.strip .st{font-size:11px;color:var(--mute);margin:0 0 4px;display:flex;justify-content:space-between}
+.strip .st b{color:var(--bar1)}
+.slots{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.slots::-webkit-scrollbar{display:none}
+.sl{flex:0 0 52px;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;font:inherit;cursor:pointer;color:inherit}
+.sl .pic{width:40px;height:40px;font-size:7px}
+.sl.e .pic{background:#d8d8d8;border-style:dashed;border-color:var(--sh);color:var(--sh);font-size:12px}
+.sl .rk{font-family:var(--px);font-size:8px;color:var(--bar1)}
+.sl.r1 .rk,.sl.r2 .rk,.sl.r3 .rk{color:#b8860b}
+.sl .nm{font-size:10px;line-height:1.1;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.layout{display:block}
+.side{display:none}
+@media(min-width:760px){
+  .window.wide{max-width:960px}
+  .layout{display:grid;grid-template-columns:1fr 320px;align-items:start}
+  .strip{display:none}
+  .side{display:block;border-left:1px solid var(--sh);box-shadow:inset 1px 0 0 var(--hi);position:sticky;top:0;align-self:start;max-height:calc(100vh - 60px);overflow:auto}
+  .side .list{background:var(--paper);border:2px solid;border-color:var(--sh) var(--hi) var(--hi) var(--sh);box-shadow:inset 1px 1px 0 #000;margin:0 10px 10px}
+  .side .hint{margin:8px 12px 6px}
+}
+</style>
+
+<div class="window" id="app"></div>
+<div class="task">
+  <button class="start" id="restart" title="처음으로"><i></i>시작</button>
+  <div class="prog" id="prog"></div>
+  <button class="top" id="topbtn">TOP10 · 0</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ICONS: 이름 → data URI (별도 주입)
+const ICONS = {};
+// 장르: M=MMORPG A=액션RPG F=FPS C=캐주얼 S=전략·AOS P=스포츠
+const DATA=[
+[1996,[["바람의나라","M"]]],
+[1997,[["어둠의전설","M"],["다크세이버","M"],["영웅문","M"],["머그 삼국지","S"]]],
+[1998,[["리니지","M"],["미르의 전설","M"],["마지막왕국","M"],["워바이블","M"],["조선협객전","M"],["일랜시아","M"],["마제스티","M"],["배틀 드래곤","M"]]],
+[1999,[["포트리스 2","C"],["레드문","M"],["헬브레스","M"],["퀴즈퀴즈","C"],["택티컬 커맨더스","S"],["슬레이어즈","M"],["아크메이지","S"],["스타체이스","M"],["신세계: 천지인의 서","M"],["게임 에버랜드","C"]]],
+[2000,[["스톤에이지","M"],["드래곤라자 온라인","M"],["천년","M"],["마지막왕국 2","M"],["가디우스","M"],["엘리멘탈 사가","M"],["조이시티","C"]]],
+[2001,[["미르의 전설 2","M"],["뮤 온라인","M"],["크레이지 아케이드","C"],["라그하임","M"],["드로이얀 온라인","M"],["아스가르드","M"],["라그나로크 온라인","M"],["다크에덴","M"],["무혼","M"],["포가튼사가 2 온라인","M"]]],
+[2002,[["거상","M"],["프리스톤테일","M"],["네이비필드","S"],["겟앰프드","A"],["나이트 온라인","M"],["테일즈위버","M"],["크로노스","M"],["카르마 온라인","F"],["A3","M"],["미르의 전설 3","M"],["위드","M"],["세피로스","M"],["바스티안","M"],["네오다크세이버","M"],["뎁스판타지아","M"],["다크 에이지 오브 카멜롯","M"],["서바이벌 프로젝트","C"],["오투잼","C"],["해피시티","C"]]],
+[2003,[["메이플스토리","A"],["리니지 2","M"],["씰 온라인","M"],["붉은보석","M"],["마비노기","M"],["그랜드체이스","A"],["건즈 온라인","F"],["탄트라","M"],["믹스마스터","M"],["트릭스터","M"],["트라비아","M"],["시티레이서","C"],["포트리스 3 패왕전","C"],["퍼피레드","C"],["프리스트","M"],["로켓롤","C"]]],
+[2004,[["카트라이더","C"],["팡야","P"],["스페셜포스","F"],["RF 온라인","M"],["열혈강호 온라인","M"],["십이지천","M"],["프리스타일","P"],["월드 오브 워크래프트","M"],["샷온라인","P"],["오디션","C"],["디제이맥스 온라인","C"],["군주 온라인","M"],["프리프","M"],["란 온라인","M"],["라스트카오스","M"],["실크로드 온라인","M"],["히트프로젝트","F"],["묵향 온라인","M"]]],
+[2005,[["던전앤파이터","A"],["서든어택","F"],["테일즈런너","C"],["데카론","M"],["귀혼","M"],["카발 온라인","M"],["로한","M"],["대항해시대 온라인","M"],["길드워","M"],["라피스","M"],["아크로드","M"],["샤이야","M"],["구룡쟁패","M"],["워록","F"],["알투비트","C"],["요구르팅","M"],["큐링 온라인","C"],["신야구","P"]]],
+[2006,[["라테일","A"],["그라나도 에스파다","M"],["썬 온라인","M"],["R2","M"],["피파 온라인","P"],["루니아전기","A"],["마구마구","P"],["레이시티","C"],["젬파이터","A"],["라펠즈","M"],["용천기","M"],["미니파이터","A"],["드래곤젬","C"]]],
+[2007,[["엘소드","A"],["아바","F"],["크로스파이어","F"],["S4리그","F"],["창천 온라인","M"],["완미세계","M"],["스키드러쉬","C"],["SD건담 캡슐파이터","F"],["피파 온라인 2","P"],["슬러거","P"],["루나 온라인","M"],["레퀴엠 온라인","M"],["텐비","M"],["울프팀","F"],["컴뱃암즈","F"],["랜드매스","F"],["원더킹","A"],["홀릭","M"]]],
+[2008,[["아이온","M"],["아틀란티카","M"],["카운터 스트라이크 온라인","F"],["에이스 온라인","F"],["프리우스 온라인","M"],["십이지천 2","M"],["에이카 온라인","M"],["케로로파이터","A"],["케로로레이싱","C"],["러브비트","C"],["이지투온","C"],["클럽데이 온라인","C"],["윈드슬레이어","A"],["헉슬리","F"],["몬스터헌터 프론티어 온라인","A"]]],
+[2009,[["버블파이터","C"],["C9","A"],["허스키 익스프레스","C"],["카로스 온라인","M"],["로스트사가","A"],["메탈레이지","F"],["케로로팡팡","C"],["아발론 온라인","S"],["밴드마스터","C"],["스파이크걸즈","P"],["카르마 2","F"]]],
+[2010,[["마비노기 영웅전","A"],["드래곤네스트","A"],["에버플래닛","M"],["세븐소울즈","M"],["배틀필드 온라인","F"],["LOCO","S"],["프리스타일 풋볼","P"],["겟앰프드 2","A"],["본투파이어","F"],["배터리 온라인","F"],["드래곤볼 온라인","M"],["아르고","M"],["적벽","S"]]],
+[2011,[["테라","M"],["사이퍼즈","S"],["리그 오브 레전드","S"],["스페셜포스 2","F"],["프리스타일 2","P"],["러스티하츠","A"],["카오스 온라인","S"],["엠스타","C"],["레전드 오브 블러드","A"],["다크블러드","A"],["워베인","M"]]],
+[2012,[["블레이드 & 소울","M"],["디아블로 3","A"],["피파 온라인 3","P"],["카운터 스트라이크: 글로벌 오펜시브","F"],["레이더즈","A"],["DK 온라인","M"],["카발 2","M"],["능력자X","A"],["세븐코어","M"],["트리니티 2","M"],["레전드 오브 소울즈","A"]]],
+[2013,[["아키에이지","M"],["크리티카","A"],["던전스트라이커","A"],["도타 2","S"],["워페이스","F"],["에오스","M"],["아스타","M"],["코어 온라인","F"],["열혈강호 2","M"],["아크로드 2","M"],["마구더리얼","P"],["카운터 스트라이크 온라인 2","F"]]],
+[2014,[["검은사막","M"],["클로저스","A"],["이카루스","M"],["하운즈","F"],["데빌리언","A"],["블랙스쿼드","F"],["건즈 2","F"],["코어마스터즈","S"],["최강의 군단","A"],["플라넷사이드 2","F"],["위닝일레븐 온라인 2014","P"]]],
+[2015,[["메이플스토리 2","M"],["파이널 판타지 14","M"],["히어로즈 오브 더 스톰","S"],["트리 오브 세이비어","M"],["문명 온라인","S"],["애스커","A"],["아제라","M"],["월드 오브 워쉽","S"],["스카이사가","A"]]],
+[2016,[["오버워치","F"],["블레스","M"],["서든어택 2","F"],["하이퍼유니버스","S"],["아틀라스 리액터","S"]]],
+[2017,[["배틀그라운드","F"],["소울워커","A"],["뮤 레전드","A"],["로브레이커즈","F"],["니드 포 스피드 엣지","C"]]],
+[2018,[["로스트아크","A"],["피파 온라인 4","P"],["천애명월도","M"],["데스티니 가디언즈","F"],["아스텔리아","M"]]],
+[2019,[["패스 오브 엑자일","A"],["에이펙스 레전드","F"],["커츠펠","A"],["콜 오브 듀티: 모던 워페어","F"]]],
+[2020,[["발로란트","F"],["이터널 리턴","S"],["엘리온","M"],["섀도우 아레나","S"],["콜 오브 듀티: 워존","F"]]],
+[2021,[["그랜드체이스 클래식","A"],["블레스 언리쉬드 PC","M"],["나라카: 블레이드포인트","S"]]],
+[2022,[["오버워치 2","F"],["슈퍼피플","F"]]],
+[2023,[["쓰론 앤 리버티","M"],["디아블로 4","A"],["더 파이널스","F"],["워헤이븐","S"]]],
+[2024,[["퍼스트 디센던트","A"],["패스 오브 엑자일 2","A"],["마블 라이벌즈","F"],["원스 휴먼","F"]]],
+[2025,[]],
+[2026,[["리니지 클래식","M"]]],
+];
+const G={M:["MMORPG","필드에서 살았던 사람"],A:["액션 RPG","던전이 집이었던 사람"],F:["FPS","헤드샷으로 대화하던 사람"],C:["캐주얼","친구 초대장이 곧 게임이던 사람"],S:["전략·AOS","팀 채팅이 제일 뜨거웠던 사람"],P:["스포츠","동네 골목 대신 서버에서 뛰던 사람"]};
+const ABBR={M:"RPG",A:"ACT",F:"FPS",C:"CAS",S:"AOS",P:"SPT"};
+const ERA=[[1996,2002,"PC통신 1세대","모뎀 소리를 아는 사람"],[2003,2009,"PC방 황금기","한 시간 천 원의 세대"],[2010,2016,"롤 세대","'한 판만'이 열 판이던 세대"],[2017,2026,"배그 이후","치킨 먹으러 다니던 세대"]];
+const N=10;
+const GENRE={};DATA.forEach(([y,gs])=>gs.forEach(([n,g])=>GENRE[n]={y,g}));
+
+let step=-1, birth=null, rank=[];
+try{const s=JSON.parse(localStorage.getItem("mygames_top10")||"{}");rank=(s.rank||[]).filter(n=>GENRE[n]);birth=s.birth||null;}catch(e){}
+const save=()=>{try{localStorage.setItem("mygames_top10",JSON.stringify({rank,birth}))}catch(e){}};
+
+const app=document.getElementById("app"),prog=document.getElementById("prog"),topbtn=document.getElementById("topbtn");
+prog.innerHTML=DATA.map(()=>"<b></b>").join("");
+const bars=[...prog.children];
+const picHtml=(n,cls="")=>{const g=GENRE[n].g;return ICONS[n]?`<span class="pic ${cls}"><img src="${ICONS[n]}" alt=""></span>`:`<span class="pic ${g} ${cls}">${ABBR[g]}</span>`;};
+const esc=s=>s.replace(/"/g,"&quot;");
+
+function shell(title,inner,foot){app.classList.remove("wide");app.innerHTML=`<div class="tbar"><span class="ico"></span><span class="t">${title}</span><span class="x">✕</span></div>${inner}${foot||""}`;window.scrollTo({top:0});}
+function ageText(y){if(!birth)return"";const a=y-birth;if(a<0)return"태어나기 전";if(a<7)return`${a}살 · 아직 유치원`;if(a<13)return`${a}살 · 초${a-6}`;if(a<16)return`${a}살 · 중${a-12}`;if(a<19)return`${a}살 · 고${a-15}`;return`${a}살`;}
+function updTop(){topbtn.textContent=`TOP10 · ${rank.length}`;}
+
+function intro(){
+  step=-1;bars.forEach(b=>b.classList.remove("done"));updTop();
+  shell("나의 인생게임 TOP10 - 설치 마법사",`<div class="intro">
+  <h1>1996년부터 2026년까지,<br>해마다 신작이 나옵니다.<br>내 TOP10을 지켜내세요.</h1>
+  <p>한 해에 한 화면. 신작을 누르면 TOP10에 들어갑니다. 열 자리가 차면 새 게임은 10위로 들어오고 기존 10위가 밀려납니다. 순위는 TOP10 창에서 끌어서 바꾸고, 뺄 건 뺍니다.</p>
+  <div class="field"><label for="b">출생연도(선택)</label><input id="b" type="number" inputmode="numeric" placeholder="예: 1994" min="1950" max="2020" value="${birth||""}"></div>
+  <small>적으면 연도마다 '그때 몇 살·몇 학년'이 같이 표시됩니다. 저장은 이 기기 안에서만 됩니다.</small>
+  </div>`,`<div class="foot"><span class="cnt">31개 연도 · ${Object.keys(GENRE).length}개 게임</span><button class="btn pri" id="go">${rank.length?"이어서 ▸":"시작 ▸"}</button></div>`);
+  document.getElementById("go").onclick=()=>{const v=parseInt(document.getElementById("b").value);birth=(v>=1950&&v<=2020)?v:null;save();show(0);};
+}
+
+function show(i){
+  step=i;const [y,games]=DATA[i];
+  bars.forEach((b,k)=>b.classList.toggle("done",k<i));updTop();
+  const ordered=[...games].sort((a,b)=>(ICONS[b[0]]?1:0)-(ICONS[a[0]]?1:0));
+  const grid=games.length?`<p class="hint">누르면 TOP10에 올라갑니다. 다시 누르면 뺍니다.</p><div class="icons">${ordered.map(([n,g])=>{const r=rank.indexOf(n);return`<button class="gi${r>=0?" in":""}" data-n="${esc(n)}">${picHtml(n)}<span class="lab">${n}</span></button>`;}).join("")}</div>`
+   :`<div class="empty">이 해엔 새로 나온 게임이 없었습니다.<br>다들 하던 걸 계속했거나, 게임 대신 뭔가를 했겠죠.</div>`;
+  shell(`C:\\게임\\${y}`,`<div class="strip" id="strip"></div><div class="layout"><div class="body"><p class="year">${y}</p><p class="age">${ageText(y)}</p>${grid}</div><div class="side"><p class="hint">내 TOP10 — ≡ 를 끌어 순서 변경</p><div class="list" id="sl"></div></div></div>`,
+   `<div class="foot"><button class="btn" id="prev">◂ 이전</button><span class="cnt">${i+1}/${DATA.length}</span><button class="btn pri" id="next">${i===DATA.length-1?"결과 보기":"다음 ▸"}</button></div>`);
+  app.classList.add("wide");
+  app.querySelectorAll(".gi").forEach(el=>el.onclick=()=>toggle(el.dataset.n));refreshGrid();renderRank();
+  document.getElementById("prev").onclick=()=>i?show(i-1):intro();
+  document.getElementById("next").onclick=()=>i<DATA.length-1?show(i+1):result();
+}
+function refreshGrid(){app.querySelectorAll(".gi").forEach(el=>{const r=rank.indexOf(el.dataset.n);el.classList.toggle("in",r>=0);const p=el.querySelector(".pic");if(p)p.dataset.r=r+1;});updTop();}
+function toggle(n){
+  const r=rank.indexOf(n);
+  if(r>=0){rank.splice(r,1);save();renderRank();toast(`${n} 뺐습니다.`);return;}
+  let out=null;
+  if(rank.length>=N){out=rank.pop();}
+  rank.push(n);save();renderRank();
+  if(out)toast(`${n} #10 진입 · ${out} 탈락`,["되돌리기",()=>{rank.pop();rank.push(out);save();renderRank();toast(`${out} 복귀`);}]);
+  else toast(`${n} → #${rank.length}`);
+}
+
+/* ---------- rank window ---------- */
+let ov=null;
+function openRank(){
+  if(ov)return closeRank();
+  ov=document.createElement("div");ov.className="ov";
+  ov.innerHTML=`<div class="window rw"><div class="tbar"><span class="ico"></span><span class="t">인생게임 TOP10.lst</span><span class="x" id="rc">✕</span></div><p class="hint" style="margin:8px 12px 6px">≡ 를 끌어서 순서를 바꾸세요. ▲▼도 됩니다.</p><div class="list" id="rl"></div><div class="foot"><button class="btn pri" id="rc2">닫기</button></div></div>`;
+  document.body.appendChild(ov);topbtn.classList.add("open");
+  ov.querySelector("#rc").onclick=ov.querySelector("#rc2").onclick=closeRank;
+  ov.onclick=e=>{if(e.target===ov)closeRank();};
+  renderRank();
+}
+function closeRank(){if(ov){ov.remove();ov=null;topbtn.classList.remove("open");if(step>=0&&step<DATA.length)refreshGrid();}}
+function renderRank(){
+  updTop();
+  const strip=document.getElementById("strip");
+  if(strip){strip.innerHTML=`<p class="st"><span>내 TOP10 <b>${rank.length}/10</b></span><span>탭하면 순서 편집</span></p><div class="slots">${Array.from({length:N},(_,i)=>{const n=rank[i];return n?`<button class="sl r${i+1}"><span class="rk">${i+1}</span>${picHtml(n)}<span class="nm">${n}</span></button>`:`<button class="sl e"><span class="rk">${i+1}</span><span class="pic">·</span><span class="nm">&nbsp;</span></button>`;}).join("")}</div>`;
+    strip.querySelectorAll(".sl").forEach(b=>b.onclick=openRank);}
+  if(step>=0&&step<DATA.length)refreshGrid();
+  const targets=[ov&&ov.querySelector("#rl"),document.getElementById("sl")].filter(Boolean);
+  targets.forEach(L=>renderList(L));
+}
+function renderList(L){
+  L.innerHTML=rank.map((n,i)=>`<div class="row r${i+1}" data-i="${i}"><span class="rk">${i+1}</span>${picHtml(n)}<span class="nm">${n}<small>${GENRE[n].y} · ${G[GENRE[n].g][0]}</small></span><span class="mv"><button data-mv="-1" aria-label="위로">▲</button><button data-mv="1" aria-label="아래로">▼</button></span><button class="rm" aria-label="빼기">✕</button><span class="hd" aria-hidden="true">≡</span></div>`).join("")
+   +Array.from({length:N-rank.length},(_,k)=>`<div class="slot"><span class="rk">${rank.length+k+1}</span>빈 자리</div>`).join("");
+  L.querySelectorAll(".row").forEach(row=>{
+    const i=+row.dataset.i;
+    row.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{const j=i+ +b.dataset.mv;if(j<0||j>=rank.length)return;[rank[i],rank[j]]=[rank[j],rank[i]];save();renderRank();});
+    row.querySelector(".rm").onclick=()=>{const n=rank.splice(i,1)[0];save();renderRank();toast(`${n} 뺐습니다.`,["되돌리기",()=>{rank.splice(i,0,n);save();renderRank();}]);};
+    row.querySelector(".hd").onpointerdown=e=>startDrag(e,row,i,L);
+  });
+}
+function startDrag(e,row,from,L){
+  e.preventDefault();
+  const rows=()=>[...L.querySelectorAll(".row")];
+  const ghost=row.cloneNode(true);ghost.classList.add("ghost");const rect=row.getBoundingClientRect();ghost.style.top=rect.top+"px";ghost.style.width=rect.width+"px";ghost.style.left=rect.left+"px";ghost.style.margin=0;document.body.appendChild(ghost);
+  row.classList.add("drag");const offY=e.clientY-rect.top;let to=from;
+  const move=ev=>{ghost.style.top=(ev.clientY-offY)+"px";
+    const rs=rows();let idx=rs.findIndex(r=>{const b=r.getBoundingClientRect();return ev.clientY<b.top+b.height/2;});if(idx<0)idx=rs.length;
+    if(idx>from)idx--;
+    if(idx!==to){to=idx;const cur=rows();const dr=cur[from];const others=cur.filter(r=>r!==dr);L.insertBefore(dr,others[to]||L.querySelector(".slot"));}
+    // autoscroll
+    const lb=L.getBoundingClientRect();if(ev.clientY<lb.top+30)L.scrollTop-=8;else if(ev.clientY>lb.bottom-30)L.scrollTop+=8;};
+  const up=()=>{document.removeEventListener("pointermove",move);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);ghost.remove();
+    if(to!==from){const n=rank.splice(from,1)[0];rank.splice(to,0,n);save();}renderRank();};
+  document.addEventListener("pointermove",move);document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up);
+}
+
+/* ---------- result ---------- */
+function result(){
+  step=DATA.length;bars.forEach(b=>b.classList.add("done"));updTop();
+  if(!rank.length){shell("결과",`<div class="body"><div class="empty">TOP10이 비어 있습니다. 정말요?</div></div>`,`<div class="foot"><button class="btn" id="prev">◂ 돌아가기</button></div>`);document.getElementById("prev").onclick=()=>show(DATA.length-1);return;}
+  const gc={M:0,A:0,F:0,C:0,S:0,P:0};const eraC=[0,0,0,0];
+  rank.forEach((n,i)=>{const w=N-i;const {y,g}=GENRE[n];gc[g]+=w;ERA.forEach((e,k)=>{if(y>=e[0]&&y<=e[1])eraC[k]+=w});});
+  const wsum=Object.values(gc).reduce((a,b)=>a+b,0);
+  const top=Object.entries(gc).sort((a,b)=>b[1]-a[1]);const [tg,tn]=top[0];const second=top[1];
+  const era=ERA[eraC.indexOf(Math.max(...eraC))];
+  const ys=rank.map(n=>GENRE[n].y);const first=Math.min(...ys),last=Math.max(...ys);
+  const c=rank[0];const title=`${era[2]}, ${G[tg][1]}`;
+  const share=tn/wsum;
+  let taste=share>=.6?`${G[tg][0]} 한 우물. 순위 가중치로 열에 ${Math.round(share*10)}이 ${G[tg][0]}입니다.`
+    :second&&second[1]>0?`${G[tg][0]}이 먼저지만 ${G[second[0]][0]}도 상위권에 있습니다. ${G[second[0]][1]}의 얼굴도 있네요.`:`${G[tg][0]} 전문.`;
+  const gap=last-first;
+  taste+=gap>=15?` 1위부터 10위까지 ${gap}년에 걸쳐 있습니다. 한 시절에 머물지 않은 사람.`:gap<=6?` TOP10이 ${first}~${last} ${gap+1}년 안에 다 있습니다. 그 시절이 전성기였던 사람.`:"";
+  const max=Math.max(...Object.values(gc));
+  const barsHtml=`<div class="bars">${top.filter(([g,v])=>v).map(([g,v])=>`<span class="n">${G[g][0]}</span><span class="tr"><i style="--c:var(--g-${g});width:${v/max*100}%"></i></span><span class="v">${v}</span>`).join("")}</div>`;
+  const lst=rank.slice(1).map((n,i)=>`<li><span class="rk">${i+2}</span>${picHtml(n)}<span>${n}</span><small>${GENRE[n].y}</small></li>`).join("");
+  shell("명예의 전당.txt - 메모장",`<div class="body"><div class="note">
+   <h2>${title}</h2><p class="sub">${era[0]}~${era[1]} 게임이 상위권 · 주력 ${G[tg][0]}</p>
+   <div class="champ">${picHtml(c)}<div><div class="rk">#1 인생게임</div><div class="nm">${c}</div><small>${GENRE[c].y} · ${G[GENRE[c].g][0]}${birth?" · "+ageText(GENRE[c].y):""}</small></div></div>
+   <ul class="rl">${lst}</ul>
+   <div class="taste">${taste}</div>
+   <div class="stats"><div class="stat"><b>${rank.length}/10</b><span>채운 자리</span></div><div class="stat"><b>${first}–${last}</b><span>TOP10이 걸친 시기</span></div></div>
+   ${barsHtml}</div></div>`,
+   `<div class="foot"><button class="btn" id="prev">◂ 수정</button><button class="btn" id="copy">복사</button><button class="btn pri" id="sh">친구에게 보내기</button></div>`);
+  const text=`[나의 인생게임 TOP10]\n${title}\n\n`+rank.map((n,i)=>`${i+1}. ${n} (${GENRE[n].y})`).join("\n")+`\n\n${taste}\n\n너의 TOP10은? → ${location.href.split("#")[0]}`;
+  document.getElementById("prev").onclick=()=>show(DATA.length-1);
+  document.getElementById("copy").onclick=()=>copy(text);
+  document.getElementById("sh").onclick=async()=>{if(navigator.share){try{await navigator.share({title:"나의 인생게임 TOP10",text});return}catch(e){}}copy(text);};
+}
+async function copy(t){try{await navigator.clipboard.writeText(t);toast("복사됨. 단톡방에 붙여 넣으세요.")}catch(e){toast("복사가 막혔습니다. 길게 눌러 직접 복사해 주세요.")}}
+let tt=null;
+function toast(m,act){const t=document.getElementById("toast");t.innerHTML="";t.append(m);if(act){const b=document.createElement("button");b.textContent=act[0];b.onclick=()=>{act[1]();};t.append(b);}t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),act?4000:2000);}
+topbtn.onclick=openRank;
+document.getElementById("restart").onclick=()=>{if(confirm("처음 화면으로 갈까요? TOP10은 그대로 남습니다."))intro();};
+document.addEventListener("keydown",e=>{if(ov&&e.key==="Escape")return closeRank();if(step<0||step>=DATA.length||ov)return;if(e.key==="ArrowRight")document.getElementById("next").click();if(e.key==="ArrowLeft")document.getElementById("prev").click();});
+intro();
+</script>
