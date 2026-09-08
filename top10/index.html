@@ -4,7 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="나의 인생게임 TOP10">
-<meta property="og:description" content="1996~2026 신작을 넘기며 내 인생게임 TOP10을 지켜내세요">
+<meta property="og:description" content="1996~2018 신작을 넘기며 내 인생게임 TOP10을 지켜내세요">
+<meta property="og:image" content="https://ukan8.github.io/top10/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ukan8.github.io/top10/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.png">
 <title>나의 인생게임 TOP10</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
@@ -169,18 +175,10 @@ const DATA=[
 [2016,[["오버워치","F"],["블레스","M"],["서든어택 2","F"],["하이퍼유니버스","S"],["아틀라스 리액터","S"]]],
 [2017,[["배틀그라운드","F"],["소울워커","A"],["뮤 레전드","A"],["로브레이커즈","F"],["니드 포 스피드 엣지","C"]]],
 [2018,[["로스트아크","A"],["피파 온라인 4","P"],["천애명월도","M"],["데스티니 가디언즈","F"],["아스텔리아","M"]]],
-[2019,[["패스 오브 엑자일","A"],["에이펙스 레전드","F"],["커츠펠","A"],["콜 오브 듀티: 모던 워페어","F"]]],
-[2020,[["발로란트","F"],["이터널 리턴","S"],["엘리온","M"],["섀도우 아레나","S"],["콜 오브 듀티: 워존","F"]]],
-[2021,[["그랜드체이스 클래식","A"],["블레스 언리쉬드 PC","M"],["나라카: 블레이드포인트","S"]]],
-[2022,[["오버워치 2","F"],["슈퍼피플","F"]]],
-[2023,[["쓰론 앤 리버티","M"],["디아블로 4","A"],["더 파이널스","F"],["워헤이븐","S"]]],
-[2024,[["퍼스트 디센던트","A"],["패스 오브 엑자일 2","A"],["마블 라이벌즈","F"],["원스 휴먼","F"]]],
-[2025,[]],
-[2026,[["리니지 클래식","M"]]],
 ];
 const G={M:["MMORPG","필드에서 살았던 사람"],A:["액션 RPG","던전이 집이었던 사람"],F:["FPS","헤드샷으로 대화하던 사람"],C:["캐주얼","친구 초대장이 곧 게임이던 사람"],S:["전략·AOS","팀 채팅이 제일 뜨거웠던 사람"],P:["스포츠","동네 골목 대신 서버에서 뛰던 사람"]};
 const ABBR={M:"RPG",A:"ACT",F:"FPS",C:"CAS",S:"AOS",P:"SPT"};
-const ERA=[[1996,2002,"PC통신 1세대","모뎀 소리를 아는 사람"],[2003,2009,"PC방 황금기","한 시간 천 원의 세대"],[2010,2016,"롤 세대","'한 판만'이 열 판이던 세대"],[2017,2026,"배그 이후","치킨 먹으러 다니던 세대"]];
+const ERA=[[1996,2002,"PC통신 1세대","모뎀 소리를 아는 사람"],[2003,2009,"PC방 황금기","한 시간 천 원의 세대"],[2010,2016,"롤 세대","'한 판만'이 열 판이던 세대"],[2017,2018,"배그 이후","치킨 먹으러 다니던 세대"]];
 const N=10;
 const GENRE={};DATA.forEach(([y,gs])=>gs.forEach(([n,g])=>GENRE[n]={y,g}));
 
@@ -201,11 +199,11 @@ function updTop(){topbtn.textContent=`TOP10 · ${rank.length}`;}
 function intro(){
   step=-1;bars.forEach(b=>b.classList.remove("done"));updTop();
   shell("나의 인생게임 TOP10 - 설치 마법사",`<div class="intro">
-  <h1>1996년부터 2026년까지,<br>해마다 신작이 나옵니다.<br>내 TOP10을 지켜내세요.</h1>
+  <h1>1996년부터 2018년까지,<br>해마다 신작이 나옵니다.<br>내 TOP10을 지켜내세요.</h1>
   <p>한 해에 한 화면. 신작을 누르면 TOP10에 들어갑니다. 열 자리가 차면 새 게임은 10위로 들어오고 기존 10위가 밀려납니다. 순위는 TOP10 창에서 끌어서 바꾸고, 뺄 건 뺍니다.</p>
   <div class="field"><label for="b">출생연도(선택)</label><input id="b" type="number" inputmode="numeric" placeholder="예: 1994" min="1950" max="2020" value="${birth||""}"></div>
   <small>적으면 연도마다 '그때 몇 살·몇 학년'이 같이 표시됩니다. 저장은 이 기기 안에서만 됩니다.</small>
-  </div>`,`<div class="foot"><span class="cnt">31개 연도 · ${Object.keys(GENRE).length}개 게임</span><button class="btn pri" id="go">${rank.length?"이어서 ▸":"시작 ▸"}</button></div>`);
+  </div>`,`<div class="foot"><span class="cnt">${DATA.length}개 연도 · ${Object.keys(GENRE).length}개 게임</span><button class="btn pri" id="go">${rank.length?"이어서 ▸":"시작 ▸"}</button></div>`);
   document.getElementById("go").onclick=()=>{const v=parseInt(document.getElementById("b").value);birth=(v>=1950&&v<=2020)?v:null;save();show(0);};
 }
 
@@ -281,16 +279,21 @@ function startDrag(e,row,from,L){
 }
 
 /* ---------- result ---------- */
-function result(){
+let RK=[],BT=null,SHARED=false;
+function ageTextB(y){const s=birth;birth=BT;const r=ageText(y);birth=s;return r;}
+const ALL=Object.keys(GENRE);
+function resultUrl(){return location.origin+location.pathname+"?r="+RK.map(n=>ALL.indexOf(n)).join(".")+(BT?"&b="+BT:"");}
+function result(rk,bt,shared){
+  RK=rk||rank;BT=bt===undefined?birth:bt;SHARED=!!shared;
   step=DATA.length;bars.forEach(b=>b.classList.add("done"));updTop();
-  if(!rank.length){shell("결과",`<div class="body"><div class="empty">TOP10이 비어 있습니다. 정말요?</div></div>`,`<div class="foot"><button class="btn" id="prev">◂ 돌아가기</button></div>`);document.getElementById("prev").onclick=()=>show(DATA.length-1);return;}
+  if(!RK.length){shell("결과",`<div class="body"><div class="empty">TOP10이 비어 있습니다. 정말요?</div></div>`,`<div class="foot"><button class="btn" id="prev">◂ 돌아가기</button></div>`);document.getElementById("prev").onclick=()=>SHARED?intro():show(DATA.length-1);return;}
   const gc={M:0,A:0,F:0,C:0,S:0,P:0};const eraC=[0,0,0,0];
-  rank.forEach((n,i)=>{const w=N-i;const {y,g}=GENRE[n];gc[g]+=w;ERA.forEach((e,k)=>{if(y>=e[0]&&y<=e[1])eraC[k]+=w});});
+  RK.forEach((n,i)=>{const w=N-i;const {y,g}=GENRE[n];gc[g]+=w;ERA.forEach((e,k)=>{if(y>=e[0]&&y<=e[1])eraC[k]+=w});});
   const wsum=Object.values(gc).reduce((a,b)=>a+b,0);
   const top=Object.entries(gc).sort((a,b)=>b[1]-a[1]);const [tg,tn]=top[0];const second=top[1];
   const era=ERA[eraC.indexOf(Math.max(...eraC))];
-  const ys=rank.map(n=>GENRE[n].y);const first=Math.min(...ys),last=Math.max(...ys);
-  const c=rank[0];const title=`${era[2]}, ${G[tg][1]}`;
+  const ys=RK.map(n=>GENRE[n].y);const first=Math.min(...ys),last=Math.max(...ys);
+  const c=RK[0];const title=`${era[2]}, ${G[tg][1]}`;
   const share=tn/wsum;
   let taste=share>=.6?`${G[tg][0]} 한 우물. 순위 가중치로 열에 ${Math.round(share*10)}이 ${G[tg][0]}입니다.`
     :second&&second[1]>0?`${G[tg][0]}이 먼저지만 ${G[second[0]][0]}도 상위권에 있습니다. ${G[second[0]][1]}의 얼굴도 있네요.`:`${G[tg][0]} 전문.`;
@@ -298,19 +301,77 @@ function result(){
   taste+=gap>=15?` 1위부터 10위까지 ${gap}년에 걸쳐 있습니다. 한 시절에 머물지 않은 사람.`:gap<=6?` TOP10이 ${first}~${last} ${gap+1}년 안에 다 있습니다. 그 시절이 전성기였던 사람.`:"";
   const max=Math.max(...Object.values(gc));
   const barsHtml=`<div class="bars">${top.filter(([g,v])=>v).map(([g,v])=>`<span class="n">${G[g][0]}</span><span class="tr"><i style="--c:var(--g-${g});width:${v/max*100}%"></i></span><span class="v">${v}</span>`).join("")}</div>`;
-  const lst=rank.slice(1).map((n,i)=>`<li><span class="rk">${i+2}</span>${picHtml(n)}<span>${n}</span><small>${GENRE[n].y}</small></li>`).join("");
-  shell("명예의 전당.txt - 메모장",`<div class="body"><div class="note">
+  const lst=RK.slice(1).map((n,i)=>`<li><span class="rk">${i+2}</span>${picHtml(n)}<span>${n}</span><small>${GENRE[n].y}</small></li>`).join("");
+  shell(SHARED?"친구의 명예의 전당.txt - 메모장":"명예의 전당.txt - 메모장",`<div class="body">${SHARED?'<p class="hint" style="margin:0 0 10px">친구가 보낸 TOP10입니다. 아래에서 내 것도 만들 수 있어요.</p>':''}<div class="note">
    <h2>${title}</h2><p class="sub">${era[0]}~${era[1]} 게임이 상위권 · 주력 ${G[tg][0]}</p>
-   <div class="champ">${picHtml(c)}<div><div class="rk">#1 인생게임</div><div class="nm">${c}</div><small>${GENRE[c].y} · ${G[GENRE[c].g][0]}${birth?" · "+ageText(GENRE[c].y):""}</small></div></div>
+   <div class="champ">${picHtml(c)}<div><div class="rk">#1 인생게임</div><div class="nm">${c}</div><small>${GENRE[c].y} · ${G[GENRE[c].g][0]}${BT?" · "+ageTextB(GENRE[c].y):""}</small></div></div>
    <ul class="rl">${lst}</ul>
    <div class="taste">${taste}</div>
-   <div class="stats"><div class="stat"><b>${rank.length}/10</b><span>채운 자리</span></div><div class="stat"><b>${first}–${last}</b><span>TOP10이 걸친 시기</span></div></div>
+   <div class="stats"><div class="stat"><b>${RK.length}/10</b><span>채운 자리</span></div><div class="stat"><b>${first}–${last}</b><span>TOP10이 걸친 시기</span></div></div>
    ${barsHtml}</div></div>`,
-   `<div class="foot"><button class="btn" id="prev">◂ 수정</button><button class="btn" id="copy">복사</button><button class="btn pri" id="sh">친구에게 보내기</button></div>`);
-  const text=`[나의 인생게임 TOP10]\n${title}\n\n`+rank.map((n,i)=>`${i+1}. ${n} (${GENRE[n].y})`).join("\n")+`\n\n${taste}\n\n너의 TOP10은? → ${location.href.split("#")[0]}`;
-  document.getElementById("prev").onclick=()=>show(DATA.length-1);
-  document.getElementById("copy").onclick=()=>copy(text);
-  document.getElementById("sh").onclick=async()=>{if(navigator.share){try{await navigator.share({title:"나의 인생게임 TOP10",text});return}catch(e){}}copy(text);};
+   SHARED?`<div class="foot"><button class="btn pri" id="mine">나도 만들기 ▸</button><button class="btn" id="img">이미지</button></div>`:`<div class="foot"><button class="btn" id="prev">◂ 수정</button><button class="btn" id="img">이미지 저장</button><button class="btn pri" id="sh">공유</button></div>`);
+  const url=resultUrl();
+  const text=`[나의 인생게임 TOP10]\n${title}\n\n`+RK.map((n,i)=>`${i+1}. ${n} (${GENRE[n].y})`).join("\n")+`\n\n${taste}\n\n내 TOP10 보기 → ${url}`;
+  const o={title,era,tg,taste,url,text};
+  if(SHARED){document.getElementById("mine").onclick=()=>{history.replaceState(null,"",location.pathname);intro();};}
+  else{document.getElementById("prev").onclick=()=>show(DATA.length-1);
+    document.getElementById("sh").onclick=async()=>{if(navigator.share){try{await navigator.share({title:"나의 인생게임 TOP10",text:o.text});return}catch(e){}}copy(o.text);};}
+  document.getElementById("img").onclick=()=>showImage(o);
+}
+
+/* ---------- result image ---------- */
+const GC={M:"#6a4bd8",A:"#d8542b",F:"#2b7bd8",C:"#e3b214",S:"#2fa36b",P:"#c93d7c"};
+function bevel(x,X,y,w,h,inset){x.fillStyle=inset?"#808080":"#fff";x.fillRect(X,y,w,2);x.fillRect(X,y,2,h);x.fillStyle=inset?"#fff":"#404040";x.fillRect(X,y+h-2,w,2);x.fillRect(X+w-2,y,2,h);}
+function wrap(x,t,maxW){const out=[];let line="";for(const ch of t){if(x.measureText(line+ch).width>maxW&&line){out.push(line);line=ch;}else line+=ch;}if(line)out.push(line);return out;}
+async function makeImage(o){
+  try{await document.fonts.load("bold 40px 'Noto Sans KR'");await document.fonts.load("20px 'Press Start 2P'");}catch(e){}
+  const W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  const KR="'Noto Sans KR',sans-serif",PX="'Press Start 2P',monospace";
+  x.fillStyle="#008080";x.fillRect(0,0,W,H);
+  // window
+  const wx=40,wy=60,ww=W-80,wh=H-120;x.fillStyle="#000";x.fillRect(wx+8,wy+8,ww,wh);x.fillStyle="#c0c0c0";x.fillRect(wx,wy,ww,wh);bevel(x,x,wx,wy,ww,wh,false);
+  const g=x.createLinearGradient(wx,0,wx+ww,0);g.addColorStop(0,"#000080");g.addColorStop(1,"#1084d0");x.fillStyle=g;x.fillRect(wx+8,wy+8,ww-16,52);
+  x.fillStyle="#fff";x.fillRect(wx+20,wy+22,24,24);x.fillStyle="#000";x.strokeRect(wx+20.5,wy+22.5,24,24);
+  x.fillStyle="#fff";x.font=`bold 28px ${KR}`;x.textBaseline="middle";x.fillText("명예의 전당.txt - 메모장",wx+58,wy+34);
+  x.fillStyle="#c0c0c0";x.fillRect(wx+ww-52,wy+18,32,30);bevel(x,x,wx+ww-52,wy+18,32,30,false);x.fillStyle="#000";x.font=`bold 20px ${KR}`;x.textAlign="center";x.fillText("✕",wx+ww-36,wy+33);x.textAlign="left";
+  // paper
+  const px=wx+24,py=wy+84,pw=ww-48,ph=wh-108;x.fillStyle="#fff";x.fillRect(px,py,pw,ph);bevel(x,x,px,py,pw,ph,true);
+  let y=py+56;const lx=px+40,cw=pw-80;
+  x.fillStyle="#000";x.font=`22px ${PX}`;x.textBaseline="alphabetic";
+  for(const ln of wrap(x,o.title,cw)){x.fillText(ln,lx,y);y+=40;}
+  x.fillStyle="#5a5a5a";x.font=`24px ${KR}`;y+=8;x.fillText(`${o.era[0]}~${o.era[1]} 게임이 상위권 · 주력 ${G[o.tg][0]}`,lx,y);y+=36;
+  // champion
+  const c1=RK[0];x.fillStyle="#fff9dc";x.fillRect(lx,y,cw,140);x.strokeStyle="#ffe27a";x.lineWidth=4;x.strokeRect(lx+2,y+2,cw-4,136);
+  x.fillStyle=GC[GENRE[c1].g];x.fillRect(lx+22,y+22,96,96);bevel(x,x,lx+22,y+22,96,96,false);x.fillStyle="#fff";x.font=`16px ${PX}`;x.textAlign="center";x.fillText(ABBR[GENRE[c1].g],lx+70,y+78);x.textAlign="left";
+  x.fillStyle="#b8860b";x.font=`16px ${PX}`;x.fillText("#1 인생게임",lx+140,y+48);
+  x.fillStyle="#000";x.font=`bold 44px ${KR}`;x.fillText(c1,lx+140,y+98);
+  x.fillStyle="#5a5a5a";x.font=`22px ${KR}`;x.fillText(`${GENRE[c1].y} · ${G[GENRE[c1].g][0]}${BT?" · "+ageTextB(GENRE[c1].y):""}`,lx+140,y+128);
+  y+=170;
+  // 2-10
+  x.font=`28px ${KR}`;
+  RK.slice(1).forEach((n,i)=>{x.fillStyle="#000080";x.font=`16px ${PX}`;x.textAlign="right";x.fillText(String(i+2),lx+44,y+30);x.textAlign="left";
+    x.fillStyle=GC[GENRE[n].g];x.fillRect(lx+64,y+4,40,40);x.fillStyle="#000";x.font=`bold 28px ${KR}`;x.fillText(n,lx+120,y+32);
+    x.fillStyle="#5a5a5a";x.font=`20px ${KR}`;x.textAlign="right";x.fillText(String(GENRE[n].y),lx+cw,y+30);x.textAlign="left";
+    x.fillStyle="#eee";x.fillRect(lx,y+52,cw,2);y+=58;});
+  for(let i=RK.length;i<N;i++){x.fillStyle="#bbb";x.font=`16px ${PX}`;x.textAlign="right";x.fillText(String(i+1),lx+44,y+30);x.textAlign="left";x.font=`24px ${KR}`;x.fillStyle="#bbb";x.fillText("빈 자리",lx+120,y+32);x.fillStyle="#eee";x.fillRect(lx,y+52,cw,2);y+=58;}
+  // taste
+  y+=20;x.fillStyle="#eef0f8";const tl=(()=>{x.font=`24px ${KR}`;return wrap(x,o.taste,cw-60)})();x.fillRect(lx,y,cw,tl.length*36+28);x.fillStyle="#000080";x.fillRect(lx,y,8,tl.length*36+28);
+  x.fillStyle="#000";x.font=`24px ${KR}`;tl.forEach((ln,i)=>x.fillText(ln,lx+30,y+40+i*36));y+=tl.length*36+28;
+  // footer
+  x.fillStyle="#5a5a5a";x.font=`20px ${KR}`;x.textAlign="right";x.fillText("나도 만들기 → "+location.host+location.pathname,lx+cw,py+ph-28);x.textAlign="left";
+  return c.toDataURL("image/png");
+}
+async function showImage(o){
+  toast("이미지 만드는 중…");
+  const d=await makeImage(o);
+  const w=document.createElement("div");w.className="ov";
+  w.innerHTML=`<div class="window rw"><div class="tbar"><span class="ico"></span><span class="t">TOP10.png - 그림판</span><span class="x" id="ic">✕</span></div><div style="padding:8px 10px;overflow:auto"><img src="${d}" alt="내 인생게임 TOP10 결과" style="width:100%;display:block;border:1px solid #000"><p class="hint" style="margin:8px 0 0">폰에서는 이미지를 길게 눌러 저장하거나, 아래 버튼을 누르세요.</p></div><div class="foot"><a class="btn" id="dl" href="${d}" download="내_인생게임_TOP10.png" style="text-align:center;text-decoration:none">저장</a><button class="btn pri" id="ish">공유</button><button class="btn" id="ic2">닫기</button></div></div>`;
+  document.body.appendChild(w);const close=()=>w.remove();
+  w.querySelector("#ic").onclick=w.querySelector("#ic2").onclick=close;w.onclick=e=>{if(e.target===w)close();};
+  w.querySelector("#ish").onclick=async()=>{try{const b=await (await fetch(d)).blob();const f=new File([b],"top10.png",{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"나의 인생게임 TOP10",text:o.text});return;}
+    if(navigator.share){await navigator.share({title:"나의 인생게임 TOP10",text:o.text});return;}}catch(e){}
+    copy(o.text);};
 }
 async function copy(t){try{await navigator.clipboard.writeText(t);toast("복사됨. 단톡방에 붙여 넣으세요.")}catch(e){toast("복사가 막혔습니다. 길게 눌러 직접 복사해 주세요.")}}
 let tt=null;
@@ -318,7 +379,9 @@ function toast(m,act){const t=document.getElementById("toast");t.innerHTML="";t.
 topbtn.onclick=openRank;
 document.getElementById("restart").onclick=()=>{if(confirm("처음 화면으로 갈까요? TOP10은 그대로 남습니다."))intro();};
 document.addEventListener("keydown",e=>{if(ov&&e.key==="Escape")return closeRank();if(step<0||step>=DATA.length||ov)return;if(e.key==="ArrowRight")document.getElementById("next").click();if(e.key==="ArrowLeft")document.getElementById("prev").click();});
-intro();
+(function(){const q=new URLSearchParams(location.search);const r=q.get("r");
+  if(r){const rk=r.split(".").map(i=>ALL[+i]).filter(Boolean).slice(0,N);const b=parseInt(q.get("b"));if(rk.length){result(rk,(b>=1950&&b<=2020)?b:null,true);return;}}
+  intro();})();
 </script>
 
 </body>
