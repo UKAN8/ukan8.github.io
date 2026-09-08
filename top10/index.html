@@ -1,3 +1,10 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="나의 인생게임 TOP10">
+<meta property="og:description" content="1996~2026 신작을 넘기며 내 인생게임 TOP10을 지켜내세요">
 <title>나의 인생게임 TOP10</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
@@ -123,6 +130,8 @@ body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--font);fo
   .side .hint{margin:8px 12px 6px}
 }
 </style>
+</head>
+<body>
 
 <div class="window" id="app"></div>
 <div class="task">
@@ -311,3 +320,6 @@ document.getElementById("restart").onclick=()=>{if(confirm("처음 화면으로 
 document.addEventListener("keydown",e=>{if(ov&&e.key==="Escape")return closeRank();if(step<0||step>=DATA.length||ov)return;if(e.key==="ArrowRight")document.getElementById("next").click();if(e.key==="ArrowLeft")document.getElementById("prev").click();});
 intro();
 </script>
+
+</body>
+</html>
