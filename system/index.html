@@ -371,6 +371,12 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
         <button class="nd" data-open="past" style="grid-column:1"><i class="dot"></i><span class="h">기출테스트</span><span class="s">타학교 시험지</span></button>
         <span class="arr">→</span>
         <button class="nd" data-open="past"><i class="dot"></i><span class="h">학교 프린트</span><span class="s">다시 만들어 풀림</span></button>
+        <div class="brrow" style="grid-column:1/8">
+          <span class="bl">↳</span>
+          <button class="nd" data-open="past"><i class="dot"></i><span class="h">자기평가</span></button>
+          <button class="nd key" data-open="past"><i class="dot"></i><span class="h">퍼스널트레이닝</span></button>
+          <button class="nd" data-open="loop"><i class="dot"></i><span class="h">저녁 루프</span></button>
+        </div>
       </div>
       <span class="arr">→</span>
       <div class="grp">
@@ -395,7 +401,8 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       </div>
     </div>
     <div class="loopback"><span class="ic">↻</span>
-      <span>시험이 어떻게 나왔는지, 학생들이 무엇을 불편해했는지가 <b>다음 학기 교재를 바꿉니다.</b></span></div>
+      <span>기출테스트 직후 <b>자기평가 → 학생별 퍼스널트레이닝 → 그날 밤 루프</b>가 하루 안에 돌고,
+        시험이 어떻게 나왔는지, 학생들이 무엇을 불편해했는지가 <b>다음 학기 교재를 바꿉니다.</b></span></div>
   </div>
 </div></section>
 
@@ -961,8 +968,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <div class="k">매일 · 05</div>
     <h2>메타루프</h2>
     <p class="one">수업이 끝난 날 밤, 학생 폰으로 링크가 하나 갑니다.
-      <strong style="color:var(--ink)">누워서 엄지로 3분.</strong> 계산은 미리 해두고 판단만 묻습니다.</p>
-    <div class="facts"><span>3분</span><span>다음날 21시까지</span><span>학생마다 다른 문항</span></div>
+      <strong style="color:var(--ink)">누워서 엄지로 3분.</strong> 계산은 미리 해두고 판단만 묻습니다.
+      시험 기간에는 그날 기출테스트에서 틀린 문제 다시 풀기와 자기 학교 프린트 문항이 여기로 들어옵니다.</p>
+    <div class="facts"><span>3분</span><span>다음 수업 전까지</span><span>학생마다 다른 문항</span></div>
   </div>
 
   <div class="blk">
@@ -1173,7 +1181,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <a href="report_sample.jpg" target="_blank" rel="noopener" style="display:block">
         <img src="report_sample.jpg" alt="데일리 리포트 실제 예시"
              style="width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)"></a>
-      <div class="cap">위 예시와 같은 양식으로 매 수업 후 발송됩니다. 학생명은 비공개 처리했습니다.</div>
+      <div class="cap">위 예시와 같은 양식으로 매 수업 후 발송됩니다. 학생명은 비공개 처리했습니다.
+        지난 밤 루프를 제출했는지, 자가채점 결과는 어땠는지, 아직 인증을 기다리는 유형이 무엇인지를 보여주는 <strong style="color:var(--ink2)">복습 루프 카드</strong>가 함께 붙습니다.</div>
     </div>
 
     <div class="quote"><p>"수업 체계가 좋고, 시험 기간 모의 테스트가 도움이 많이 됩니다. 문제 푸는 속도가 올라갔고, 리포트 같은 시스템은 어느 학원을 봐도 없어서 너무 만족스럽습니다."</p>
@@ -1212,6 +1221,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <div class="stp on"><div class="no">3</div><div class="bd"><b>출결과 이행률</b>
         <span>출결, 결석 사유, 과제 이행률, 문항별 점수, 코멘트.</span>
         <div class="out">→ 안내 문자 · 상담 자료 · <em>학기 말 종합</em></div></div></div>
+      <div class="stp on"><div class="no">4</div><div class="bd"><b>기출테스트 결과</b>
+        <span>회차마다 문항별 ○△×, 자기평가 확신도, 자주 틀리는 단원.</span>
+        <div class="out">→ 퍼스널트레이닝 · <em>학생 포털의 추정 등급 흐름</em></div></div></div>
     </div>
   </div>
 </article>
@@ -1349,15 +1361,15 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <h2>기출테스트 · 학교 프린트</h2>
     <p class="one">우리 학교 시험은 우리 학교 자료로 준비합니다.
       <strong style="color:var(--ink)">학교가 나눠준 프린트까지 다시 만들어 풀립니다.</strong></p>
-    <div class="facts"><span>34개 학교 기출 보유</span><span>학교 프린트 재제작</span><span>학교별 실전 모의고사</span></div>
+    <div class="facts"><span>200여 학교 · 310여 종 기출 보유</span><span>자기평가 → 당일 퍼스널트레이닝</span><span>학교 프린트 재제작</span></div>
   </div>
 
   <div class="blk">
     <h3>학부모님께</h3>
     <ul class="sell">
-      <li><i>1</i><div><b>학교마다 다른 시험을 준비합니다.</b><span>담당 학교 다섯 곳 외에도 34개 학교의 기출을 갖고 있습니다. 전학을 가도, 반이 바뀌어도 그 학교 자료로 준비할 수 있습니다.</span></div></li>
+      <li><i>1</i><div><b>학교마다 다른 시험을 준비합니다.</b><span>담당 학교 외에도 2학기 중간 기준 200여 학교, 310여 종의 기출을 수집·복원해 두고 있습니다. 전학을 가도, 반이 바뀌어도 그 학교 자료로 준비할 수 있습니다.</span></div></li>
       <li><i>2</i><div><b>학교 프린트를 그냥 풀리지 않습니다.</b><span>같은 문제를 숫자만 바꿔 한 번 더 풀어야 시험장에서 나옵니다. 그래서 변형본까지 만들어 줍니다.</span></div></li>
-      <li><i>3</i><div><b>기출 결과도 유형으로 남습니다.</b><span>채점하고 끝이 아닙니다. 학생마다 약한 유형 세 개를 뽑아두고, 그게 보강 대상이 됩니다.</span></div></li>
+      <li><i>3</i><div><b>채점하고 끝이 아닙니다.</b><span>시험 직후 학생이 포털에서 문항마다 내 답과 확신도(확실·애매·찍음·안 품)를 남기고, 채점 결과와 겹쳐 학생 × 유형 단위로 처방이 정해집니다. 그날 자기 이름이 적힌 퍼스널트레이닝을 받아 갑니다. <a href="/gichul/" style="color:var(--key);font-weight:600">기출테스트 학습 시스템 자세히 →</a></span></div></li>
     </ul>
   </div>
 

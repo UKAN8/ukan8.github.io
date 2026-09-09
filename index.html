@@ -45,8 +45,8 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
 .link.primary .d{color:rgba(10,10,15,.6)}
 .link.soon{opacity:.45;pointer-events:none}
 .link.tower{border-color:var(--accent);background:rgba(245,160,160,.07)}
-.link.tower .t{display:flex;align-items:center;gap:9px}
-.link.tower .badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;color:#0a0a0f;background:var(--accent);padding:2px 7px;line-height:1.5}
+.link.tower .t,.link.gichul .t{display:flex;align-items:center;gap:9px}
+.link.tower .badge,.link.gichul .badge{font-size:.6rem;font-weight:700;letter-spacing:.1em;color:#0a0a0f;background:var(--accent);padding:2px 7px;line-height:1.5}
 .link.tower .arrow{color:var(--accent)}
 .sub-links{margin-top:34px;display:flex;justify-content:center;gap:26px;font-size:.8rem;color:var(--dim)}
 .sub-links a{border-bottom:1px solid transparent;padding-bottom:2px;transition:.18s}
@@ -84,6 +84,10 @@ footer{padding:26px;text-align:center;font-size:.75rem;color:var(--dim)}
         <div><div class="t">수업 시스템</div><div class="d">매일 · 매주 · 학기가 어떻게 도는지 — 실제 자료 열어보기</div></div>
         <div class="arrow">→</div>
       </a>
+      <a class="link gichul" href="/gichul/">
+        <div><div class="t">기출테스트 학습 시스템<span class="badge">NEW</span></div><div class="d">시험 그대로 치르고 그날 바로 처방 — 자기평가 · 퍼스널트레이닝 · 저녁 루프</div></div>
+        <div class="arrow">→</div>
+      </a>
       <a class="link" href="https://youtube.com/channel/UCMtF5NKw5_COFwvgavNFOOg" target="_blank" rel="noopener">
         <div><div class="t">YouTube</div><div class="d">수업 영상 · 개념 정리</div></div>
         <div class="arrow">→</div>
@@ -96,6 +100,10 @@ footer{padding:26px;text-align:center;font-size:.75rem;color:var(--dim)}
         <div><div class="t">카카오톡 상담</div><div class="d">상담 · 레벨테스트 문의 — 바로 채팅</div></div>
         <div class="arrow">→</div>
       </a>
+    </div>
+
+    <div class="sub-links">
+      <span>재원생 · 학부모님은 팀톡으로 받으신 <b style="color:var(--sub);font-weight:600">학생 포털 링크</b>로 성적 흐름과 오늘 할 일을 확인하실 수 있습니다 (로그인 없음)</span>
     </div>
 
   </div>
