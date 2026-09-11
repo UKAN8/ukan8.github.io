@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="직선 y=x에 대한 대칭이동 50층 — 수학은유강">
+</head>
+<body>
+<title>대칭의 탑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
+<style>
+:root{
+  --bg:#100E0D; --panel:#1C1918; --panel2:#252120; --line:#332E2C;
+  --key:#EA9090; --key-dim:#7A4A4A; --ok:#6FCF97; --no:#EB5757; --gold:#E8C56A;
+  --tx:#F5F1EF; --tx2:#A79E9A; --tx3:#6E6663;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  background:var(--bg); color:var(--tx); min-height:100vh;
+  font-family:"Noto Sans KR",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  padding:30px 14px 50px; overflow-x:hidden;
+  background-image:radial-gradient(120% 80% at 50% -10%,#241C1B 0%,var(--bg) 60%);
+}
+#app{width:100%;max-width:520px;margin:0 auto;position:relative}
+.screen{display:none;animation:fade .3s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.btn:focus-visible,.pick:focus-visible{outline:2px solid var(--key);outline-offset:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px}
+.btn{display:block;width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--tx);
+  font-family:inherit;font-size:16px;font-weight:700;padding:15px;border-radius:14px;cursor:pointer;transition:.15s}
+.btn.key{background:var(--key);color:#2A1414;border-color:var(--key);font-weight:800}
+.btn.ghost{background:transparent}
+.btn+.btn{margin-top:10px}
+@media (hover:hover){
+  .btn:hover{border-color:var(--key-dim);background:#2C2726}
+  .btn.key:hover{filter:brightness(1.08)}
+  .pick:hover{border-color:var(--key-dim)}
+}
+/* 시작 */
+.brand{text-align:center;margin-bottom:24px}
+.mark{font-size:11px;letter-spacing:.3em;color:var(--key);font-weight:800;margin-bottom:12px}
+h1{font-size:38px;font-weight:900;letter-spacing:-.03em;line-height:1.12;
+  background:linear-gradient(180deg,#fff 20%,var(--key) 140%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{margin-top:12px;font-size:14px;color:var(--tx2);line-height:1.7}
+.rules{margin:20px 0 22px;display:grid;gap:9px}
+.rule{display:flex;gap:11px;font-size:14px;color:var(--tx2);line-height:1.55}
+.rule b{color:var(--tx)}
+.dot{color:var(--key);font-weight:900}
+.best{text-align:center;font-size:13px;color:var(--tx3);margin-top:14px}
+/* 게임 */
+.hud{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.floor{font-size:15px;font-weight:800}
+.floor b{color:var(--key);font-size:22px}
+.hudr{font-size:12px;color:var(--tx3)}
+.bar{height:6px;border-radius:99px;background:var(--panel2);overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--key);width:100%;transition:width .1s linear}
+.bar.warn i{background:var(--no)}
+.qtag{font-size:11px;color:var(--key);font-weight:800;letter-spacing:.12em}
+.qtext{font-size:16px;font-weight:800;margin:8px 0 12px}
+.stage{display:flex;justify-content:center}
+.stage svg{max-width:216px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.pick{background:var(--panel2);border:2px solid var(--line);border-radius:14px;padding:7px 5px 5px;cursor:pointer;transition:.12s}
+.pick .no{font-size:12px;color:var(--tx3);font-weight:800;margin-top:1px;text-align:center}
+.pick.ok{border-color:var(--ok)} .pick.no{border-color:var(--no)}
+.pick.ok .no{color:var(--ok)} .pick.no .no{color:var(--no)}
+svg{display:block;width:100%;height:auto}
+/* 결과 */
+.res{text-align:center}
+.resf{font-size:60px;font-weight:900;color:var(--key);line-height:1}
+.resf span{font-size:24px;color:var(--tx2);margin-left:2px}
+.rescmt{margin-top:10px;color:var(--tx2);font-size:14px;line-height:1.6}
+.rev{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+.revh{font-size:13px;font-weight:800;color:var(--tx3);letter-spacing:.1em;margin-bottom:12px}
+.revrow{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.revrow svg{max-width:100px}
+.revwhy{font-size:13px;color:var(--tx2);line-height:1.65}
+</style>
+
+<div id="app">
+
+<div class="screen on" id="s-home">
+  <div class="brand">
+    <div class="mark">수학은유강</div>
+    <h1>대칭의 탑</h1>
+    <div class="sub">직선 y=x를 접는 선으로 두고 도형을 뒤집어라.<br>50층까지, 한 번만 틀려도 끝.</div>
+  </div>
+  <div class="card">
+    <div class="rules">
+      <div class="rule"><span class="dot">·</span><span>문제 그림을 <b>직선 y=x에 대하여 대칭이동</b>한 것을 보기 3개에서 고른다</span></div>
+      <div class="rule"><span class="dot">·</span><span>한 문제 <b>10초</b>. 오답·시간초과는 <b>즉시 종료</b></span></div>
+      <div class="rule"><span class="dot">·</span><span>틀린 문제는 끝난 뒤 정답 그림으로 되짚어 준다</span></div>
+    </div>
+    <button class="btn key" id="startBtn">등반 시작</button>
+    <div class="best" id="bestLine"></div>
+  </div>
+</div>
+
+<div class="screen" id="s-play">
+  <div class="hud"><div class="floor"><b id="floorN">1</b>F / 50</div><div class="hudr" id="hudBest"></div></div>
+  <div class="bar" id="bar"><i id="barI"></i></div>
+  <div class="card">
+    <div class="qtag" id="qtag"></div>
+    <div class="qtext">다음 도형을 직선 y=x에 대하여 대칭이동한 것은?</div>
+    <div class="stage" id="stage"></div>
+    <div class="picks" id="picks"></div>
+  </div>
+</div>
+
+<div class="screen" id="s-over">
+  <div class="card res">
+    <div class="mark" id="overWhy"></div>
+    <div class="resf" id="overFloor">0<span>F</span></div>
+    <div class="rescmt" id="overCmt"></div>
+    <div class="rev" id="rev"></div>
+  </div>
+  <div style="margin-top:14px">
+    <button class="btn key" id="againBtn">다시 도전</button>
+    <button class="btn ghost" id="homeBtn">처음으로</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const R=5,C=24,PAD=18,S=R*2*C+PAD*2,O=PAD+R*C;
+const X=x=>PAD+(x+R)*C, Y=y=>PAD+(R-y)*C;
+
+const T={
+  yx:[0,1,1,0], xax:[1,0,0,-1], yax:[-1,0,0,1],
+  org:[-1,0,0,-1], nyx:[0,-1,-1,0], rot90:[0,-1,1,0]
+};
+const NAME={yx:'y=x 대칭',xax:'x축 대칭',yax:'y축 대칭',org:'원점 대칭',nyx:'y=−x 대칭',rot90:'90° 회전'};
+const ap=(k,p)=>{const[a,b,c,d]=T[k];return[a*p[0]+b*p[1],c*p[0]+d*p[1]];};
+const mat=k=>{const[a,b,c,d]=T[k];return `translate(${O},${O}) matrix(${a},${-c},${-b},${d},0,0) translate(${-O},${-O})`;};
+
+function sample(s){const n=150,o=[];for(let i=0;i<=n;i++){const x=s.from+(s.to-s.from)*i/n;o.push([x,s.f(x)]);}return{t:'line',p:o};}
+const norm=ps=>ps.map(s=>s.t==='fn'?sample(s):s);
+function tf(ps,k){return ps.map(s=>{
+  if(s.t==='circ')return{...s,c:ap(k,s.c)};
+  if(s.t==='word')return{...s,k};
+  return{...s,p:s.p.map(q=>ap(k,q))};
+});}
+function clip(p){const g=[];let c=[];for(const q of p){
+  if(Math.abs(q[0])<=R+.01&&Math.abs(q[1])<=R+.01)c.push(q);else if(c.length){g.push(c);c=[];}}
+  if(c.length)g.push(c);return g;}
+function axes(){let g='';
+  for(let i=-R;i<=R;i++){if(!i)continue;
+    g+=`<line x1="${X(i)}" y1="${Y(0)-4}" x2="${X(i)}" y2="${Y(0)+4}" stroke="#5A5250" stroke-width="1.2"/>`;
+    g+=`<line x1="${X(0)-4}" y1="${Y(i)}" x2="${X(0)+4}" y2="${Y(i)}" stroke="#5A5250" stroke-width="1.2"/>`;}
+  g+=`<line x1="${X(-R)}" y1="${Y(0)}" x2="${X(R)}" y2="${Y(0)}" stroke="#8B8280" stroke-width="1.6"/>`;
+  g+=`<line x1="${X(0)}" y1="${Y(-R)}" x2="${X(0)}" y2="${Y(R)}" stroke="#8B8280" stroke-width="1.6"/>`;
+  g+=`<line x1="${X(-R)}" y1="${Y(-R)}" x2="${X(R)}" y2="${Y(R)}" stroke="#EA9090" stroke-width="1.7" opacity=".9"/>`;
+  g+=`<text x="${X(R)-4}" y="${Y(R)+15}" fill="#EA9090" font-size="12" font-weight="700" text-anchor="end">y=x</text>`;
+  return g;}
+function draw(ps,col){return ps.map(s=>{
+  if(s.t==='circ')return `<circle cx="${X(s.c[0])}" cy="${Y(s.c[1])}" r="${s.r*C}" fill="${col}22" stroke="${col}" stroke-width="2.4"/><circle cx="${X(s.c[0])}" cy="${Y(s.c[1])}" r="3" fill="${col}"/>`;
+  if(s.t==='word')return `<g${s.k?` transform="${mat(s.k)}"`:''}><text x="${X(s.at[0])}" y="${Y(s.at[1])}" fill="${col}" font-size="${s.size||40}" font-weight="900" letter-spacing="-1">${s.s}</text></g>`;
+  if(s.t==='line')return clip(s.p).map(g=>`<polyline points="${g.map(q=>`${X(q[0])},${Y(q[1])}`).join(' ')}" fill="none" stroke="${col}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>`).join('');
+  return `<polygon points="${s.p.map(q=>`${X(q[0])},${Y(q[1])}`).join(' ')}" fill="${col}22" stroke="${col}" stroke-width="2.4" stroke-linejoin="round"/>`;
+}).join('');}
+const fig=(ps,col)=>`<svg viewBox="0 0 ${S} ${S}">${axes()}${draw(ps,col||'#F5F1EF')}</svg>`;
+
+/* ---------------- 문항 50 ---------------- */
+const F=(f,from,to)=>({t:'fn',f,from,to});
+const P=p=>({t:'poly',p}); const L=p=>({t:'line',p});
+const K=(c,r)=>({t:'circ',c,r}); const W=(s,at,size)=>({t:'word',s,at,size:size||40});
+
+const BANK=[
+ // 직선
+ {t:1,u:'직선',f:[F(x=>2*x+1,-6,6)],w:['xax','yax'],y:'x와 y를 맞바꾸면 x=2y+1, 즉 y=(x−1)/2. 기울기 2가 1/2로 눕는다.'},
+ {t:2,u:'직선',f:[F(x=>x/3+2,-6,6)],w:['yax','org'],y:'x=y/3+2 → y=3x−6. 기울기 1/3이 3으로 선다.'},
+ {t:1,u:'직선',f:[F(()=>4,-5,5)],w:['xax','rot90'],y:'가로선 y=4는 세로선 x=4가 된다. 축에 나란한 선끼리 역할이 바뀐다.'},
+ {t:3,u:'직선',f:[F(x=>-x+3,-6,6)],w:['xax','yax'],y:'x=−y+3 ⇔ y=−x+3. y=x와 수직인 직선은 자기 자신으로 옮겨진다.'},
+ {t:3,u:'직선',f:[F(x=>-2*x-2,-6,6)],w:['nyx','rot90'],y:'x=−2y−2 → y=−(x+2)/2. 기울기 −2가 −1/2가 된다.'},
+ {t:2,u:'직선',f:[F(x=>x/2-2,-6,6)],w:['xax','yax'],y:'x=y/2−2 → y=2x+4.'},
+ // 원
+ {t:1,u:'원',f:[K([3,-2],2)],w:['xax','org'],y:'원은 중심만 옮긴다. (3,−2)→(−2,3), 반지름 2는 그대로.'},
+ {t:2,u:'원',f:[K([-3,1],1.5)],w:['yax','nyx'],y:'중심 (−3,1)→(1,−3).'},
+ {t:3,u:'원',f:[K([2,2],2)],w:['xax','yax'],y:'중심 (2,2)가 y=x 위에 있다. 중심이 이 직선 위면 원은 제자리 — 움직이지 않는 것도 답이 될 수 있다.'},
+ {t:1,u:'원',f:[K([0,3],1.5)],w:['xax','rot90'],y:'중심 (0,3)→(3,0). y축 위의 점은 x축 위로 간다.'},
+ {t:2,u:'원',f:[K([-2,-4],1)],w:['org','nyx'],y:'중심 (−2,−4)→(−4,−2). 제3사분면 안에서 자리만 바뀐다.'},
+ // 이차함수
+ {t:2,u:'이차함수',f:[F(x=>x*x-3,-3.2,3.2)],w:['xax','yax'],y:'y=x²−3 → x=y²−3. 위로 열린 포물선이 오른쪽으로 열린다.'},
+ {t:2,u:'이차함수',f:[F(x=>-x*x+4,-3.4,3.4)],w:['xax','rot90'],y:'x=−y²+4. 아래로 열린 것이 왼쪽으로 열린다.'},
+ {t:3,u:'이차함수',f:[F(x=>(x-2)*(x-2)-1,-0.5,4.5)],w:['yax','org'],y:'꼭짓점 (2,−1)→(−1,2). 축이 세로에서 가로로 바뀐다.'},
+ {t:2,u:'이차함수',f:[F(x=>x*x/2,-3.2,3.2)],w:['xax','nyx'],y:'꼭짓점은 원점 그대로, 열린 방향만 위 → 오른쪽.'},
+ {t:3,u:'이차함수',f:[F(x=>-(x+2)*(x+2)+3,-4.8,0.8)],w:['yax','rot90'],y:'꼭짓점 (−2,3)→(3,−2).'},
+ // 절댓값·반원
+ {t:2,u:'절댓값',f:[F(x=>Math.abs(x-1),-4,6)],w:['yax','rot90'],y:'V자가 옆으로 눕는다. 꺾인 점 (1,0)→(0,1).'},
+ {t:2,u:'절댓값',f:[F(x=>Math.abs(x)-2,-4.5,4.5)],w:['xax','rot90'],y:'꺾인 점 (0,−2)→(−2,0).'},
+ {t:2,u:'반원',f:[F(x=>Math.sqrt(Math.max(0,9-x*x)),-3,3)],w:['xax','rot90'],y:'위쪽 반원이 오른쪽 반원이 된다.'},
+ // 삼각형
+ {t:1,u:'삼각형',f:[P([[1,1],[4,1],[1,3]])],w:['xax','rot90'],y:'(4,1)→(1,4), (1,3)→(3,1). 회전은 뒤집히지 않으니 답이 아니다.'},
+ {t:2,u:'삼각형',f:[P([[-1,2],[-4,1],[-2,5]])],w:['yax','org'],y:'제2사분면의 도형은 y=x 대칭에서 제4사분면으로 간다.'},
+ {t:2,u:'삼각형',f:[P([[0,0],[3,-1],[1,-4]])],w:['xax','nyx'],y:'(3,−1)→(−1,3), (1,−4)→(−4,1).'},
+ {t:3,u:'삼각형',f:[P([[-3,-1],[-1,-4],[-4,-4]])],w:['org','rot90'],y:'제3사분면 안에서 뒤집힌다. 회전과 헷갈리기 쉬우니 한 꼭짓점만 찍어서 확인하라.'},
+ // 사각형·꺾인 도형
+ {t:1,u:'직사각형',f:[P([[1,2],[4,2],[4,4],[1,4]])],w:['xax','yax'],y:'가로로 긴 직사각형이 세로로 긴 직사각형이 된다.'},
+ {t:2,u:'ㄴ자',f:[P([[1,1],[4,1],[4,2],[2,2],[2,5],[1,5]])],w:['yax','nyx'],y:'꼭짓점을 모두 (a,b)→(b,a)로.'},
+ {t:3,u:'ㄷ자',f:[P([[-5,1],[-5,4],[-2,4],[-2,3],[-4,3],[-4,2],[-2,2],[-2,1]])],w:['org','rot90'],y:'벌어진 입이 향하는 방향이 어디로 가는지 보라.'},
+ {t:3,u:'계단',f:[P([[0,0],[1,0],[1,1],[2,1],[2,2],[3,2],[3,3],[0,3]])],w:['xax','rot90'],y:'계단은 y=x를 따라 오르므로 대칭이동하면 계단이 반대쪽으로 뒤집힌다.'},
+ {t:2,u:'화살표',f:[P([[1,0],[3,0],[3,-1],[5,0.5],[3,2],[3,1],[1,1]])],w:['xax','rot90'],y:'오른쪽을 향한 화살표가 위를 향한다.'},
+ {t:2,u:'마름모',f:[P([[0,-2],[2,-3],[0,-4],[-2,-3]])],w:['yax','nyx'],y:'네 꼭짓점을 각각 좌표 교환. (2,−3)→(−3,2).'},
+ {t:2,u:'십자',f:[P([[1,-1],[3,-1],[3,-3],[1,-3]].concat([]))],w:['xax','yax'],y:'정사각형이라도 위치가 바뀐다. (1,−1)→(−1,1).'},
+ {t:1,u:'집 모양',f:[P([[1,0],[4,0],[4,2],[2.5,3.5],[1,2]])],w:['xax','yax'],y:'지붕 꼭대기 (2.5,3.5)→(3.5,2.5). 지붕이 오른쪽을 향한다.'},
+ {t:2,u:'꺾은선',f:[L([[-1,4],[-1,1],[3,1]])],w:['yax','rot90'],y:'꺾인 점 (−1,1)→(1,−1). 끝점 두 개만 따라가도 충분하다.'},
+ {t:3,u:'사다리꼴',f:[P([[-4,-1],[-1,-1],[-2,-4],[-3.5,-4]])],w:['org','nyx'],y:'평행한 두 변이 가로에서 세로로 바뀐다.'},
+ {t:3,u:'톱니',f:[L([[-4,-1],[-3,-3],[-2,-1],[-1,-3],[0,-1],[1,-3],[2,-1]])],w:['xax','rot90'],y:'톱니의 뾰족한 방향을 보라. 위로 향하던 이가 오른쪽으로 향한다.'},
+ {t:3,u:'지그재그',f:[L([[0,1],[2,3],[1,4],[3,5]])],w:['nyx','org'],y:'점을 순서대로 (a,b)→(b,a). 시작점 (0,1)→(1,0).'},
+ {t:3,u:'깃발',f:[L([[-4,1],[-4,5]]),P([[-4,5],[-1,4],[-4,3]])],w:['org','rot90'],y:'깃대와 깃발 끝을 각각 좌표 교환. 대칭은 뒤집히고 회전은 뒤집히지 않는다.'},
+ {t:3,u:'요상한 다각형',f:[P([[-4,1],[-1,2],[-2,4],[0,5],[1,3],[3,4],[2,1],[-1,0]])],w:['nyx','rot90'],y:'꼭짓점이 많아도 규칙은 하나 — 전부 좌표 교환.'},
+ {t:3,u:'요상한 다각형',f:[P([[0,-1],[2,-2],[4,-1],[3,-4],[1,-5],[-1,-3]])],w:['xax','org'],y:'제4사분면 도형은 제2사분면으로 간다.'},
+ {t:3,u:'도형 두 개',f:[K([1,4],1),K([3,1],1.5)],w:['xax','rot90'],y:'작은 원과 큰 원의 자리가 서로 바뀐 것처럼 보이는지 확인하라.'},
+ {t:3,u:'도형 두 개',f:[P([[0,0],[3,0],[0,2]]),K([-2,-2],1)],w:['yax','org'],y:'y=x 위에 있는 원의 중심 (−2,−2)는 제자리, 삼각형만 뒤집힌다.'},
+ // 글자
+ {t:2,u:'글자',f:[W('필탑',[0.4,0.6],44)],w:['yax','org'],y:'글자도 도형이다. y=x 대칭이면 글자가 왼쪽 아래로 누우며 뒤집힌다.'},
+ {t:3,u:'글자',f:[W('유강',[-4.4,1.2],40)],w:['nyx','rot90'],y:'회전은 글자가 뒤집히지 않고 돌아갈 뿐 — 거울 글씨인 쪽이 대칭이다.'},
+ {t:2,u:'글자',f:[W('수학',[0.5,-3],40)],w:['xax','yax'],y:'제4사분면의 글자는 제2사분면으로 간다.'},
+ {t:3,u:'글자',f:[W('만점',[-4.4,-2.8],40)],w:['org','rot90'],y:'제3사분면 안에서 뒤집힌다. 글자의 위아래가 어디로 갔는지 보라.'},
+ {t:1,u:'글자',f:[W('1등',[0.5,1.2],40)],w:['xax','rot90'],y:'가로로 쓰인 글자가 세로 방향으로 눕는다.'},
+ {t:2,u:'글자',f:[W('함수',[0.4,2.4],40)],w:['yax','nyx'],y:'y=x를 접는 선으로 접으면 원래 글자와 정답 글자가 포개진다.'},
+ {t:2,u:'글자',f:[W('도형',[-4.4,3],40)],w:['xax','org'],y:'제2사분면 → 제4사분면.'},
+ {t:3,u:'글자',f:[W('미적',[0.6,-1.2],40)],w:['nyx','rot90'],y:'대칭은 거울, 회전은 돌리기. 글자가 뒤집혔는지만 보면 된다.'},
+ {t:2,u:'글자',f:[W('대수',[-4.4,-1],40)],w:['yax','xax'],y:'글자의 첫 자가 어디로 가는지 따라가라.'},
+ {t:3,u:'글자',f:[W('최강',[0.4,3.2],44)],w:['org','nyx'],y:'제1사분면 안에서 y=x를 거울로 뒤집힌다.'},
+];
+
+/* ---------------- 게임 ---------------- */
+const LIMIT=10, MAXF=50;
+const G={order:[],i:0,floor:1,dead:false,t0:0,timer:null,wrong:[],best:0};
+try{G.best=+(localStorage.getItem('yxtower_best')||0)||0;}catch(e){}
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$('#'+id).classList.add('on');}
+function bestLine(){$('#bestLine').textContent=G.best?`내 최고 기록 ${G.best}F`:'';$('#hudBest').textContent=G.best?`최고 ${G.best}F`:'';}
+
+function start(){
+  const t1=shuffle(BANK.filter(q=>q.t===1)),t2=shuffle(BANK.filter(q=>q.t===2)),t3=shuffle(BANK.filter(q=>q.t===3));
+  G.order=t1.concat(t2,t3); G.i=0; G.floor=1; G.dead=false; G.wrong=[];
+  show('s-play'); bestLine(); render();
+}
+function render(){
+  const q=G.order[G.i]; q._f=q._f||norm(q.f);
+  $('#floorN').textContent=G.floor;
+  $('#qtag').textContent=q.u+' · '+'★'.repeat(q.t);
+  $('#stage').innerHTML=fig(q._f,'#EA9090');
+  const keys=shuffle(['yx',...q.w]);
+  $('#picks').innerHTML=keys.map((k,j)=>`<div class="pick" data-k="${k}" data-j="${j}">${fig(tf(q._f,k))}<div class="no">${'①②③'[j]}</div></div>`).join('');
+  $('#picks').querySelectorAll('.pick').forEach(el=>el.onclick=()=>answer(el,keys));
+  G.t0=Date.now(); tick();
+  clearInterval(G.timer); G.timer=setInterval(tick,100);
+}
+function tick(){
+  const left=LIMIT-(Date.now()-G.t0)/1000;
+  const p=Math.max(0,left/LIMIT);
+  $('#barI').style.width=(p*100)+'%';
+  $('#bar').classList.toggle('warn',left<=3);
+  if(left<=0){clearInterval(G.timer); over('시간 초과');}
+}
+function answer(el,keys){
+  if(G.dead)return; clearInterval(G.timer);
+  const k=el.dataset.k, q=G.order[G.i];
+  if(k==='yx'){
+    el.classList.add('ok');
+    setTimeout(()=>{
+      if(G.floor>=MAXF){record(MAXF); over('정복');return;}
+      G.floor++; G.i=(G.i+1)%G.order.length; render();
+    },260);
+  }else{
+    el.classList.add('no');
+    $('#picks').querySelectorAll('.pick').forEach(p=>{if(p.dataset.k==='yx')p.classList.add('ok');});
+    G.wrong.push({q,picked:k});
+    setTimeout(()=>over(NAME[k]+'을(를) 골랐다'),900);
+  }
+}
+function record(f){ if(f>G.best){G.best=f; try{localStorage.setItem('yxtower_best',f);}catch(e){}} }
+function comment(f){
+  if(f>=50)return'50층 정복. y=x 대칭은 이제 네 것이다.';
+  if(f>=35)return'거의 다 왔다. 회전과 대칭만 끝까지 구별하면 된다.';
+  if(f>=20)return'감은 잡혔다. 한 꼭짓점을 정해 (a,b)→(b,a)로 찍어 보는 습관을 들이자.';
+  if(f>=10)return'뒤집혔는지부터 보라. 회전 보기는 절대 뒤집히지 않는다.';
+  return'서두르지 말고 y=x 선을 접는 선이라고 생각하자.';
+}
+function over(why){
+  if(G.dead)return; G.dead=true; clearInterval(G.timer);
+  const reached=why==='정복'?MAXF:G.floor-1;
+  record(reached);
+  $('#overWhy').textContent=why==='정복'?'탑의 꼭대기':why;
+  $('#overFloor').innerHTML=reached+'<span>F</span>';
+  $('#overCmt').textContent=comment(reached);
+  const w=G.wrong[G.wrong.length-1];
+  $('#rev').innerHTML=w?`<div class="revh">되짚기</div>
+    <div class="revrow">${fig(w.q._f,'#EA9090')}${fig(tf(w.q._f,'yx'),'#6FCF97')}</div>
+    <div class="revwhy"><b style="color:#6FCF97">초록이 정답</b> — ${w.q.y}</div>`:'';
+  bestLine(); show('s-over');
+}
+$('#startBtn').onclick=start; $('#againBtn').onclick=start;
+$('#homeBtn').onclick=()=>{bestLine();show('s-home');};
+bestLine();
+</script>
+
+</body>
+</html>
