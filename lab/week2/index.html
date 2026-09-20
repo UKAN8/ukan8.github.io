@@ -576,8 +576,9 @@ details .ans{margin-top:5px; font-size:13px; color:var(--ink-2); background:var(
         d.hw? (hwNum? '숫자 범위가 들어 있어 체크리스트가 항목별로 쪼개졌어요.' : '“'+d.hw.slice(0,22)+'…” 에 쪽·문항 숫자가 없어요.') : '과제 칸이 비어 있어요.',
         (d.hw&&!hwNum)? '“프린트 풀기” 는 학생마다 다르게 읽혀요. 단원과 문항 수를 숫자로.':'');
 
-    var st=r.review.replace(/<[^>]+>/g,' ')+' '+r.parentRaw;
-    var hard=st.match(/(하세요|하십시오|해라|하라|할 것|바랍니다|반드시|필수)/g)||[];
+    var st=(r.review.replace(/<[^>]+>/g,' ')+' '+r.parentRaw).replace(/안녕하세요/g,' ');
+    var hard=st.match(/(?:^|[^해아어여])(하세요|하십시오|해라|하라|할 것|바랍니다|반드시|필수)/g)||[];
+    hard=hard.map(function(x){ return x.replace(/^[^하바반필]/,''); });
     add('학생·학부모 문구가 존댓말 ~요 인가', hard.length?'warn':'ok',
         hard.length? '명령·강압 표현 '+hard.length+'곳 — '+hard.slice(0,3).join(' · ')
           : '복습지와 알림톡이 전부 존댓말 + ~요 로 끝나요.',
