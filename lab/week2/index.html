@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="수업 메모 한 장을 복습지·확인퀴즈·과제 체크리스트·학부모 알림톡 4종으로 펴고 9항목을 자동 검수하는 브라우저 워크플로.">
+<meta property="og:title" content="수업메모 자료공장">
+<meta property="og:description" content="메모 한 장 → 자료 4종 + 품질검수">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>수업메모 자료공장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* 단일 다크 테마 — 콘솔·데일리리포트와 같은 옷 */
+:root{
+  --bg:#0F1116; --panel:#171A21; --panel-2:#1C202A; --panel-3:#222732;
+  --line:#272D39; --line-2:#333A48;
+  --ink:#ECEFF5; --ink-2:#9AA3B4; --ink-3:#697284;
+  --pink:#EA9090; --pink-2:#F3B0B0; --pink-soft:rgba(234,144,144,.13);
+  --ok:#5FD0A0; --ok-soft:rgba(95,208,160,.12);
+  --warn:#E5B45F; --warn-soft:rgba(229,180,95,.12);
+  --bad:#F07C6E; --bad-soft:rgba(240,124,110,.12);
+  --r:10px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  font-size:15px; line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1200px; margin:0 auto; padding-inline:16px; padding-block:24px 56px}
+
+/* ---------- top bar ---------- */
+.bar{
+  display:flex; align-items:center; gap:12px 16px; flex-wrap:wrap;
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+  padding:14px 18px; margin-bottom:18px;
+}
+.mark{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+  letter-spacing:.14em; color:var(--pink); border:1px solid var(--pink);
+  border-radius:4px; padding:2px 7px; flex:none;
+}
+h1{font-size:20px; font-weight:700; margin:0; letter-spacing:-.02em}
+.bar .sub{color:var(--ink-3); font-size:13px; margin:0}
+.bar-right{margin-left:auto; display:flex; gap:7px; flex-wrap:wrap}
+.chip{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:500;
+  color:var(--ink-2); background:var(--panel-2); border:1px solid var(--line);
+  border-radius:999px; padding:3px 10px; white-space:nowrap;
+}
+
+/* ---------- layout ---------- */
+.cols{display:grid; grid-template-columns:minmax(0,350px) minmax(0,1fr); gap:18px; align-items:start}
+@media (max-width:920px){ .cols{grid-template-columns:1fr} }
+.card{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.card-h{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:12px 16px; border-bottom:1px solid var(--line); background:var(--panel-2);
+}
+.card-h h2{
+  font-size:13px; margin:0; font-weight:600; letter-spacing:.02em;
+  display:flex; align-items:center; gap:8px;
+}
+.card-h .idx{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--pink)}
+
+/* ---------- memo ---------- */
+.memo{position:sticky; top:env(safe-area-inset-top,0px)}
+@media (max-width:920px){ .memo{position:static} }
+.memo-body{padding:14px 16px; display:flex; flex-direction:column; gap:11px}
+.field{display:flex; flex-direction:column; gap:4px}
+.field label{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em;
+  color:var(--ink-3); font-weight:600;
+}
+.field .ko{font-family:'IBM Plex Sans KR',sans-serif; letter-spacing:0; font-size:12px; color:var(--ink-2); font-weight:400}
+input[type=text], textarea{
+  font:inherit; font-size:13.5px; color:var(--ink); background:var(--bg);
+  border:1px solid var(--line-2); border-radius:6px; padding:8px 10px; width:100%;
+  resize:vertical; line-height:1.6;
+}
+input[type=text]::placeholder, textarea::placeholder{color:var(--ink-3)}
+input[type=text]:focus, textarea:focus{outline:none; border-color:var(--pink); box-shadow:0 0 0 3px var(--pink-soft)}
+.memo-f{padding:13px 16px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:10px; background:var(--panel-2)}
+.presets{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
+.presets span{font-size:11.5px; color:var(--ink-3); font-family:'IBM Plex Mono',monospace; letter-spacing:.06em}
+
+button{font:inherit; cursor:pointer}
+.btn{
+  background:var(--pink); color:#201616; border:1px solid var(--pink);
+  border-radius:6px; padding:10px 14px; font-weight:600; font-size:14px;
+  transition:background .15s ease, transform .05s ease;
+}
+.btn:hover{background:var(--pink-2); border-color:var(--pink-2)}
+.btn:active{transform:translateY(1px)}
+.btn-g{
+  background:var(--panel-3); color:var(--ink-2); border:1px solid var(--line-2);
+  border-radius:5px; padding:4px 9px; font-size:12px; font-weight:500;
+}
+.btn-g:hover{border-color:var(--pink); color:var(--pink)}
+:focus-visible{outline:2px solid var(--pink); outline-offset:2px}
+
+.right{display:flex; flex-direction:column; gap:18px; min-width:0}
+
+/* ---------- gate ---------- */
+.verdict{
+  margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600;
+  border:1px solid var(--line-2); border-radius:999px; padding:3px 11px; color:var(--ink-2);
+}
+.tiles{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--line)}
+.tile{background:var(--panel); padding:13px 16px}
+.tile .k{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.13em;
+  color:var(--ink-3); font-weight:600; display:flex; align-items:center; gap:6px;
+}
+.tile .k i{width:7px; height:7px; border-radius:2px; display:inline-block}
+.tile .v{font-family:'IBM Plex Mono',monospace; font-size:27px; font-weight:600; line-height:1.25; font-variant-numeric:tabular-nums}
+.tile.ok .v{color:var(--ok)} .tile.ok .k i{background:var(--ok)}
+.tile.warn .v{color:var(--warn)} .tile.warn .k i{background:var(--warn)}
+.tile.bad .v{color:var(--bad)} .tile.bad .k i{background:var(--bad)}
+
+.checks{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.checks li{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:2px 11px;
+  padding:11px 16px 11px 13px; border-bottom:1px solid var(--line); border-left:3px solid transparent;
+}
+.checks li:last-child{border-bottom:0}
+.checks li.ok{border-left-color:var(--ok)}
+.checks li.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+.checks li.bad{border-left-color:var(--bad); background:var(--bad-soft)}
+.dot{
+  width:19px; height:19px; border-radius:5px; display:grid; place-items:center;
+  font-size:11px; font-weight:700; margin-top:3px; font-family:'IBM Plex Mono',monospace;
+}
+.dot.ok{background:var(--ok-soft); color:var(--ok)}
+.dot.warn{background:var(--warn-soft); color:var(--warn)}
+.dot.bad{background:var(--bad-soft); color:var(--bad)}
+.ck-t{font-weight:600; font-size:13.5px}
+.ck-m{grid-column:2; color:var(--ink-2); font-size:13px}
+.ck-f{grid-column:2; font-size:12.5px; color:var(--warn); margin-top:4px}
+.ck-f.bad{color:var(--bad)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex; gap:4px; flex-wrap:wrap; padding:10px 12px; background:var(--panel-2); border:1px solid var(--line); border-bottom:0; border-radius:var(--r) var(--r) 0 0}
+.tab{
+  background:transparent; border:1px solid transparent; border-radius:6px;
+  padding:6px 12px; font-size:13.5px; font-weight:500; color:var(--ink-3);
+  display:flex; align-items:center; gap:7px;
+}
+.tab .n{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-3)}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--pink-soft); border-color:var(--pink); color:var(--pink-2); font-weight:600}
+.tab[aria-selected="true"] .n{color:var(--pink)}
+
+.stage{
+  background:var(--panel); border:1px solid var(--line); border-top:0;
+  border-radius:0 0 var(--r) var(--r); padding:14px;
+}
+.stage-tools{display:flex; gap:8px; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap}
+.stage-tools .hint{font-size:12px; color:var(--ink-3); font-family:'IBM Plex Mono',monospace}
+
+/* ---------- 용지: 인쇄물은 흰 종이로 미리보기 ---------- */
+.sheet{
+  background:#FFFFFF; border-radius:6px; padding:26px clamp(18px,3vw,34px) 30px;
+  /* 종이 위에서만 쓰는 토큰 — 아래 .doc 안의 색은 전부 여기서 나온다 */
+  --ink:#191D22; --ink-2:#525963; --ink-3:#88909C;
+  --line:#E3E6EB; --panel-2:#F6F7F9;
+  --accent:#B85C5C; --accent-soft:#FBEEEE;
+  --warn:#8E5C16; --warn-soft:#FBF2E2;
+  color:var(--ink);
+}
+.doc{max-width:64ch}
+.doc .rule{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--accent); font-weight:600; margin:0 0 4px;
+}
+.doc h3{font-size:21px; margin:0 0 4px; font-weight:700; letter-spacing:-.01em; text-wrap:balance}
+.doc .meta{
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-3);
+  border-bottom:1.5px solid var(--accent); padding-bottom:10px; margin-bottom:18px;
+  display:flex; gap:5px 14px; flex-wrap:wrap;
+}
+.doc h4{font-size:13.5px; margin:20px 0 7px; font-weight:700; display:flex; align-items:baseline; gap:8px}
+.doc h4 .num{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); font-weight:600}
+.doc p{margin:0 0 9px}
+.doc ol, .doc ul{margin:0 0 9px; padding-left:20px}
+.doc li{margin-bottom:5px}
+.box{
+  border:1px solid var(--line); border-left:3px solid var(--accent);
+  background:var(--panel-2); padding:11px 14px; border-radius:0 5px 5px 0; margin:0 0 12px;
+}
+.box.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+.box.warn .box-t{color:var(--warn)}
+.box-t{
+  font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600; color:var(--accent); margin-bottom:5px;
+}
+.blank{display:inline-block; min-width:62px; border-bottom:1.5px solid var(--accent); text-align:center; color:var(--accent); font-weight:600}
+.write{border-bottom:1px solid var(--line); height:25px; margin:5px 0}
+.q{margin:0 0 15px; padding-bottom:13px; border-bottom:1px dashed var(--line)}
+.q:last-of-type{border-bottom:0}
+.q-h{display:flex; gap:9px; align-items:baseline}
+.q-n{font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px; color:var(--accent); flex:none; min-width:22px}
+.q-type{font-size:10px; font-family:'IBM Plex Mono',monospace; letter-spacing:.08em; color:var(--ink-3); border:1px solid var(--line); border-radius:3px; padding:1px 6px}
+details{margin-top:7px}
+details summary{
+  cursor:pointer; font-size:12px; color:var(--ink-3); font-family:'IBM Plex Mono',monospace;
+  list-style:none; display:inline-flex; gap:5px; align-items:center;
+}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"\25B8"; color:var(--accent)}
+details[open] summary::before{content:"\25BE"}
+details .ans{margin-top:5px; font-size:13px; color:var(--ink-2); background:var(--accent-soft); padding:8px 11px; border-radius:5px}
+.chk{display:flex; gap:9px; align-items:flex-start; margin-bottom:7px}
+.chk .sq{flex:none; width:14px; height:14px; border:1.5px solid var(--ink-3); border-radius:3px; margin-top:5px}
+.note{font-size:12px; color:var(--ink-3); margin-top:14px; border-top:1px solid var(--line); padding-top:10px}
+
+/* 알림톡 탭은 종이가 아니라 톡방 — 어두운 말풍선 */
+.sheet.talk{background:var(--panel-2)}
+.kakao{
+  background:#0F1116; border:1px solid #272D39; border-radius:4px 14px 14px 14px;
+  padding:16px 18px; white-space:pre-wrap; font-size:14px; line-height:1.85;
+  max-width:42ch; color:#ECEFF5;
+}
+.talkbar{
+  display:flex; align-items:center; gap:8px; margin-bottom:10px;
+  font-family:'IBM Plex Mono',monospace; font-size:11px; color:#697284;
+}
+.talkbar b{color:#EA9090; font-weight:600}
+
+.toast{
+  position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(180%);
+  background:var(--pink); color:#201616; padding:9px 16px; border-radius:999px;
+  font-size:13px; font-weight:600; transition:transform .25s ease; z-index:50;
+  padding-bottom:calc(9px + env(safe-area-inset-bottom,0px));
+}
+.toast.on{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <span class="mark">WEEK 02 / LV 04</span>
+    <div>
+      <h1>수업메모 자료공장</h1>
+      <p class="sub">메모 한 장 → 복습지 · 확인퀴즈 · 과제 체크리스트 · 학부모 알림톡 + 9항목 자동 검수</p>
+    </div>
+    <div class="bar-right">
+      <span class="chip">브라우저 단독 · 외부 AI 없음</span>
+      <span class="chip">가상 정보</span>
+    </div>
+  </header>
+
+  <div class="cols">
+    <section class="card memo" aria-label="오늘 수업 메모">
+      <div class="card-h"><h2><span class="idx">IN</span>오늘 수업 메모</h2><span class="chip">유일한 원본</span></div>
+      <div class="memo-body">
+        <div class="field">
+          <label for="f-class">CLASS <span class="ko">수업명</span></label>
+          <input type="text" id="f-class">
+        </div>
+        <div class="field">
+          <label for="f-unit">UNIT <span class="ko">단원</span></label>
+          <input type="text" id="f-unit">
+        </div>
+        <div class="field">
+          <label for="f-goal">GOAL <span class="ko">오늘의 목표 · 한 문장</span></label>
+          <textarea id="f-goal" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-concept">CORE <span class="ko">핵심 개념</span></label>
+          <textarea id="f-concept" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-example">EXAMPLE <span class="ko">수업에서 다룬 예제</span></label>
+          <textarea id="f-example" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-mistake">TRAP <span class="ko">자주 나온 실수 · 쉼표로 구분</span></label>
+          <textarea id="f-mistake" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-homework">HOMEWORK <span class="ko">과제 · 쉼표로 구분</span></label>
+          <textarea id="f-homework" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-loop">LOOP <span class="ko">루프 그룹 코드</span></label>
+          <input type="text" id="f-loop">
+        </div>
+      </div>
+      <div class="memo-f">
+        <div class="presets">
+          <span>SAMPLE</span>
+          <button class="btn-g" id="p1" type="button">고1 공수2</button>
+          <button class="btn-g" id="p2" type="button">고2 미적1</button>
+          <button class="btn-g" id="p3" type="button">부실 메모</button>
+        </div>
+        <button class="btn" id="run" type="button">자료 4종 만들기 → 검수</button>
+      </div>
+    </section>
+
+    <div class="right">
+      <section class="card" aria-label="품질 검수">
+        <div class="card-h">
+          <h2><span class="idx">QA</span>품질 검수</h2>
+          <span class="verdict" id="verdict">대기</span>
+        </div>
+        <div class="tiles">
+          <div class="tile ok"><div class="k"><i></i>PASS</div><div class="v" id="n-ok">0</div></div>
+          <div class="tile warn"><div class="k"><i></i>주의</div><div class="v" id="n-warn">0</div></div>
+          <div class="tile bad"><div class="k"><i></i>수정</div><div class="v" id="n-bad">0</div></div>
+        </div>
+        <ul class="checks" id="checks"></ul>
+      </section>
+
+      <section aria-label="생성된 자료">
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" data-t="0" aria-selected="true"><span class="n">01</span>학생 복습지</button>
+          <button class="tab" role="tab" data-t="1" aria-selected="false"><span class="n">02</span>확인 퀴즈</button>
+          <button class="tab" role="tab" data-t="2" aria-selected="false"><span class="n">03</span>과제 체크리스트</button>
+          <button class="tab" role="tab" data-t="3" aria-selected="false"><span class="n">04</span>학부모 알림톡</button>
+        </div>
+        <div class="stage">
+          <div class="stage-tools">
+            <span class="hint" id="hint">PREVIEW · A4 배부용</span>
+            <button class="btn-g" id="copy" type="button">이 자료 텍스트 복사</button>
+          </div>
+          <div class="sheet" id="sheet"><div id="out"></div></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">복사했어요</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var PRESETS = {
+    p1:{
+      cls:"고1 S반 (공통수학2)",
+      unit:"03 원의 방정식 — 원의 접선의 방정식",
+      goal:"원 위의 점에서의 접선과 기울기가 주어진 접선을 구분해서 식을 세운다.",
+      concept:"원 x²+y²=r² 위의 점 (x₁,y₁)에서의 접선은 x₁x+y₁y=r² 이고, 기울기 m이 주어지면 y=mx±r√(m²+1) 이다.",
+      example:"x²+y²=25 위의 점 (3,4)에서의 접선 → 3x+4y=25 / 기울기가 2인 접선 → y=2x±5√5",
+      mistake:"중심이 원점이 아닌 원에 x₁x+y₁y=r² 공식을 그대로 쓰는 것, ± 부호를 한쪽만 쓰는 것",
+      hw:"T:OP 공통수학2 03단원 R2 8문항, 오답은 중심·반지름을 먼저 적고 다시 풀기",
+      loop:"03-G8 원의 접선의 방정식"
+    },
+    p2:{
+      cls:"고2 A반 (미적분1)",
+      unit:"02 미분 — 미분계수와 도함수",
+      goal:"평균변화율과 순간변화율을 그래프 위에서 구분해 설명한다.",
+      concept:"미분계수 f′(a)=lim(h→0){f(a+h)-f(a)}/h 는 x=a 에서의 접선의 기울기이고, 평균변화율은 두 점을 잇는 직선의 기울기이다.",
+      example:"f(x)=x²-3x 에서 f′(2)=1 이고 x=2 에서의 접선은 y=x-2 / 구간 [2,4]의 평균변화율은 3",
+      mistake:"평균변화율 구간을 [a, a+h] 가 아니라 [0, a] 로 잡는 것, h→0 을 h=0 대입으로 처리하는 것",
+      hw:"T:OP 미적분1 02단원 R2 8문항, 오답은 그래프에 접선을 직접 그려 표시하기",
+      loop:"02-G3 미분계수의 뜻"
+    },
+    p3:{ cls:"고1 A반", unit:"원", goal:"접선 배우기", concept:"접선 공식 쓰기", example:"", mistake:"", hw:"프린트 풀어오세요", loop:"" }
+  };
+
+  var F = {
+    cls:document.getElementById('f-class'), unit:document.getElementById('f-unit'),
+    goal:document.getElementById('f-goal'), concept:document.getElementById('f-concept'),
+    example:document.getElementById('f-example'), mistake:document.getElementById('f-mistake'),
+    hw:document.getElementById('f-homework'), loop:document.getElementById('f-loop')
+  };
+
+  function load(k){ var p=PRESETS[k]; for(var f in F){ F[f].value = p[f]||''; } run(); }
+
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function items(s){ return String(s||'').split(/[,\n]/).map(function(x){return x.trim();}).filter(Boolean); }
+  function words(s){ return String(s||'').toLowerCase().replace(/[^0-9a-z가-힣]+/g,' ').split(' ').filter(function(w){ return w.length>=2; }); }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function today(){ var d=new Date(); return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate()); }
+
+  function makeBlank(raw){
+    var t = esc(raw).split(/(\s+)/), idx=[];
+    t.forEach(function(w,i){ if(/[=√²³±]|\^/.test(w) && w.replace(/\s/g,'').length>2) idx.push(i); });
+    if(!idx.length){
+      var best=-1,len=0;
+      t.forEach(function(w,i){ var c=w.replace(/[^가-힣]/g,''); if(c.length>len){len=c.length;best=i;} });
+      if(best>=0) idx.push(best);
+    }
+    idx.slice(0,2).forEach(function(i,k){ t[i]='<span class="blank">'+(k?'②':'①')+'</span>'; });
+    return t.join('');
+  }
+  function firstSentence(s){
+    var x=String(s||'').trim();
+    var cut=x.split(/[.!?]\s|\s*이고,?\s*/)[0];
+    return (cut||x).trim();
+  }
+
+  function readMemo(){
+    return {cls:F.cls.value.trim(), unit:F.unit.value.trim(), goal:F.goal.value.trim(),
+            concept:F.concept.value.trim(), example:F.example.value.trim(),
+            mistake:F.mistake.value.trim(), hw:F.hw.value.trim(), loop:F.loop.value.trim()};
+  }
+  function metaLine(d){
+    var out=['<span>'+esc(d.cls||'반 미기입')+'</span>','<span>'+esc(d.unit||'단원 미기입')+'</span>','<span>'+today()+'</span>'];
+    if(d.loop) out.push('<span>루프 '+esc(d.loop)+'</span>');
+    return '<div class="meta">'+out.join('')+'</div>';
+  }
+
+  function buildReview(d){
+    var traps=items(d.mistake), hws=items(d.hw), exs=items(d.example);
+    var h='<div class="doc">';
+    h+='<p class="rule">자료 01 &middot; 학생 복습지</p>';
+    h+='<h3>'+esc(d.unit||'단원')+' 복습지</h3>'+metaLine(d);
+
+    h+='<h4><span class="num">01</span>오늘 이걸 할 수 있으면 끝이에요</h4>';
+    h+='<div class="box"><div class="box-t">Goal</div><p>'+esc(d.goal||'(목표 칸이 비어 있어요)')+'</p></div>';
+
+    h+='<h4><span class="num">02</span>핵심 개념 &mdash; 빈칸을 먼저 채워 보세요</h4>';
+    h+='<p>'+(d.concept? makeBlank(d.concept) : '(핵심 개념 칸이 비어 있어요)')+'</p>';
+    h+='<details><summary>빈칸 정답 보기</summary><div class="ans">'+esc(d.concept||'-')+'</div></details>';
+
+    h+='<h4><span class="num">03</span>수업에서 푼 예제, 다시 한 번</h4>';
+    if(exs.length){
+      h+='<ol>';
+      exs.forEach(function(e){ h+='<li>'+esc(e)+'<div class="write"></div></li>'; });
+      h+='</ol>';
+    } else { h+='<p>(예제 칸이 비어 있어요)</p>'; }
+
+    h+='<h4><span class="num">04</span>여기서 제일 많이 틀렸어요</h4>';
+    if(traps.length){
+      h+='<div class="box warn"><div class="box-t">Trap</div>';
+      traps.forEach(function(t){ h+='<p>&middot; '+esc(t)+'</p>'; });
+      h+='<p style="margin:8px 0 0">→ 문제를 풀기 전에 위 줄을 소리 내서 읽고 시작하면 절반은 막혀요.</p></div>';
+    } else {
+      h+='<p>(자주 나온 실수 칸이 비어 있어요 &mdash; 복습지에서 제일 값어치 있는 칸이에요)</p>';
+    }
+
+    h+='<h4><span class="num">05</span>혼자 확인</h4>';
+    h+='<div class="chk"><span class="sq"></span><span>개념을 안 보고 한 줄로 다시 쓸 수 있어요</span></div>';
+    h+='<div class="chk"><span class="sq"></span><span>예제를 숫자만 바꿔도 풀 수 있어요</span></div>';
+    h+='<div class="chk"><span class="sq"></span><span>04번 실수를 왜 하는지 설명할 수 있어요</span></div>';
+
+    if(hws.length){
+      h+='<h4><span class="num">06</span>오늘 과제</h4><ul>';
+      hws.forEach(function(x){ h+='<li>'+esc(x)+'</li>'; });
+      h+='</ul>';
+    }
+    h+='<p class="note">이 복습지는 오늘 수업 메모에서 자동으로 뽑은 초안이에요. 배부 전에 선생님이 한 번 훑어 주세요.</p>';
+    return h+'</div>';
+  }
+
+  function buildQuiz(d){
+    var traps=items(d.mistake), exs=items(d.example);
+    var h='<div class="doc">';
+    h+='<p class="rule">자료 02 &middot; 확인 퀴즈 5문</p>';
+    h+='<h3>'+esc(d.unit||'단원')+' 확인 퀴즈</h3>'+metaLine(d);
+    h+='<p style="color:var(--ink-2);font-size:13px">수업 끝 5분, 또는 다음 수업 시작 5분용이에요. 1~3번은 30초 안에 답이 나와야 해요.</p>';
+
+    function q(n,type,body,ans){
+      return '<div class="q"><div class="q-h"><span class="q-n">'+n+'</span><span class="q-type">'+type+'</span></div>'+
+             '<div style="padding-left:31px">'+body+
+             '<details><summary>정답 · 채점 포인트</summary><div class="ans">'+ans+'</div></details></div></div>';
+    }
+
+    h+=q('Q1','빈칸', '<p>'+(d.concept? makeBlank(d.concept):'(개념 미기입)')+'</p>', esc(d.concept||'-'));
+
+    h+=q('Q2','계산',
+      '<p>'+esc(exs[0]||'(예제 미기입)')+'</p><p style="color:var(--ink-3);font-size:12.5px">숫자만 바꿔 한 번 더 풀어 보세요.</p><div class="write"></div>',
+      '수업에서 푼 예제와 같은 경로로 풀렸는지 본다. 답보다 <b>첫 줄에 무엇을 썼는지</b>가 채점 포인트.');
+
+    var t1=traps[0]||'';
+    h+=q('Q3','O / X',
+      '<p>'+(t1? '“'+esc(t1)+'” — 이렇게 해도 된다.' : '(자주 나온 실수 칸이 비어 함정 문항을 못 만들었어요)')+'</p>'+
+      '<p style="color:var(--ink-3);font-size:12.5px">O · X 중 고르고, X면 무엇이 틀렸는지 한 줄로 쓰세요.</p><div class="write"></div>',
+      t1? '정답 X. 오늘 수업에서 제일 많이 나온 실수다. 이유를 못 쓰면 반만 맞은 것으로 본다.' : '메모의 “자주 나온 실수” 칸을 채우면 이 문항이 살아난다.');
+
+    var t2=traps[1]||'';
+    h+=q('Q4', t2? 'O / X':'서술',
+      t2 ? '<p>“'+esc(t2)+'” — 이렇게 해도 된다.</p><div class="write"></div>'
+         : '<p>'+esc(d.goal||'(목표 미기입)')+'</p><p style="color:var(--ink-3);font-size:12.5px">이걸 할 수 있다고 옆 친구에게 두 줄로 설명해 보세요.</p><div class="write"></div><div class="write"></div>',
+      t2? '정답 X. 부호나 범위를 “한쪽만 쓰는” 실수는 시험에서 그대로 감점된다.' : '목표 문장을 자기 말로 바꿔 썼으면 통과.');
+
+    h+=q('Q5','서술',
+      '<p>오늘 배운 걸 한 문장으로 정리하고, 아직 흐릿한 부분을 한 줄로 적으세요.</p><div class="write"></div><div class="write"></div>',
+      '흐릿하다고 적은 줄이 다음 수업 첫 5분의 재료다. 비어 있으면 “없음” 이 아니라 “안 봤음” 으로 본다.');
+
+    h+='<p class="note">문항은 메모의 개념 · 예제 · 실수 칸에서 그대로 뽑아 만든 거예요. 숫자를 바꾸거나 선지를 붙이는 건 선생님 몫이에요.</p>';
+    return h+'</div>';
+  }
+
+  function buildChecklist(d){
+    var hws=items(d.hw), traps=items(d.mistake);
+    var h='<div class="doc">';
+    h+='<p class="rule">자료 03 &middot; 과제 체크리스트</p>';
+    h+='<h3>과제 확인표</h3>'+metaLine(d);
+
+    h+='<h4><span class="num">01</span>오늘 나간 과제</h4>';
+    if(hws.length){ hws.forEach(function(x){ h+='<div class="chk"><span class="sq"></span><span>'+esc(x)+'</span></div>'; }); }
+    else { h+='<p>(과제 칸이 비어 있어요)</p>'; }
+
+    h+='<h4><span class="num">02</span>제출 전에 학생이 스스로 확인</h4>';
+    h+='<div class="chk"><span class="sq"></span><span>틀린 문항에 빨간 펜으로 표시했어요</span></div>';
+    h+='<div class="chk"><span class="sq"></span><span>오답은 답을 베끼지 않고 풀이 첫 줄부터 다시 썼어요</span></div>';
+    if(traps.length){ h+='<div class="chk"><span class="sq"></span><span>'+esc(traps[0])+' &mdash; 이 실수를 안 했는지 다시 봤어요</span></div>'; }
+    h+='<div class="chk"><span class="sq"></span><span>끝까지 안 풀린 문항은 어디서 막혔는지 한 줄 적었어요</span></div>';
+
+    h+='<h4><span class="num">03</span>조교 확인란</h4>';
+    h+='<div class="box"><div class="box-t">Staff</div>'+
+       '<p>제출 여부 · 오답 표시 유무 · 미완 문항 수를 적습니다. 이행률은 여기 적힌 값으로 들어갑니다.</p>'+
+       '<div class="write"></div><div class="write"></div></div>';
+
+    h+='<h4><span class="num">04</span>마감</h4>';
+    h+='<p>다음 수업 시작 전까지예요.'+(d.loop? ' 루프 그룹 <b>'+esc(d.loop)+'</b> 로 묶여 있어요.':'')+'</p>';
+    h+='<p class="note">조교용 초안이에요. 이행률은 사람이 채우는 자리라 자동으로 채우지 않습니다.</p>';
+    return h+'</div>';
+  }
+
+  function parentText(d){
+    var cls=d.cls||'오늘 수업', unit=d.unit||'오늘 단원';
+    var goal=firstSentence(d.goal)||'오늘 배운 내용을 정리했어요';
+    var trap=items(d.mistake)[0]||'', hw=items(d.hw)[0]||'';
+    var t='안녕하세요, 필탑수학 유강입니다~\n\n';
+    t+='오늘 '+cls+'은 「'+unit+'」 수업이었어요.\n';
+    t+='목표는 '+goal.replace(/[.]\s*$/,'')+' 였고, 대부분 예제까지 잘 따라왔어요~\n\n';
+    if(trap){ t+='다만 '+trap+' — 이 부분에서 손이 자주 멈췄어요.\n복습지 04번에 같은 내용을 따로 적어 두었어요🙂\n\n'; }
+    if(hw){ t+='과제는 '+hw+' 예요.\n마감은 다음 수업 시작 전이에요~\n\n'; }
+    t+='집에서는 “오늘 뭐 배웠어?” 대신\n“오늘 어디서 막혔어?” 하고 한 번만 물어봐 주시면 좋아요~\n그 한 줄이 다음 수업 자료가 돼요.\n\n';
+    t+='오늘도 고생한 아이 많이 칭찬해 주세요!';
+    return t;
+  }
+
+  function buildParent(d){
+    var h='<div class="talkbar">팀톡 · <b>'+esc(d.cls||'학생')+'</b> · 학생 / 학부모 / 유강 / 데스크</div>';
+    h+='<div class="kakao">'+esc(parentText(d))+'</div>';
+    h+='<p class="note" style="color:#697284;border-color:#272D39;max-width:64ch">학부모·학생에게 나가는 문구는 존댓말에 <b>~요</b>로 끝나게 두었어요. '+
+       '“~하겠습니다 / 부탁드립니다” 같은 약속 문장은 일부러 뺐습니다 — 기계가 한 약속이 남으면 지킬 사람은 선생님이라서요. 학생 실명도 넣지 않았어요.</p>';
+    return h;
+  }
+
+  function gate(d, r){
+    var C=[];
+    function add(t,st,msg,fix){ C.push({t:t,st:st,m:msg,f:fix||''}); }
+
+    var req=[['수업명',d.cls],['단원',d.unit],['목표',d.goal],['핵심 개념',d.concept],['예제',d.example],['자주 나온 실수',d.mistake],['과제',d.hw]];
+    var empty=req.filter(function(x){return !x[1];}).map(function(x){return x[0];});
+    add('메모 7칸이 다 찼나', empty.length? (empty.length>2?'bad':'warn') : 'ok',
+        empty.length? '빈 칸 '+empty.length+'개 — '+empty.join(' · ') : '7칸 모두 채워졌어요.',
+        empty.length? '빈 칸에서 나온 자료는 껍데기가 돼요. 특히 “자주 나온 실수” 가 비면 확인퀴즈 3·4번과 복습지 04번이 동시에 죽어요.':'');
+
+    var g=d.goal.replace(/\s+$/,'');
+    var gOk = g && g.length>=12 && g.length<=70 && /(다|한다|된다|본다|쓴다|세운다)\.?$/.test(g);
+    add('목표가 한 문장인가', g? (gOk?'ok':'warn') : 'bad',
+        g? (gOk? '길이 '+g.length+'자, 서술형 한 문장이에요.' : '길이 '+g.length+'자 — “~한다” 로 떨어지는 한 문장이 아니에요.') : '목표 칸이 비어 있어요.',
+        gOk? '' : '“무엇을 할 수 있다” 로 끝나는 12~70자 한 문장으로. 목표가 흐리면 확인퀴즈 5번과 학부모 문구가 같이 흐려져요.');
+
+    var cw=words(d.concept).filter(function(w,i,a){return a.indexOf(w)===i;});
+    var ew=words(d.example);
+    var hit=cw.filter(function(w){
+      return ew.some(function(e){ return e===w || (w.length>=2 && (e.indexOf(w)===0 || w.indexOf(e)===0)); });
+    });
+    var ratio=cw.length? hit.length/cw.length : 0;
+    add('개념이 예제에 실제로 쓰였나', (!d.concept||!d.example)?'bad':(ratio>=0.12?'ok':'warn'),
+        (!d.concept||!d.example)? '개념 또는 예제 칸이 비어 있어요.'
+          : '겹치는 낱말 '+hit.length+'개'+(hit.length? ' ('+hit.slice(0,4).join(', ')+')':'')+' — 연결도 '+Math.round(ratio*100)+'%',
+        (d.concept&&d.example&&ratio<0.12)? '예제가 개념을 안 쓰고 있어요. 개념 문장의 기호·용어가 예제에 한 번은 나와야 복습지 02 → 03 이 이어져요.':'');
+
+    var traps=items(d.mistake);
+    add('실수가 퀴즈 함정으로 갔나', traps.length>=2?'ok':(traps.length===1?'warn':'bad'),
+        traps.length? '실수 '+traps.length+'개 → 확인퀴즈 '+(traps.length>=2?'3·4번':'3번')+'에 O/X 함정으로 들어갔어요.'
+          : '실수 칸이 비어 함정 문항이 안 만들어졌어요.',
+        traps.length>=2? '' : '쉼표로 2개 이상 적어 주세요. 실수 2개면 O/X 두 문항이 자동으로 생겨요.');
+
+    var hwNum=/\d/.test(d.hw);
+    add('과제에 범위 숫자가 있나', d.hw? (hwNum?'ok':'warn') : 'bad',
+        d.hw? (hwNum? '숫자 범위가 들어 있어 체크리스트가 항목별로 쪼개졌어요.' : '“'+d.hw.slice(0,22)+'…” 에 쪽·문항 숫자가 없어요.') : '과제 칸이 비어 있어요.',
+        (d.hw&&!hwNum)? '“프린트 풀기” 는 학생마다 다르게 읽혀요. 단원과 문항 수를 숫자로.':'');
+
+    var st=r.review.replace(/<[^>]+>/g,' ')+' '+r.parentRaw;
+    var hard=st.match(/(하세요|하십시오|해라|하라|할 것|바랍니다|반드시|필수)/g)||[];
+    add('학생·학부모 문구가 존댓말 ~요 인가', hard.length?'warn':'ok',
+        hard.length? '명령·강압 표현 '+hard.length+'곳 — '+hard.slice(0,3).join(' · ')
+          : '복습지와 알림톡이 전부 존댓말 + ~요 로 끝나요.',
+        hard.length? '명령형이 한 줄 섞이면 사람이 아니라 기계가 보낸 문자로 읽혀요. “~해 주세요~ / ~해요” 로.':'');
+
+    var promise=r.parentRaw.match(/(하겠습니다|드리겠습니다|부탁드립니다|약속드)/g)||[];
+    add('지키지 못할 약속이 없나', promise.length?'bad':'ok',
+        promise.length? '약속 문장 '+promise.length+'곳 — '+promise.join(' · ') : '알림톡에 “~하겠습니다 / 부탁드립니다” 류 약속 문장이 없어요.',
+        promise.length? '기계가 쓴 약속은 안 지켜지면 그대로 증거로 남아요. 관찰과 사실만.':'');
+
+    var all=[d.cls,d.unit,d.goal,d.concept,d.example,d.mistake,d.hw,d.loop].join(' ');
+    var pii=[];
+    if(/\d{2,3}-\d{3,4}-\d{4}/.test(all)) pii.push('전화번호 형식');
+    if(/\d{6}\s*-\s*\d{7}/.test(all)) pii.push('주민번호 형식');
+    if(/[가-힣]{2,3}\s*(학생|군|양)(\s|$|,|\.)/.test(all)) pii.push('학생 실명 의심');
+    if(/[가-힣]{2,3}\s*\d{1,3}\s*점/.test(all)) pii.push('이름+점수');
+    add('실제 학생 개인정보가 없나', pii.length?'bad':'ok',
+        pii.length? '의심 패턴 — '+pii.join(' · ') : '메모에 실명·연락처·점수로 읽히는 문자열이 없어요.',
+        pii.length? '이번 미션 규칙대로 가상 정보로 바꿔 주세요.':'');
+
+    var len=r.review.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().length;
+    var lenOk=len>=350 && len<=1600;
+    add('복습지가 한 장에 들어가나', len<200?'bad':(lenOk?'ok':'warn'),
+        '본문 '+len+'자 — '+(len<200? '내용이 거의 없어요' : (lenOk? 'A4 한 장에 들어가요' : '한 장을 넘겨요')),
+        lenOk? '' : (len<350? '메모 칸을 채우면 같이 늘어나요.' : '예제나 실수를 줄여 한 장으로. 두 장이면 학생이 안 봐요.'));
+
+    return C;
+  }
+
+  var PAGES=[], cur=0;
+  var HINTS=['PREVIEW · A4 배부용','PREVIEW · A4 배부용','PREVIEW · 조교 확인용','PREVIEW · 팀톡 발송용'];
+
+  function paint(){
+    document.getElementById('out').innerHTML = PAGES[cur];
+    document.getElementById('sheet').className = 'sheet'+(cur===3?' talk':'');
+    document.getElementById('hint').textContent = HINTS[cur];
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(b){
+      b.setAttribute('aria-selected', String(+b.dataset.t===cur));
+    });
+  }
+
+  function run(){
+    var d=readMemo();
+    PAGES=[buildReview(d), buildQuiz(d), buildChecklist(d), buildParent(d)];
+    var C=gate(d,{review:PAGES[0], parentRaw:parentText(d)});
+
+    var n={ok:0,warn:0,bad:0};
+    C.forEach(function(c){ n[c.st]++; });
+    document.getElementById('n-ok').textContent=n.ok;
+    document.getElementById('n-warn').textContent=n.warn;
+    document.getElementById('n-bad').textContent=n.bad;
+
+    var v=document.getElementById('verdict');
+    v.textContent = n.bad? '내보내기 전 수정' : (n.warn? '손볼 곳 '+n.warn+'군데' : '내보내도 좋아요');
+    var col = n.bad? 'var(--bad)' : (n.warn? 'var(--warn)' : 'var(--ok)');
+    v.style.color=col; v.style.borderColor=col;
+
+    var mark={ok:'✓',warn:'!',bad:'×'};
+    document.getElementById('checks').innerHTML = C.map(function(c){
+      return '<li class="'+c.st+'"><span class="dot '+c.st+'">'+mark[c.st]+'</span>'+
+             '<span class="ck-t">'+c.t+'</span>'+
+             '<span class="ck-m">'+esc(c.m)+'</span>'+
+             (c.f? '<span class="ck-f'+(c.st==='bad'?' bad':'')+'">'+esc(c.f)+'</span>' : '')+
+             '</li>';
+    }).join('');
+
+    paint();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(b){
+    b.addEventListener('click', function(){ cur=+b.dataset.t; paint(); });
+  });
+  document.getElementById('run').addEventListener('click', run);
+  ['p1','p2','p3'].forEach(function(k){ document.getElementById(k).addEventListener('click', function(){ load(k); }); });
+
+  var toast=document.getElementById('toast');
+  function say(t){ toast.textContent=t; toast.classList.add('on'); setTimeout(function(){toast.classList.remove('on');},1800); }
+  document.getElementById('copy').addEventListener('click', function(){
+    var tmp=document.createElement('div'); tmp.innerHTML=PAGES[cur];
+    var txt=(tmp.innerText||tmp.textContent||'').replace(/\n{3,}/g,'\n\n').trim();
+    try{
+      navigator.clipboard.writeText(txt).then(function(){ say('복사했어요'); }, function(){ say('복사가 막혀 있어요 — 드래그해서 복사해 주세요'); });
+    }catch(e){ say('복사가 막혀 있어요 — 드래그해서 복사해 주세요'); }
+  });
+
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', run); });
+
+  load('p1');
+})();
+</script>
+</body>
+</html>
