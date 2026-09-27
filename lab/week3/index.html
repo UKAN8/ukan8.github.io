@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="y=(x−1)²−2로 '이차항 계수가 양수이면 항상 증가한다'는 가설을 예측·실험·반례·수정 설명·교사 검토로 탐구하는 수업 도구.">
+<meta property="og:title" content="이차함수 반례 실험실">
+<meta property="og:description" content="가설 → 실험 → 반례 → 수정 → 교사 검토 · 박유강">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>반례 실험실 y=(x−1)²−2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4EF; --paper:#E3E9E3; --surface:#FFFFFF; --ink:#17222B; --muted:#5C6870; --line:#D3DBD6; --grid:#E4EAE6;
+  --accent:#2C40A0; --accent-soft:#E7EAF7; --dec:#C0412A; --dec-soft:#FAE8E3; --inc:#2A7853; --inc-soft:#E2F1E9;
+  --warn:#946500; --warn-soft:#F8EFD6;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif; --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--bg:#10151A;--paper:#18202A;--surface:#182028;--ink:#E4E9EB;--muted:#97A3AA;--line:#2B353E;--grid:#222B33;
+  --accent:#8FA0FF;--accent-soft:#232A48;--dec:#FF8C70;--dec-soft:#38231F;--inc:#70D3A1;--inc-soft:#1B3228;--warn:#E6BF62;--warn-soft:#38301F;}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--bg:#10151A;--paper:#18202A;--surface:#182028;--ink:#E4E9EB;--muted:#97A3AA;--line:#2B353E;--grid:#222B33;
+  --accent:#8FA0FF;--accent-soft:#232A48;--dec:#FF8C70;--dec-soft:#38231F;--inc:#70D3A1;--inc-soft:#1B3228;--warn:#E6BF62;--warn-soft:#38301F;}
+*{box-sizing:border-box}
+body,textarea,pre{word-break:keep-all;overflow-wrap:break-word}
+body{background-color:var(--bg);background-image:linear-gradient(var(--paper) 1px,transparent 1px),linear-gradient(90deg,var(--paper) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:32px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+
+/* header */
+header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 40px;align-items:center}
+@media (max-width:720px){header{grid-template-columns:1fr}}
+.head-main{display:flex;flex-direction:column;gap:14px;max-width:760px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.eyebrow b{color:var(--accent);font-weight:500}
+h1{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.02em;margin:0;color:var(--muted)}
+.hyp{font-family:var(--serif);font-weight:700;font-size:clamp(24px,3.6vw,36px);line-height:1.45;margin:0;text-wrap:balance}
+.always{position:relative;display:inline-block;padding-inline:2px}
+.always::after{content:"";position:absolute;left:-4px;right:-4px;top:54%;height:3px;background:var(--dec);transform:scaleX(0) rotate(-4deg);transform-origin:left center;transition:transform .45s cubic-bezier(.3,.7,.2,1)}
+.always::before{content:"반례 있음";position:absolute;left:50%;bottom:88%;transform:translateX(-50%) rotate(-4deg);font-family:var(--sans);font-size:12px;font-weight:600;color:var(--dec);white-space:nowrap;opacity:0;transition:opacity .3s .25s}
+.refuted .always{color:var(--muted)}
+.refuted .always::after{transform:scaleX(1) rotate(-4deg)}
+.refuted .always::before{opacity:1}
+.sub{font-size:14px;color:var(--muted);margin:0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.sub code{font-family:var(--mono);font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:1px 6px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stamp{width:164px;height:164px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;border:2px dashed var(--line);color:var(--muted);transform:rotate(-7deg);transition:border-color .3s,color .3s;background:var(--surface);justify-self:center}
+.stamp .big{font-family:var(--serif);font-size:25px;font-weight:700;line-height:1.1}
+.stamp .sm{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;line-height:1.4;padding-inline:14px}
+.stamp.on{border:4px double var(--dec);color:var(--dec);background:var(--dec-soft)}
+@media (max-width:720px){.stamp{width:120px;height:120px;justify-self:start}.stamp .big{font-size:24px}}
+
+/* layout */
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 12px 28px -18px rgba(20,30,40,.35)}
+@media (max-width:880px){.stage{position:static}}
+.fighead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:14px;height:0;border-top:2.5px solid var(--accent)}
+.legend i.d{border-top:1.5px dashed var(--accent)}
+.legend i.c{border-top:2px dashed var(--dec)}
+svg{display:block;width:100%;height:auto;touch-action:none;user-select:none}
+.readout{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--line)}
+@media (max-width:460px){.readout{grid-template-columns:1fr 1fr}.readout .dl{grid-column:1/-1;border-top:1px solid var(--line)}}
+.pt{padding:10px 14px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--line)}
+.pt:last-child{border-right:0}
+.pt label,.pt .lab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.pt .row{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14px}
+.pt input{width:4.6em}
+.dl .row{flex-direction:column;align-items:flex-start;gap:0}
+.verdict{padding:12px 14px;font-weight:500;display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--line)}
+.verdict .tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:3px;white-space:nowrap;letter-spacing:.03em}
+.v-dec{background:var(--dec-soft);color:var(--ink)} .v-dec .tag{background:var(--dec);color:var(--surface)}
+.v-inc{background:var(--inc-soft)} .v-inc .tag{background:var(--inc);color:var(--surface)}
+.v-bad{background:var(--warn-soft)} .v-bad .tag{background:var(--warn);color:var(--surface)}
+.stagefoot{padding:10px 14px;border-top:1px solid var(--line)}
+
+/* steps rail */
+.steps{display:flex;flex-direction:column;gap:0;position:relative}
+section.step{position:relative;display:flex;flex-direction:column;gap:10px;padding:0 0 30px 48px}
+section.step::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--line)}
+section.step:last-child::before{display:none}
+.step h2{font-family:var(--serif);font-size:21px;margin:0;line-height:30px}
+.step .n{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--accent);background:var(--surface);border:2px solid var(--accent);transition:background .2s,color .2s}
+.step.done .n{background:var(--accent);color:var(--surface)}
+.step.done::before{background:var(--accent);opacity:.45}
+.step p{margin:0;color:var(--muted);max-width:62ch}
+
+/* form */
+input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:5px 8px}
+input[type=number]{font-family:var(--mono)}
+textarea{font:inherit;color:var(--ink);width:100%;min-height:104px;resize:vertical;border:1px solid var(--line);border-radius:4px;padding:3px 12px 0;line-height:26px;background-color:var(--surface);background-image:repeating-linear-gradient(transparent 0 25px,var(--grid) 25px 26px);background-position:0 3px;background-attachment:local}
+input:focus-visible,textarea:focus-visible,button:focus-visible,.stage g:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+input:focus,textarea:focus{border-color:var(--accent)}
+button{font:inherit;font-size:14px;cursor:pointer;border-radius:4px;padding:7px 13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:border-color .15s,background .15s}
+button:hover{border-color:var(--ink)}
+button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:600}
+button.primary:hover{background:var(--accent);border-color:var(--accent)}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.ghost{background:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;gap:7px;align-items:center;border:1px solid var(--line);border-radius:4px;padding:6px 14px;background:var(--surface);cursor:pointer;transition:border-color .15s}
+.chip:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.chip input{margin:0;accent-color:var(--accent)}
+.plain{display:inline-flex;gap:7px;align-items:center;font-size:14px;cursor:pointer}
+.plain input{accent-color:var(--accent)}
+
+/* cases */
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.cases{grid-template-columns:1fr}}
+.case{border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--surface);display:flex;flex-direction:column;gap:6px}
+.case .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;font-weight:500}
+.case.dec .k{color:var(--dec)} .case.inc .k{color:var(--inc)}
+.case .co{font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums}
+.case .co small{font-size:13px;color:var(--muted)}
+.case p{font-size:14px;color:var(--ink)}
+.note{font-size:14px;border:1px dashed var(--accent);border-radius:6px;padding:12px 14px;color:var(--ink);background:var(--surface)}
+
+/* table */
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+th{font-weight:500;color:var(--muted);font-size:11px;font-family:var(--mono);letter-spacing:.06em;background:var(--bg)}
+td.m{font-family:var(--mono)}
+.x{border:0;background:none;color:var(--muted);padding:0 4px;font-size:13px}
+.x:hover{color:var(--dec)}
+
+/* review */
+.review{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.review{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:6px;padding:14px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.panel h3{margin:0;font-size:14px;font-weight:600;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.panel h3 small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.pill{font-size:12px;border-radius:3px;padding:2px 8px;font-weight:600;white-space:nowrap}
+.p-ok{background:var(--inc-soft);color:var(--inc)} .p-no{background:var(--dec-soft);color:var(--dec)} .p-wait{background:var(--warn-soft);color:var(--warn)}
+.checks{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.checks label{display:flex;gap:9px;align-items:flex-start;cursor:pointer}
+.checks input{margin-top:5px;accent-color:var(--inc)}
+ul.v{margin:0;padding:0;list-style:none;font-size:14px;display:flex;flex-direction:column;gap:4px;font-variant-numeric:tabular-nums}
+ul.v li{display:flex;gap:8px}
+ul.v .ok{color:var(--inc);font-weight:600} ul.v .no{color:var(--dec);font-weight:600}
+.status{border-radius:6px;padding:11px 14px;font-weight:500;font-size:14px}
+
+/* export */
+.exports{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.exports{grid-template-columns:1fr}}
+pre.preview{font-family:var(--mono);font-size:12px;line-height:1.65;white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;max-height:300px;overflow:auto;margin:0}
+.msg{font-size:13px;color:var(--muted);min-height:1.2em}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer b{font-family:var(--serif);color:var(--ink)}
+.row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.row2 label{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="head-main">
+      <div class="eyebrow"><b>LAB 03</b> · 가설 → 실험 → 반례 → 수정 → 교사 검토</div>
+      <h1>이차함수 반례 실험실</h1>
+      <p class="hyp" id="hyp">“이차항 계수가 양수이면 x가 증가할수록 y도 <span class="always">항상</span> 더 커진다.”</p>
+      <p class="sub"><span>실험 함수 <code>y = (x − 1)² − 2</code></span><span>이차항 계수 1 &gt; 0</span><span>그래프 위 A, B를 끌어서 시험해 보세요</span></p>
+      <div class="bar">
+        <button id="btnExample">완성 예시 불러오기</button>
+        <button id="btnBlank" class="ghost">빈 활동지로 시작</button>
+        <span class="row2"><label for="author">작성자</label><input type="text" id="author" size="8"></span>
+      </div>
+    </div>
+    <div class="stamp" id="stamp" aria-live="polite"><span class="big">검증 중</span><span class="sm">반례 없음</span></div>
+  </header>
+
+<div class="grid">
+    <div class="stage">
+      <div class="fighead"><span>FIG. 실험대 · 드래그 또는 방향키</span>
+        <span class="legend"><span><i></i>곡선</span><span><i class="d"></i>대칭축 x=1</span><span><i class="c"></i>A→B</span></span></div>
+      <svg id="plot" viewBox="0 0 560 440" role="img" aria-label="y=(x-1)^2-2 그래프와 실험 점 A, B"></svg>
+      <div class="readout">
+        <div class="pt"><label for="x1">A · 처음 x₁</label>
+          <div class="row"><input type="number" id="x1" step="0.5"><span id="y1t"></span></div></div>
+        <div class="pt"><label for="x2">B · 다음 x₂</label>
+          <div class="row"><input type="number" id="x2" step="0.5"><span id="y2t"></span></div></div>
+        <div class="pt dl"><span class="lab">변화량</span><div class="row" id="dxy"></div></div>
+      </div>
+      <div id="verdict" class="verdict" aria-live="polite"></div>
+      <div class="stagefoot"><label class="plain"><input type="checkbox" id="showVertex"> 꼭짓점 x = 1 기준으로 나눠 보기</label></div>
+    </div>
+
+    <div class="steps">
+      <section class="step" id="s1">
+        <span class="n">1</span><h2>예측</h2>
+        <p>실험 전에 먼저 판단해 보세요. 이 가설은 참일까요?</p>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="pred" value="참" id="predT"> 참이다</label>
+          <label class="chip"><input type="radio" name="pred" value="거짓" id="predF"> 거짓이다</label>
+        </div>
+        <textarea id="predReason" placeholder="그렇게 예측한 이유"></textarea>
+      </section>
+
+      <section class="step" id="s2">
+        <span class="n">2</span><h2>실험 좌표</h2>
+        <p>두 점을 움직이고 결과를 기록하세요. x₂ &gt; x₁ 인데 y₂ ≤ y₁ 이면 반례입니다.</p>
+        <div class="bar">
+          <button id="btnRec" class="primary">이 실험 기록하기</button>
+          <button id="pDec">반례 사례 넣기 (x: −1 → 0)</button>
+          <button id="pInc">비교 사례 넣기 (x: 2 → 3)</button>
+        </div>
+        <div class="tbl"><table>
+          <thead><tr><th>#</th><th>(x₁, y₁)</th><th>(x₂, y₂)</th><th>y 변화</th><th>판정</th><th></th></tr></thead>
+          <tbody id="log"></tbody>
+        </table></div>
+      </section>
+
+      <section class="step" id="s3">
+        <span class="n">3</span><h2>반례와 비교 사례</h2>
+        <div class="cases">
+          <div class="case dec"><span class="k">반례</span><span class="co">(−1, 2) → (0, −1)</span><p>x가 커졌는데 y가 작아졌다. 이 하나로 “항상”이라는 주장은 거짓이 된다.</p></div>
+          <div class="case inc"><span class="k">비교 사례</span><span class="co">(2, −1) → (3, 2)</span><p>가설과 맞지만, 증가 사례 하나로 “항상 증가”를 <strong>증명할 수는 없다</strong>.</p></div>
+        </div>
+        <div class="note">반례 하나면 “항상”을 반박하기에 충분하지만, 맞는 사례는 아무리 많아도 전체를 증명하지 못합니다. 정확한 설명: 꼭짓점 x = 1의 <strong>왼쪽(x &lt; 1)에서는 감소</strong>하고 <strong>오른쪽(x &gt; 1)에서는 증가</strong>한다.</div>
+      </section>
+
+      <section class="step" id="s4">
+        <span class="n">4</span><h2>반례 · 수정 설명</h2>
+        <p>찾은 반례를 쓰고, 가설을 올바르게 고쳐 쓰세요.</p>
+        <textarea id="ceText" placeholder="내가 찾은 반례 (좌표와 이유)"></textarea>
+        <textarea id="revText" placeholder="수정한 설명 — 어디에서 증가하고 어디에서 감소하는가?"></textarea>
+      </section>
+
+      <section class="step" id="s5">
+        <span class="n">5</span><h2>교사 검토</h2>
+        <p>수치 검증은 자동으로, 설명 검토는 교사가 합니다. 좌표나 설명이 바뀌면 검토를 다시 받아야 합니다.</p>
+        <div class="review">
+          <div class="panel"><h3><span>수치 검증<small>자동 계산</small></span><span id="numPill" class="pill"></span></h3><ul class="v" id="numList"></ul></div>
+          <div class="panel"><h3><span>설명 검토<small>교사 확인</small></span><span id="expPill" class="pill"></span></h3>
+            <div class="checks">
+              <label><input type="checkbox" id="c1"> 반례 하나로 “항상”이 반박됨을 설명했다</label>
+              <label><input type="checkbox" id="c2"> 증가 사례 하나로는 증명되지 않음을 알고 있다</label>
+              <label><input type="checkbox" id="c3"> 꼭짓점 x = 1 기준으로 감소·증가 구간을 구분했다</label>
+            </div>
+            <div class="row2"><label for="reviewer">검토 교사</label><input type="text" id="reviewer" size="8"></div>
+            <textarea id="rvNote" placeholder="교사 코멘트" style="min-height:56px"></textarea>
+          </div>
+        </div>
+        <div id="rvStatus" class="status"></div>
+        <div class="bar"><button id="btnApprove" class="primary">검토 완료</button><button id="btnUnapprove">검토 취소</button></div>
+      </section>
+
+      <section class="step" id="s6">
+        <span class="n">6</span><h2>인쇄 · 내려받기</h2>
+        <p>인쇄용(.html)은 내려받아 열면 바로 인쇄 창이 뜹니다. 텍스트(.txt)는 그대로 붙여넣기 용도입니다.</p>
+        <div class="exports">
+          <div class="panel"><h3>학생용 활동지 <span class="pill p-wait">빈칸</span></h3>
+            <div class="bar"><button data-dl="student-html">인쇄용 받기</button><button data-dl="student-txt">텍스트 받기</button></div></div>
+          <div class="panel"><h3>교사용 기록 <span class="pill p-ok">작성 내용</span></h3>
+            <div class="bar"><button data-dl="teacher-html">인쇄용 받기</button><button data-dl="teacher-txt">텍스트 받기</button><button id="btnCopy">복사</button></div></div>
+        </div>
+        <div class="msg" id="dlMsg"></div>
+        <pre class="preview" id="preview"></pre>
+      </section>
+    </div>
+  </div>
+  <footer><span>제작 <b>박유강</b> · 수학은유강</span><span>초강스 에듀테크 LAB 3주차 · 고수 미션</span></footer>
+</div>
+
+<script>
+const f = x => (x-1)*(x-1) - 2;
+const r2 = v => Math.round(v*100)/100;
+const fmt = v => { const s = r2(v).toString(); return s.replace('-', '−'); };
+const $ = id => document.getElementById(id);
+
+const EXAMPLE = {
+  author:'박유강', pred:'참', predReason:'a > 0 이면 그래프가 위로 열리니까 x가 커질수록 y도 계속 커질 것 같다.',
+  x1:-1, x2:0,
+  log:[{x1:2,x2:3},{x1:-1,x2:0},{x1:0,x2:2}],
+  ceText:'x가 −1에서 0으로 커질 때 y는 2에서 −1로 줄어든다. x₂ > x₁ 인데 y₂ < y₁ 이므로 가설의 반례다. (0 → 2 처럼 y가 −1로 같은 경우도 반례)',
+  revText:'이차항 계수가 양수인 y=(x−1)²−2 는 꼭짓점 x = 1 의 왼쪽(x < 1)에서는 x가 증가할 때 y가 감소하고, 오른쪽(x > 1)에서는 증가한다. 그래서 “항상 증가”는 거짓이고, 증가 사례(2 → 3) 하나로는 전체를 증명할 수 없다.',
+  checks:[true,true,true], reviewer:'박유강', rvNote:'반례 판정과 구간 구분 모두 정확. 같은 값(0→2)도 반례임을 찾은 점 좋음.',
+  review:null, showVertex:true
+};
+const BLANK = {author:'', pred:'', predReason:'', x1:-2, x2:-1, log:[], ceText:'', revText:'', checks:[false,false,false], reviewer:'', rvNote:'', review:null, showVertex:false};
+
+let S;
+function snapKey(){ return JSON.stringify([S.x1,S.x2,S.ceText.trim(),S.revText.trim()]); }
+function loadState(src, approve){
+  S = JSON.parse(JSON.stringify(src));
+  if(approve) S.review = {by:S.reviewer, key:snapKey(), at:new Date().toLocaleString('ko-KR')};
+  syncInputs(); render();
+}
+function classify(x1,x2){
+  const y1=f(x1), y2=f(x2);
+  if(!(x2 > x1)) return {kind:'bad', y1, y2};
+  if(y2 <= y1) return {kind:'dec', y1, y2};
+  return {kind:'inc', y1, y2};
+}
+function change(y1,y2){ return y2>y1?'증가':(y2<y1?'감소':'같음'); }
+
+/* ---------- plot ---------- */
+const W=560,H=440, X0=-3, X1=5, Y0=-3, Y1=7, PADL=34, PADR=14, PADT=14, PADB=30;
+const sx = x => PADL + (x-X0)/(X1-X0)*(W-PADL-PADR);
+const sy = y => PADT + (Y1-y)/(Y1-Y0)*(H-PADT-PADB);
+const ix = px => X0 + (px-PADL)/(W-PADL-PADR)*(X1-X0);
+const NS='http://www.w3.org/2000/svg';
+const svg=$('plot');
+function el(tag, attrs, parent){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); (parent||svg).appendChild(e); return e; }
+function drawPlot(){
+  svg.innerHTML='';
+  el('rect',{x:0,y:0,width:W,height:H,fill:'var(--surface)'});
+  if(S.showVertex){
+    el('rect',{x:sx(X0),y:PADT,width:sx(1)-sx(X0),height:H-PADT-PADB,fill:'var(--dec-soft)'});
+    el('rect',{x:sx(1),y:PADT,width:sx(X1)-sx(1),height:H-PADT-PADB,fill:'var(--inc-soft)'});
+    const t1=el('text',{x:sx(-2.85),y:H-PADB-10,fill:'var(--dec)','font-size':13,'font-weight':600,'font-family':'IBM Plex Sans KR, sans-serif'}); t1.textContent='x < 1 : 감소';
+    const t2=el('text',{x:sx(4.85),y:H-PADB-10,fill:'var(--inc)','font-size':13,'font-weight':600,'text-anchor':'end','font-family':'IBM Plex Sans KR, sans-serif'}); t2.textContent='x > 1 : 증가';
+  }
+  for(let x=X0;x<=X1;x++){ el('line',{x1:sx(x),y1:PADT,x2:sx(x),y2:H-PADB,stroke:'var(--grid)','stroke-width':1});
+    const t=el('text',{x:sx(x),y:H-PADB+17,fill:'var(--muted)','font-size':11,'text-anchor':'middle','font-family':'IBM Plex Mono, monospace'}); t.textContent=x<0?'−'+(-x):x; }
+  for(let y=Y0;y<=Y1;y++){ el('line',{x1:PADL,y1:sy(y),x2:W-PADR,y2:sy(y),stroke:'var(--grid)','stroke-width':1});
+    if(y!==0){const t=el('text',{x:PADL-6,y:sy(y)+4,fill:'var(--muted)','font-size':11,'text-anchor':'end','font-family':'IBM Plex Mono, monospace'}); t.textContent=y<0?'−'+(-y):y;} }
+  el('line',{x1:PADL,y1:sy(0),x2:W-PADR,y2:sy(0),stroke:'var(--muted)','stroke-width':1.2});
+  el('line',{x1:sx(0),y1:PADT,x2:sx(0),y2:H-PADB,stroke:'var(--muted)','stroke-width':1.2});
+  // axis of symmetry
+  el('line',{x1:sx(1),y1:PADT,x2:sx(1),y2:H-PADB,stroke:'var(--accent)','stroke-width':1,'stroke-dasharray':'4 4',opacity:.7});
+  // curve
+  let d=''; for(let i=0;i<=200;i++){ const x=X0+(X1-X0)*i/200, y=f(x); if(y>Y1+1) { d+=''; } d+=(d?'L':'M')+sx(x).toFixed(1)+' '+sy(Math.min(y,Y1+2)).toFixed(1); }
+  const clip=el('clipPath',{id:'clp'}); el('rect',{x:PADL,y:PADT,width:W-PADL-PADR,height:H-PADT-PADB,fill:'#000'},clip);
+  el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':3,'stroke-linecap':'round','clip-path':'url(#clp)'});
+  const lab=el('text',{x:sx(3.05),y:sy(0.9),fill:'var(--accent)','font-size':13,'font-family':'IBM Plex Mono, monospace'}); lab.textContent='y=(x−1)²−2';
+  // vertex
+  el('circle',{cx:sx(1),cy:sy(-2),r:3.5,fill:'var(--accent)'});
+  const vt=el('text',{x:sx(1)+7,y:sy(-2)+16,fill:'var(--accent)','font-size':11,'font-family':'IBM Plex Mono, monospace'}); vt.textContent='꼭짓점(1, −2)';
+  // chord
+  const c=classify(S.x1,S.x2);
+  const col = c.kind==='dec'?'var(--dec)':c.kind==='inc'?'var(--inc)':'var(--warn)';
+  el('line',{x1:sx(S.x1),y1:sy(f(S.x1)),x2:sx(S.x2),y2:sy(f(S.x2)),stroke:col,'stroke-width':2,'stroke-dasharray':'6 4'});
+  // guide lines + points
+  [['A',S.x1],['B',S.x2]].forEach(([name,x])=>{
+    const y=f(x), cx=sx(x), cy=sy(Math.min(y,Y1));
+    el('line',{x1:cx,y1:cy,x2:cx,y2:sy(0),stroke:col,'stroke-width':1,opacity:.5});
+    const g=el('g',{tabindex:0,role:'slider','aria-label':'점 '+name+' x좌표','aria-valuenow':x,style:'cursor:grab'});
+    el('circle',{cx,cy,r:16,fill:'transparent'},g);
+    el('circle',{cx,cy,r:13,fill:col,opacity:.14},g); el('circle',{cx,cy,r:7,fill:'var(--surface)',stroke:col,'stroke-width':3},g);
+    const t=el('text',{x:cx+(name==='A'?-12:12),y:cy-12,fill:'var(--ink)','font-size':14,'font-weight':600,'text-anchor':name==='A'?'end':'start','font-family':'IBM Plex Sans KR, sans-serif'},g); t.textContent=name;
+    g.addEventListener('pointerdown',e=>{drag=name; svg.setPointerCapture(e.pointerId); e.preventDefault();});
+    g.addEventListener('keydown',e=>{ const k=e.key; let dx=0; if(k==='ArrowRight'||k==='ArrowUp')dx=.5; if(k==='ArrowLeft'||k==='ArrowDown')dx=-.5; if(!dx)return; e.preventDefault(); setX(name, (name==='A'?S.x1:S.x2)+dx); requestAnimationFrame(()=>svg.querySelector('[aria-label="점 '+name+' x좌표"]')?.focus()); });
+  });
+}
+let drag=null;
+svg.addEventListener('pointermove',e=>{ if(!drag) return; const r=svg.getBoundingClientRect(); const px=(e.clientX-r.left)*W/r.width; setX(drag, Math.round(ix(px)*2)/2); });
+svg.addEventListener('pointerup',()=>drag=null); svg.addEventListener('pointercancel',()=>drag=null);
+function setX(name,x){ x=Math.max(-2.5,Math.min(4.5,x)); if(name==='A'){ if(S.x1===x) return; S.x1=x; $('x1').value=x; } else { if(S.x2===x) return; S.x2=x; $('x2').value=x; } render(); }
+
+/* ---------- render ---------- */
+function render(){
+  drawPlot();
+  const c=classify(S.x1,S.x2);
+  $('y1t').textContent='y₁ = '+fmt(c.y1); $('y2t').textContent='y₂ = '+fmt(c.y2);
+  const v=$('verdict');
+  const pair=`(${fmt(S.x1)}, ${fmt(c.y1)}) → (${fmt(S.x2)}, ${fmt(c.y2)})`;
+  if(c.kind==='dec'){ v.className='verdict v-dec'; v.innerHTML=`<span class="tag">반례 성립</span><span>${pair}. x가 커졌는데 y가 ${c.y2<c.y1?'감소':'그대로'}했다. 가설의 “항상”이 깨진다.</span>`; }
+  else if(c.kind==='inc'){ v.className='verdict v-inc'; v.innerHTML=`<span class="tag">증가 사례</span><span>${pair}. 가설과 맞지만 이것만으로 “항상”을 증명할 수는 없다.</span>`; }
+  else { v.className='verdict v-bad'; v.innerHTML=`<span class="tag">조건 불충족</span><span>B의 x가 A보다 커야 “x가 증가할 때”를 시험할 수 있다.</span>`; }
+
+  // log
+  $('log').innerHTML = S.log.map((t,i)=>{ const k=classify(t.x1,t.x2); const lab=k.kind==='dec'?'<span class="pill p-no">반례</span>':k.kind==='inc'?'<span class="pill p-ok">증가 사례</span>':'<span class="pill p-wait">조건 불충족</span>';
+    return `<tr><td>${i+1}</td><td class="m">(${fmt(t.x1)}, ${fmt(k.y1)})</td><td class="m">(${fmt(t.x2)}, ${fmt(k.y2)})</td><td>${change(k.y1,k.y2)}</td><td>${lab}</td><td><button class="x" data-del="${i}" aria-label="${i+1}번 기록 삭제">삭제</button></td></tr>`; }).join('') || '<tr><td colspan="6" style="color:var(--muted)">아직 기록이 없습니다.</td></tr>';
+
+  // numeric verification
+  const okX = S.x2 > S.x1, okY = f(S.x2) <= f(S.x1);
+  const numOK = okX && okY;
+  $('numList').innerHTML = `<li style="color:var(--muted)">A(${fmt(S.x1)}, ${fmt(c.y1)}) · B(${fmt(S.x2)}, ${fmt(c.y2)}) — 함수식으로 계산</li>
+    <li><span class="${okX?'ok':'no'}">${okX?'✓':'✗'}</span><span>x₂ &gt; x₁ &nbsp;<span style="font-family:var(--mono)">${fmt(S.x2)} ${okX?'&gt;':'≤'} ${fmt(S.x1)}</span></span></li>
+    <li><span class="${okY?'ok':'no'}">${okY?'✓':'✗'}</span><span>y₂ ≤ y₁ &nbsp;<span style="font-family:var(--mono)">${fmt(c.y2)} ${okY?'≤':'&gt;'} ${fmt(c.y1)}</span></span></li>`;
+  $('numPill').className='pill '+(numOK?'p-ok':'p-no'); $('numPill').textContent=numOK?'반례 확인':'반례 아님';
+  const checksOK = S.checks.every(Boolean);
+  const hasText = S.revText.trim().length>0;
+  $('expPill').className='pill '+(checksOK&&hasText?'p-ok':'p-wait'); $('expPill').textContent=!hasText?'설명 없음':checksOK?'기준 충족':'확인 중';
+
+  // review status
+  const st=$('rvStatus'); let stale=false;
+  if(S.review && S.review.key!==snapKey()){ stale=true; }
+  if(S.review && !stale){ st.className='status v-inc'; st.textContent=`검토 완료 · ${S.review.by||'교사'} · ${S.review.at}`; }
+  else if(stale){ st.className='status v-bad'; st.textContent='좌표나 설명이 바뀌었습니다. 교사 검토를 다시 받아야 합니다.'; }
+  else if(!numOK){ st.className='status v-dec'; st.textContent='현재 좌표는 반례가 아니므로 검토를 완료할 수 없습니다.'; }
+  else if(!hasText||!checksOK){ st.className='status v-bad'; st.textContent='수정 설명을 쓰고 설명 검토 항목을 모두 확인해야 검토를 완료할 수 있습니다.'; }
+  else { st.className='status v-bad'; st.textContent='수치 검증 통과. 교사의 검토 완료를 기다리는 중입니다.'; }
+  $('btnApprove').disabled = !(numOK && checksOK && hasText && S.reviewer.trim()) || (S.review && !stale);
+  $('btnUnapprove').disabled = !S.review;
+  $('showVertex').checked=S.showVertex;
+  const sg=v=>(v>0?'+':v<0?'−':'')+r2(Math.abs(v));
+  $('dxy').innerHTML=`<span>Δx ${sg(S.x2-S.x1)}</span><span style="color:${c.y2-c.y1>0?'var(--inc)':c.y2-c.y1<0?'var(--dec)':'var(--muted)'}">Δy ${sg(c.y2-c.y1)}</span>`;
+  const ce = (c.kind==='dec') ? {x1:S.x1,x2:S.x2} : S.log.find(t=>classify(t.x1,t.x2).kind==='dec');
+  $('hyp').classList.toggle('refuted',!!ce);
+  const stp=$('stamp');
+  if(ce){ stp.className='stamp on'; stp.innerHTML=`<span class="big">가설 기각</span><span class="sm">반례 (${fmt(ce.x1)}, ${fmt(f(ce.x1))})<br>→ (${fmt(ce.x2)}, ${fmt(f(ce.x2))})</span>`; }
+  else { stp.className='stamp'; stp.innerHTML='<span class="big">검증 중</span><span class="sm">아직 반례 없음</span>'; }
+  const approved = S.review && S.review.key===snapKey();
+  [!!S.pred, S.log.length>0, !!ce, !!(S.ceText.trim()&&S.revText.trim()), !!approved, false].forEach((d,i)=>$('s'+(i+1)).classList.toggle('done',d));
+  $('preview').textContent = teacherText();
+  save();
+}
+
+/* ---------- inputs ---------- */
+function syncInputs(){
+  $('author').value=S.author; $('predT').checked=S.pred==='참'; $('predF').checked=S.pred==='거짓';
+  $('predReason').value=S.predReason; $('x1').value=S.x1; $('x2').value=S.x2;
+  $('ceText').value=S.ceText; $('revText').value=S.revText;
+  ['c1','c2','c3'].forEach((id,i)=>$(id).checked=S.checks[i]);
+  $('reviewer').value=S.reviewer; $('rvNote').value=S.rvNote;
+}
+const bindText=(id,key)=>$(id).addEventListener('input',e=>{S[key]=e.target.value; render();});
+bindText('author','author'); bindText('predReason','predReason'); bindText('ceText','ceText'); bindText('revText','revText'); bindText('reviewer','reviewer'); bindText('rvNote','rvNote');
+document.querySelectorAll('input[name=pred]').forEach(r=>r.addEventListener('change',e=>{S.pred=e.target.value; render();}));
+['x1','x2'].forEach(id=>$(id).addEventListener('input',e=>{ const v=parseFloat(e.target.value); if(isNaN(v)) return; S[id]=Math.max(-2.5,Math.min(4.5,v)); render(); }));
+['c1','c2','c3'].forEach((id,i)=>$(id).addEventListener('change',e=>{S.checks[i]=e.target.checked; render();}));
+$('showVertex').addEventListener('change',e=>{S.showVertex=e.target.checked; render();});
+$('btnRec').onclick=()=>{ S.log.push({x1:S.x1,x2:S.x2}); render(); };
+$('log').addEventListener('click',e=>{ const b=e.target.closest('[data-del]'); if(!b) return; S.log.splice(+b.dataset.del,1); render(); });
+$('pDec').onclick=()=>{ S.x1=-1; S.x2=0; syncInputs(); render(); };
+$('pInc').onclick=()=>{ S.x1=2; S.x2=3; syncInputs(); render(); };
+$('btnApprove').onclick=()=>{ S.review={by:S.reviewer.trim(), key:snapKey(), at:new Date().toLocaleString('ko-KR')}; render(); };
+$('btnUnapprove').onclick=()=>{ S.review=null; render(); };
+$('btnExample').onclick=()=>loadState(EXAMPLE,true);
+$('btnBlank').onclick=()=>loadState(BLANK,false);
+
+/* ---------- export ---------- */
+const HYP='이차항 계수가 양수이면 x가 증가할수록 y도 항상 더 커진다.';
+function studentText(){
+  return `[가설·반례 탐구 활동지]  y = (x − 1)² − 2
+이름: ______________    날짜: ______________
+
+가설: “${HYP}”
+
+1. 예측
+   이 가설은 ( 참 / 거짓 )이라고 예측한다.
+   이유: ____________________________________________
+
+2. 실험 좌표  (x₂ > x₁ 이 되게 두 점을 고른다)
+   처음 점 A (x₁, y₁) = ( ______ , ______ )
+   다음 점 B (x₂, y₂) = ( ______ , ______ )
+   y의 변화: 증가 / 감소 / 같음
+
+3. 반례 판정
+   x₂ > x₁ 인데 y₂ ≤ y₁ 이면 반례다.
+   내 실험은 반례인가? ( 예 / 아니오 )  근거: ______________________
+
+4. 비교 사례
+   x가 −1 → 0 일 때 y는 ______ → ______
+   x가  2 → 3 일 때 y는 ______ → ______
+   증가 사례 하나로 가설이 증명되는가? 그 이유는?
+   ____________________________________________
+
+5. 수정한 설명 (꼭짓점을 이용해서)
+   ____________________________________________
+   ____________________________________________
+
+[교사 확인]  수치 검증: □   설명 검토: □   서명: __________
+`;
+}
+function teacherText(){
+  const c=classify(S.x1,S.x2);
+  const st = S.review ? (S.review.key===snapKey()?`검토 완료 (${S.review.by||'-'}, ${S.review.at})`:'재검토 필요 (검토 후 내용이 바뀜)') : '검토 전';
+  const log = S.log.length ? S.log.map((t,i)=>{const k=classify(t.x1,t.x2); return `   ${i+1}. (${fmt(t.x1)}, ${fmt(k.y1)}) → (${fmt(t.x2)}, ${fmt(k.y2)})  ${change(k.y1,k.y2)}  ${k.kind==='dec'?'반례':k.kind==='inc'?'증가 사례':'조건 불충족'}`;}).join('\n') : '   (없음)';
+  return `[교사용 기록] 가설·반례 탐구  y = (x − 1)² − 2
+작성자: ${S.author||'-'}
+
+가설: “${HYP}”
+
+1. 예측: ${S.pred||'-'}
+   이유: ${S.predReason||'-'}
+
+2. 제출 실험
+   A (${fmt(S.x1)}, ${fmt(c.y1)}) → B (${fmt(S.x2)}, ${fmt(c.y2)})   y ${change(c.y1,c.y2)}
+   실험 기록:
+${log}
+
+3. 반례: ${S.ceText||'-'}
+
+4. 수정 설명: ${S.revText||'-'}
+
+5. 검토
+   [수치 검증 · 자동] ${c.kind==='dec'?'통과 — x₂ > x₁ 이고 y₂ ≤ y₁ (반례)':'불통과 — 반례 아님'}
+   [설명 검토 · 교사]
+     ${S.checks[0]?'☑':'☐'} 반례 하나로 “항상”이 반박됨
+     ${S.checks[1]?'☑':'☐'} 증가 사례 하나로는 증명되지 않음
+     ${S.checks[2]?'☑':'☐'} 꼭짓점 x = 1 기준 감소·증가 구분
+   검토 교사: ${S.reviewer||'-'}
+   코멘트: ${S.rvNote||'-'}
+   상태: ${st}
+`;
+}
+function esc(s){ return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+function printHTML(title, text){
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${title}</title>
+<style>@page{size:A4;margin:18mm}body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#111;margin:0;padding:24px}
+h1{font-size:18px;margin:0 0 4px}p.s{color:#555;font-size:12px;margin:0 0 16px}pre{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:14px;line-height:2;white-space:pre-wrap;margin:0}
+.btn{margin-bottom:16px}@media print{.btn{display:none}}</style></head><body>
+<div class="btn"><button onclick="window.print()">인쇄</button></div>
+<h1>${title}</h1><p class="s">제작 박유강 · 수학은유강</p><pre>${esc(text)}</pre>
+<script>window.addEventListener('load',()=>setTimeout(()=>window.print(),300));<\/script></body></html>`;
+}
+const nativeDl={save:({filename,data})=>{ const u=URL.createObjectURL(new Blob([data],{type:filename.endsWith('.html')?'text/html;charset=utf-8':'text/plain;charset=utf-8'})); const a=document.createElement('a'); a.href=u; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),2000); return Promise.resolve({status:'saved'}); }};
+let dl=null; (async()=>{ try{ dl = window.claude ? await window.claude.use('downloads') : nativeDl; }catch(e){ dl=null; } if(!dl){ document.querySelectorAll('[data-dl]').forEach(b=>b.hidden=true); $('dlMsg').textContent='이 화면에서는 파일 저장을 쓸 수 없습니다. 아래 기록을 복사해 사용하세요.'; } })();
+document.querySelectorAll('[data-dl]').forEach(b=>b.addEventListener('click',async()=>{
+  if(!dl) return;
+  const [who,kind]=b.dataset.dl.split('-'); const name=(S.author||'이름')+'_'+(who==='student'?'학생용_활동지':'교사용_기록');
+  const text = who==='student'?studentText():teacherText();
+  const data = kind==='txt'?text:printHTML(who==='student'?'학생용 활동지':'교사용 기록', text);
+  try{ await dl.save({filename:name+'.'+kind, data}); $('dlMsg').textContent=name+'.'+kind+' 저장됨'; }
+  catch(e){ $('dlMsg').textContent = e && e.code==='declined' ? '저장을 취소했습니다.' : '저장하지 못했습니다. 복사 버튼을 이용하세요.'; }
+}));
+$('btnCopy').onclick=async()=>{ const t=teacherText(); try{ await navigator.clipboard.writeText(t); $('dlMsg').textContent='교사용 기록을 복사했습니다.'; }catch(e){ const r=document.createRange(); r.selectNodeContents($('preview')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); $('dlMsg').textContent='기록을 선택해 두었습니다. Ctrl+C로 복사하세요.'; } };
+
+function save(){ try{ localStorage.setItem('lab3-state', JSON.stringify(S)); }catch(e){} }
+let saved=null; try{ saved=JSON.parse(localStorage.getItem('lab3-state')); }catch(e){}
+if(saved && typeof saved.x1==='number'){ S=Object.assign(JSON.parse(JSON.stringify(BLANK)),saved); syncInputs(); render(); } else loadState(EXAMPLE,true);
+</script>
+
+</html>
