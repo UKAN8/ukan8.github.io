@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="행렬 혼합연산 오답을 틀린 줄 찾기 → 이유 → 힌트 → 숫자 바꿔 재도전 → 검산으로 다루는 수업 묶음 제작·저장·재사용 스튜디오.">
+<meta property="og:title" content="행렬 혼합연산 클리닉 스튜디오">
+<meta property="og:description" content="틀린 줄 찾기 → 이유 → 힌트 → 재도전 → 검산 · 박유강">
+<title>행렬 클리닉 스튜디오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{
+  --bg:#F3F2EE; --surface:#FFFFFF; --sunk:#ECEBE6; --ink:#1A1D24; --muted:#5E6470; --line:#DCDAD3;
+  --accent:#2445A8; --accent-soft:#E6EBF8; --bad:#C2412B; --bad-soft:#FBE9E4; --good:#23774F; --good-soft:#E1F1E8;
+  --warn:#8E6200; --warn-soft:#F7EED5; --mark:#C2412B;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#121419; --surface:#1B1E25; --sunk:#16181E; --ink:#E9EAEE; --muted:#9CA2AE; --line:#2D313B;
+  --accent:#8EA7F2; --accent-soft:#222B44; --bad:#F08A72; --bad-soft:#3A2420; --good:#6FCB9C; --good-soft:#1C3329;
+  --warn:#E3B858; --warn-soft:#352D18; --mark:#F08A72;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#121419; --surface:#1B1E25; --sunk:#16181E; --ink:#E9EAEE; --muted:#9CA2AE; --line:#2D313B;
+  --accent:#8EA7F2; --accent-soft:#222B44; --bad:#F08A72; --bad-soft:#3A2420; --good:#6FCB9C; --good-soft:#1C3329;
+  --warn:#E3B858; --warn-soft:#352D18; --mark:#F08A72;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;word-spacing:.04em;-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 64px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:18px}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);font-weight:600}
+h1{font-size:24px;line-height:1.3;margin:2px 0 0;letter-spacing:-.01em}
+h2{font-size:17px;margin:0 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:13px;margin:4px 0 0}
+.tabs{display:flex;gap:4px;background:var(--sunk);border:1px solid var(--line);padding:3px;border-radius:10px}
+.tabs button{border:0;background:transparent;padding:7px 14px;border-radius:7px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;padding:0;list-style:none;font-size:13px}
+.flow li{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 11px;color:var(--muted)}
+.flow li b{color:var(--accent);margin-right:4px}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+select,input[type=text],textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 9px;min-width:0}
+select{padding-right:28px}
+textarea{width:100%;resize:vertical;min-height:52px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 13px;cursor:pointer;font-weight:600;font-size:14px;line-height:1.3}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.pri{color:#10131a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.pri{color:#10131a}}
+.btn.sm{padding:4px 9px;font-size:13px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.mats{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 4px}
+.mat{display:flex;align-items:center;gap:6px}
+.mat .nm{font-weight:700;font-size:15px;width:16px}
+.mat .cells{display:grid;gap:4px;padding:4px 7px;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:9px}
+.mat input{width:44px;text-align:center;padding:5px 2px;border:1px solid var(--line);border-radius:6px;background:var(--sunk);font-family:var(--mono)}
+.mat input:focus{outline:2px solid var(--accent);outline-offset:0}
+.msg{font-size:13px;border-radius:8px;padding:8px 10px;margin-top:10px}
+.msg.ok{background:var(--good-soft);color:var(--good)}
+.msg.bad{background:var(--bad-soft);color:var(--bad)}
+.msg.warn{background:var(--warn-soft);color:var(--warn)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media (max-width:620px){.cmp{grid-template-columns:1fr}}
+.sol{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--sunk)}
+.sol .hd{font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:6px}
+.sol.wr .hd{color:var(--bad)} .sol.rt .hd{color:var(--good)}
+.ln{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-top:1px dashed var(--line);overflow-x:auto}
+.ln:first-of-type{border-top:0}
+.ln .no{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none;width:18px}
+.ln.err .no{color:var(--bad);font-weight:700}
+.tex{min-width:0}
+.katex{font-size:1.05em}
+.hints{margin:12px 0 0;padding-left:20px;font-size:14px}
+.hints li{margin:4px 0}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.badge.ok{background:var(--good-soft);color:var(--good);border-color:transparent}
+.badge.no{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.list li{border:1px solid var(--line);border-radius:9px;padding:8px 10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface)}
+.list li.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.list .ttl{flex:1 1 160px;min-width:0;font-size:14px}
+.list .ttl small{display:block;color:var(--muted);font-size:12px}
+.list .acts{display:flex;gap:2px;flex-wrap:wrap}
+.sep{height:1px;background:var(--line);margin:14px 0}
+.saved{list-style:none;padding:0;margin:8px 0 0;font-size:13px}
+.saved li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:5px 0;border-top:1px solid var(--line)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-top:10px;cursor:pointer}
+.chk input{margin-top:4px;width:16px;height:16px;accent-color:var(--accent)}
+/* ===== 학생 화면 ===== */
+.play{max-width:720px;margin:0 auto}
+.prog{display:flex;gap:4px;margin:6px 0 14px}
+.prog span{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.prog span.done{background:var(--good)} .prog span.cur{background:var(--accent)}
+.steps{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;font-size:12px}
+.steps span{padding:2px 9px;border-radius:999px;background:var(--sunk);color:var(--muted);border:1px solid var(--line)}
+.steps span.cur{background:var(--accent-soft);color:var(--accent);border-color:transparent;font-weight:700}
+.steps span.done{color:var(--good)}
+.q{font-size:16px;font-weight:600;margin:4px 0 12px}
+.prob{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:12px;overflow-x:auto}
+.tap{display:flex;flex-direction:column;gap:8px}
+.tap button{display:flex;gap:10px;align-items:center;text-align:left;width:100%;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;cursor:pointer;overflow-x:auto;min-height:48px}
+.tap button .no{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none;width:22px}
+.tap button.sel{border-color:var(--accent);background:var(--accent-soft)}
+.tap button.okd{border-color:var(--good);background:var(--good-soft)}
+.tap button.okd .no::after{content:" ✓";color:var(--good)}
+.tap button.hit{border-color:var(--bad);background:var(--bad-soft)}
+.tap button:disabled{cursor:default}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts.one{grid-template-columns:1fr}
+@media (max-width:520px){.opts{grid-template-columns:1fr}}
+.opts button{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;cursor:pointer;text-align:left;min-height:48px;display:flex;gap:10px;align-items:center;overflow-x:auto}
+.opts button .k{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none}
+.opts button.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opts button.right{border-color:var(--good);background:var(--good-soft)}
+.opts button.wrong{border-color:var(--bad);background:var(--bad-soft);opacity:.75}
+.bar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap}
+.fb{min-height:22px;font-size:14px;margin-top:10px}
+.fb.ok{color:var(--good)} .fb.bad{color:var(--bad)}
+.hintbox{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 8px 8px 0;padding:8px 12px;margin:8px 0;font-size:14px}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;margin:12px 0 0;font-size:14px}
+table.res{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+table.res th,table.res td{border-bottom:1px solid var(--line);padding:6px 6px;text-align:left}
+table.res th{color:var(--muted);font-weight:600}
+footer{margin-top:28px;color:var(--muted);font-size:12px;text-align:center}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;z-index:9;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.copybox{width:100%;font-family:var(--mono);font-size:12px;min-height:90px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top" id="hdr">
+  <div>
+    <div class="eyebrow">초강스 에듀테크 LAB · 5주차 · ⑤ 초고수</div>
+    <h1>행렬 혼합연산 클리닉 스튜디오</h1>
+    <p class="sub">오답 풀이를 만들고, 비교하고, 수업 묶음으로 저장했다가 숫자만 바꿔 다시 씁니다.</p>
+  </div>
+  <div class="tabs" role="tablist" id="tabs">
+    <button role="tab" aria-selected="true" data-tab="studio">스튜디오</button>
+    <button role="tab" aria-selected="false" data-tab="play">학생 화면</button>
+  </div>
+</header>
+
+<ul class="flow" id="flow">
+  <li><b>1</b>틀린 줄 찾기</li><li><b>2</b>이유 고르기</li><li><b>3</b>힌트 보고 고치기</li><li><b>4</b>숫자 바꿔 재도전</li><li><b>5</b>검산</li>
+</ul>
+
+<!-- ================= 스튜디오 ================= -->
+<section id="studio">
+<div class="grid">
+  <div class="card">
+    <h2 id="edTitle">오답 카드 만들기</h2>
+    <div class="row">
+      <label class="f">문제 유형
+        <select id="selTpl"></select>
+      </label>
+      <label class="f">오답 유형
+        <select id="selErr"></select>
+      </label>
+      <label class="f" id="kWrap">실수배 k
+        <select id="selK"><option>2</option><option>3</option><option>4</option></select>
+      </label>
+    </div>
+    <div class="mats" id="mats"></div>
+    <div class="row" style="margin-top:6px">
+      <button class="btn" id="btnRand">숫자 새로 뽑기</button>
+      <span class="small muted">칸을 직접 고쳐도 됩니다. 정수 −9 ~ 9.</span>
+    </div>
+    <div id="valid"></div>
+
+    <div class="cmp">
+      <div class="sol wr"><div class="hd">오답 풀이 · 학생이 보는 줄</div><div id="solWrong"></div></div>
+      <div class="sol rt"><div class="hd">바른 풀이</div><div id="solRight"></div></div>
+    </div>
+    <div id="diffNote" class="small muted" style="margin-top:8px"></div>
+
+    <h3 style="margin-top:16px">자동 힌트 3단계</h3>
+    <ol class="hints" id="hintPrev"></ol>
+
+    <h3 style="margin-top:16px">재도전 미리보기 <span class="small muted">(학생마다 숫자가 새로 나옵니다)</span></h3>
+    <div class="prob" id="retryPrev"></div>
+
+    <label class="f" style="margin-top:14px">선생님 한마디 (카드 끝에 학생에게 보임)
+      <textarea id="note" maxlength="160" placeholder="예) 곱셈은 '행 → 열' 손가락 두 개로 짚으면서!"></textarea>
+    </label>
+    <label class="chk"><input type="checkbox" id="chkRev"> <span>위 두 풀이를 손으로 계산해 확인했어요. <span class="muted small">(검토 안 한 카드는 묶음에 ‘미검토’로 표시)</span></span></label>
+    <div class="row" style="margin-top:12px">
+      <button class="btn pri" id="btnAdd">묶음에 추가</button>
+      <button class="btn" id="btnUpd" hidden>이 카드 수정 저장</button>
+      <button class="btn ghost" id="btnNew" hidden>새 카드로</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>수업 묶음</h2>
+    <label class="f">묶음 이름
+      <input type="text" id="bName" maxlength="40">
+    </label>
+    <ul class="list" id="bList"></ul>
+    <p class="small muted" id="bEmpty" hidden>아직 카드가 없어요. 왼쪽에서 만들어 추가하세요.</p>
+    <div class="row" style="margin-top:12px">
+      <button class="btn pri" id="btnPlay">학생 화면으로 실행</button>
+      <button class="btn" id="btnLink">학생 링크 복사</button>
+    </div>
+    <div class="sep"></div>
+    <h3>저장 · 불러오기</h3>
+    <div class="row">
+      <button class="btn" id="btnSave">이 브라우저에 저장</button>
+      <button class="btn" id="btnExport">파일로 내보내기</button>
+      <label class="btn" style="display:inline-block">파일 가져오기<input type="file" id="fileIn" accept=".json,application/json" hidden></label>
+      <button class="btn ghost" id="btnClear">새 묶음</button>
+    </div>
+    <ul class="saved" id="savedList"></ul>
+    <p class="small muted" id="savedEmpty">저장한 묶음이 없어요.</p>
+    <textarea class="copybox" id="linkBox" readonly hidden></textarea>
+    <div class="sep"></div>
+    <p class="small muted" style="margin:0">학생 링크는 묶음 내용이 주소 안에 들어 있어서 서버 없이 열립니다. 학생 이름·성적은 저장하지 않습니다. 결과는 학생이 마지막 화면에서 복사해 보내는 방식이에요.</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= 학생 화면 ================= -->
+<section id="play" hidden>
+  <div class="play">
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div><div class="eyebrow" id="pBundle"></div><div class="small muted" id="pCount"></div></div>
+        <button class="btn sm ghost" id="btnRestart">처음부터</button>
+      </div>
+      <div class="prog" id="pProg"></div>
+      <div class="steps" id="pSteps"></div>
+      <div id="pBody"></div>
+    </div>
+  </div>
+</section>
+
+<footer>박유강 · 수학은유강 · 초강스 에듀테크 LAB 5주차 · 공통수학1 행렬(2022 개정) · 외부 AI 없이 브라우저에서만 계산</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<!--ENGINE-START-->
+<script>
+/* ===================== 계산 엔진 ===================== */
+const ENG = (function(){
+const clone = M => M.map(r => r.slice());
+const dims = M => [M.length, M[0].length];
+const add = (X,Y) => X.map((r,i)=>r.map((v,j)=>v+Y[i][j]));
+const sub = (X,Y) => X.map((r,i)=>r.map((v,j)=>v-Y[i][j]));
+const scal = (k,X) => X.map(r=>r.map(v=>k*v));
+const mul = (X,Y) => { const n=X.length,m=Y[0].length,p=Y.length; const R=[];
+  for(let i=0;i<n;i++){R.push([]);for(let j=0;j<m;j++){let s=0;for(let t=0;t<p;t++)s+=X[i][t]*Y[t][j];R[i].push(s);}} return R; };
+const tr = X => X[0].map((_,j)=>X.map(r=>r[j]));
+const had = (X,Y) => X.map((r,i)=>r.map((v,j)=>v*Y[i][j]));
+const eq = (X,Y) => X.length===Y.length && X.every((r,i)=>r.length===Y[i].length && r.every((v,j)=>v===Y[i][j]));
+const diffCells = (X,Y) => { const d=[]; if(!X||!Y||X.length!==Y.length) return d; X.forEach((r,i)=>r.forEach((v,j)=>{ if(Y[i]&&v!==Y[i][j]) d.push([i,j]); })); return d; };
+
+/* 오답 유형 */
+const ERR = {
+  E1:{name:"실수배 일부 누락", why:"실수배를 일부 성분에만 곱했다"},
+  E2:{name:"음수 뺄셈 부호", why:"음수 성분을 뺄 때 부호를 잘못 처리했다"},
+  E3:{name:"성분끼리 곱", why:"같은 자리 성분끼리만 곱했다 (행렬의 곱을 성분 곱으로 착각)"},
+  E4:{name:"곱 순서 뒤바뀜", why:"곱하는 순서를 바꿔 계산했다 (AB와 BA를 같다고 봄)"},
+  E5:{name:"행·열 짝 오류", why:"행과 열의 짝을 잘못 맞춰 곱했다"},
+  E6:{name:"곱셈 공식 오용", why:"수의 공식 (a+b)²=a²+2ab+b²을 행렬에 그대로 썼다"}
+};
+/* 문제 유형: steps 는 순서대로 계산, out 이름이 다음 줄에서 쓰인다 */
+const TPL = {
+  T1:{name:"kA − B", mats:{A:[2,2],B:[2,2]}, usesK:true,
+      steps:k=>[{op:"scal",k,a:"A",out:"kA",lhs:`${k}A`},{op:"sub",a:"kA",b:"B",out:"R",lhs:`${k}A-B`}],
+      errs:["E1","E2"], expr:k=>`${k}A-B`},
+  T2:{name:"AB (2×2 곱)", mats:{A:[2,2],B:[2,2]}, expand:true,
+      steps:()=>[{op:"mul",a:"A",b:"B",out:"R",lhs:"AB"}], errs:["E3","E4","E5"], expr:()=>"AB"},
+  T6:{name:"AX (2×2 · 2×1)", mats:{A:[2,2],X:[2,1]}, expand:true,
+      steps:()=>[{op:"mul",a:"A",b:"X",out:"R",lhs:"AX"}], errs:["E5"], expr:()=>"AX"},
+  T3:{name:"kA − BC", mats:{A:[2,2],B:[2,2],C:[2,2]}, usesK:true,
+      steps:k=>[{op:"scal",k,a:"A",out:"kA",lhs:`${k}A`},{op:"mul",a:"B",b:"C",out:"BC",lhs:"BC"},{op:"sub",a:"kA",b:"BC",out:"R",lhs:`${k}A-BC`}],
+      errs:["E1","E3","E4","E5","E2"], expr:k=>`${k}A-BC`},
+  T4:{name:"A(B + C)", mats:{A:[2,2],B:[2,2],C:[2,2]},
+      steps:()=>[{op:"add",a:"B",b:"C",out:"S",lhs:"B+C"},{op:"mul",a:"A",b:"S",out:"R",lhs:"A(B+C)"}],
+      errs:["E3","E4","E5"], expr:()=>"A(B+C)"},
+  T5:{name:"(A + B)²", mats:{A:[2,2],B:[2,2]},
+      steps:()=>[{op:"add",a:"A",b:"B",out:"S",lhs:"A+B"},{op:"sq",a:"S",out:"R",lhs:"(A+B)^2"}],
+      errs:["E6","E3"], expr:()=>"(A+B)^2"}
+};
+const TPL_ORDER = ["T1","T2","T6","T3","T4","T5"];
+const errStepOp = {E1:"scal",E2:"sub",E3:"mul",E4:"mul",E5:"mul",E6:"sq"};
+function errStepIndex(tplId, err, k){
+  const st = TPL[tplId].steps(k||2);
+  for(let i=0;i<st.length;i++){
+    const op = st[i].op;
+    if(op===errStepOp[err]) return i;
+    if(op==="sq" && (err==="E3")) return i;
+  }
+  return -1;
+}
+/* 바른 계산 / 틀린 계산 */
+function opRight(s, env){
+  const A=env[s.a], B=s.b?env[s.b]:null;
+  switch(s.op){ case "scal": return scal(s.k,A); case "add": return add(A,B); case "sub": return sub(A,B);
+    case "mul": return mul(A,B); case "sq": return mul(A,A); }
+}
+function opWrong(s, A, B, err, base){
+  if(err==="E1" && s.op==="scal") return A.map((r,i)=>r.map((v,j)=>i===j?s.k*v:v));
+  if(err==="E2" && s.op==="sub") return A.map((r,i)=>r.map((v,j)=>B[i][j]<0? v+B[i][j] : v-B[i][j]));
+  if(err==="E3" && s.op==="mul") return dims(A).join()===dims(B).join()? had(A,B) : null;
+  if(err==="E3" && s.op==="sq") return had(A,A);
+  if(err==="E4" && s.op==="mul") return (dims(A)[0]===dims(B)[1] && dims(B)[0]===dims(A)[1]) ? mul(B,A) : null;
+  if(err==="E5" && s.op==="mul") return dims(B)[1]===2 && dims(B)[0]===2 ? mul(A,tr(B)) : mul(tr(A),B);
+  if(err==="E6" && s.op==="sq"){ const a=base.A,b=base.B; return add(add(mul(a,a),scal(2,mul(a,b))),mul(b,b)); }
+  return null;
+}
+/* 전체 풀이: err 가 null 이면 바른 풀이 */
+function solve(card, err){
+  const t = TPL[card.tpl]; const st = t.steps(card.k||2);
+  const env = {}; Object.keys(t.mats).forEach(n=>env[n]=clone(card.M[n]));
+  const e = err? errStepIndex(card.tpl, err, card.k) : -1;
+  const lines = [];
+  st.forEach((s,i)=>{
+    const ops = {a: env[s.a], b: s.b? env[s.b]:null};
+    const right = opRight(s, env);
+    let val = right, wrong=false;
+    if(i===e){ const w = opWrong(s, env[s.a], s.b?env[s.b]:null, err, card.M); if(w){ val=w; wrong=!eq(w,right); } }
+    lines.push({s, ops, val, right, wrong, err: i===e? err : null});
+    env[s.out] = val;
+  });
+  return {lines, final: env.R, errIdx: e};
+}
+function check(card){
+  const issues=[];
+  const r = solve(card,null), w = solve(card,card.err);
+  if(w.errIdx<0) issues.push("이 문제 유형에는 고른 오답이 생기지 않아요.");
+  else if(!w.lines[w.errIdx].wrong) issues.push(card.err==="E2" ? "빼는 행렬에 음수 성분이 없어서 부호 오답이 안 생겨요. 음수를 하나 넣어 주세요." :
+     card.err==="E1" ? "대각선 밖 성분이 모두 0이라 실수배 누락이 티가 안 나요." :
+     "이 숫자로는 오답 줄과 바른 줄이 같아져요. 숫자를 바꿔 주세요.");
+  else if(eq(w.final, r.final)) issues.push("중간 줄은 틀렸는데 최종 답이 우연히 같아요. 숫자를 바꾸는 걸 권해요.");
+  if(card.err==="E4" || card.tpl==="T5"){ const ln = r.lines.find(l=>l.s.op==="mul"||l.s.op==="sq"); }
+  return issues;
+}
+/* 난수 */
+function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function randMat(r,c,lo,hi){ const M=[]; for(let i=0;i<r;i++){M.push([]);for(let j=0;j<c;j++)M[i].push(rnd(lo,hi));} return M; }
+function randomCard(tpl, err, k){
+  const t = TPL[tpl];
+  for(let tries=0; tries<800; tries++){
+    const M={}; Object.entries(t.mats).forEach(([n,[r,c]])=>{ M[n]=randMat(r,c,-2,4); });
+    if(err==="E2"){ /* 빼는 행렬에 음수 넣기 */
+      if(tpl==="T1"){ M.B[rnd(0,1)][rnd(0,1)] = -rnd(1,3); }
+    }
+    const card = {tpl, err, k:k||2, M};
+    const nz = Object.values(M).every(X=>X.flat().filter(v=>v!==0).length>=Math.min(3,X.flat().length));
+    if(!nz) continue;
+    if(check(card).length) continue;
+    if(err && retryOptions(card, true)===null) continue;
+    return card;
+  }
+  return null;
+}
+/* 재도전 선지: 정답 + 오답 모델들 */
+function finalsByErr(card){
+  const out = {}; out.right = solve(card,null).final;
+  TPL[card.tpl].errs.forEach(e=>{ const w=solve(card,e); if(w.errIdx>=0 && w.lines[w.errIdx].wrong) out[e]=w.final; });
+  return out;
+}
+function retryOptions(card, testOnly){
+  const f = finalsByErr(card); const opts=[{m:f.right, right:true, tag:"right"}];
+  const seen = [f.right];
+  Object.keys(f).filter(k=>k!=="right").forEach(e=>{ if(!seen.some(s=>eq(s,f[e]))){ seen.push(f[e]); opts.push({m:f[e],right:false,tag:e}); } });
+  /* 부족하면 한 칸만 살짝 바꾼 것으로 채움 */
+  let guard=0;
+  while(opts.length<4 && guard++<60){
+    const base = opts[rnd(0,opts.length-1)].m.map(r=>r.slice());
+    const i=rnd(0,base.length-1), j=rnd(0,base[0].length-1); base[i][j]+= [ -2,-1,1,2 ][rnd(0,3)];
+    if(!seen.some(s=>eq(s,base))){ seen.push(base); opts.push({m:base,right:false,tag:"near"}); }
+  }
+  if(testOnly) return opts.filter(o=>o.tag!=="near").length>=2 ? opts : null;
+  /* 4개로 자르기: 정답 + 이 카드의 오답 모델 우선 + 나머지 무작위 */
+  const keep = opts.filter(o=>o.right||o.tag===card.err);
+  shuffle(opts.filter(o=>!o.right&&o.tag!==card.err)).forEach(o=>{ if(keep.length<4) keep.push(o); });
+  return shuffle(keep);
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* ---------- TeX ---------- */
+const n2 = v => v<0? `(${v})` : `${v}`;
+function texM(M, mark){ return "\\begin{pmatrix}"+M.map((r,i)=>r.map((v,j)=>{ const s = String(v); return mark && mark.some(([a,b])=>a===i&&b===j) ? `\\textcolor{#E0563B}{\\mathbf{${s}}}` : s; }).join(" & ")).join(" \\\\ ")+"\\end{pmatrix}"; }
+function texLine(L, card, opts){
+  const s=L.s, o=L.ops, mark = opts&&opts.mark;
+  let mid;
+  if(s.op==="scal") mid = `${s.k}${texM(o.a)}`;
+  else if(s.op==="add") mid = `${texM(o.a)}+${texM(o.b)}`;
+  else if(s.op==="sub") mid = `${texM(o.a)}-${texM(o.b)}`;
+  else if(s.op==="mul") mid = `${texM(o.a)}${texM(o.b)}`;
+  else if(s.op==="sq"){
+    if(L.err==="E6" && L.wrong){ const a=card.M.A,b=card.M.B;
+      return `${s.lhs}=A^2+2AB+B^2=${texM(mul(a,a))}+2${texM(mul(a,b))}+${texM(mul(b,b))}=${texM(L.val,mark)}`; }
+    mid = `${texM(o.a)}${texM(o.a)}`;
+  }
+  return `${s.lhs}=${mid}=${texM(L.val,mark)}`;
+}
+/* 곱셈 식 세우기 줄 (T2·T6): 각 칸에 어떤 수끼리 곱했는지 */
+function expandTex(A,B,err){
+  let X=A, Y=B, cell;
+  const term=(a,b)=>`${n2(a)}\\times ${n2(b)}`;
+  if(err==="E3") cell=(i,j)=>term(A[i][j],B[i][j]);
+  else { if(err==="E4"){X=B;Y=A;}
+    if(err==="E5"){ if(B[0].length===2) cell=(i,j)=>A[i].map((v,t)=>term(v,B[j][t])).join("+");
+                    else cell=(i,j)=>A.map((r,t)=>term(r[i],B[t][j])).join("+"); }
+    if(!cell) cell=(i,j)=>X[i].map((v,t)=>term(v,Y[t][j])).join("+"); }
+  const R = err==="E3"? A : (err==="E5" && B[0].length===1 ? tr(A).map(r=>[0]) : mul(X,Y));
+  const rows=R.length, cols= err==="E3"? A[0].length : R[0].length;
+  const out=[]; for(let i=0;i<rows;i++){ const r=[]; for(let j=0;j<cols;j++) r.push(cell(i,j)); out.push(r.join(" & ")); }
+  return "\\begin{pmatrix}"+out.join(" \\\\[2pt] ")+"\\end{pmatrix}";
+}
+function displayLines(card, sol, withMark){
+  const t=TPL[card.tpl]; const out=[];
+  sol.lines.forEach((L,i)=>{
+    if(t.expand && L.s.op==="mul"){
+      out.push({tex:`${L.s.lhs}=${texM(L.ops.a)}${texM(L.ops.b)}=${expandTex(L.ops.a,L.ops.b,L.wrong?L.err:null)}`, wrong:L.wrong, src:i});
+      out.push({tex:`\\phantom{${L.s.lhs}}=${texM(L.val, withMark&&L.wrong?diffCells(L.val,L.right):null)}`, wrong:false, src:i, after:true});
+    } else out.push({tex:texLine(L,card,{mark: withMark&&L.wrong?diffCells(L.val,L.right):null}), wrong:L.wrong, src:i});
+  });
+  return out;
+}
+/* 한 칸 계산식 (바른 계산) */
+function cellCalc(s, env, i, j){
+  const A=env.a, B=env.b;
+  if(s.op==="scal") return {tex:`${s.k}\\times ${n2(A[i][j])}=${s.k*A[i][j]}`, val:s.k*A[i][j]};
+  if(s.op==="add") return {tex:`${A[i][j]}+${n2(B[i][j])}=${A[i][j]+B[i][j]}`, val:A[i][j]+B[i][j]};
+  if(s.op==="sub") return {tex:`${A[i][j]}-${n2(B[i][j])}=${A[i][j]-B[i][j]}`, val:A[i][j]-B[i][j]};
+  const Y = s.op==="sq"? A : B; const p=Y.length; const parts=[]; let v=0;
+  for(let t=0;t<p;t++){ parts.push(`${n2(A[i][t])}\\times ${n2(Y[t][j])}`); v+=A[i][t]*Y[t][j]; }
+  return {tex: parts.join("+")+"="+v, val:v};
+}
+const pos = (i,j)=>`(${i+1},\\,${j+1})`;
+function hints(card){
+  const w = solve(card, card.err); const L = w.lines[w.errIdx]; if(!L) return [];
+  const d = diffCells(L.val, L.right); const [i,j] = d[0]||[0,0];
+  const s=L.s, A=L.ops.a, B=L.ops.b; const c = cellCalc(s, L.ops, i, j);
+  const tag = `$${pos(i,j)}$ 성분`;
+  switch(card.err){
+    case "E1": return [
+      `실수배 $kA$는 $A$의 <b>모든</b> 성분에 $k$를 곱해요.`,
+      `${w.errIdx+1}번째 줄 ${tag}을 보세요. $A$의 값 $${A[i][j]}$을 ${s.k}배 하지 않고 그대로 옮겨 적었어요.`,
+      `$${c.tex}$ 이므로 바르게 고치면 $${s.lhs}=${texM(L.right)}$`];
+    case "E2": return [
+      `뺄셈은 같은 자리 성분끼리 빼요. 빼는 수가 음수면 괄호를 쳐 보세요.`,
+      `${w.errIdx+1}번째 줄 ${tag}: 빼는 수가 $${B[i][j]}$이에요. $x-(${B[i][j]})$은 더하기로 바뀌어요.`,
+      `$${c.tex}$ 이므로 바르게 고치면 $${s.lhs}=${texM(L.right)}$`];
+    case "E3": return [
+      `행렬의 곱에서 $(i,\\,j)$ 성분은 <b>왼쪽 행렬의 $i$행</b>과 <b>오른쪽 행렬의 $j$열</b>을 짝지어 곱해 더한 값이에요.`,
+      `${w.errIdx+1}번째 줄 ${tag}에는 같은 자리 수끼리 곱한 값($${L.val[i][j]}$)이 적혀 있어요. ${i+1}행과 ${j+1}열을 손가락으로 짚어 보세요.`,
+      `$${c.tex}$ 이므로 바르게 고치면 $${s.lhs}=${texM(L.right)}$`];
+    case "E4": return [
+      `행렬의 곱은 순서를 바꾸면 결과가 달라질 수 있어요. $AB\\neq BA$ 가 기본!`,
+      `${w.errIdx+1}번째 줄은 $${s.lhs}$인데, 적힌 값은 오른쪽 행렬을 앞에 두고 곱한 결과예요. 왼쪽에 있는 행렬의 행부터 읽어야 해요.`,
+      `${tag}: $${c.tex}$ → 바르게 고치면 $${s.lhs}=${texM(L.right)}$`];
+    case "E5": return [
+      `왼쪽 행렬에서는 <b>가로줄(행)</b>, 오른쪽 행렬에서는 <b>세로줄(열)</b>을 써요.`,
+      `${w.errIdx+1}번째 줄 ${tag}은 짝이 어긋난 줄끼리 곱했어요 (행과 행, 또는 열과 열).`,
+      `${tag}: $${c.tex}$ → 바르게 고치면 $${s.lhs}=${texM(L.right)}$`];
+    case "E6": { const a=card.M.A,b=card.M.B;
+      return [
+      `$(A+B)^2=(A+B)(A+B)=A^2+AB+BA+B^2$ 이에요.`,
+      `$AB=${texM(mul(a,b))}$, $BA=${texM(mul(b,a))}$ 로 서로 달라요. 그래서 $2AB$로 합칠 수 없어요.`,
+      `$A+B$를 먼저 구해 두 번 곱하면 $(A+B)^2=${texM(L.ops.a)}${texM(L.ops.a)}=${texM(L.right)}$`]; }
+  }
+  return [];
+}
+/* 고치기 선지: 바른 줄 + 학생 오답 줄 + 다른 오답 모델 */
+function fixOptions(card){
+  const w = solve(card, card.err); const L = w.lines[w.errIdx];
+  const opts=[{m:L.right,right:true},{m:L.val,right:false}]; const seen=[L.right,L.val];
+  ["E1","E2","E3","E4","E5","E6"].forEach(e=>{ if(e===card.err) return; const x = opWrong(L.s, L.ops.a, L.ops.b, e, card.M); if(x && !seen.some(s=>eq(s,x))){ seen.push(x); opts.push({m:x,right:false}); } });
+  let g=0; while(opts.length<4 && g++<60){ const b=L.right.map(r=>r.slice()); const i=rnd(0,b.length-1),j=rnd(0,b[0].length-1); b[i][j]+=[-2,-1,1,2][rnd(0,3)]; if(!seen.some(s=>eq(s,b))){seen.push(b);opts.push({m:b,right:false});} }
+  return shuffle(opts.slice(0,4));
+}
+/* 검산 (항등식) */
+function verify(card){
+  const r = solve(card,null); const M=card.M, k=card.k||2; const R=r.final;
+  switch(card.tpl){
+    case "T1": return {tex:`(${k}A-B)+B=${texM(R)}+${texM(M.B)}=${texM(add(R,M.B))}=${k}A`, ok:eq(add(R,M.B),scal(k,M.A)), say:`$(${k}A-B)+B$ 가 $${k}A$ 로 돌아오면 통과`};
+    case "T3": { const BC=mul(M.B,M.C); return {tex:`(${k}A-BC)+BC=${texM(R)}+${texM(BC)}=${texM(add(R,BC))}=${k}A`, ok:eq(add(R,BC),scal(k,M.A)), say:`$(${k}A-BC)+BC$ 가 $${k}A$ 로 돌아오면 통과`}; }
+    case "T2": { const BA=mul(M.B,M.A); return {tex:`AB=${texM(R)},\\quad BA=${texM(BA)}`, ok:true, say: eq(R,BA)?`이번 숫자는 우연히 $AB=BA$ 예요.`:`순서를 바꾼 $BA$ 와 비교하면 다르다는 게 보여요.`}; }
+    case "T6": return {tex:`AX=${texM(R)}`, ok:true, say:`$2\\times 2$ 와 $2\\times 1$ 의 곱은 $2\\times 1$ 행렬이 나와야 해요.`};
+    case "T4": { const s=add(mul(M.A,M.B),mul(M.A,M.C)); return {tex:`AB+AC=${texM(mul(M.A,M.B))}+${texM(mul(M.A,M.C))}=${texM(s)}`, ok:eq(s,R), say:`분배법칙 $A(B+C)=AB+AC$ 로 다시 구해 같으면 통과`}; }
+    case "T5": { const a=M.A,b=M.B; const s=add(add(mul(a,a),mul(a,b)),add(mul(b,a),mul(b,b))); return {tex:`A^2+AB+BA+B^2=${texM(s)}`, ok:eq(s,R), say:`네 항을 따로 구해 더해도 같으면 통과`}; }
+  }
+}
+/* 검산 한 칸 문제 */
+function cellQuiz(card){
+  const r = solve(card,null); const L = r.lines[r.lines.length-1];
+  /* 마지막 줄이 뺄셈/합이면 곱 줄을 고르는 게 더 의미 있음 */
+  const pick = r.lines.find(l=>l.s.op==="mul"||l.s.op==="sq") || L;
+  const R = pick.right; const i=rnd(0,R.length-1), j=rnd(0,R[0].length-1);
+  const c = cellCalc(pick.s, pick.ops, i, j);
+  const vals=[c.val]; const cands=[];
+  const ow = e=>opWrong(pick.s,pick.ops.a,pick.ops.b,e,card.M); const w3=ow("E3"), w5=ow("E5"), w4=ow("E4"), w1=ow("E1");
+  [w3,w5,w4,w1].forEach(x=>{ if(x&&x[i]&&x[i][j]!==undefined) cands.push(x[i][j]); });
+  cands.push(c.val+1,c.val-1,c.val+2,-c.val);
+  cands.forEach(v=>{ if(vals.length<4 && !vals.includes(v)) vals.push(v); });
+  return {lhs:pick.s.lhs, i, j, calc:c.tex, answer:c.val, opts:shuffle(vals)};
+}
+return {displayLines,ERR,TPL,TPL_ORDER,solve,check,randomCard,retryOptions,hints,fixOptions,verify,cellQuiz,texM,texLine,diffCells,eq,mul,add,sub,scal,shuffle,rnd};
+})();
+</script>
+<!--ENGINE-END-->
+
+<script>
+/* ===================== 화면 ===================== */
+const $ = s => document.querySelector(s);
+const {ERR,TPL,TPL_ORDER} = ENG;
+const K = (tex, disp) => { try{ return window.katex? katex.renderToString(tex,{throwOnError:false,displayMode:!!disp}) : `<code>${tex}</code>`; }catch(e){ return `<code>${tex}</code>`; } };
+const inl = html => html.replace(/\$([^$]+)\$/g, (_,t)=>K(t));
+const toast = t => { const el=$("#toast"); el.textContent=t; el.classList.add("on"); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("on"),1800); };
+const uid = () => Math.random().toString(36).slice(2,9);
+const store = {
+  get(){ try{ return JSON.parse(localStorage.getItem("mxclinic.bundles.v1")||"[]"); }catch(e){ return []; } },
+  set(v){ try{ localStorage.setItem("mxclinic.bundles.v1", JSON.stringify(v)); return true; }catch(e){ return false; } }
+};
+
+/* ---------- 예시 묶음 ---------- */
+const SAMPLE = {name:"행렬 혼합연산 클리닉 · 예시 5장", cards:[
+  {id:"s1",tpl:"T1",err:"E1",k:2,M:{A:[[3,2],[1,4]],B:[[1,1],[0,1]]},note:"실수배는 네 칸 모두! 대각선만 곱하는 실수가 가장 흔해요.",reviewed:true},
+  {id:"s2",tpl:"T2",err:"E3",k:2,M:{A:[[1,2],[3,1]],B:[[2,0],[1,3]]},note:"곱셈은 '행 → 열' 손가락 두 개로 짚으면서.",reviewed:true},
+  {id:"s3",tpl:"T2",err:"E4",k:2,M:{A:[[2,1],[0,3]],B:[[1,2],[1,0]]},note:"AB와 BA는 다른 계산이에요. 왼쪽 행렬의 행부터.",reviewed:true},
+  {id:"s4",tpl:"T3",err:"E5",k:3,M:{A:[[1,0],[2,1]],B:[[1,2],[0,1]],C:[[2,-1],[1,3]]},note:"혼합연산은 곱을 먼저, 그다음 뺄셈.",reviewed:true},
+  {id:"s5",tpl:"T5",err:"E6",k:2,M:{A:[[1,2],[0,1]],B:[[1,0],[1,1]]},note:"(A+B)²은 (A+B)(A+B). 수의 공식은 AB=BA일 때만.",reviewed:true}
+]};
+
+let bundle = JSON.parse(JSON.stringify(SAMPLE));
+let editIdx = -1;
+let cur = {tpl:"T1", err:"E1", k:2, M:JSON.parse(JSON.stringify(SAMPLE.cards[0].M))};
+
+/* ---------- 스튜디오 ---------- */
+function fillSelects(){
+  $("#selTpl").innerHTML = TPL_ORDER.map(t=>`<option value="${t}">${TPL[t].name}</option>`).join("");
+}
+function fillErr(){
+  const errs = TPL[cur.tpl].errs;
+  if(!errs.includes(cur.err)) cur.err = errs[0];
+  $("#selErr").innerHTML = errs.map(e=>`<option value="${e}">${ERR[e].name}</option>`).join("");
+  $("#selErr").value = cur.err;
+  $("#kWrap").hidden = !TPL[cur.tpl].usesK;
+  $("#selK").value = String(cur.k||2);
+}
+function renderMats(){
+  const t = TPL[cur.tpl];
+  $("#mats").innerHTML = Object.entries(t.mats).map(([n,[r,c]])=>{
+    const M = cur.M[n];
+    return `<div class="mat"><span class="nm">${n}</span><div class="cells" style="grid-template-columns:repeat(${c},auto)">${
+      M.map((row,i)=>row.map((v,j)=>`<input inputmode="numeric" aria-label="${n} ${i+1}행 ${j+1}열" data-n="${n}" data-i="${i}" data-j="${j}" value="${v}">`).join("")).join("")}</div></div>`;
+  }).join("");
+}
+function ensureShape(){
+  const t = TPL[cur.tpl];
+  Object.entries(t.mats).forEach(([n,[r,c]])=>{
+    const M = cur.M[n];
+    if(!M || M.length!==r || M[0].length!==c) cur.M[n] = Array.from({length:r},(_,i)=>Array.from({length:c},(_,j)=>ENG.rnd(-2,4)));
+  });
+  Object.keys(cur.M).forEach(n=>{ if(!t.mats[n]) delete cur.M[n]; });
+}
+function renderPreview(){
+  const card = cur;
+  const issues = ENG.check(card);
+  $("#valid").innerHTML = issues.length ? `<div class="msg warn">${issues.join("<br>")}</div>` : `<div class="msg ok">오답 줄이 ${ENG.solve(card,card.err).errIdx+1}번째 줄에서 생기고, 최종 답도 달라요. 학생용으로 쓸 수 있어요.</div>`;
+  const r = ENG.solve(card,null), w = ENG.solve(card,card.err);
+  $("#solRight").innerHTML = ENG.displayLines(card,r).map((D,i)=>`<div class="ln"><span class="no">${i+1}</span><span class="tex">${K(D.tex)}</span></div>`).join("");
+  $("#solWrong").innerHTML = ENG.displayLines(card,w,true).map((D,i)=>`<div class="ln ${D.wrong?"err":""}"><span class="no">${i+1}${D.wrong?"✗":""}</span><span class="tex">${K(D.tex)}</span></div>`).join("");
+  const fd = ENG.diffCells(w.final, r.final).length;
+  $("#diffNote").innerHTML = w.errIdx>=0 ? `오답 유형 <b>${ERR[card.err].name}</b> · 학생이 고를 이유: “${ERR[card.err].why}” · 최종 답에서 다른 칸 ${fd}개 (빨간 숫자 = 틀린 줄에서 바른 값과 다른 칸)` : "";
+  $("#hintPrev").innerHTML = issues.length && w.errIdx>=0 && !w.lines[w.errIdx].wrong ? `<li class="muted">오답이 생기지 않아 힌트를 만들 수 없어요.</li>` : ENG.hints(card).map(h=>`<li>${inl(h)}</li>`).join("");
+  const rc = ENG.randomCard(card.tpl, card.err, card.k);
+  if(rc){ const o = ENG.retryOptions(rc);
+    $("#retryPrev").innerHTML = `${inl(`$${TPL[rc.tpl].expr(rc.k)}$`)} — ${Object.keys(rc.M).map(n=>inl(`$${n}=${ENG.texM(rc.M[n])}$`)).join(", ")}<div class="small muted" style="margin-top:6px">선지 ${o.length}개: 정답 1 + 오답 모델(${o.filter(x=>!x.right).map(x=>x.tag==="near"?"근사값":ERR[x.tag].name).join(", ")})</div>`;
+  } else $("#retryPrev").textContent = "이 조합으로는 재도전 문제를 만들기 어려워요.";
+}
+function syncEditor(){ fillErr(); renderMats(); renderPreview(); }
+function loadCardToEditor(c, idx){
+  cur = {tpl:c.tpl, err:c.err, k:c.k||2, M:JSON.parse(JSON.stringify(c.M))};
+  $("#selTpl").value = cur.tpl; $("#note").value = c.note||""; $("#chkRev").checked = !!c.reviewed;
+  editIdx = idx; $("#btnUpd").hidden = idx<0; $("#btnNew").hidden = idx<0;
+  $("#edTitle").textContent = idx<0 ? "오답 카드 만들기" : `카드 ${idx+1} 편집 중`;
+  syncEditor(); renderBundle();
+}
+function cardFromEditor(){ return {id: editIdx>=0? bundle.cards[editIdx].id : uid(), tpl:cur.tpl, err:cur.err, k:cur.k, M:JSON.parse(JSON.stringify(cur.M)), note:$("#note").value.trim(), reviewed:$("#chkRev").checked}; }
+
+function renderBundle(){
+  $("#bName").value = bundle.name;
+  $("#bEmpty").hidden = bundle.cards.length>0;
+  $("#bList").innerHTML = bundle.cards.map((c,i)=>{
+    const bad = ENG.check(c).length>0;
+    return `<li class="${i===editIdx?"on":""}"><div class="ttl"><b>${i+1}.</b> ${inl(`$${TPL[c.tpl].expr(c.k)}$`)} · ${ERR[c.err].name}<small>${c.note? c.note.replace(/</g,"&lt;") : "선생님 한마디 없음"}</small></div>
+      ${c.reviewed? `<span class="badge ok">검토함</span>` : `<span class="badge no">미검토</span>`}${bad? `<span class="badge no">오답 안 생김</span>`:""}
+      <div class="acts"><button class="btn sm ghost" data-a="edit" data-i="${i}">편집</button><button class="btn sm ghost" data-a="dup" data-i="${i}" title="같은 유형·오답으로 숫자만 새로">숫자만 바꿔 복제</button><button class="btn sm ghost" data-a="up" data-i="${i}" aria-label="위로">↑</button><button class="btn sm ghost" data-a="dn" data-i="${i}" aria-label="아래로">↓</button><button class="btn sm ghost" data-a="del" data-i="${i}">삭제</button></div></li>`;
+  }).join("");
+}
+function renderSaved(){
+  const all = store.get();
+  $("#savedEmpty").hidden = all.length>0;
+  $("#savedList").innerHTML = all.map((b,i)=>`<li><span>${b.name.replace(/</g,"&lt;")} <span class="muted">· ${b.cards.length}장 · ${b.saved||""}</span></span><span><button class="btn sm" data-s="load" data-i="${i}">불러오기</button> <button class="btn sm ghost" data-s="del" data-i="${i}">지우기</button></span></li>`).join("");
+}
+
+/* 묶음 <-> 링크 */
+const enc = obj => { const s = JSON.stringify({n:obj.name,c:obj.cards.map(c=>[c.tpl,c.err,c.k,c.M,c.note||""])}); return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); };
+const dec = str => { const s = decodeURIComponent(escape(atob(str.replace(/-/g,"+").replace(/_/g,"/")))); const o = JSON.parse(s); return {name:o.n, cards:o.c.map(a=>({id:uid(),tpl:a[0],err:a[1],k:a[2],M:a[3],note:a[4],reviewed:true}))}; };
+function validBundle(b){ return b && Array.isArray(b.cards) && b.cards.every(c=>TPL[c.tpl] && ERR[c.err] && c.M); }
+
+/* ---------- 학생 화면 ---------- */
+let P = null;
+const STEP_NAMES = ["틀린 줄","이유","고치기","재도전","검산"];
+function startPlay(b){
+  P = {b, ci:0, step:0, res:b.cards.map(()=>({find:0,why:0,hint:0,fix:0,retry:0,cellq:0})), st:{}};
+  $("#pBundle").textContent = b.name || "행렬 오답 클리닉";
+  initCard(); renderPlay();
+}
+function initCard(){
+  const c = P.b.cards[P.ci];
+  P.st = {sel:null, okd:[], wrongTap:null, done:false, fb:"", fbk:""};
+  P.w = ENG.solve(c, c.err); P.hintN = 0; P.dl = ENG.displayLines(c, P.w); P.dErr = P.dl.findIndex(d=>d.wrong);
+  P.whyOpts = ENG.shuffle([c.err, ...ENG.shuffle(Object.keys(ERR).filter(e=>e!==c.err)).slice(0,3)]);
+  P.fixOpts = ENG.fixOptions(c);
+  P.retry = ENG.randomCard(c.tpl, c.err, c.k) || c;
+  P.retryOpts = ENG.retryOptions(P.retry);
+  P.cq = ENG.cellQuiz(P.retry);
+  P.step = 0;
+}
+function probTex(c){ return `${inl(`$${TPL[c.tpl].expr(c.k)}$`)} 를 구하시오. &nbsp; ${Object.keys(c.M).map(n=>inl(`$${n}=${ENG.texM(c.M[n])}$`)).join(", &nbsp;")}`; }
+function renderPlay(){
+  const c = P.b.cards[P.ci], n = P.b.cards.length;
+  $("#pCount").textContent = P.ci<n ? `카드 ${P.ci+1} / ${n}` : `완료`;
+  $("#pProg").innerHTML = P.b.cards.map((_,i)=>`<span class="${i<P.ci?"done":i===P.ci?"cur":""}"></span>`).join("");
+  if(P.ci>=n){ $("#pSteps").innerHTML=""; return renderSummary(); }
+  $("#pSteps").innerHTML = STEP_NAMES.map((s,i)=>`<span class="${i<P.step?"done":i===P.step?"cur":""}">${i+1} ${s}</span>`).join("");
+  const st = P.st, w = P.w; let h = "";
+  if(P.step===0){
+    h += `<div class="q">친구의 풀이예요. <b>처음으로 틀린 줄</b>을 눌러 고르고 확인을 누르세요.</div><div class="prob">${probTex(c)}</div><div class="tap">`;
+    h += P.dl.map((D,i)=>`<button data-line="${i}" class="${st.okd.includes(i)?"okd":""} ${st.sel===i?"sel":""} ${st.done&&i===P.dErr?"hit":""}" ${st.okd.includes(i)||st.done?"disabled":""}><span class="no">${i+1}</span><span class="tex">${K(D.tex)}</span></button>`).join("");
+    h += `</div>`;
+  } else if(P.step===1){
+    h += `<div class="q">${P.dErr+1}번째 줄이 왜 틀렸을까요?</div><div class="prob">${K(P.dl[P.dErr].tex)}</div><div class="opts one">`;
+    h += P.whyOpts.map((e,i)=>`<button data-why="${e}" class="${st.sel===e?"sel":""} ${st.done&&e===c.err?"right":""} ${st.okd.includes(e)?"wrong":""}" ${st.done||st.okd.includes(e)?"disabled":""}><span class="k">${"①②③④"[i]}</span><span>${inl(ERR[e].why)}</span></button>`).join("");
+    h += `</div>`;
+  } else if(P.step===2){
+    const L = w.lines[w.errIdx]; const hs = ENG.hints(c);
+    h += `<div class="q">${inl(`$${L.s.lhs}$`)} 을 바르게 고치면? 막히면 힌트를 열어 보세요.</div>`;
+    h += hs.slice(0,P.hintN).map((x,i)=>`<div class="hintbox"><b>힌트 ${i+1}</b> · ${inl(x)}</div>`).join("");
+    if(P.hintN<3 && !st.done) h += `<button class="btn sm" id="btnHint" style="margin:4px 0 10px">힌트 ${P.hintN+1} 보기</button>`;
+    h += `<div class="opts">` + P.fixOpts.map((o,i)=>`<button data-fix="${i}" class="${st.sel===i?"sel":""} ${st.done&&o.right?"right":""} ${st.okd.includes(i)?"wrong":""}" ${st.done||st.okd.includes(i)?"disabled":""}><span class="k">${"①②③④"[i]}</span><span class="tex">${K(ENG.texM(o.m))}</span></button>`).join("") + `</div>`;
+  } else if(P.step===3){
+    h += `<div class="q">숫자를 바꿔 다시! 같은 실수를 하지 않게 풀어 보세요.</div><div class="prob">${probTex(P.retry)}</div><div class="opts">`;
+    h += P.retryOpts.map((o,i)=>`<button data-rt="${i}" class="${st.sel===i?"sel":""} ${st.done&&o.right?"right":""} ${st.okd.includes(i)?"wrong":""}" ${st.done||st.okd.includes(i)?"disabled":""}><span class="k">${"①②③④"[i]}</span><span class="tex">${K(ENG.texM(o.m))}</span></button>`).join("") + `</div>`;
+  } else if(P.step===4){
+    const q = P.cq, v = ENG.verify(P.retry);
+    h += `<div class="q">검산: ${inl(`$${q.lhs}$`)} 의 ${inl(`$(${q.i+1},\\,${q.j+1})$`)} 성분을 직접 계산하면?</div><div class="prob">${probTex(P.retry)}</div><div class="opts">`;
+    h += q.opts.map((x,i)=>`<button data-cq="${i}" class="${st.sel===i?"sel":""} ${st.done&&x===q.answer?"right":""} ${st.okd.includes(i)?"wrong":""}" ${st.done||st.okd.includes(i)?"disabled":""}><span class="k">${"①②③④"[i]}</span><span>${K(String(x))}</span></button>`).join("") + `</div>`;
+    if(st.done){ h += `<div class="note"><b>계산</b> ${K(q.calc)}<br><b>전체 검산</b> ${inl(v.say)}<div style="overflow-x:auto;margin-top:4px">${K(v.tex)}</div></div>`;
+      if(c.note) h += `<div class="note"><b>선생님 한마디</b> · ${c.note.replace(/</g,"&lt;")}</div>`; }
+  }
+  h += `<div class="fb ${st.fbk}">${st.fb}</div><div class="bar"><span class="small muted">고른 뒤 확인을 눌러야 채점돼요. 잘못 눌렀으면 다시 고르면 됩니다.</span>`;
+  h += st.done ? `<button class="btn pri" id="btnNext">${P.step<4?"다음 단계":"다음 카드"}</button>` : `<button class="btn pri" id="btnOk" ${st.sel===null?"disabled":""}>확인</button>`;
+  h += `</div>`;
+  $("#pBody").innerHTML = h;
+}
+function grade(){
+  const c = P.b.cards[P.ci], st = P.st, r = P.res[P.ci];
+  if(P.step===0){ r.find++;
+    if(st.sel===P.dErr){ st.done=true; st.fb="맞아요. 이 줄부터 틀렸어요."; st.fbk="ok"; }
+    else if(st.sel>P.dErr){ st.fb="이 줄은 앞 줄 값을 그대로 받아 계산했어요. 더 앞을 보세요."; st.fbk="bad"; st.sel=null; }
+    else { st.okd.push(st.sel); st.fb="이 줄은 맞게 계산했어요. ✓ 표시해 둘게요."; st.fbk="bad"; st.sel=null; }
+  } else if(P.step===1){ r.why++;
+    if(st.sel===c.err){ st.done=true; st.fb="정확해요."; st.fbk="ok"; } else { st.okd.push(st.sel); st.fb="그 실수는 아니에요. 줄을 한 칸씩 다시 계산해 보세요."; st.fbk="bad"; st.sel=null; }
+  } else if(P.step===2){ r.fix++;
+    if(P.fixOpts[st.sel].right){ st.done=true; st.fb="고쳤어요!"; st.fbk="ok"; } else { st.okd.push(st.sel); st.fb="아직이에요. 힌트를 하나 더 열어 보세요."; st.fbk="bad"; st.sel=null; }
+  } else if(P.step===3){ r.retry++;
+    if(P.retryOpts[st.sel].right){ st.done=true; st.fb="재도전 성공!"; st.fbk="ok"; }
+    else { const tg=P.retryOpts[st.sel].tag; st.okd.push(st.sel); st.fb = tg!=="near" && ERR[tg] ? `이건 ‘${ERR[tg].name}’ 실수를 하면 나오는 값이에요.` : "한 칸이 어긋났어요. 다시 계산해 보세요."; st.fbk="bad"; st.sel=null; }
+  } else if(P.step===4){ r.cellq++;
+    if(P.cq.opts[st.sel]===P.cq.answer){ st.done=true; st.fb="검산 통과."; st.fbk="ok"; } else { st.okd.push(st.sel); st.fb="다시 한 번, 행과 열을 짚으면서."; st.fbk="bad"; st.sel=null; }
+  }
+  renderPlay();
+}
+function nextStep(){
+  if(P.step<4){ P.step++; P.st={sel:null,okd:[],done:false,fb:"",fbk:""}; }
+  else { P.ci++; if(P.ci<P.b.cards.length) initCard(); }
+  renderPlay(); window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderSummary(){
+  const rows = P.b.cards.map((c,i)=>{ const r=P.res[i]; return {i:i+1, ex:TPL[c.tpl].expr(c.k), err:ERR[c.err].name, ...r}; });
+  const first = x => x===1 ? "한 번에" : `${x}번`;
+  let h = `<div class="q">수고했어요! 카드 ${rows.length}장을 모두 끝냈어요.</div><table class="res"><thead><tr><th>#</th><th>문제</th><th>틀린 줄</th><th>이유</th><th>힌트</th><th>재도전</th></tr></thead><tbody>`;
+  h += rows.map(r=>`<tr><td>${r.i}</td><td>${K(r.ex)}</td><td>${first(r.find)}</td><td>${first(r.why)}</td><td>${r.hint}개</td><td>${first(r.retry)}</td></tr>`).join("");
+  h += `</tbody></table>`;
+  const txt = `[행렬 오답 클리닉] ${P.b.name}\n` + rows.map(r=>`${r.i}. ${r.ex} (${r.err}) 틀린줄 ${first(r.find)} / 이유 ${first(r.why)} / 힌트 ${r.hint} / 재도전 ${first(r.retry)}`).join("\n");
+  h += `<textarea class="copybox" id="resTxt" readonly>${txt}</textarea><div class="bar"><span class="small muted">이름 없이 결과만 복사돼요.</span><button class="btn pri" id="btnCopyRes">결과 복사</button></div>`;
+  $("#pBody").innerHTML = h;
+}
+
+/* ---------- 이벤트 ---------- */
+function setTab(t){
+  document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.tab===t));
+  $("#studio").hidden = t!=="studio"; $("#play").hidden = t!=="play";
+  if(t==="play" && !P) startPlay(bundle);
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.tab){ if(b.dataset.tab==="play") P=null; return setTab(b.dataset.tab); }
+  if(b.dataset.a){ const i=+b.dataset.i, cs=bundle.cards;
+    if(b.dataset.a==="edit") return loadCardToEditor(cs[i], i);
+    if(b.dataset.a==="dup"){ const c=cs[i]; const n=ENG.randomCard(c.tpl,c.err,c.k); if(!n) return toast("새 숫자를 못 찾았어요");
+      cs.splice(i+1,0,{...n,id:uid(),note:c.note,reviewed:false}); renderBundle(); return toast("숫자만 바꾼 카드를 추가했어요 · 검토해 주세요"); }
+    if(b.dataset.a==="up" && i>0){ [cs[i-1],cs[i]]=[cs[i],cs[i-1]]; if(editIdx===i) editIdx--; }
+    if(b.dataset.a==="dn" && i<cs.length-1){ [cs[i+1],cs[i]]=[cs[i],cs[i+1]]; if(editIdx===i) editIdx++; }
+    if(b.dataset.a==="del"){ cs.splice(i,1); if(editIdx===i) loadCardToEditor(cardFromEditor(),-1); }
+    return renderBundle();
+  }
+  if(b.dataset.s){ const all=store.get(), i=+b.dataset.i;
+    if(b.dataset.s==="load"){ bundle = JSON.parse(JSON.stringify(all[i])); editIdx=-1; renderBundle(); toast("불러왔어요"); }
+    if(b.dataset.s==="del"){ all.splice(i,1); store.set(all); renderSaved(); }
+    return;
+  }
+  if(b.dataset.line!==undefined){ if(!P.st.done){ P.st.sel=+b.dataset.line; P.st.fb=""; renderPlay(); } return; }
+  if(b.dataset.why){ P.st.sel=b.dataset.why; P.st.fb=""; return renderPlay(); }
+  if(b.dataset.fix!==undefined){ P.st.sel=+b.dataset.fix; P.st.fb=""; return renderPlay(); }
+  if(b.dataset.rt!==undefined){ P.st.sel=+b.dataset.rt; P.st.fb=""; return renderPlay(); }
+  if(b.dataset.cq!==undefined){ P.st.sel=+b.dataset.cq; P.st.fb=""; return renderPlay(); }
+  switch(b.id){
+    case "btnOk": return grade();
+    case "btnNext": return nextStep();
+    case "btnHint": P.hintN++; P.res[P.ci].hint=Math.max(P.res[P.ci].hint,P.hintN); return renderPlay();
+    case "btnRestart": return startPlay(P.b);
+    case "btnCopyRes": { const t=$("#resTxt"); t.select(); (navigator.clipboard? navigator.clipboard.writeText(t.value):Promise.reject()).then(()=>toast("복사했어요"),()=>{ try{document.execCommand("copy");toast("복사했어요");}catch(_){toast("직접 길게 눌러 복사해 주세요");} }); return; }
+    case "btnRand": { const n=ENG.randomCard(cur.tpl,cur.err,cur.k); if(n){ cur.M=n.M; $("#chkRev").checked=false; syncEditor(); } else toast("조건에 맞는 숫자를 못 찾았어요"); return; }
+    case "btnAdd": { bundle.cards.push({...cardFromEditor(), id:uid()}); editIdx=-1; renderBundle(); return toast("묶음에 추가했어요"); }
+    case "btnUpd": { bundle.cards[editIdx]=cardFromEditor(); renderBundle(); return toast("수정했어요"); }
+    case "btnNew": { editIdx=-1; $("#note").value=""; $("#chkRev").checked=false; $("#btnUpd").hidden=$("#btnNew").hidden=true; $("#edTitle").textContent="오답 카드 만들기"; return renderBundle(); }
+    case "btnPlay": { if(!bundle.cards.length) return toast("카드를 먼저 추가하세요"); P=null; setTab("play"); return; }
+    case "btnLink": { if(!bundle.cards.length) return toast("카드를 먼저 추가하세요");
+      const url = location.href.split("#")[0] + "#play=" + enc(bundle); const box=$("#linkBox"); box.hidden=false; box.value=url;
+      (navigator.clipboard? navigator.clipboard.writeText(url):Promise.reject()).then(()=>toast("학생 링크를 복사했어요"),()=>{ box.select(); toast("아래 칸을 길게 눌러 복사해 주세요"); });
+      if(bundle.cards.some(c=>!c.reviewed)) setTimeout(()=>toast("미검토 카드가 섞여 있어요"),1900); return; }
+    case "btnSave": { const all=store.get(); const d=new Date(); const s={...JSON.parse(JSON.stringify(bundle)), saved:`${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`};
+      const k=all.findIndex(x=>x.name===s.name); if(k>=0) all[k]=s; else all.unshift(s);
+      toast(store.set(all)?"저장했어요 (같은 이름은 덮어씀)":"이 브라우저는 저장이 막혀 있어요. 파일로 내보내 주세요"); return renderSaved(); }
+    case "btnExport": { const blob=new Blob([JSON.stringify(bundle,null,1)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=(bundle.name||"묶음").replace(/[\\/:*?"<>|]/g,"_")+".json"; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); return; }
+    case "btnClear": { bundle={name:"새 수업 묶음",cards:[]}; editIdx=-1; return renderBundle(); }
+  }
+});
+document.addEventListener("input", e=>{
+  const t=e.target;
+  if(t.matches(".mat input")){ let v=parseInt(t.value,10); if(isNaN(v)) return; v=Math.max(-9,Math.min(9,v)); cur.M[t.dataset.n][+t.dataset.i][+t.dataset.j]=v; $("#chkRev").checked=false; renderPreview(); }
+  if(t.id==="bName") bundle.name=t.value;
+});
+document.addEventListener("change", e=>{
+  const t=e.target;
+  if(t.id==="selTpl"){ cur.tpl=t.value; ensureShape(); const n=ENG.randomCard(cur.tpl,TPL[cur.tpl].errs.includes(cur.err)?cur.err:TPL[cur.tpl].errs[0],cur.k); if(n){cur.M=n.M; cur.err=n.err;} syncEditor(); }
+  if(t.id==="selErr"){ cur.err=t.value; if(ENG.check(cur).length){ const n=ENG.randomCard(cur.tpl,cur.err,cur.k); if(n) cur.M=n.M; } syncEditor(); }
+  if(t.id==="selK"){ cur.k=+t.value; syncEditor(); }
+  if(t.id==="fileIn" && t.files[0]){ const fr=new FileReader(); fr.onload=()=>{ try{ const b=JSON.parse(fr.result); if(!validBundle(b)) throw 0; bundle=b; editIdx=-1; renderBundle(); toast("가져왔어요"); }catch(_){ toast("묶음 파일이 아니에요"); } }; fr.readAsText(t.files[0]); t.value=""; }
+});
+
+function boot(){
+  fillSelects();
+  const m = location.hash.match(/#play=([\w-]+)/);
+  if(m){ try{ const b=dec(m[1]); if(!validBundle(b)) throw 0; document.getElementById("tabs").hidden=true; $("#flow").hidden=true; $("#hdr .sub").textContent="틀린 줄 찾기 → 이유 → 고치기 → 재도전 → 검산";
+      $("#hdr .eyebrow").textContent="행렬 오답 클리닉"; $("#hdr h1").textContent=b.name||"행렬 오답 클리닉"; $("#studio").hidden=true; $("#play").hidden=false; startPlay(b); return; }
+    catch(_){ toast("링크가 깨졌어요. 스튜디오를 엽니다"); } }
+  $("#selTpl").value=cur.tpl; loadCardToEditor(bundle.cards[0], 0); renderSaved();
+}
+function whenKatex(fn, n=0){ if(window.katex || n>40) fn(); else setTimeout(()=>whenKatex(fn,n+1),75); }
+whenKatex(boot);
+</script>
+<script>window.goatcounter={path:function(){return location.pathname||"/"}}</script><script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
