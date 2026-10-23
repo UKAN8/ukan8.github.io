@@ -274,10 +274,10 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
   <p class="lede">같은 학년이라도 반마다 교재가 다르고, 어제 무엇이 안 됐느냐에 따라 학생마다 다음에 받는 자료가 달라집니다.
   아래 도식에서 <strong style="color:var(--ink)">아무 칸이나 눌러보세요.</strong> 학생이 실제로 받는 자료가 그대로 열립니다.</p>
   <div class="stats">
-    <div><b>11<i>회</i></b><span>전교 1등<br>(중간 6 · 기말 5)</span></div>
-    <div><b>9<i>회</i></b><span>지필 100점<br>(중간 6 · 기말 3)</span></div>
-    <div><b>62<i>%</i></b><span>1학기 종합<br>1등급 비율</span></div>
-    <div><b>95.5<i>%</i></b><span>친구에게 추천<br>강의평가 응답 기준</span></div>
+    <div><b>6<i>명</i></b><span>2학기 중간 전교 1등<br>(전원 100점 · 4개 반 모두)</span></div>
+    <div><b>17<i>회</i></b><span>2026 전교 1등<br>(1학기 11 · 2학기 중간 6)</span></div>
+    <div><b>100<i>%</i></b><span>학부모 추천<br>시험 후 설문 응답 전원</span></div>
+    <div><b>80<i>%</i></b><span>"학원에서 본 문제가<br>여러 개 나왔다" · 학생 응답</span></div>
     <div><b>100<i>%</i></b><span>자료 직접 제작<br>교재·과제·테스트</span></div>
   </div>
 </div></div>
@@ -299,9 +299,9 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
         <div class="brace" style="grid-column:1/8">학원에서 · 수업 시간</div>
         <div class="nd plain" style="grid-column:1"><span class="h">등원</span><span class="s">출결</span></div>
         <span class="arr">→</span>
-        <button class="nd" data-open="circuit"><i class="dot"></i><span class="h">과제 제출</span><span class="s">써킷 R0~R3</span></button>
+        <button class="nd" data-open="circuit"><i class="dot"></i><span class="h">과제 제출</span><span class="s">문항별 해결 기록</span></button>
         <span class="arr">→</span>
-        <button class="nd key" data-open="review"><i class="dot"></i><span class="h">리뷰테스트</span><span class="s">5문항 10점</span></button>
+        <button class="nd key" data-open="review"><i class="dot"></i><span class="h">리뷰테스트</span><span class="s">개념 4 → 유형 3</span></button>
         <span class="arr">→</span>
         <button class="nd key" data-open="opt"><i class="dot"></i><span class="h">수업</span><span class="s">개념 + OPT</span></button>
       </div>
@@ -309,16 +309,16 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       <span class="arr">→</span>
 
       <div class="grp">
-        <div class="brace" style="grid-column:9/14">수업 직후 · 그날 밤</div>
+        <div class="brace" style="grid-column:9/14">수업 후 · 다음 수업 전</div>
         <button class="nd" data-open="data" style="grid-column:9"><i class="dot"></i><span class="h">채점</span><span class="s">문항별로</span></button>
         <span class="arr">→</span>
-        <button class="nd" data-open="daily"><i class="dot"></i><span class="h">배포</span><span class="s">팀톡 · 문자</span></button>
+        <button class="nd" data-open="daily"><i class="dot"></i><span class="h">배포</span><span class="s">다음 날 9시 팀톡</span></button>
         <span class="arr">→</span>
-        <div class="nd plain"><span class="h">과제</span><span class="s">다음 범위 배정</span></div>
+        <div class="nd plain"><span class="h">과제</span><span class="s">공통 → 개별</span></div>
         <div class="brrow" style="grid-column:9/14">
           <span class="bl">↳</span>
           <button class="nd key" data-open="daily"><i class="dot"></i><span class="h">데일리 리포트</span></button>
-          <button class="nd key" data-open="loop"><i class="dot"></i><span class="h">메타루프</span></button>
+          <button class="nd key" data-open="loop"><i class="dot"></i><span class="h">루프 과제</span></button>
         </div>
       </div>
 
@@ -332,7 +332,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       </div>
     </div>
     <div class="loopback"><span class="ic">↻</span>
-      <span>오늘 틀린 것이 <b>그날 밤 루프 문항</b>이 되고, <b>다음 날 리뷰테스트</b>로 다시 돌아옵니다.
+      <span>개념을 확인해야 <b>그 개념의 유형이 열리고</b>, 놓친 것은 <b>루프 과제</b>로 갔다가 <b>다음 리뷰테스트</b>로 다시 돌아옵니다.
         어제 무엇이 안 됐는지가 오늘 무엇을 푸는지를 정합니다.</span></div>
   </div>
 
@@ -357,7 +357,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       </div>
     </div>
     <div class="loopback"><span class="ic">↻</span>
-      <span>주간고사에서 <b>두 번 이상 틀린 유형</b>은 추가학습과 그날 밤 루프로 내려갑니다.</span></div>
+      <span>주간고사에서 <b>두 번 이상 틀린 유형</b>은 추가학습과 루프 과제로 내려갑니다.</span></div>
   </div>
 
   <div class="lanesplit"></div>
@@ -375,7 +375,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
           <span class="bl">↳</span>
           <button class="nd" data-open="past"><i class="dot"></i><span class="h">자기평가</span></button>
           <button class="nd key" data-open="past"><i class="dot"></i><span class="h">퍼스널트레이닝</span></button>
-          <button class="nd" data-open="loop"><i class="dot"></i><span class="h">저녁 루프</span></button>
+          <button class="nd" data-open="loop"><i class="dot"></i><span class="h">루프 과제</span></button>
         </div>
       </div>
       <span class="arr">→</span>
@@ -401,35 +401,39 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       </div>
     </div>
     <div class="loopback"><span class="ic">↻</span>
-      <span>기출테스트 직후 <b>자기평가 → 학생별 퍼스널트레이닝 → 그날 밤 루프</b>가 하루 안에 돌고,
+      <span>기출테스트 직후 <b>자기평가 → 유형별 4단계 퍼스널트레이닝 → 루프 과제</b>가 하루 안에 돌고,
         시험이 어떻게 나왔는지, 학생들이 무엇을 불편해했는지가 <b>다음 학기 교재를 바꿉니다.</b></span></div>
   </div>
 </div></section>
 
 <section id="record" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
   <div class="shead">
-    <div class="k">RECORD — 2026 1학기</div>
-    <h2>한 학기 동안 전교 1등이 열한 번 나왔습니다.</h2>
-    <p>중간고사 6명, 기말고사 5명. 2026년 1학기, 담당 반(고1 S·A·T, 고2 A) 학생들의 실제 지필 결과입니다. 아래는 그중 셋입니다.</p>
+    <div class="k">RECORD — 2026 2학기 중간</div>
+    <h2>전교 1등 여섯 명, 여섯 명 모두 100점.</h2>
+    <p>2026년 2학기 중간고사. 담당 4개 반(고1 S·A·T, 고2 A) 모두에서 1학기에 이어 다시 전교 1등이 나왔습니다. 1학기 11회를 더해 올해만 열일곱 번입니다.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
     <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px">
-      <div style="font-size:12px;color:var(--ink3);font-weight:700">용인고 1학년</div>
-      <div style="font-size:15px;font-weight:800;margin-top:4px">중간·기말·종합 모두 전교 1등</div>
-      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">중간 100점</div></div>
+      <div style="font-size:12px;color:var(--ink3);font-weight:700">태성고 1학년 · 고1 A · T</div>
+      <div style="font-size:15px;font-weight:800;margin-top:4px">전교 1등 네 명 (공동)</div>
+      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">네 명 모두 100점 · 74.8 → 100, 77 → 100</div></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px">
-      <div style="font-size:12px;color:var(--ink3);font-weight:700">고림고 2학년</div>
-      <div style="font-size:15px;font-weight:800;margin-top:4px">기말 전교 1등</div>
-      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">1등급컷 61점 시험에서 90.1점</div></div>
+      <div style="font-size:12px;color:var(--ink3);font-weight:700">고림고 1학년 · 고1 S</div>
+      <div style="font-size:15px;font-weight:800;margin-top:4px">전교 1등</div>
+      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">100점</div></div>
     <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px">
-      <div style="font-size:12px;color:var(--ink3);font-weight:700">태성고 1학년</div>
-      <div style="font-size:15px;font-weight:800;margin-top:4px">기말 전교 1등</div>
-      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">그 시험의 유일한 100점</div></div>
+      <div style="font-size:12px;color:var(--ink3);font-weight:700">용인고 2학년 · 고2 A</div>
+      <div style="font-size:15px;font-weight:800;margin-top:4px">전교 1등</div>
+      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">1학기 기말에 이어 연속 100점</div></div>
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px">
+      <div style="font-size:12px;color:var(--ink3);font-weight:700">고림고 2학년 · 고2 A</div>
+      <div style="font-size:15px;font-weight:800;margin-top:4px">전교 상위 4% 안에 세 명</div>
+      <div style="font-size:13px;color:var(--key);margin-top:6px;font-weight:700">미적분Ⅰ · 한 반에서</div></div>
   </div>
   <div style="margin-top:14px"><a class="btn" style="display:inline-block" href="/intro/#record">전체 기록 · 성적이 올라간 학생들 보기 →</a></div>
 
   <div style="margin-top:26px;background:linear-gradient(180deg,var(--tint),transparent);border:1px solid var(--tint2);border-radius:16px;padding:22px 24px">
-    <div style="font-size:11.5px;letter-spacing:.12em;font-weight:800;color:var(--deep)">어려운 시험일수록 벌어집니다</div>
+    <div style="font-size:11.5px;letter-spacing:.12em;font-weight:800;color:var(--deep)">1학기 — 어려운 시험일수록 벌어집니다</div>
     <p style="font-size:16.5px;line-height:1.75;margin-top:10px;color:var(--ink)">
       고림고 2학년 1학기 기말은 <strong style="color:var(--key)">1등급컷이 61점</strong>이었습니다. 이 시험에서 저희 반 학생이
       <strong style="color:var(--key)">90.1점으로 전교 1등</strong>을 했습니다. 같은 범위 용인고의 1등급컷은 85점이었고요.
@@ -460,7 +464,7 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
     </div>
   </div>
   <div style="margin-top:14px;background:var(--bg2);border:1px dashed var(--line2);border-radius:14px;padding:16px 18px;font-size:13.5px;color:var(--ink2)">
-    담당 학교 — 용인고 · 고림고 · 태성고 · 진덕고 · 삼계고 &nbsp;|&nbsp; 담당 반 — 고1 S · 고1 A · 고1 T(주말) · 고2 A · 수능반 · 고등 선행반
+    담당 학교 — 용인고 · 고림고 · 태성고 · 진덕고 · 삼계고 · 포곡고 &nbsp;|&nbsp; 담당 반 — 고1 S · 고1 A · 고1 T(주말) · 고2 A · 수능반 · 고등 선행반
   </div>
   <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
     <a class="btn ghost" href="/intro/" style="text-decoration:none">학생 후기 · 반별 안내 보기 →</a>
@@ -481,11 +485,11 @@ footer .fine{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);f
       <ul>
         <li><a href="#" data-open="review">리뷰테스트</a></li>
         <li><a href="#" data-open="opt">개념 수업 + OPT</a></li>
-        <li><a href="#" data-open="circuit">써킷 R0~R3</a></li>
+        <li><a href="#" data-open="circuit">과제 · 해결 기록</a></li>
         <li><a href="#" data-open="clinic">추가학습</a></li>
         <li><a href="#" data-open="data">기록 적재</a></li>
         <li><a href="#" data-open="daily">데일리 리포트</a></li>
-        <li><a href="#" data-open="loop">메타루프</a></li>
+        <li><a href="#" data-open="loop">루프 과제</a></li>
       </ul>
     </div>
     <div>
@@ -726,79 +730,68 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <!-- ══════════ 리뷰테스트 ══════════ -->
 <article class="detail" id="d-review" data-title="리뷰테스트">
   <div class="dhero">
-    <div class="k">매일 · 01</div>
+    <div class="k">매일 · 01 — 2학기 개편</div>
     <h2>리뷰테스트</h2>
-    <p class="one">매 수업 시작 전에 5문항을 봅니다. <strong style="color:var(--ink)">과제를 했는지</strong>가 아니라
-      <strong style="color:var(--ink)">지금도 풀 수 있는지</strong>를 확인합니다.</p>
-    <div class="facts"><span>5문항 · 10점</span><span>매 수업</span><span>어제 과제 범위에서</span></div>
+    <p class="one">수업 첫 10분, 폰으로 봅니다. 지난 수업의 <strong style="color:var(--ink)">개념을 먼저</strong> 확인하고,
+      개념을 통과해야 <strong style="color:var(--ink)">그 개념의 유형이 그 자리에서 열립니다.</strong></p>
+    <div class="facts"><span>개념 4 → 유형 3</span><span>수업 시간에만 열림</span><span>풀이는 연습지, 답만 입력</span></div>
   </div>
 
   <div class="blk">
     <h3>학부모님께</h3>
     <ul class="sell">
-      <li><i>1</i><div><b>외워서는 통과하지 못합니다.</b><span>과제에 있던 문제를 그대로 내지 않습니다. 숫자와 조건을 바꿔서 냅니다. 풀이를 외운 학생은 여기서 막힙니다.</span></div></li>
-      <li><i>2</i><div><b>반마다 시험이 다릅니다.</b><span>그 반 교재에서 뽑아 만들기 때문에, 교재가 다른 반은 시험도 자연히 달라집니다.</span></div></li>
-      <li><i>3</i><div><b>점수보다 어느 문항인지를 봅니다.</b><span>같은 6점이라도 무엇을 틀렸는지에 따라 처방이 다릅니다. 못 넘긴 유형은 다음 등원 전에 다시 잡습니다.</span></div></li>
+      <li><i>1</i><div><b>개념이 서야 유형이 열립니다.</b><span>개념 문항(개념마다 2문항)을 통과하지 못하면 리뷰는 거기서 끝나고, 그 개념은 루프 과제로 넘어갑니다. 유형을 외워서 넘어가는 길을 막았습니다.</span></div></li>
+      <li><i>2</i><div><b>"확실해요 / 애매해요"를 같이 고릅니다.</b><span>찍어서 맞힌 것과 알고 맞힌 것은 다릅니다. 정답이어도 "애매해요"면 성공으로 세지 않고 다시 돌아옵니다.</span></div></li>
+      <li><i>3</i><div><b>학생마다 같은 개수, 다른 문항.</b><span>개념 4문항은 반 공통, 유형 3문항은 그 학생에게 열린 유형에서 나옵니다. 결과는 바로 단원 지도와 데일리 리포트에 남습니다.</span></div></li>
     </ul>
   </div>
 
   <div class="blk">
-    <h3>어떻게 출제되는가</h3>
+    <h3>어떻게 진행되는가</h3>
     <div class="demo">
       <div class="dl">눌러서 한 단계씩 따라가보기</div>
       <div class="stepper" id="rvStep">
         <div class="stp on"><div class="no">1</div><div class="bd">
-          <b>어제 낸 과제 범위를 봅니다</b>
-          <span>오늘 배울 내용이 아니라, 어제 과제로 내준 범위입니다.</span>
-          <div class="out">고1S · 8월 3일 과제 → <em>써킷 R1 · R2 · 7~11번 주제</em></div></div></div>
+          <b>지난 수업에서 배운 개념을 확인합니다</b>
+          <span>개념마다 2문항, 모두 4문항. 반 전체가 같은 문항을 봅니다.</span>
+          <div class="out">고1A · 명제 수업 다음 날 → <em>역 · 대우 2문항 + 충분 · 필요조건 2문항</em></div></div></div>
         <div class="stp"><div class="no">2</div><div class="bd">
-          <b>그 범위에서 가장 어려운 문항을 고릅니다</b>
-          <span>주제마다 마지막 문항이 그 주제에서 제일 어렵습니다. 거기를 넘겼으면 앞은 다 된 겁니다.</span>
-          <div class="out">9번 주제 마지막 문항 → <em>원 밖의 점에서 그은 접선</em></div></div></div>
+          <b>답과 함께 확신을 고릅니다</b>
+          <span>정답이어도 "애매해요"면 아직 성공이 아닙니다.</span>
+          <div class="out">정답 + <em>확실해요</em> = 성공</div></div></div>
         <div class="stp"><div class="no">3</div><div class="bd">
-          <b>과제에 있던 변형본을 가져옵니다</b>
-          <span>학생이 이미 한 번 만난 형태입니다. 여기까지는 익숙합니다.</span>
-          <div class="out"><em>같은 구조, 숫자만 다른 문제</em></div></div></div>
+          <b>통과한 개념의 유형이 그 자리에서 열립니다</b>
+          <span>잠겨 있던 유형 칸이 열리고, 그 학생에게 돌아올 유형 3문항이 바로 나옵니다. 풀이는 연습지에, 답만 폰에.</span>
+          <div class="out">→ <em>대우를 이용한 증명 · 상수의 범위 · 진리집합</em></div></div></div>
         <div class="stp"><div class="no">4</div><div class="bd">
-          <b>거기서 한 번 더 바꿔서 냅니다</b>
-          <span>익숙한 모양을 살짝 비틉니다. 원리를 알면 그대로 풀리고, 답만 외웠으면 여기서 멈춥니다.</span>
-          <div class="out">→ <em>리뷰테스트 3번 문항</em></div></div></div>
+          <b>놓친 것은 루프 과제로 넘어갑니다</b>
+          <span>개념을 놓쳤으면 유형은 열리지 않고, 그 개념은 다음 수업 전 루프 과제에 들어갑니다. 교재의 개념 정리가 함께 펼쳐집니다.</span>
+          <div class="out">→ <em>루프 과제 · 다음 리뷰테스트</em></div></div></div>
       </div>
       <div style="display:flex;gap:8px;margin-top:6px">
         <button class="btn" data-rv="next">다음 단계 →</button>
         <button class="btn ghost" data-rv="reset">처음부터</button>
       </div>
-      <div class="cap">범위를 미리 알려주지 않아도 됩니다. 학생 입장에서는 <strong style="color:var(--ink2)">"어제 것"만 챙기면</strong> 되니까요.</div>
+      <div class="cap">리뷰테스트는 <strong style="color:var(--ink2)">그 반 수업 시간에만</strong> 열립니다. 집에서 미리 보거나 나중에 몰아서 볼 수 없습니다.</div>
     </div>
   </div>
 
   <div class="blk">
-    <h3>실제 시험지 (예시)</h3>
+    <h3>학생이 보는 화면 (예시)</h3>
     <div class="demo">
-      <div class="dl">고1S · 08/04 · 원의 방정식</div>
-      <div class="paper">
-        <div class="ph"><b>리뷰테스트 — 고1S</b><span>2026. 08. 04 · 10점 만점</span></div>
-        <div class="q"><i>1.</i> 원 밖의 한 점에서 원에 그은 접선이 <span class="blank"></span>개인 이유를,
-          점과 원의 위치 관계로 설명하시오. <span class="pill" style="margin-left:4px">개념</span>
-          <div class="wr"></div></div>
-        <div class="q"><i>2.</i> 두 원이 서로 다른 두 점에서 만날 조건을, 중심거리 <b>d</b>와 두 반지름
-          <b>r₁, r₂</b>로 나타내고 그 이유를 쓰시오. <span class="pill" style="margin-left:4px">개념</span>
-          <div class="wr"></div></div>
-        <div class="q"><i>3.</i> 점 (4, 2)에서 원 x² + y² = 4 에 그은 접선의 방정식을 모두 구하시오.
-          <span class="pill" style="margin-left:4px">단답</span>
-          <div class="ans">답 : <span class="blank" style="min-width:110px"></span></div></div>
-        <div class="q"><i>4.</i> 원 x² + y² − 6x + 2y + 6 = 0 의 중심과 반지름을 구하시오.
-          <span class="pill" style="margin-left:4px">단답</span>
-          <div class="ans">답 : <span class="blank" style="min-width:110px"></span></div></div>
-        <div class="q"><i>5.</i> 두 원 x² + y² = 9 와 (x−4)² + y² = 1 의 위치 관계를 말하시오.
-          <span class="pill" style="margin-left:4px">단답</span>
-          <div class="ans">답 : <span class="blank" style="min-width:110px"></span></div></div>
-      </div>
-      <div class="cap">앞의 두 문항은 개념을 말로 묻고, 뒤의 세 문항은 답만 씁니다.
-        객관식을 넣지 않는 이유는 <strong style="color:var(--ink2)">찍어서 맞히면 상태를 알 수 없기 때문</strong>입니다.</div>
+      <div class="dl">고1A · 07 명제</div>
+      <div class="phone"><div class="scr">
+        <div class="lp-h"><div class="br">REVIEW TEST</div><h4>리뷰테스트</h4><div class="mt">고1A · 수업 시작 10분 · 개념 4 → 유형 3</div>
+          <div class="bar"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i></i><i></i><i></i></div></div>
+        <div class="lp-q"><div class="qh"><span class="qn">개념 ③</span><span class="tg">충분 · 필요조건</span></div>
+          <div class="stem">두 조건 p, q 의 진리집합을 P, Q 라 할 때, P ⊂ Q 이면 p 는 q 이기 위한 ___ 조건이다.</div>
+          <div class="lp-ch"><button class="ans"><b>①</b> 충분</button><button class="dim"><b>②</b> 필요</button></div>
+          <div class="lp-ch" style="grid-template-columns:1fr 1fr"><button class="ans" style="justify-content:center">확실해요</button><button class="dim" style="justify-content:center">애매해요</button></div></div>
+        <div class="lp-p" style="padding-bottom:14px"><div class="pl">🔓 개념 통과</div><div class="pt">유형 3문항이 열렸어</div>
+          <div class="pd">연습지 ✎1 · ✎2 · ✎3 칸에 풀고 답만 넣기</div></div>
+      </div></div>
+      <div class="cap">수업 중 폰 사용은 리뷰테스트 시간에만. 풀이는 A4 연습지에 남아서 나중에 다시 볼 수 있습니다.</div>
     </div>
-    <div class="quote"><p>"똑같은 문제인데 숫자만 다르게 나와서 여러 번 풀어봄으로써 유형을 익힐 수 있었어요. 틀렸던 문제를 추가로 과제로 주시는 것도 너무 좋았어요."</p>
-      <div class="by">— 고림고 2학년</div></div>
   </div>
 </article>
 
@@ -870,10 +863,10 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <article class="detail" id="d-circuit" data-title="써킷 (과제)">
   <div class="dhero">
     <div class="k">매일 · 03</div>
-    <h2>써킷 — 과제</h2>
-    <p class="one">같은 유형이 <strong style="color:var(--ink)">숫자만 바뀌어 한 번 더, 라운드를 올라가며 또 한 번</strong> 나옵니다.
-      한 번 맞혔다고 넘어가지지 않습니다.</p>
-    <div class="facts"><span>R0 ~ R3 네 단계</span><span>A·T반 R0~R2</span><span>S반 R1~R3</span></div>
+    <h2>써킷 — 과제 · 해결 기록</h2>
+    <p class="one">수업한 날은 반 전체가 같은 <strong style="color:var(--ink)">공통과제</strong>, 다음부터는 학생마다 다른 <strong style="color:var(--ink)">개별과제</strong>가 나갑니다.
+      그리고 문항마다 <strong style="color:var(--ink)">어떻게 풀었는지</strong>를 포털에 남깁니다.</p>
+    <div class="facts"><span>공통 → 개별 25~50문항</span><span>문항별 6단계 기록</span><span>마감 = 다음 수업 1시간 전</span></div>
   </div>
 
   <div class="blk">
@@ -881,8 +874,21 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <ul class="sell">
       <li><i>1</i><div><b>"봤는데 못 풀겠다"가 안 나옵니다.</b><span>한 라운드 안에서 원본을 한 바퀴 다 풀고, 같은 순서로 숫자만 바뀐 문제를 한 바퀴 더 풉니다. 두 번째에 걸리면 그 유형은 아직 안 된 겁니다.</span></div></li>
       <li><i>2</i><div><b>같은 반이라도 과제가 같지 않습니다.</b><span>A·T반에서 잘 따라오는 학생에게는 심화 라운드를 더 주고, S반에서 버거워하는 학생에게는 대신 기본 유형을 반복시킵니다.</span></div></li>
-      <li><i>3</i><div><b>서술형은 과제에서 훈련합니다.</b><span>교재에는 서술형을 넣지 않습니다. 수업 시간을 서술 연습에 쓰지 않기 위해서입니다.</span></div></li>
+      <li><i>3</i><div><b>"했다"가 아니라 "어떻게 풀었는지"를 봅니다.</b><span>해설까지 공부한 뒤 문항마다 한 번에 · 고쳐서 · 해설 보고 · 질문해서 · 해설 봐도 모름 · 안 풀었음 중 하나를 고릅니다. 이걸로 이행률과 단원별 성취도가 나옵니다.</span></div></li>
+      <li><i>4</i><div><b>모르는 문제는 그냥 두지 않습니다.</b><span>"해설 봐도 모름"은 바로 질문 대기열로 가고, 질문해서 해결하면 학생이 직접 해결 표시를 합니다. 약한 유형은 다음 개별과제에 다시 나옵니다.</span></div></li>
+      <li><i>5</i><div><b>분량과 난이도를 학생이 고릅니다.</b><span>개별과제는 25~50문항, 학생이 포털에서 범위 안에서 조정합니다. 다 맞히는 학생에게는 더 어려운 과제가 갑니다.</span></div></li>
     </ul>
+  </div>
+
+  <div class="blk">
+    <h3>해결 기록은 이렇게 남습니다</h3>
+    <div class="demo">
+      <div class="dl">한 학생의 개별과제 30문항 (예시)</div>
+      <div id="hwGrid" style="display:grid;grid-template-columns:repeat(10,1fr);gap:5px"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;font-size:12.5px;color:var(--ink2)" id="hwLeg"></div>
+      <div class="cap">이행률 <strong style="color:var(--ink2)" id="hwRate2">—</strong> · 질문 대기 <strong style="color:var(--key)" id="hwQ2">—</strong>문항.
+        마감이 지나면 기록이 잠겨 고칠 수 없습니다.</div>
+    </div>
   </div>
 
   <div class="blk">
@@ -910,12 +916,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="blk">
     <h3>과제는 이렇게 나갑니다</h3>
     <table class="kv">
-      <tr><th>고1 S</th><td>R1 · R2 · R3</td></tr>
-      <tr><th>고1 A · T</th><td>R0 · R1 · R2</td></tr>
-      <tr><th>표기</th><td>도형의 이동 써킷 R0 + R1 + R2 · 1~8번 주제</td></tr>
+      <tr><th>수업한 날</th><td>공통과제 — 수업 DAY별 · 반별 난이도 책자</td></tr>
+      <tr><th>다음 수업부터</th><td>개별과제 — 학생마다 다른 25~50문항</td></tr>
+      <tr><th>마감</th><td>다음 수업 시작 1시간 전 (고1T는 일요일 하원 ~ 토요일)</td></tr>
     </table>
-    <div class="warnbox">과제는 쪽수가 아니라 <b>주제 번호</b>로 나갑니다.
-      다음 날 리뷰테스트가 그 주제에서 나오기 때문에, 무엇을 준비해야 하는지가 늘 분명합니다.</div>
+    <div class="warnbox">학원 사정으로 과제를 받지 못한 경우는 미이행으로 처리하지 않고 <b>그 학생만 마감을 연장</b>합니다.</div>
   </div>
 </article>
 
@@ -963,22 +968,23 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 </article>
 
 <!-- ══════════ 메타루프 ══════════ -->
-<article class="detail" id="d-loop" data-title="메타루프">
+<article class="detail" id="d-loop" data-title="루프 과제">
   <div class="dhero">
-    <div class="k">매일 · 05</div>
-    <h2>메타루프</h2>
-    <p class="one">수업이 끝난 날 밤, 학생 폰으로 링크가 하나 갑니다.
-      <strong style="color:var(--ink)">누워서 엄지로 3분.</strong> 계산은 미리 해두고 판단만 묻습니다.
-      시험 기간에는 그날 기출테스트에서 틀린 문제 다시 풀기와 자기 학교 프린트 문항이 여기로 들어옵니다.</p>
-    <div class="facts"><span>3분</span><span>다음 수업 전까지</span><span>학생마다 다른 문항</span></div>
+    <div class="k">매일 · 05 — 2학기 개편</div>
+    <h2>루프 과제</h2>
+    <p class="one">수업이 끝나고 다음 수업 전까지 <strong style="color:var(--ink)">한 번, 폰으로 15분.</strong>
+      단원 지도에서 열린 개념 · 유형 중 <strong style="color:var(--ink)">다시 볼 때가 된 것만</strong> 나옵니다.
+      개념이 서야 유형이 열리고, 확실하게 두 번 맞혀야 졸업합니다.</p>
+    <div class="facts"><span>수업마다 한 번 · 15분</span><span>잠김 → 열림 → 1회 → 졸업</span><span>학생마다 다른 문항</span></div>
   </div>
 
   <div class="blk">
     <h3>학부모님께</h3>
     <ul class="sell">
-      <li><i>1</i><div><b>문항 수가 곧 학생의 상태입니다.</b><span>다 잡은 학생은 3문항, 밀린 게 있으면 8문항이 갑니다. 벌이 아니라 표시입니다. 오늘 몇 개가 갔는지만 봐도 알 수 있습니다.</span></div></li>
-      <li><i>2</i><div><b>한 번 맞혔다고 끝나지 않습니다.</b><span>두 번 연속 맞혀야 넘어가고, 그 뒤에도 시간이 지나면 다시 나옵니다. 많이 틀린 유형은 일주일쯤 뒤에, 잘 잡은 유형은 세 주쯤 뒤에 돌아옵니다.</span></div></li>
-      <li><i>3</i><div><b>계산을 시키지 않으니까 실제로 합니다.</b><span>밤 11시에 종이와 펜을 꺼내라고 하면 안 합니다. 그래서 계산은 미리 해두고 "왜 그렇게 되는지"만 묻습니다.</span></div></li>
+      <li><i>1</i><div><b>개념을 건너뛰고 유형으로 갈 수 없습니다.</b><span>개념이 한 번 성공해야 그 개념의 유형이 열립니다. 유형을 놓치면 그 개념 문항이 다시 붙습니다.</span></div></li>
+      <li><i>2</i><div><b>"확실해요"까지 골라야 성공입니다.</b><span>정답 + 확실 = 성공. 그날 그 문항의 첫 시도만 셉니다. 해설을 보고 다시 맞힌 것은 세지 않습니다.</span></div></li>
+      <li><i>3</i><div><b>사흘 넘게 떨어진 두 번의 성공 = 졸업.</b><span>하루 몰아서 두 번 맞힌 건 졸업이 아닙니다. 다시 틀리면 처음부터 다시 셉니다. 기말 무렵엔 모르는 개념 · 유형이 남지 않게 하는 것이 목표입니다.</span></div></li>
+      <li><i>4</i><div><b>틀리면 교재가 펼쳐집니다.</b><span>오답이거나 "애매해요"면 그 개념 정리와 교재 예제 풀이가 화면에 바로 열립니다. 같은 문제 반복에 지치지 않도록 외부 문항도 섞어 냅니다.</span></div></li>
     </ul>
   </div>
 
@@ -988,9 +994,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <div class="dl">학생이 보는 화면 그대로입니다</div>
       <div class="phone"><div class="scr" id="lpScr">
         <div class="lp-h">
-          <div class="br">META LOOP</div>
-          <h4>오늘의 루프</h4>
-          <div class="mt">고1A · 8월 5일(수) 21시까지 · 3분</div>
+          <div class="br">LOOP</div>
+          <h4>루프 과제</h4>
+          <div class="mt">고1A · 다음 수업 전까지 · 15분</div>
           <div class="bar" id="lpBar"><i></i><i></i><i></i></div>
         </div>
 
@@ -1069,8 +1075,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
         <div class="lp-res" id="lpRes">
           <div class="n" id="lpN">3 / 3</div>
-          <div class="l">오늘의 루프 완료</div>
-          <div class="nx"><b>이 유형이 다시 나오는 때</b>
+          <div class="l">이번 루프 완료</div>
+          <div class="nx"><b>단원 지도에서</b>
             <div id="lpNext">채점 결과에 따라 정해집니다.</div></div>
         </div>
       </div></div>
@@ -1079,25 +1085,27 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   </div>
 
   <div class="blk">
-    <h3>왜 어떤 건 자주 나오고 어떤 건 뜸한가</h3>
-    <p>많이 틀렸던 유형은 빨리 돌아오고, 여러 번 맞힌 유형은 천천히 돌아옵니다.
-      <strong>졸업하는 유형은 없습니다.</strong> 뜸해질 뿐입니다.</p>
+    <h3>한 칸이 졸업하기까지</h3>
+    <p>단원 지도의 칸 하나(개념 또는 유형)가 어떻게 바뀌는지 직접 눌러보세요.</p>
     <div class="demo" style="margin-top:14px">
-      <div class="dl">슬라이더를 움직여보세요</div>
-      <div class="sldbox">
-        <label>지금까지 이 유형을 틀린 횟수 <b id="lpW">1</b></label>
-        <input type="range" id="lpWr" min="1" max="5" step="1" value="1">
-        <label style="margin-top:16px">그 뒤로 맞힌 횟수 <b id="lpC">1</b></label>
-        <input type="range" id="lpCr" min="1" max="4" step="1" value="1">
+      <div class="dl">버튼을 눌러보세요</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px" id="msSteps">
+        <div data-s="0">잠김</div><div data-s="1">열림</div><div data-s="2">1회</div><div data-s="3">졸업</div>
       </div>
-      <div class="gcard hi" style="margin-top:11px;text-align:center">
-        <div class="sc">다시 나오기까지</div>
-        <div class="gr" id="lpDay" style="font-size:36px">30<span style="font-size:16px">일</span></div>
+      <div class="gcard hi" style="margin-top:12px;text-align:center">
+        <div class="sc" id="msDay">D+0</div>
+        <div class="gr" id="msState" style="font-size:30px">잠김</div>
+        <div style="font-size:13px;color:var(--ink2);margin-top:4px" id="msWhy">아직 수업하지 않은 개념</div>
       </div>
-      <div class="track"><i id="lpMark"></i></div>
-      <div class="trackx"><span>오늘</span><span>2주 뒤</span><span>한 달 뒤</span></div>
-      <div class="cap">손대지 않아도 학생마다 나오는 문제가 자동으로 벌어집니다.
-        많이 틀린 건 자주, 잘 잡은 건 뜸하게.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <button class="btn" data-ms="class">수업</button>
+        <button class="btn" data-ms="ok">정답 + 확실</button>
+        <button class="btn ghost" data-ms="unsure">정답 + 애매</button>
+        <button class="btn ghost" data-ms="wrong">오답</button>
+        <button class="btn ghost" data-ms="wait">사흘 지남</button>
+      </div>
+      <div class="cap">성공한 날이 <strong style="color:var(--ink2)">사흘 이상 떨어져 두 번</strong>이면 졸업.
+        틀리면 그때부터 다시 셉니다.</div>
     </div>
   </div>
 </article>
@@ -1109,13 +1117,13 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <h2>데일리 리포트</h2>
     <p class="one">매 수업 후 학생 한 명당 한 장. 점수와 과제 이행률, 코멘트, 다음 과제가
       <strong style="color:var(--ink)">한 화면에 들어옵니다.</strong></p>
-    <div class="facts"><span>수업 당일 밤</span><span>학생 · 학부모 · 데스크 동시</span><span>한 명당 한 장</span></div>
+    <div class="facts"><span>수업 다음 날 9시</span><span>학생별 팀톡으로</span><span>한 명당 한 장</span></div>
   </div>
 
   <div class="blk">
     <h3>학부모님께</h3>
     <ul class="sell">
-      <li><i>1</i><div><b>"오늘 뭐 했어?"를 물어볼 필요가 없습니다.</b><span>진도, 과제, 테스트 점수, 선생님 코멘트가 그날 밤에 도착합니다.</span></div></li>
+      <li><i>1</i><div><b>"오늘 뭐 했어?"를 물어볼 필요가 없습니다.</b><span>리뷰테스트 점수, 과제 이행률, 루프 과제를 했는지, 단원 지도에서 어디까지 왔는지가 수업 다음 날 아침 9시에 도착합니다.</span></div></li>
       <li><i>2</i><div><b>9점을 받아도 틀린 건 남습니다.</b><span>총점이 아니라 문항별로 봅니다. 점수가 좋아도 특정 유형을 놓쳤으면 표시가 붙고, 그게 다음 과제와 보강의 근거가 됩니다.</span></div></li>
       <li><i>3</i><div><b>한 번 흔들린 건지 계속 내려가는 건지 보입니다.</b><span>최근 다섯 번의 점수와 이행률이 함께 나옵니다.</span></div></li>
     </ul>
@@ -1173,7 +1181,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         <div class="foot"><span>수학은유강 · 필탑학원</span><span>Daily Report</span></div>
       </div>
       <div class="cap" id="drCap">점수가 좋아도 <strong style="color:var(--ink2)">부분 실점한 유형은 노란색으로</strong> 남습니다.
-        표시가 붙은 유형은 그날 밤 루프에 들어가고, 다음 리뷰테스트 후보가 됩니다.</div>
+        표시가 붙은 유형은 루프 과제에 들어가고, 다음 리뷰테스트 후보가 됩니다.</div>
     </div>
 
     <div class="demo" style="margin-top:16px">
@@ -1214,7 +1222,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <div class="stepper">
       <div class="stp on"><div class="no">1</div><div class="bd"><b>틀린 유형</b>
         <span>리뷰테스트에서 틀리거나 부분 실점한 것.</span>
-        <div class="out">→ 추가학습 대상 · 그날 밤 루프 문항 · <em>다음 리뷰테스트</em></div></div></div>
+        <div class="out">→ 추가학습 대상 · 루프 과제 문항 · <em>다음 리뷰테스트</em></div></div></div>
       <div class="stp on"><div class="no">2</div><div class="bd"><b>진도와 과제 범위</b>
         <span>반별로 그날 어디까지 나갔고 무엇을 냈는지.</span>
         <div class="out">→ <em>다음 리뷰테스트의 범위</em></div></div></div>
@@ -1346,7 +1354,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
           <span class="pill y">제곱의 합의 최대·최소 ×1</span>
         </div>
         <div style="font-size:12.5px;color:var(--ink3);margin-top:11px;line-height:1.65">
-          빨간색은 <strong style="color:var(--bad)">두 번 이상 반복된</strong> 유형입니다. 추가학습과 그날 밤 루프로 내려갑니다.</div>
+          빨간색은 <strong style="color:var(--bad)">두 번 이상 반복된</strong> 유형입니다. 추가학습과 루프 과제로 내려갑니다.</div>
       </div>
       <div class="cap">회차가 쌓일수록 이 목록이 짧아지는지가 실제 성장입니다.
         점수는 시험 난이도에 따라 흔들리지만, <strong style="color:var(--ink2)">반복 오답 개수는 흔들리지 않습니다.</strong></div>
@@ -1688,7 +1696,19 @@ INIT.circuit=function(){
   });
 };
 
-/* ══ 메타루프 ══ */
+/* ══ 해결 기록 그리드 ══ */
+(function(){
+  var g=document.getElementById("hwGrid"); if(!g) return;
+  var C=["#7fd8a8","#b7e4a0","#F0CE96","#f8c48c","#EA9090","#3A3845"], L=["한 번에","고쳐서","해설 보고","질문해서","해설 봐도 모름","안 풀었음"];
+  var P=[0,0,1,0,0,2,0,0,0,1, 0,3,0,0,2,0,1,0,0,0, 0,0,4,0,1,0,2,0,5,0];
+  P.forEach(function(k,i){var c=document.createElement("i");c.style.cssText="display:block;height:22px;border-radius:4px;background:"+C[k];c.title=(i+1)+"번 · "+L[k];g.appendChild(c);});
+  document.getElementById("hwLeg").innerHTML=L.map(function(l,i){return '<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:'+C[i]+'"></i>'+l+'</span>';}).join("");
+  var done=P.filter(function(k){return k!==5;}).length;
+  document.getElementById("hwRate2").textContent=Math.round(done/P.length*100)+"%";
+  document.getElementById("hwQ2").textContent=P.filter(function(k){return k===4;}).length;
+})();
+
+/* ══ 루프 과제 ══ */
 INIT.loop=function(){
   var ANS={1:0,2:0}, STEPANS=[0,0,0], done={}, correct=0, total=3;
   function bar(i,ok){var b=$("#lpBar").children[i-1];if(b)b.className=ok?"done":"wrong";}
@@ -1696,9 +1716,9 @@ INIT.loop=function(){
     if(Object.keys(done).length<total)return;
     $("#lpN").textContent=correct+" / "+total;
     var msg=[];
-    if(done[1])msg.push("y=x 대칭이동 — "+(done[1]==="o"?"3주쯤 뒤에 한 번 더":"내일 다시"));
-    if(done[2])msg.push("y축 대칭이동 — "+(done[2]==="o"?"3주쯤 뒤에 한 번 더":"내일 다시"));
-    if(done[3])msg.push("평행이동의 원리 — "+(done[3]==="o"?"한동안 안 나옴":"내일 다시"));
+    if(done[1])msg.push("y=x 대칭이동 — "+(done[1]==="o"?"1회 · 사흘 뒤 한 번 더 맞히면 졸업":"다음 루프에 다시"));
+    if(done[2])msg.push("y축 대칭이동 — "+(done[2]==="o"?"1회 · 사흘 뒤 한 번 더 맞히면 졸업":"다음 루프에 다시"));
+    if(done[3])msg.push("평행이동의 원리 — "+(done[3]==="o"?"1회 · 사흘 뒤 한 번 더 맞히면 졸업":"다음 루프에 다시 + 교재 개념 펼침"));
     $("#lpNext").innerHTML=msg.map(function(m){return "· "+m;}).join("<br>");
     $("#lpRes").classList.add("show");
     setTimeout(function(){$("#lpRes").scrollIntoView({behavior:"smooth",block:"nearest"});},120);
@@ -1754,17 +1774,32 @@ INIT.loop=function(){
   }
   stepBind();
 
-  /* 다시 나오는 시점 */
-  var wr=$("#lpWr"), cr=$("#lpCr");
-  function decay(){
-    var w=+wr.value, c=+cr.value;
-    var d=Math.max(0.5,Math.min(10,1.5*w/(1+0.5*c)));
-    var days=Math.round(30/d);
-    $("#lpW").textContent=w; $("#lpC").textContent=c;
-    $("#lpDay").innerHTML=days+'<span style="font-size:16px">일</span>';
-    $("#lpMark").style.left=Math.min(96,Math.max(3,days/32*100))+"%";
+  /* 한 칸이 졸업하기까지 */
+  var st=0, day=0, lastOk=-99, okDays=0;
+  var NAMES=["잠김","열림","1회","졸업"];
+  var steps=$$("#msSteps div");
+  steps.forEach(function(x){x.style.cssText="text-align:center;padding:9px 0;border-radius:9px;font-size:13px;font-weight:700;border:1px solid var(--line);color:var(--ink3);transition:.25s";});
+  function paint(why){
+    steps.forEach(function(x,i){var on=(i===st);x.style.background=on?(st===3?"var(--okbg)":"var(--tint)"):"transparent";
+      x.style.borderColor=on?(st===3?"var(--ok)":"var(--key)"):"var(--line)";x.style.color=on?"var(--ink)":(i<st?"var(--ink2)":"var(--ink3)");});
+    $("#msState").textContent=NAMES[st]; $("#msState").style.color=st===3?"var(--ok)":"var(--key)";
+    $("#msDay").textContent="D+"+day; $("#msWhy").textContent=why;
   }
-  wr.oninput=decay; cr.oninput=decay; decay();
+  $$("[data-ms]").forEach(function(b){ b.onclick=function(){
+    var k=b.getAttribute("data-ms");
+    if(k==="class"){ if(st===0){st=1;paint("수업한 날 — 개념이 열렸습니다");} else paint("이미 열려 있습니다"); return; }
+    if(k==="wait"){ day+=3; paint("사흘이 지났습니다"); return; }
+    if(st===0){ paint("수업 전에는 잠겨 있어 풀 수 없습니다"); return; }
+    if(st===3 && k==="ok"){ paint("졸업한 칸 — 가끔 확인만"); return; }
+    if(k==="unsure"){ paint("정답이지만 \"애매해요\" — 성공으로 세지 않습니다"); return; }
+    if(k==="wrong"){ st=1; okDays=0; lastOk=-99; paint("오답 — 처음부터 다시 셉니다"); return; }
+    if(k==="ok"){
+      if(okDays>=1 && day-lastOk>=3){ st=3; okDays=2; paint("사흘 넘게 떨어진 두 번째 성공 — 졸업!"); }
+      else if(okDays>=1){ paint("같은 시기에 또 맞힘 — 사흘 뒤 한 번 더"); }
+      else { st=2; okDays=1; lastOk=day; paint("첫 성공 — 개념이면 이제 유형이 열립니다"); }
+    }
+  };});
+  paint("아직 수업하지 않은 개념");
 };
 
 /* ══ 데일리 리포트 ══ */
@@ -1775,14 +1810,14 @@ INIT.daily=function(){
     hw:100,hwc:"#9BDCBB",hwt:"원의 방정식 써킷 R1 + R2 THEME 21~22 · 유형체화 100제",
     cm:"접선 유형은 이제 확실히 잡았습니다. 두 원의 위치 관계에서 중심거리를 먼저 그리는 습관만 붙이면 됩니다. 다음 시간 도형의 이동 들어갑니다.",
     clinic:false, bars:[6,10,8,7,9],
-    cap:'점수가 좋아도 <strong style="color:var(--ink2)">부분 실점한 유형은 노란 태그</strong>로 남습니다. 태그가 붙은 유형은 그날 밤 메타루프에 들어가고, 다음 리뷰테스트의 출제 후보가 됩니다.'};
+    cap:'점수가 좋아도 <strong style="color:var(--ink2)">부분 실점한 유형은 노란 태그</strong>로 남습니다. 태그가 붙은 유형은 루프 과제에 들어가고, 다음 리뷰테스트의 출제 후보가 됩니다.'};
   var B={date:"08 / 04 <small>(화)</small>",att:'<i style="background:#F0CE96"></i>지각 <span style="color:#F0CE96;margin-left:4px">· 20분</span>',
     score:4,avg:"6.4",gc:"#F09A96",
     pills:'<span class="r">원 밖의 점에서의 접선 (오답)</span><span class="r">두 원의 위치 관계 (오답)</span><span class="y">원의 일반형 정리 (부분)</span>',
     hw:55,hwc:"#F09A96",hwt:"원의 방정식 써킷 R1 + R2 THEME 21~22 — R2 미완",
     cm:"접선 유형에서 판별식을 세우기 전에 그림을 먼저 그리지 않고 있습니다. 오늘 추가학습에서 그 순서만 다시 잡겠습니다. 과제는 R2까지 반드시 채워서 오세요.",
     clinic:true, bars:[6,10,8,7,4],
-    cap:'같은 학생, 같은 양식입니다. <strong style="color:var(--ink2)">흔들린 날은 숨기지 않고 그대로 보냅니다.</strong> 추가학습 카드가 자동으로 붙고, 다음 날 메타루프 문항 수가 늘어납니다.'};
+    cap:'같은 학생, 같은 양식입니다. <strong style="color:var(--ink2)">흔들린 날은 숨기지 않고 그대로 보냅니다.</strong> 추가학습 카드가 자동으로 붙고, 다음 루프 과제 문항 수가 늘어납니다.'};
   function paint(d){
     $("#drDate").innerHTML=d.date; $("#drAtt").innerHTML=d.att;
     $("#drScore").textContent=d.score; $("#drAvg").textContent=d.avg;
