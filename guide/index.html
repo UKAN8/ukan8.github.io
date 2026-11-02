@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>예비고1 학습 안내 — 필탑학원 고등수학과</title>
+<meta name="description" content="필탑학원 고등수학과 2027 예비고1 학습 안내. 매일 · 매주 · 시험까지, 수업 하나가 시험까지 흘러가는 길을 언제든 다시 보실 수 있습니다.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="예비고1 학습 안내 — 필탑학원 고등수학과">
+<meta property="og:description" content="개념이 서야 유형이 열리고, 확실하게 두 번 맞혀야 졸업합니다. 설명회 내용을 언제든 다시 보세요.">
+<meta property="og:url" content="https://ukan8.github.io/guide/">
+<meta property="og:image" content="https://ukan8.github.io/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
+<style>
+:root{
+  --bg:#0a0a0f; --card:rgba(255,255,255,.025); --card2:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.08); --line:rgba(255,255,255,.06); --line2:rgba(255,255,255,.14);
+  --text:#f5f5fa; --sub:#b8b8c5; --dim:#8a8a98;
+  --accent:#f5a0a0; --accent-bg:rgba(245,160,160,.12);
+  --good:#7fd8a8; --good-bg:rgba(127,216,168,.1); --mid:#fce8c8; --warm:#f8c48c; --lock:#55555f;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Paperlogy','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--text);background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;border:none;background:none;cursor:pointer}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+@media(max-width:600px){.wrap{padding:0 16px}}
+nav{position:sticky;top:0;background:rgba(10,10,15,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:700;font-size:1rem}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:26px;font-size:.86rem;font-weight:500;color:var(--dim)}
+.nav-links a:hover{color:var(--text)}.nav-links .cta{color:var(--accent)}
+@media(max-width:760px){.nav-links{gap:16px}.nav-links a:not(.cta){display:none}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+section{padding:96px 0;border-top:1px solid var(--line)}
+@media(max-width:600px){section{padding:68px 0}}
+.kicker{font-size:.74rem;font-weight:600;letter-spacing:.16em;color:var(--accent);margin-bottom:14px}
+h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:900;line-height:1.18;letter-spacing:-.03em}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.3;letter-spacing:-.02em}
+h2 em,h1 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--sub);font-size:1.05rem;margin-top:18px;max-width:640px}
+.small{font-size:.82rem;color:var(--dim)}
+
+/* hero */
+.hero{padding:96px 0 84px;border-top:none}
+.hero .tag{display:inline-block;font-size:.8rem;font-weight:600;color:var(--sub);border:1px solid var(--border);padding:5px 14px;border-radius:99px;margin-bottom:26px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 24px;border-radius:12px;font-weight:700;font-size:.95rem;background:var(--accent);color:#1a0f10}
+.btn.ghost{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:56px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:22px 20px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.stat b{display:block;font-size:2.4rem;font-weight:900;line-height:1.1}
+.stat b small{font-size:1rem;font-weight:700;color:var(--sub);margin-left:2px}
+.stat span{display:block;font-weight:700;margin-top:10px;font-size:.92rem}
+.stat i{display:block;font-style:normal;font-size:.76rem;color:var(--dim);margin-top:2px}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+@media(max-width:700px){.cmp{grid-template-columns:1fr}}
+.cmp .c{padding:26px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.cmp .c.hi{background:var(--accent-bg);border-color:rgba(245,160,160,.3)}
+.cmp h3{font-size:1.2rem;font-weight:800;margin-bottom:12px}
+.cmp .hi h3{color:var(--accent)}
+.cmp li{list-style:none;padding:8px 0;border-top:1px solid var(--line);color:var(--sub)}
+.cmp .hi li{color:var(--text)}
+
+/* principles */
+.pr{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+@media(max-width:800px){.pr{grid-template-columns:1fr}}
+.pr .p{padding:28px 24px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.pr .n{font-weight:900;color:var(--accent);font-size:1rem}
+.pr h3{font-size:1.25rem;font-weight:800;line-height:1.4;margin:12px 0 10px}
+.pr p{color:var(--sub);font-size:.92rem}
+
+/* flow tabs */
+.tabs{display:flex;gap:8px;margin-top:36px;flex-wrap:wrap}
+.tab{padding:9px 18px;border-radius:99px;border:1px solid var(--border);font-weight:700;font-size:.9rem;color:var(--dim);transition:.2s}
+.tab.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.lane{margin-top:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative}
+@media(max-width:800px){.lane{grid-template-columns:1fr}}
+.st{position:relative;padding:20px 18px;border-radius:14px;background:var(--card);border:1px solid var(--border);cursor:pointer;transition:.3s}
+.st:hover{border-color:var(--line2)}
+.st.on{border-color:var(--accent);background:var(--accent-bg)}
+.st .w{font-size:.72rem;color:var(--dim);font-weight:600}
+.st .t{font-weight:800;font-size:1.02rem;margin-top:4px}
+.st .d{font-size:.78rem;color:var(--sub);margin-top:2px}
+.detail{margin-top:14px;padding:24px 26px;border-radius:16px;background:var(--card2);border:1px solid var(--border);min-height:120px}
+.detail h4{font-size:1.1rem;font-weight:800;margin-bottom:8px}
+.detail p{color:var(--sub)}
+.detail b{color:var(--text)}
+.auto{font-size:.76rem;color:var(--dim);margin-top:10px;display:flex;align-items:center;gap:8px}
+.auto i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.2}}
+
+/* loop demo */
+.loopd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:36px}
+@media(max-width:700px){.loopd{grid-template-columns:repeat(2,1fr)}}
+.ls{padding:24px 18px;border-radius:14px;text-align:center;border:1px solid var(--border);background:var(--card);transition:.5s}
+.ls b{display:block;font-size:1.5rem;font-weight:900}
+.ls span{font-size:.8rem;color:var(--dim)}
+.ls.on.s0{border-color:var(--lock)}.ls.on.s0 b{color:#9a9aa5}
+.ls.on.s1{border-color:var(--mid);background:rgba(252,232,200,.07)}.ls.on.s1 b{color:var(--mid)}
+.ls.on.s2{border-color:var(--warm);background:rgba(248,196,140,.08)}.ls.on.s2 b{color:var(--warm)}
+.ls.on.s3{border-color:var(--good);background:var(--good-bg)}.ls.on.s3 b{color:var(--good)}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:800px){.rules{grid-template-columns:1fr}}
+.rules div{padding:18px 20px;border-left:2px solid var(--accent);background:var(--card)}
+.rules b{display:block}.rules span{color:var(--sub);font-size:.88rem}
+
+/* week */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:36px}
+@media(max-width:800px){.week{grid-template-columns:1fr}}
+.dcol{border-radius:14px;background:var(--card);border:1px solid var(--border);padding:14px 10px}
+.dcol.we{background:rgba(127,216,168,.04)}
+.dcol h4{text-align:center;font-weight:800;font-size:1.05rem;margin-bottom:10px}
+.dcol.we h4{color:var(--good)}
+.chip{display:block;text-align:center;font-size:.8rem;font-weight:600;padding:8px 6px;border-radius:9px;background:var(--card2);margin-top:6px}
+.chip.a{color:var(--accent)}.chip.w{color:var(--warm)}.chip.g{color:var(--good)}.chip.m{color:var(--mid)}.chip.s{color:var(--sub)}
+@media(max-width:800px){.dcol{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px}.dcol h4{margin:0 8px 0 0;min-width:24px}.chip{margin:0;padding:6px 12px}}
+
+/* no-shortcut */
+.ns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+@media(max-width:700px){.ns{grid-template-columns:1fr}}
+.ns div{padding:20px 22px;border-radius:14px;background:var(--card);border:1px solid var(--border)}
+.ns span{display:block;font-size:.82rem;color:var(--dim)}
+.ns b{display:block;font-size:1.05rem;font-weight:700;margin-top:4px}
+
+/* table */
+.tbl-wrap{margin-top:32px;overflow-x:auto;border:1px solid var(--border);border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:620px;font-size:.92rem}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:.78rem;color:var(--dim);font-weight:600;background:var(--card2);cursor:pointer;user-select:none;white-space:nowrap}
+th .ar{margin-left:4px;color:var(--accent)}
+th .pri{display:inline-block;min-width:16px;height:16px;line-height:16px;text-align:center;font-size:.66rem;border-radius:50%;background:var(--accent);color:#1a0f10;margin-left:4px}
+td:first-child,th:first-child{width:48px;color:var(--dim);text-align:center}
+tr:last-child td{border-bottom:none}
+td b{font-weight:700}
+.tbl-note{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:.78rem;color:var(--dim);flex-wrap:wrap}
+.tbl-note button{color:var(--accent);font-size:.78rem}
+
+/* exam timeline */
+.tl{margin-top:40px;position:relative}
+.tl:before{content:'';position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line2)}
+.tli{position:relative;padding:0 0 26px 44px}
+.tli:before{content:'';position:absolute;left:5px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--good)}
+.tli.hot:before{border-color:var(--accent);background:var(--accent)}
+.tli .w{font-size:.76rem;color:var(--dim);font-weight:600}
+.tli b{display:block;font-size:1.08rem;font-weight:800}
+.tli p{color:var(--sub);font-size:.9rem}
+
+/* faq */
+.faq{margin-top:32px}
+.fq{border-top:1px solid var(--line)}
+.fq button{width:100%;text-align:left;padding:20px 0;font-weight:700;font-size:1rem;display:flex;justify-content:space-between;gap:16px}
+.fq button:after{content:'+';color:var(--accent);font-size:1.3rem;line-height:1}
+.fq.open button:after{content:'−'}
+.fq .a{display:none;padding:0 0 22px;color:var(--sub)}
+.fq.open .a{display:block}
+
+/* try cta */
+.try{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:36px;border-radius:20px;background:linear-gradient(135deg,rgba(245,160,160,.14),rgba(127,216,168,.06));border:1px solid rgba(245,160,160,.25)}
+@media(max-width:800px){.try{grid-template-columns:1fr;padding:26px 20px}}
+.mini{border-radius:14px;background:var(--bg);border:1px solid var(--border);padding:16px}
+.mn{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);margin-top:6px;font-size:.85rem;font-weight:600;transition:.5s}
+.mn em{font-style:normal;margin-left:auto;font-size:.72rem;padding:2px 9px;border-radius:99px;background:rgba(255,255,255,.06);color:var(--dim)}
+.mn.g{border-color:rgba(127,216,168,.4);background:var(--good-bg)}.mn.g em{background:var(--good);color:#0b1f15}
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px}
+@media(max-width:700px){.contact{grid-template-columns:1fr}}
+.contact div{padding:24px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.contact span{font-size:.78rem;color:var(--dim);font-weight:600;letter-spacing:.1em}
+.contact b{display:block;font-size:1.3rem;font-weight:800;margin:6px 0}
+.contact a.l{color:var(--accent);font-size:.9rem;font-weight:600;margin-right:14px}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;color:var(--dim)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/">수학은<span>유강</span></a>
+    <div class="nav-links">
+      <a href="#flow">흐름</a><a href="#week">일주일</a><a href="#parents">학부모님께</a><a href="#exam">시험까지</a><a href="/try/">체험</a><a class="cta" href="#contact">상담</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="tag">필탑학원 고등수학과 · 2027 예비고1 학습 안내</div>
+    <h1 class="rv">고등 수학,<br><em>이렇게</em> 공부합니다.</h1>
+    <p class="lead rv">설명회에서 보여드린 내용을 언제든 다시 보실 수 있게 정리했습니다. 수업 하나가 다음 수업으로, 한 주가 시험으로 이어지는 길입니다.</p>
+    <div class="hero-actions rv">
+      <a class="btn" href="/try/">자녀와 함께 체험해 보기</a>
+      <a class="btn ghost" href="#flow">흐름 먼저 보기</a>
+    </div>
+    <div class="stats rv">
+      <div class="stat"><b style="color:var(--accent)" data-count="17">0<small>회</small></b><span>수학 전교 1등</span><i>2026 1학기 11 · 2학기 중간 6</i></div>
+      <div class="stat"><b>4/4</b><span>전 반 전교 1등</span><i>2학기 중간 · 담당 4개 반</i></div>
+      <div class="stat"><b data-count="6">0<small>명</small></b><span>중간 100점</span><i>2학기 전교 1등 여섯 명 모두</i></div>
+      <div class="stat"><b data-count="100">0<small>%</small></b><span>학부모 추천</span><i>시험 후 설문 응답 전원</i></div>
+    </div>
+    <p class="small" style="margin-top:12px">고등수학과 유강T 반 · 학교 성적표 기준</p>
+  </div>
+</section>
+
+<!-- STANDARD -->
+<section>
+  <div class="wrap">
+    <div class="kicker">STANDARD</div>
+    <h2 class="rv">옆 동네가 아니라,<br><em>가장 높은 기준</em>에 맞춥니다.</h2>
+    <p class="lead rv">교재 · 테스트 · 과제 · 리포트를 전부 직접 만들고, 학생 한 명이 문제 하나를 어떻게 풀었는지까지 기록합니다. 그 기록으로 다음에 풀 문제를 고릅니다. 멀리 보내지 않으셔도 되는 수업을 만드는 것이 저희 목표입니다.</p>
+    <div class="cmp rv">
+      <div class="c"><h3>중학교</h3><ul><li>개념 하나에 유형 몇 개</li><li>교과서 중심 시험</li><li>한두 문제는 만회 가능</li></ul></div>
+      <div class="c hi"><h3>고등학교</h3><ul><li>개념 하나에 유형 여러 개</li><li>학교마다 다른 출제</li><li>한 문제가 등급을 가름</li></ul></div>
+    </div>
+    <p class="lead rv" style="margin-top:22px">"수업 때 이해했다"와 "시험장에서 풀 수 있다" 사이의 거리가 중학교보다 훨씬 멉니다. 아래의 모든 단계는 이 거리를 좁히기 위한 장치입니다.</p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section>
+  <div class="wrap">
+    <div class="kicker">PRINCIPLES</div>
+    <h2 class="rv">수업의 원칙은 세 가지입니다.</h2>
+    <div class="pr">
+      <div class="p rv"><span class="n">01</span><h3>개념이 서야<br>유형이 열립니다.</h3><p>개념을 통과하지 못하면 그 개념의 유형은 잠겨 있습니다. 유형만 외워서 넘어가는 길을 막았습니다.</p></div>
+      <div class="p rv"><span class="n">02</span><h3>확실하게 두 번 맞혀야<br>졸업입니다.</h3><p>정답이어도 "애매해요"면 성공이 아닙니다. 사흘 간격으로 두 번, 확실하게 맞혀야 졸업합니다.</p></div>
+      <div class="p rv"><span class="n">03</span><h3>어제의 기록이<br>오늘의 문제가 됩니다.</h3><p>리뷰테스트 · 과제 · 주간고사 기록이 다음 과제와 루프를 정합니다. 학생마다 받는 문제가 다릅니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section id="flow">
+  <div class="wrap">
+    <div class="kicker">SYSTEM MAP</div>
+    <h2 class="rv">매일, 매주,<br>그리고 <em>시험까지</em>.</h2>
+    <p class="lead rv">세 겹으로 돕니다. 칸을 누르면 설명이 나옵니다.</p>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-l="0">매일</button><button class="tab" data-l="1">매주</button><button class="tab" data-l="2">시험까지</button>
+    </div>
+    <div class="lane" id="lane"></div>
+    <div class="detail" id="detail"></div>
+    <div class="auto" id="autoNote"><i></i>자동으로 넘어가는 중 · 칸을 누르면 멈춥니다</div>
+  </div>
+</section>
+
+<!-- LOOP -->
+<section>
+  <div class="wrap">
+    <div class="kicker">LOOP</div>
+    <h2 class="rv">한 번 맞혔다고<br>넘어가지 않습니다.</h2>
+    <p class="lead rv">단원의 개념 · 유형 하나하나가 이 네 단계를 거칩니다. 다음 수업 전까지 한 번, 폰으로 15분 정도 하는 루프 과제에는 <b>다시 볼 때가 된 것만</b> 나옵니다.</p>
+    <div class="loopd" id="loopd">
+      <div class="ls s0"><b>잠김</b><span>개념 통과 전</span></div>
+      <div class="ls s1"><b>열림</b><span>풀 수 있음</span></div>
+      <div class="ls s2"><b>1회</b><span>정답 + 확실</span></div>
+      <div class="ls s3"><b>졸업</b><span>사흘 뒤 또 성공</span></div>
+    </div>
+    <div class="rules">
+      <div><b>정답 + 확실 = 성공</b><span>찍어서 맞힌 날은 세지 않습니다.</span></div>
+      <div><b>사흘 간격 두 번 = 졸업</b><span>한 번 맞히고 잊어버리는 것을 막습니다.</span></div>
+      <div><b>다시 틀리면 처음부터</b><span>졸업 직전이어도 다시 셉니다.</span></div>
+    </div>
+    <p class="lead rv" style="margin-top:26px;color:var(--accent)">목표 — 시험 범위가 끝날 때, 모르는 개념 · 유형 0개.</p>
+  </div>
+</section>
+
+<!-- WEEK -->
+<section id="week">
+  <div class="wrap">
+    <div class="kicker">ONE WEEK · 월 · 수 · 금 반 예시</div>
+    <h2 class="rv">한 학생의 일주일.</h2>
+    <p class="lead rv">하루도 "이번 주는 그냥 넘어가는" 날이 없게 짜여 있습니다. 과제와 루프는 다음 수업 30분 전에 마감됩니다.</p>
+    <div class="week rv">
+      <div class="dcol"><h4>월</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">공통과제</span></div>
+      <div class="dcol"><h4>화</h4><span class="chip s">과제 기록</span><span class="chip w">루프 15분</span></div>
+      <div class="dcol"><h4>수</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">개별과제</span></div>
+      <div class="dcol"><h4>목</h4><span class="chip s">과제 기록</span><span class="chip w">루프 15분</span><span class="chip m">클리닉실</span></div>
+      <div class="dcol"><h4>금</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">개별과제</span></div>
+      <div class="dcol we"><h4>토</h4><span class="chip g">주간고사</span><span class="chip g">오답 루프</span></div>
+      <div class="dcol we"><h4>일</h4><span class="chip s">한 주 마감</span><span class="chip g">주간 리포트</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- NO SHORTCUT -->
+<section>
+  <div class="wrap">
+    <div class="kicker">NO SHORTCUT</div>
+    <h2 class="rv">공부가 될 수밖에 없게<br>만들어 두었습니다.</h2>
+    <div class="ns">
+      <div class="rv"><span>찍어서 맞혔다</span><b>→ 성공으로 세지 않고 다시 나옵니다</b></div>
+      <div class="rv"><span>한 번 맞히고 잊었다</span><b>→ 사흘 뒤 다시 나옵니다</b></div>
+      <div class="rv"><span>개념을 건너뛰었다</span><b>→ 유형이 열리지 않습니다</b></div>
+      <div class="rv"><span>과제를 안 했다</span><b>→ 수업 3시간 전 알림 · 리포트에 그대로</b></div>
+      <div class="rv"><span>해설을 봐도 모르겠다</span><b>→ 조교 손풀이 답변 · 클리닉실 예약</b></div>
+      <div class="rv"><span>주간고사를 빠졌다</span><b>→ 그 주 안에 재시</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARENTS -->
+<section id="parents">
+  <div class="wrap">
+    <div class="kicker">FOR PARENTS</div>
+    <h2 class="rv">학부모님께서 받으시는 것.</h2>
+    <p class="lead rv">"아이가 학원에서 뭘 하는지 모르겠다"는 말씀이 안 나오게 하는 것이 목표입니다. 머리글을 누르면 정렬되고, 누른 순서대로 우선순위가 붙습니다.</p>
+    <div class="tbl-wrap rv">
+      <table id="ptbl">
+        <thead><tr><th data-k="no">번호</th><th data-k="when">언제</th><th data-k="what">무엇을</th><th data-k="how">어떻게</th><th data-k="in">담긴 내용</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="tbl-note"><span id="sortState">정렬 없음</span><button id="sortReset">정렬 초기화</button></div>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="exam">
+  <div class="wrap">
+    <div class="kicker">시험까지</div>
+    <h2 class="rv">범위가 시작될 때부터,<br>시험이 끝난 뒤까지.</h2>
+    <div class="tl">
+      <div class="tli rv"><span class="w">범위 시작 전</span><b>개념 진단</b><p>선행에서 남아 있는 개념 · 유형을 학생별로 점검하고, 수업의 깊이를 맞춥니다.</p></div>
+      <div class="tli rv"><span class="w">시험 3~4주 전</span><b>기출테스트</b><p>다른 학교 기출을 실제 시험처럼 봅니다. 200여 학교, 310여 종을 직접 복원해 두었습니다. 끝나면 문항마다 확신도를 남깁니다.</p></div>
+      <div class="tli hot rv"><span class="w">당일</span><b>퍼스널트레이닝</b><p>그날 바로 학생 이름이 적힌 과제를 받아 갑니다. 같은 학생도 유형마다 처방이 4단계로 다릅니다.</p></div>
+      <div class="tli rv"><span class="w">시험 2주 전</span><b>학교 프린트 변형 · 해부</b><p>그 학교 프린트를 숫자 · 조건을 바꾼 변형까지 만들어 풀고, 문항이 묻는 개념을 끝까지 쪼개 봅니다.</p></div>
+      <div class="tli rv"><span class="w">시험 1주 전</span><b>파이널 라운드</b><p>그 학교에서 실제로 걸리는 것만 좁히고, 실수를 없앱니다.</p></div>
+      <div class="tli rv"><span class="w">D−1 · D-DAY</span><b>직전보강</b><p>전날과 당일 아침. 자기 취약 유형을 선생님께 묻게 해서 시험장에서 흔들리지 않게 합니다.</p></div>
+      <div class="tli rv"><span class="w">시험 직후</span><b>분석지 · 설문</b><p>시험을 뜯어보고, 학생 · 학부모님 설문을 받아 다음 학기 교재와 과제에 반영합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRY -->
+<section>
+  <div class="wrap">
+    <div class="try rv">
+      <div>
+        <div class="kicker">TRY IT</div>
+        <h2>찍어서는<br>졸업이 안 됩니다.</h2>
+        <p class="lead">공통수학1 첫 단원 문제로 리뷰테스트 → 유형 열림 → 루프 과제 → 졸업까지 5분. 자녀분이 직접 해 보면 무슨 뜻인지 바로 아실 겁니다.</p>
+        <div class="hero-actions"><a class="btn" href="/try/">체험 시작</a></div>
+      </div>
+      <div class="mini" id="mini">
+        <div class="small" style="margin-bottom:4px">단원 지도 · 곱셈 공식의 변형</div>
+        <div class="mn">개념 · 제곱의 합<em>열림</em></div>
+        <div class="mn">개념 · 세제곱의 합<em>열림</em></div>
+        <div class="mn">유형 · x + 1/x 만들기<em>🔒 잠김</em></div>
+        <div class="mn">유형 · 세제곱의 합 응용<em>🔒 잠김</em></div>
+        <div class="mn">유형 · x − 1/x 로 제곱의 합<em>🔒 잠김</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2 class="rv">자주 묻는 질문.</h2>
+    <div class="faq">
+      <div class="fq"><button>선행을 얼마나 해 와야 하나요?</button><div class="a">선행을 많이 했느냐보다, 배운 개념이 정말 남아 있느냐가 더 중요합니다. 반 배정 전에 상담과 레벨테스트로 지금 상태부터 봅니다. 고1 1학기 첫 내신 범위는 공통수학1이고, 고등 선행반에서는 중학교 개념과 연결하며 공통수학1을 공부합니다.</div></div>
+      <div class="fq"><button>폰으로 공부하면 집중이 안 되지 않나요?</button><div class="a">폰은 답을 넣는 데만 씁니다. 풀이는 항상 종이에 하고, 답만 고릅니다. 리뷰테스트는 수업 시간에만 열리고, 루프 과제는 다음 수업 전까지 한 번, 15분 정도입니다.</div></div>
+      <div class="fq"><button>과제 양이 너무 많거나 적으면요?</button><div class="a">수업한 날은 반 전체가 같은 공통과제를, 그다음부터는 학생마다 다른 개별과제를 받습니다. 개별과제는 정해진 최소 분량 안에서 학생이 포털에서 분량과 난이도를 직접 조정하고, 다 맞히는 학생에게는 더 어려운 과제가 갑니다.</div></div>
+      <div class="fq"><button>모르는 문제는 어디에 물어보나요?</button><div class="a">과제 기록에서 "해설 봐도 모름"을 고르면 질문만 받는 조교 선생님께 바로 올라가고, 손으로 푼 풀이 사진으로 답이 옵니다. 직접 묻고 싶으면 클리닉실을 30분 단위로 예약해서 옵니다. 입실하면 학부모님께 알림이 갑니다.</div></div>
+      <div class="fq"><button>주간고사는 언제 보나요?</button><div class="a">예약제입니다. 학생이 일정에 맞는 타임을 골라 예약하고, 결시하면 그 주 안에 재시를 봅니다. 시험이 끝나면 학부모님께 점수와 오답 루프 진행 상황이 알림으로 가고, 일요일 마감 후 주간 리포트가 갑니다.</div></div>
+      <div class="fq"><button>아이 상황을 어디서 확인하나요?</button><div class="a">수업 다음 날 리포트 링크가 가고, 로그인 없는 개인 링크(학생 포털)에서 성적 흐름 · 할 일 · 지난 수업 영상 · 시험지와 해설을 언제든 보실 수 있습니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="kicker">CONTACT</div>
+    <h2 class="rv">상담과 레벨테스트 후,<br>반과 진행 계획을 안내드립니다.</h2>
+    <div class="contact">
+      <div><span>PHONE · KAKAO</span><b>010-6456-8959</b><a class="l" href="tel:010-6456-8959">전화하기</a><a class="l" href="https://pf.kakao.com/_xeqibn/chat">카카오톡 상담</a></div>
+      <div><span>LOCATION</span><b>필탑학원</b><p class="small" style="color:var(--sub)">경기 용인시 처인구 중부대로 1305, 흥양빌딩 3층</p><a class="l" href="https://map.kakao.com/link/search/%EA%B2%BD%EA%B8%B0%20%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EC%B2%98%EC%9D%B8%EA%B5%AC%20%EC%A4%91%EB%B6%80%EB%8C%80%EB%A1%9C%201305">카카오맵</a><a class="l" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EC%B2%98%EC%9D%B8%EA%B5%AC%20%EC%A4%91%EB%B6%80%EB%8C%80%EB%A1%9C%201305">네이버 지도</a></div>
+    </div>
+    <p class="small" style="margin-top:22px">더 자세한 자료는 <a href="/system/" style="color:var(--accent)">수업 시스템</a> 페이지에서 실제 화면으로 보실 수 있습니다.</p>
+  </div>
+</section>
+<footer><div class="wrap"><b style="color:var(--text)">수학은<span style="color:var(--accent)">유강</span></b> — 필탑학원 고등수학과 · © 2026</div></footer>
+
+<script>
+/* reveal + count */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const to=+el.dataset.count, suf=el.querySelector('small').outerHTML; let t0=null;
+  const step=ts=>{t0=t0||ts;const k=Math.min(1,(ts-t0)/1200);el.innerHTML=Math.round(to*(1-Math.pow(1-k,3)))+suf;if(k<1)requestAnimationFrame(step);};
+  requestAnimationFrame(step);
+});
+
+/* flow */
+const LANES=[
+ [['수업 첫 10분','리뷰테스트','개념 4 → 유형 3','<b>폰으로 보고, 풀이는 연습지에.</b> 지난 수업 개념 4문항을 먼저 보고, 개념을 통과해야 그 개념의 유형 3문항이 그 자리에서 열립니다. 문항마다 "확실해요 / 애매해요"를 같이 고릅니다. 수업 시간에만 열립니다.'],
+  ['수업','개념 수업','자체 제작 교재','<b>교재를 처음부터 직접 만들었습니다.</b> 반마다 수준이 달라 교재도 반별로 다릅니다. 펼친 두 쪽에 개념 하나, 유형은 개념 뒤에. 리뷰 · 루프에서 묻는 이름이 교재의 이름과 같아 틀리면 몇 쪽을 다시 펴야 하는지 바로 보입니다.'],
+  ['수업 후','과제 · 해결 기록','공통 → 개별','<b>수업한 날은 공통과제, 그다음부터는 학생마다 다른 개별과제.</b> 다 하고 나면 문항마다 "한 번에 · 고쳐서 · 해설 보고 · 질문해서 · 해설 봐도 모름 · 안 풀었음" 중 하나를 남깁니다. "해설 봐도 모름"은 조교 손풀이 질문으로 바로 올라갑니다.'],
+  ['다음 수업 전','루프 과제','15분 · 졸업까지','<b>다시 볼 때가 된 개념 · 유형만 나옵니다.</b> 정답 + 확실만 성공, 사흘 간격 두 번이면 졸업, 다시 틀리면 처음부터. 숫자는 매번 바뀝니다.'],
+  ['다음 날','리포트','학부모님께 링크','<b>수업 다음 날 학부모님께 리포트 링크.</b> 리뷰테스트 점수, 과제 이행률, 반 평균, 추이가 한 화면에 담깁니다.']],
+ [['주 1회','주간고사 예약','결시하면 그 주 재시','<b>학생이 자기 일정에 맞는 타임을 예약합니다.</b> 교실 화면의 QR로 입실이 기록되고, 결시하면 그 주 일요일까지 재시를 봅니다.'],
+  ['시험 중','답 + 풀이 방식','폰으로 입력','<b>답과 함께 "확실히 · 헷갈림 · 찍음 · 못 풂"을 고릅니다.</b> 이 선택이 그 학생의 오답 루프를 정합니다.'],
+  ['시험 직후','오답 루프','진단부터','<b>확실히 풀었는데 틀린 문항은 바로 비슷한 문제를 주지 않습니다.</b> 다시 풀려 보고 계산 실수인지 개념을 잘못 알고 있는지부터 가린 뒤, 틀린 문제를 뜯어 보고 변형 문제로 넘어갑니다.'],
+  ['평일 저녁 · 주말','클리닉실','30분 단위 예약','<b>막힌 문제를 들고 예약해서 옵니다.</b> 질문만 받는 조교가 따로 앉아 있고, 입실하면 학부모님께 알림이 갑니다.'],
+  ['일요일 마감','주간 리포트','학부모님께','<b>한 주가 마감되면 주간 리포트를 보내드립니다.</b> 주간고사 점수와 오답 루프 결과가 담깁니다.']],
+ [['범위 시작 전','개념 진단','학생별 점검','<b>선행에서 남아 있는 개념 · 유형을 학생별로 점검</b>하고 결과를 학부모님께 전달합니다.'],
+  ['3~4주 전','기출테스트','200여 학교 · 310여 종','<b>다른 학교 기출을 실제 시험처럼.</b> 직접 복원한 시험지로 보고, 끝나면 문항마다 확신도를 남깁니다. 찍어서 맞힌 것은 맞힌 것으로 세지 않습니다.'],
+  ['당일','퍼스널트레이닝','유형별 4단계','<b>그날 바로 학생 이름이 적힌 과제.</b> 학생 하나를 상 · 중 · 하로 묶지 않고, 유형마다 처방을 따로 냅니다.'],
+  ['2주 전 ~ 1주 전','학교 프린트 · 파이널','변형 · 실수 점검','<b>그 학교 프린트를 변형까지 만들어 풀고</b>, 1주 전엔 그 학교에서 실제로 걸리는 것만 좁혀 실수를 없앱니다.'],
+  ['D−1 · D-DAY','직전보강','전날 + 당일 아침','<b>시험 전날과 당일 아침.</b> 자기 취약 유형을 선생님께 묻게 해서 시험장에서 흔들리지 않게 합니다.']],
+];
+let L=0,I=0,auto=true,timer=null;
+const lane=document.getElementById('lane'),det=document.getElementById('detail');
+function drawLane(){ lane.innerHTML=LANES[L].map((s,i)=>`<div class="st ${i===I?'on':''}" data-i="${i}"><div class="w">${s[0]}</div><div class="t">${s[1]}</div><div class="d">${s[2]}</div></div>`).join('');
+  const s=LANES[L][I]; det.innerHTML=`<h4>${s[1]}</h4><p>${s[3]}</p>`; }
+lane.addEventListener('click',e=>{const st=e.target.closest('.st'); if(!st) return; I=+st.dataset.i; stop(); drawLane();});
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab'); if(!b) return; L=+b.dataset.l; I=0;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t===b)); stop(); drawLane();});
+function stop(){auto=false;clearInterval(timer);document.getElementById('autoNote').style.visibility='hidden';}
+timer=setInterval(()=>{ if(!auto) return; I++; if(I>=5){I=0;L=(L+1)%3;document.querySelectorAll('.tab').forEach((t,k)=>t.classList.toggle('on',k===L));} drawLane(); },3800);
+drawLane();
+
+/* loop demo */
+const ls=[...document.querySelectorAll('.ls')]; let li=0;
+setInterval(()=>{ ls.forEach((x,k)=>x.classList.toggle('on',k===li)); li=(li+1)%4; },1300);
+
+/* mini map animation */
+const mn=[...document.querySelectorAll('#mini .mn')];
+const seq=[[0,'1회'],[1,'1회'],[2,'열림'],[4,'열림'],[3,'열림'],[0,'졸업'],[1,'졸업'],[2,'1회'],[4,'1회'],[3,'1회'],[2,'졸업'],[4,'졸업'],[3,'졸업']];
+let si=0;
+setInterval(()=>{ if(si>=seq.length){ si=0; mn.forEach((m,k)=>{m.classList.remove('g');m.querySelector('em').textContent=k<2?'열림':'🔒 잠김';}); return; }
+  const [k,v]=seq[si++]; const m=mn[k]; m.querySelector('em').textContent=v; m.classList.toggle('g',v==='졸업'); },1100);
+
+/* faq */
+document.querySelectorAll('.fq button').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+
+/* parents table — 누른 순서대로 우선순위 다중 정렬 */
+const ROWS=[
+  {when:'수업 다음 날',w:1,what:'리포트 링크',how:'팀톡 링크',in:'리뷰테스트 점수 · 과제 이행률 · 반 평균 · 추이'},
+  {when:'과제 · 루프 미완료 시',w:2,what:'마감 전 알림',how:'알림톡',in:'수업 3시간 전, 아직 안 한 과제 · 루프'},
+  {when:'주간고사 직후',w:3,what:'주간고사 종료 알림',how:'알림톡',in:'점수 · 오답 루프 진행'},
+  {when:'클리닉실 입실 시',w:4,what:'입실 알림',how:'알림톡',in:'도착 시각'},
+  {when:'매주 일요일 마감 후',w:5,what:'주간 리포트',how:'알림톡 링크',in:'한 주의 주간고사 · 루프 결과 · 평균'},
+  {when:'범위 시작 전',w:6,what:'개념 진단 결과',how:'상담',in:'남아 있는 개념 · 유형'},
+  {when:'언제든',w:7,what:'학생 포털',how:'로그인 없는 개인 링크',in:'성적 흐름 · 할 일 · 수업 영상 · 시험지 · 해설'},
+];
+ROWS.forEach((r,i)=>r.no=i+1);
+let SORT=[]; // [{k,dir}]
+const tb=document.querySelector('#ptbl tbody');
+function key(r,k){ return k==='when'?r.w:r[k]; }
+function render(){
+  const rows=ROWS.slice().sort((a,b)=>{ for(const s of SORT){ const x=key(a,s.k),y=key(b,s.k); const c=(typeof x==='number'?x-y:String(x).localeCompare(String(y),'ko')); if(c) return c*s.dir; } return a.no-b.no; });
+  tb.innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.when}</td><td><b>${r.what}</b></td><td>${r.how}</td><td style="color:var(--sub)">${r.in}</td></tr>`).join('');
+  document.querySelectorAll('#ptbl th').forEach(th=>{ const k=th.dataset.k, idx=SORT.findIndex(s=>s.k===k); const base=th.textContent.replace(/[▲▼\d]+$/,'').trim();
+    th.innerHTML=base+(idx>=0?`<span class="ar">${SORT[idx].dir>0?'▲':'▼'}</span>${SORT.length>1?`<span class="pri">${idx+1}</span>`:''}`:''); });
+  document.getElementById('sortState').textContent=SORT.length?'정렬: '+SORT.map(s=>({no:'번호',when:'언제',what:'무엇을',how:'어떻게',in:'담긴 내용'})[s.k]+(s.dir>0?' ↑':' ↓')).join(' → '):'정렬 없음';
+}
+document.querySelector('#ptbl thead').addEventListener('click',e=>{ const th=e.target.closest('th'); if(!th) return; const k=th.dataset.k;
+  const i=SORT.findIndex(s=>s.k===k);
+  if(i<0) SORT.push({k,dir:1}); else if(SORT[i].dir>0) SORT[i].dir=-1; else SORT.splice(i,1);
+  render(); });
+document.getElementById('sortReset').addEventListener('click',()=>{SORT=[];render();});
+render();
+</script>
+<script>window.goatcounter={path:function(){return location.pathname||"/"}}</script><script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
