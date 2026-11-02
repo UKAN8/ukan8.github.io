@@ -179,6 +179,14 @@ td b{font-weight:700}
 .contact span{font-size:.78rem;color:var(--dim);font-weight:600;letter-spacing:.1em}
 .contact b{display:block;font-size:1.3rem;font-weight:800;margin:6px 0}
 .contact a.l{color:var(--accent);font-size:.9rem;font-weight:600;margin-right:14px}
+.sch{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+@media(max-width:760px){.sch{grid-template-columns:1fr}}
+.sc{padding:26px 24px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.sc.hi{background:var(--accent-bg);border-color:rgba(245,160,160,.28)}
+.sc h3{font-size:1.4rem;font-weight:900}
+.sc em{display:block;font-style:normal;font-weight:700;color:var(--accent);margin:4px 0 12px}
+.sc em.m{color:var(--mid)}.sc em.g{color:var(--good)}
+.sc p{color:var(--sub);font-size:.93rem;margin-top:8px}.sc b{color:var(--text)}
 footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;color:var(--dim)}
 </style>
 </head>
@@ -187,7 +195,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
   <div class="wrap">
     <a class="logo" href="/">수학은<span>유강</span></a>
     <div class="nav-links">
-      <a href="#flow">흐름</a><a href="#week">일주일</a><a href="#parents">학부모님께</a><a href="#exam">시험까지</a><a href="/try/">체험</a><a class="cta" href="#contact">상담</a>
+      <a href="#flow">흐름</a><a href="#week">일주일</a><a href="#parents">학부모님께</a><a href="#exam">시험까지</a><a href="#schools">학교별</a><a href="/try/">체험</a><a class="cta" href="#contact">상담</a>
     </div>
   </div>
 </nav>
@@ -203,12 +211,12 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
       <a class="btn ghost" href="#flow">흐름 먼저 보기</a>
     </div>
     <div class="stats rv">
-      <div class="stat"><b style="color:var(--accent)" data-count="17">0<small>회</small></b><span>수학 전교 1등</span><i>2026 1학기 11 · 2학기 중간 6</i></div>
+      <div class="stat"><b style="color:var(--accent)" data-count="17">0<small>회</small></b><span>전교 1등 누적</span><i>2026 1학기 11 · 2학기 중간 6</i></div>
       <div class="stat"><b>4/4</b><span>전 반 전교 1등</span><i>2학기 중간 · 담당 4개 반</i></div>
       <div class="stat"><b data-count="6">0<small>명</small></b><span>중간 100점</span><i>2학기 전교 1등 여섯 명 모두</i></div>
-      <div class="stat"><b data-count="100">0<small>%</small></b><span>학부모 추천</span><i>시험 후 설문 응답 전원</i></div>
+      <div class="stat"><b data-count="100">0<small>%</small></b><span>학부모 추천</span><i>2학기 중간 후 설문</i></div>
     </div>
-    <p class="small" style="margin-top:12px">고등수학과 유강T 반 · 학교 성적표 기준</p>
+    <p class="small" style="margin-top:12px">성적 — 학교 성적표 기준(고등수학과 유강T 반) · 추천 — 2학기 중간고사 후 학부모 설문</p>
   </div>
 </section>
 
@@ -233,7 +241,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     <h2 class="rv">수업의 원칙은 세 가지입니다.</h2>
     <div class="pr">
       <div class="p rv"><span class="n">01</span><h3>개념이 서야<br>유형이 열립니다.</h3><p>개념을 통과하지 못하면 그 개념의 유형은 잠겨 있습니다. 유형만 외워서 넘어가는 길을 막았습니다.</p></div>
-      <div class="p rv"><span class="n">02</span><h3>확실하게 두 번 맞혀야<br>졸업입니다.</h3><p>정답이어도 "애매해요"면 성공이 아닙니다. 사흘 간격으로 두 번, 확실하게 맞혀야 졸업합니다.</p></div>
+      <div class="p rv"><span class="n">02</span><h3>확실하게 맞혀야<br>맞힌 겁니다.</h3><p>리뷰테스트도 주간고사도 문항마다 확실한지 · 애매한지 · 찍었는지를 같이 고릅니다. 찍었거나 애매하게 맞힌 것은 다시 돌아옵니다.</p></div>
       <div class="p rv"><span class="n">03</span><h3>어제의 기록이<br>오늘의 문제가 됩니다.</h3><p>리뷰테스트 · 과제 · 주간고사 기록이 다음 과제와 루프를 정합니다. 학생마다 받는 문제가 다릅니다.</p></div>
     </div>
   </div>
@@ -259,6 +267,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
   <div class="wrap">
     <div class="kicker">LOOP</div>
     <h2 class="rv">한 번 맞혔다고<br>넘어가지 않습니다.</h2>
+    <p class="small rv" style="margin-top:12px;color:var(--mid)">루프 과제 — 유강T 반에서 먼저 운영하고, 고등수학과 전체로 넓혀 가는 중입니다.</p>
     <p class="lead rv">단원의 개념 · 유형 하나하나가 이 네 단계를 거칩니다. 다음 수업 전까지 한 번, 폰으로 15분 정도 하는 루프 과제에는 <b>다시 볼 때가 된 것만</b> 나옵니다.</p>
     <div class="loopd" id="loopd">
       <div class="ls s0"><b>잠김</b><span>개념 통과 전</span></div>
@@ -268,7 +277,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     </div>
     <div class="rules">
       <div><b>정답 + 확실 = 성공</b><span>찍어서 맞힌 날은 세지 않습니다.</span></div>
-      <div><b>사흘 간격 두 번 = 졸업</b><span>한 번 맞히고 잊어버리는 것을 막습니다.</span></div>
+      <div><b>3일 이상 간격 두 번 = 졸업</b><span>한 번 맞히고 잊어버리는 것을 막습니다.</span></div>
       <div><b>다시 틀리면 처음부터</b><span>졸업 직전이어도 다시 셉니다.</span></div>
     </div>
     <p class="lead rv" style="margin-top:26px;color:var(--accent)">목표 — 시험 범위가 끝날 때, 모르는 개념 · 유형 0개.</p>
@@ -280,13 +289,13 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
   <div class="wrap">
     <div class="kicker">ONE WEEK · 월 · 수 · 금 반 예시</div>
     <h2 class="rv">한 학생의 일주일.</h2>
-    <p class="lead rv">하루도 "이번 주는 그냥 넘어가는" 날이 없게 짜여 있습니다. 과제와 루프는 다음 수업 30분 전에 마감됩니다.</p>
+    <p class="lead rv">수업이 있는 날은 리뷰테스트 · 수업 · 과제 받기, 없는 날은 과제를 풀고 문항마다 기록을 남깁니다. 과제는 반 공통과제와, 지난 과제 기록으로 학생마다 다르게 만든 개별과제입니다. 다음 수업 30분 전 마감.</p>
     <div class="week rv">
-      <div class="dcol"><h4>월</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">공통과제</span></div>
-      <div class="dcol"><h4>화</h4><span class="chip s">과제 기록</span><span class="chip w">루프 15분</span></div>
-      <div class="dcol"><h4>수</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">개별과제</span></div>
-      <div class="dcol"><h4>목</h4><span class="chip s">과제 기록</span><span class="chip w">루프 15분</span><span class="chip m">클리닉실</span></div>
-      <div class="dcol"><h4>금</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">개별과제</span></div>
+      <div class="dcol"><h4>월</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">과제 받기</span></div>
+      <div class="dcol"><h4>화</h4><span class="chip s">과제 · 기록</span><span class="chip w">루프 15분</span><span class="chip m">클리닉 필요 시</span></div>
+      <div class="dcol"><h4>수</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">과제 받기</span></div>
+      <div class="dcol"><h4>목</h4><span class="chip s">과제 · 기록</span><span class="chip w">루프 15분</span><span class="chip m">클리닉 필요 시</span></div>
+      <div class="dcol"><h4>금</h4><span class="chip a">리뷰테스트</span><span class="chip">수업</span><span class="chip s">과제 받기</span></div>
       <div class="dcol we"><h4>토</h4><span class="chip g">주간고사</span><span class="chip g">오답 루프</span></div>
       <div class="dcol we"><h4>일</h4><span class="chip s">한 주 마감</span><span class="chip g">주간 리포트</span></div>
     </div>
@@ -300,7 +309,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     <h2 class="rv">공부가 될 수밖에 없게<br>만들어 두었습니다.</h2>
     <div class="ns">
       <div class="rv"><span>찍어서 맞혔다</span><b>→ 성공으로 세지 않고 다시 나옵니다</b></div>
-      <div class="rv"><span>한 번 맞히고 잊었다</span><b>→ 사흘 뒤 다시 나옵니다</b></div>
+      <div class="rv"><span>확실했는데 틀렸다</span><b>→ 실수인지 개념인지부터 진단합니다</b></div>
       <div class="rv"><span>개념을 건너뛰었다</span><b>→ 유형이 열리지 않습니다</b></div>
       <div class="rv"><span>과제를 안 했다</span><b>→ 수업 3시간 전 알림 · 리포트에 그대로</b></div>
       <div class="rv"><span>해설을 봐도 모르겠다</span><b>→ 조교 손풀이 답변 · 클리닉실 예약</b></div>
@@ -333,11 +342,34 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     <div class="tl">
       <div class="tli rv"><span class="w">범위 시작 전</span><b>개념 진단</b><p>선행에서 남아 있는 개념 · 유형을 학생별로 점검하고, 수업의 깊이를 맞춥니다.</p></div>
       <div class="tli rv"><span class="w">시험 3~4주 전</span><b>기출테스트</b><p>다른 학교 기출을 실제 시험처럼 봅니다. 200여 학교, 310여 종을 직접 복원해 두었습니다. 끝나면 문항마다 확신도를 남깁니다.</p></div>
-      <div class="tli hot rv"><span class="w">당일</span><b>퍼스널트레이닝</b><p>그날 바로 학생 이름이 적힌 과제를 받아 갑니다. 같은 학생도 유형마다 처방이 4단계로 다릅니다.</p></div>
+      <div class="tli hot rv"><span class="w">기출 응시 당일</span><b>퍼스널트레이닝</b><p>그날 바로 학생 이름이 적힌 과제를 받아 갑니다. 같은 학생도 유형마다 처방이 4단계로 다릅니다.</p></div>
       <div class="tli rv"><span class="w">시험 2주 전</span><b>학교 프린트 변형 · 해부</b><p>그 학교 프린트를 숫자 · 조건을 바꾼 변형까지 만들어 풀고, 문항이 묻는 개념을 끝까지 쪼개 봅니다.</p></div>
       <div class="tli rv"><span class="w">시험 1주 전</span><b>파이널 라운드</b><p>그 학교에서 실제로 걸리는 것만 좁히고, 실수를 없앱니다.</p></div>
       <div class="tli rv"><span class="w">D−1 · D-DAY</span><b>직전보강</b><p>전날과 당일 아침. 자기 취약 유형을 선생님께 묻게 해서 시험장에서 흔들리지 않게 합니다.</p></div>
       <div class="tli rv"><span class="w">시험 직후</span><b>분석지 · 설문</b><p>시험을 뜯어보고, 학생 · 학부모님 설문을 받아 다음 학기 교재와 과제에 반영합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOLS -->
+<section id="schools">
+  <div class="wrap">
+    <div class="kicker">2학기 중간고사 분석 · 학교별</div>
+    <h2 class="rv">학교마다 시험이 다르게 나옵니다.<br>그래서 <em>학교마다 준비가 다릅니다</em>.</h2>
+    <p class="lead rv">시험이 끝나면 학교마다 문항 하나하나를 수업 자료와 나란히 놓고 분석합니다. 같은 문항이 나왔다는 뜻이 아니라, 풀이의 틀이 같은 문항입니다.</p>
+    <div class="sch">
+      <div class="sc hi rv"><h3>고림고</h3><em>학교 프린트를 원본 · 변형 · 해부까지</em>
+        <p>고1 공통수학2 — <b>12 · 19 · 20 · 21번</b>이 학교 프린트(올림포스 고난도) 틀 그대로, 그중 19 · 21번은 숫자만 바꿨습니다. 고2 미적분Ⅰ도 <b>15 · 18 · 22번</b>이 학교 프린트 틀 그대로 나왔습니다.</p>
+        <p>그래서 프린트를 원본으로 한 번, 숫자를 바꾼 변형으로 한 번, 그 문항이 묻는 개념을 끝까지 쪼개는 해부 루프까지 돌립니다.</p></div>
+      <div class="sc hi rv"><h3>진덕고</h3><em>학교 프린트와 교과서를 빈틈없이</em>
+        <p>16번은 학교 프린트(올림포스 유형편)와 직선 하나까지 같았고, 논술형 2번도 학교 프린트 고난도 문항과 같은 구조였습니다.</p>
+        <p>교과서와 구조가 같은 <b>7문항(35.9점)</b>은 전부 시험 전에 진덕고 학생들에게 준 교과서 핵심문항 자료에 들어 있었습니다.</p></div>
+      <div class="sc rv"><h3>용인고</h3><em class="m">교과서를 끝까지</em>
+        <p>고1 — 교과서와 구조가 같은 <b>11문항(52.9점)</b>, 모두 시험 전날 · 당일 아침 직전보강 자료에 있던 문항입니다. 고2도 교과서 같은 구조 <b>8문항(41.4점)</b>.</p>
+        <p>교과서 서술형 · 수행평가 · 익힘책까지 빠짐없이 넣습니다.</p></div>
+      <div class="sc rv"><h3>태성고</h3><em class="g">학력평가와 다른 학교 기출을 넓게</em>
+        <p>13 · 19 · 24번이 지난 학력평가 문항과 같은 구조였고, 8번은 9월 기출테스트에서 푼 다른 학교 문제와 두 직선이 숫자까지 같았습니다.</p>
+        <p>이번 중간고사 고1 전교 1등 네 명, 모두 100점이었습니다.</p></div>
     </div>
   </div>
 </section>
@@ -409,7 +441,7 @@ const LANES=[
  [['수업 첫 10분','리뷰테스트','개념 4 → 유형 3','<b>폰으로 보고, 풀이는 연습지에.</b> 지난 수업 개념 4문항을 먼저 보고, 개념을 통과해야 그 개념의 유형 3문항이 그 자리에서 열립니다. 문항마다 "확실해요 / 애매해요"를 같이 고릅니다. 수업 시간에만 열립니다.'],
   ['수업','개념 수업','자체 제작 교재','<b>교재를 처음부터 직접 만들었습니다.</b> 반마다 수준이 달라 교재도 반별로 다릅니다. 펼친 두 쪽에 개념 하나, 유형은 개념 뒤에. 리뷰 · 루프에서 묻는 이름이 교재의 이름과 같아 틀리면 몇 쪽을 다시 펴야 하는지 바로 보입니다.'],
   ['수업 후','과제 · 해결 기록','공통 → 개별','<b>수업한 날은 공통과제, 그다음부터는 학생마다 다른 개별과제.</b> 다 하고 나면 문항마다 "한 번에 · 고쳐서 · 해설 보고 · 질문해서 · 해설 봐도 모름 · 안 풀었음" 중 하나를 남깁니다. "해설 봐도 모름"은 조교 손풀이 질문으로 바로 올라갑니다.'],
-  ['다음 수업 전','루프 과제','15분 · 졸업까지','<b>다시 볼 때가 된 개념 · 유형만 나옵니다.</b> 정답 + 확실만 성공, 사흘 간격 두 번이면 졸업, 다시 틀리면 처음부터. 숫자는 매번 바뀝니다.'],
+  ['다음 수업 전','루프 과제','15분 · 유강T 반 먼저','<b>다시 볼 때가 된 개념 · 유형만 나옵니다.</b> 정답 + 확실만 성공, 3일 이상 간격 두 번이면 졸업, 다시 틀리면 처음부터. 유강T 반에서 먼저 운영하고 고등수학과 전체로 넓혀 가는 중입니다.'],
   ['다음 날','리포트','학부모님께 링크','<b>수업 다음 날 학부모님께 리포트 링크.</b> 리뷰테스트 점수, 과제 이행률, 반 평균, 추이가 한 화면에 담깁니다.']],
  [['주 1회','주간고사 예약','결시하면 그 주 재시','<b>학생이 자기 일정에 맞는 타임을 예약합니다.</b> 교실 화면의 QR로 입실이 기록되고, 결시하면 그 주 일요일까지 재시를 봅니다.'],
   ['시험 중','답 + 풀이 방식','폰으로 입력','<b>답과 함께 "확실히 · 헷갈림 · 찍음 · 못 풂"을 고릅니다.</b> 이 선택이 그 학생의 오답 루프를 정합니다.'],
@@ -418,7 +450,7 @@ const LANES=[
   ['일요일 마감','주간 리포트','학부모님께','<b>한 주가 마감되면 주간 리포트를 보내드립니다.</b> 주간고사 점수와 오답 루프 결과가 담깁니다.']],
  [['범위 시작 전','개념 진단','학생별 점검','<b>선행에서 남아 있는 개념 · 유형을 학생별로 점검</b>하고 결과를 학부모님께 전달합니다.'],
   ['3~4주 전','기출테스트','200여 학교 · 310여 종','<b>다른 학교 기출을 실제 시험처럼.</b> 직접 복원한 시험지로 보고, 끝나면 문항마다 확신도를 남깁니다. 찍어서 맞힌 것은 맞힌 것으로 세지 않습니다.'],
-  ['당일','퍼스널트레이닝','유형별 4단계','<b>그날 바로 학생 이름이 적힌 과제.</b> 학생 하나를 상 · 중 · 하로 묶지 않고, 유형마다 처방을 따로 냅니다.'],
+  ['기출 응시 당일','퍼스널트레이닝','유형별 4단계','<b>그날 바로 학생 이름이 적힌 과제.</b> 학생 하나를 상 · 중 · 하로 묶지 않고, 유형마다 처방을 따로 냅니다.'],
   ['2주 전 ~ 1주 전','학교 프린트 · 파이널','변형 · 실수 점검','<b>그 학교 프린트를 변형까지 만들어 풀고</b>, 1주 전엔 그 학교에서 실제로 걸리는 것만 좁혀 실수를 없앱니다.'],
   ['D−1 · D-DAY','직전보강','전날 + 당일 아침','<b>시험 전날과 당일 아침.</b> 자기 취약 유형을 선생님께 묻게 해서 시험장에서 흔들리지 않게 합니다.']],
 ];
