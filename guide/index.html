@@ -187,6 +187,18 @@ td b{font-weight:700}
 .sc em{display:block;font-style:normal;font-weight:700;color:var(--accent);margin:4px 0 12px}
 .sc em.m{color:var(--mid)}.sc em.g{color:var(--good)}
 .sc p{color:var(--sub);font-size:.93rem;margin-top:8px}.sc b{color:var(--text)}
+.units{margin-top:22px;padding:22px 24px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.units .ut{font-weight:700;color:var(--accent);margin-bottom:12px}
+.units ol{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;list-style:none;counter-reset:u}
+@media(max-width:700px){.units ol{grid-template-columns:repeat(2,1fr)}}
+.units li{counter-increment:u;padding:10px 12px;border-radius:10px;background:var(--card2);font-weight:600;font-size:.9rem}
+.units li:before{content:counter(u);display:block;font-weight:900;color:var(--dim);font-size:.8rem}
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+@media(max-width:700px){.road{grid-template-columns:1fr 1fr}}
+.road div{padding:16px 18px;border-radius:14px;background:var(--card);border:1px solid var(--border)}
+.road div.hi{background:var(--accent-bg);border-color:rgba(245,160,160,.3)}
+.road span{display:block;font-size:.8rem;color:var(--accent);font-weight:600}
+.road b{display:block;font-weight:700;margin-top:4px}
 footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;color:var(--dim)}
 </style>
 </head>
@@ -378,12 +390,25 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
 <!-- PRE -->
 <section id="pre">
   <div class="wrap">
-    <div class="kicker">예비고1 · 고등 선행반</div>
-    <h2 class="rv">고등 선행반도 현행반과<br><em>모든 시스템이 똑같습니다.</em></h2>
-    <p class="lead rv">리뷰테스트 · 루프 · 과제 기록 · 개별과제 · 데일리 리포트 · 온라인 질문과 클리닉실, 그리고 주간고사까지. 특히 매주 고등 시험 형식의 주간고사로 시험에 대한 적응도를 미리 높여 둡니다.</p>
+    <div class="kicker">예비고1 · 12월 1일 개강</div>
+    <h2 class="rv">겨울, 공통수학1을<br><em>한 주에 한 단원씩 깊게.</em></h2>
+    <p class="lead rv">고등 선행반도 리뷰테스트 · 루프 · 과제 기록 · 개별과제 · 데일리 리포트 · 온라인 질문 · 주간고사까지 현행반과 모든 시스템이 똑같습니다. 매주 고등 시험 형식의 주간고사로 시험에 대한 적응도를 미리 높여 둡니다.</p>
     <div class="cmp rv">
-      <div class="c"><h3>겨울방학 · 고등 선행반</h3><ul><li>고1 첫 내신 범위, 공통수학1</li><li>현행반과 같은 시스템 그대로</li><li>매주 주간고사로 고등 시험 적응</li></ul></div>
-      <div class="c hi"><h3>고1 3월 · 첫 내신</h3><ul><li>적응 기간 없이 바로 시작</li><li>시스템 · 주간고사에 이미 익숙</li><li>첫 수업부터 내신 대비</li></ul></div>
+      <div class="c hi"><h3>심화반</h3><ul><li>화 · 목 · 토</li></ul></div>
+      <div class="c"><h3>기본반</h3><ul><li>월 · 수 · 금 또는 화 · 목 · 토</li></ul></div>
+    </div>
+    <div class="units rv">
+      <div class="ut">12월 ~ 2월 · 공통수학1 <span style="color:var(--sub);font-weight:500">· 교재는 반별 선생님의 시그니처 교재</span></div>
+      <ol>
+        <li>다항식의 연산</li><li>나머지정리</li><li>인수분해</li><li>복소수와 이차방정식</li><li>이차방정식과 이차함수</li>
+        <li>여러 가지 방정식</li><li>여러 가지 부등식</li><li>경우의 수</li><li>순열과 조합</li><li>행렬</li>
+      </ol>
+    </div>
+    <div class="road rv">
+      <div><span>지금</span><b>상담 · 레벨테스트</b></div>
+      <div><span>12월 1일</span><b>개강 · 공통수학1</b></div>
+      <div><span>겨울방학</span><b>공통수학2 특강 개강</b></div>
+      <div class="hi"><span>고1 3월</span><b>적응 기간 없이 첫 내신</b></div>
     </div>
   </div>
 </section>
