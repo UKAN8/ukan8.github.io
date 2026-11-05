@@ -82,8 +82,8 @@ footer .links a{padding:10px 18px;border-radius:12px;background:var(--card2);bor
   <h1>시험이 끝난 뒤,<br><em>직접 남긴 말.</em></h1>
   <p class="lead">학교 시험이 끝날 때마다 학생과 학부모님께 설문을 받습니다. 공개에 동의해 주신 답변만 옮겼습니다.</p>
   <div class="stats">
-    <div class="stat"><b>100<small>%</small></b><span>학부모 추천</span></div>
-    <div class="stat"><b>80<small>%</small></b><span>“학원에서 본 문제가 시험에 나왔다”</span></div>
+    <div class="stat"><b>100<small>%</small></b><span>학부모 추천</span><i style="font-style:normal;font-size:.75rem;color:var(--dim)">유강 선생님 반 설문</i></div>
+    <div class="stat"><b>80<small>%</small></b><span>“학원에서 본 문제가 시험에 나왔다”</span><i style="font-style:normal;font-size:.75rem;color:var(--dim)">유강 선생님 반 설문</i></div>
   </div>
 </div></header>
 
@@ -95,7 +95,7 @@ footer .links a{padding:10px 18px;border-radius:12px;background:var(--card2);bor
 
 <main><div class="wrap">
   <div class="grid" id="grid"></div>
-  <p class="note">2026 2학기 중간고사 후 설문 · 이름은 학교 · 학년으로만 표기 · 문장 길이만 일부 줄였습니다</p>
+  <p class="note">2026 2학기 중간고사 후 설문 · 이름은 빼고 응답자가 고른 범위(학교 · 학년)로만 표기 · 문장 길이만 일부 줄였습니다</p>
 </div></main>
 
 <footer><div class="wrap">
@@ -117,6 +117,8 @@ const R=[
  {who:'s',kind:'one',t:'유강',from:'태성고 1학년',big:1,q:'성적이 오를 수밖에 없는 수업'},
  {who:'s',kind:'one',t:'유강',from:'고림고 2학년',q:'AI까지 써서 다방면으로 실력을 평가하고 향상시켜 주는 학원'},
  {who:'s',kind:'one',t:'유강',from:'태성고 1학년',big:1,q:'구원자'},
+ {who:'s',kind:'one',t:'다부',from:'고1',q:'꿀잼'},
+ {who:'s',kind:'one',t:'다부',from:'고1',q:'즐거운 분위기'},
 
  {who:'s',kind:'hit',t:'유강',from:'용인고 1학년',q:'거의 대부분 봤던 문제였다. 시험 적중률이 너무 좋았다. 7번, 서술형 1·3번 등등'},
  {who:'s',kind:'hit',t:'유강',from:'태성고 1학년',big:1,q:'모든 문제가 기출테스트에서 공부했던 문제들이었다'},
@@ -132,6 +134,8 @@ const R=[
  {who:'s',kind:'change',t:'유강',from:'용인고 1학년',q:'문제 풀 때 안 쫄아요'},
  {who:'s',kind:'change',t:'유강',from:'태성고 1학년',q:'환골탈태'},
  {who:'s',kind:'change',t:'유강',from:'태성고 1학년',q:'공부하고 싶을 때 언제나 학원이 열려 있고, 조교쌤이 항상 있어 바로바로 해결된다'},
+ {who:'s',kind:'change',t:'다부',from:'고1',big:1,q:'평소에 공부 하나도 안 하고 숙제도 당일에 해 가거나 아예 안 했었는데, 수업 듣고 나서는 거의 매일 숙제를 해 가요'},
+ {who:'s',kind:'change',t:'다부',from:'고2',q:'듣기 전엔 학생을 방치하는 건 아닌가 걱정됐는데, 한 문제 한 문제 옆에서 봐주던 게 가장 기억에 남는다'},
 
  {who:'p',kind:'rec',t:'유강',from:'고1 학부모',big:1,q:'대치동 갈 필요 없어요. 대치 방식으로 관리해주시고 학교 분석도 잘해주십니다. 혼자 공부하던 아이가 샘의 터치로 놀라운 점수를 받았네요'},
  {who:'p',kind:'rec',t:'유강',from:'삼계고 1학년 학부모',q:'배울 기회가 주어진다면 정말 좋은 기회. 그만큼 믿고 추천드리고 싶은 선생님'},
@@ -148,6 +152,7 @@ const R=[
  {who:'p',kind:'change',t:'유강',from:'고1 학부모',q:'반에서 꼴찌 탈출하던 아이가 최근 제법 상위권. 쉬는 날도 없이 노력하는 선생님 리스펙'},
  {who:'p',kind:'rec',t:'유강',from:'고1 학부모',big:1,q:'선생님의 열정과 개별 아이에 대한 정확한 진단으로 질 높은 수업'},
  {who:'p',kind:'rec',t:'유강',from:'고1 학부모',q:'학교별 모의고사로 수준을 알 수 있고, 매 수업 알림톡으로 수업이 한눈에 보인다'},
+ {who:'p',kind:'rec',t:'다부',from:'고1 학부모',q:'수업 피드백 잘해주는 수업'},
 ];
 const WHO={s:'학생',p:'학부모'}, KIND={one:'한 문장으로',hit:'시험에서',change:'달라진 점',rec:'추천'};
 const F={who:'all',kind:'all',t:'all'};
