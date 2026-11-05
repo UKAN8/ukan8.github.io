@@ -65,6 +65,8 @@ h2 em,h1 em{font-style:normal;color:var(--accent)}
 /* compare */
 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
 @media(max-width:700px){.cmp{grid-template-columns:1fr}}
+.cmp3{grid-template-columns:repeat(3,1fr)}@media(max-width:700px){.cmp3{grid-template-columns:1fr}}
+.cmp h3 small{font-size:.8rem;color:var(--accent);font-weight:600;margin-left:6px}
 .cmp .c{padding:26px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
 .cmp .c.hi{background:var(--accent-bg);border-color:rgba(245,160,160,.3)}
 .cmp h3{font-size:1.2rem;font-weight:800;margin-bottom:12px}
@@ -189,8 +191,8 @@ td b{font-weight:700}
 .sc p{color:var(--sub);font-size:.93rem;margin-top:8px}.sc b{color:var(--text)}
 .units{margin-top:22px;padding:22px 24px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
 .units .ut{font-weight:700;color:var(--accent);margin-bottom:12px}
-.units ol{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;list-style:none;counter-reset:u}
-@media(max-width:700px){.units ol{grid-template-columns:repeat(2,1fr)}}
+.units ol{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;list-style:none;counter-reset:u}
+@media(max-width:900px){.units ol{grid-template-columns:repeat(3,1fr)}}@media(max-width:500px){.units ol{grid-template-columns:repeat(2,1fr)}}
 .units li{counter-increment:u;padding:10px 12px;border-radius:10px;background:var(--card2);font-weight:600;font-size:.9rem}
 .units li:before{content:counter(u);display:block;font-weight:900;color:var(--dim);font-size:.8rem}
 .road{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
@@ -393,22 +395,24 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     <div class="kicker">예비고1 · 12월 1일 개강</div>
     <h2 class="rv">겨울, 공통수학1을<br><em>한 주에 한 단원씩 깊게.</em></h2>
     <p class="lead rv">고등 선행반도 리뷰테스트 · 루프 · 과제 기록 · 개별과제 · 데일리 리포트 · 온라인 질문 · 주간고사까지 현행반과 모든 시스템이 똑같습니다. 매주 고등 시험 형식의 주간고사로 시험에 대한 적응도를 미리 높여 둡니다.</p>
-    <div class="cmp rv">
-      <div class="c hi"><h3>심화반</h3><ul><li>화 · 목 · 토</li></ul></div>
-      <div class="c"><h3>기본반</h3><ul><li>월 · 수 · 금 또는 화 · 목 · 토</li></ul></div>
+    <div class="cmp cmp3 rv">
+      <div class="c"><h3>예비고1 A <small>심화</small></h3><ul><li>유강 선생님</li><li>화 · 목 18–20시 / 토 12–14시</li></ul></div>
+      <div class="c"><h3>예비고1 K <small>기본</small></h3><ul><li>규진 선생님</li><li>월 · 수 · 금 20–22시</li></ul></div>
+      <div class="c"><h3>예비고1 M <small>기본</small></h3><ul><li>다부 선생님</li><li>화 · 목 20–22시 / 토 12–14시</li></ul></div>
     </div>
     <div class="units rv">
-      <div class="ut">12월 ~ 2월 · 공통수학1 <span style="color:var(--sub);font-weight:500">· 교재는 반별 선생님의 시그니처 교재</span></div>
+      <div class="ut">12월 1일 ~ 2월 · 공통수학1 · 12주 <span style="color:var(--sub);font-weight:500">· 교재는 반별 선생님의 시그니처 교재</span></div>
       <ol>
-        <li>다항식의 연산</li><li>나머지정리</li><li>인수분해</li><li>복소수와 이차방정식</li><li>이차방정식과 이차함수</li>
-        <li>여러 가지 방정식</li><li>여러 가지 부등식</li><li>경우의 수</li><li>순열과 조합</li><li>행렬</li>
+        <li>다항식의 연산</li><li>항등식과 나머지정리</li><li>인수분해</li><li>복소수</li><li>이차방정식</li><li>이차방정식과 이차함수</li>
+        <li>여러 가지 방정식</li><li>일차부등식</li><li>이차부등식</li><li>경우의 수</li><li>순열과 조합</li><li>행렬</li>
       </ol>
+      <p class="small" style="margin-top:12px"><b style="color:var(--accent)">6주차 자체 중간고사 · 12주차 자체 기말고사</b> — 고1 내신과 같은 범위 · 형식으로 미리 치릅니다. 시즌 중에도 수업 태도 · 과제 이행 · 주간고사 기록으로 반을 조정합니다.</p>
     </div>
     <div class="road rv">
-      <div><span>지금</span><b>상담 · 레벨테스트</b></div>
-      <div><span>12월 1일</span><b>개강 · 공통수학1</b></div>
-      <div><span>겨울방학</span><b>공통수학2 특강 개강</b></div>
-      <div><span>2월 말</span><b>테스트 후 반 재배치</b><span style="color:var(--sub);font-weight:500;margin-top:4px">최상위 · 심화 · 기본</span></div>
+      <div><span>11/20 · 21</span><b>배치고사</b><span style="color:var(--sub);font-weight:500;margin-top:4px">반 배정</span></div>
+      <div><span>12/1</span><b>정규 시즌 개강</b><span style="color:var(--sub);font-weight:500;margin-top:4px">공통수학1 · 12주</span></div>
+      <div><span>1/4 ~ 2/27</span><b>윈터특강</b><span style="color:var(--sub);font-weight:500;margin-top:4px">공통수학2 · 두 반</span></div>
+      <div><span>2월 말</span><b>테스트 후 재배치</b><span style="color:var(--sub);font-weight:500;margin-top:4px">최상위 · 심화 · 기본</span></div>
       <div class="hi"><span>고1 3월</span><b>적응 기간 없이 첫 내신</b></div>
     </div>
   </div>
@@ -547,6 +551,6 @@ document.querySelector('#ptbl thead').addEventListener('click',e=>{ const th=e.t
 document.getElementById('sortReset').addEventListener('click',()=>{SORT=[];render();});
 render();
 </script>
-<script>window.goatcounter={path:function(){return location.pathname||"/"}}</script><script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
