@@ -81,16 +81,10 @@ footer .links a{padding:10px 18px;border-radius:12px;background:var(--card2);bor
   <div class="kicker">필탑학원 고등수학과 · 수강 후기</div>
   <h1>시험이 끝난 뒤,<br><em>직접 남긴 말.</em></h1>
   <p class="lead">학교 시험이 끝날 때마다 학생과 학부모님께 설문을 받습니다. 공개에 동의해 주신 답변만 옮겼습니다.</p>
-  <div class="stats">
-    <div class="stat"><b>100<small>%</small></b><span>학부모 추천</span><i style="font-style:normal;font-size:.75rem;color:var(--dim)">유강 선생님 반 설문</i></div>
-    <div class="stat"><b>80<small>%</small></b><span>“학원에서 본 문제가 시험에 나왔다”</span><i style="font-style:normal;font-size:.75rem;color:var(--dim)">유강 선생님 반 설문</i></div>
-  </div>
 </div></header>
 
 <div class="bar"><div class="wrap">
-  <div class="grp" id="g-who"><i>누가</i></div>
-  <div class="grp" id="g-kind"><i>주제</i></div>
-  <div class="grp" id="g-t"><i>반</i></div>
+  <div class="grp" id="g-who"></div>
 </div></div>
 
 <main><div class="wrap">
@@ -162,13 +156,11 @@ function chips(id,key,map){
   vals.forEach(v=>{const b=document.createElement('button');b.className='chip'+(v==='all'?' on':'');b.textContent=v==='all'?'전체':map[v];
     b.onclick=()=>{F[key]=v;g.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));render();};g.appendChild(b);});
 }
-chips('g-who','who',WHO); chips('g-kind','kind',KIND);
-const TS={}; R.forEach(r=>TS[r.t]=r.t+' 선생님 반');
-if(Object.keys(TS).length>1) chips('g-t','t',TS); else document.getElementById('g-t').remove();
+chips('g-who','who',WHO);
 function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 function render(){
   const L=R.filter(r=>(F.who==='all'||r.who===F.who)&&(F.kind==='all'||r.kind===F.kind)&&(F.t==='all'||r.t===F.t));
-  document.getElementById('grid').innerHTML=L.length?L.map(r=>`<div class="card ${r.who}${r.big?' big':''}"><q>“${esc(r.q)}”</q><div class="who"><b>${esc(r.from)}${r.who==='s'?' 학생':''}</b><span class="tag">${KIND[r.kind]}</span></div></div>`).join(''):'<div class="empty">해당하는 후기가 없습니다.</div>';
+  document.getElementById('grid').innerHTML=L.length?L.map(r=>`<div class="card ${r.who}${r.big?' big':''}"><q>“${esc(r.q)}”</q><div class="who"><b>${esc(r.from)}${r.who==='s'?' 학생':''}</b></div></div>`).join(''):'<div class="empty">해당하는 후기가 없습니다.</div>';
 }
 render();
 </script>
