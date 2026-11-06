@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="이차부등식 과제를 조건 바꾸기·추가·재배치하고, 원본을 저장·불러와 다음 수업 누적테스트(누테)로 다시 쓰는 스튜디오.">
+<meta property="og:title" content="이차부등식 누테 스튜디오">
+<meta property="og:description" content="과제 원본 저장 → 불러오기 → 조건 바꿔 누테로 재활용 · 박유강">
+<title>이차부등식 누테 스튜디오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{
+  --bg:#F3F2EE; --surface:#FFFFFF; --sunk:#ECEBE6; --ink:#1A1D24; --muted:#5E6470; --line:#DCDAD3;
+  --accent:#2445A8; --accent-soft:#E6EBF8; --bad:#C2412B; --bad-soft:#FBE9E4; --good:#23774F; --good-soft:#E1F1E8;
+  --warn:#8E6200; --warn-soft:#F7EED5;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  color-scheme:dark; --bg:#121419; --surface:#1B1E25; --sunk:#16181E; --ink:#E9EAEE; --muted:#9CA2AE; --line:#2D313B;
+  --accent:#8EA7F2; --accent-soft:#222B44; --bad:#F08A72; --bad-soft:#3A2420; --good:#6FCB9C; --good-soft:#1C3329;
+  --warn:#E3B858; --warn-soft:#352D18;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#121419; --surface:#1B1E25; --sunk:#16181E; --ink:#E9EAEE; --muted:#9CA2AE; --line:#2D313B;
+  --accent:#8EA7F2; --accent-soft:#222B44; --bad:#F08A72; --bad-soft:#3A2420; --good:#6FCB9C; --good-soft:#1C3329;
+  --warn:#E3B858; --warn-soft:#352D18;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;word-spacing:.05em;-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+.wrap{max-width:1160px;margin:0 auto;padding:20px 16px 64px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);font-weight:600}
+h1{font-size:24px;line-height:1.3;margin:2px 0 0;letter-spacing:-.01em}
+h2{font-size:17px;margin:0 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:13px;margin:4px 0 0}
+.tabs{display:flex;gap:4px;background:var(--sunk);border:1px solid var(--line);padding:3px;border-radius:10px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;padding:7px 14px;border-radius:7px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none;font-size:13px}
+.flow li{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 11px;color:var(--muted)}
+.flow li b{color:var(--accent);margin-right:4px}
+.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.side{position:sticky;top:12px;display:flex;flex-direction:column;gap:12px}
+@media (max-width:900px){.side{position:static}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted);font-weight:600}
+select,input[type=text],input[type=number],textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-width:0}
+input[type=number]{width:64px}
+textarea{width:100%;resize:vertical;min-height:48px}
+.meta{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+.meta .full{grid-column:1/-1}
+@media (max-width:560px){.meta{grid-template-columns:1fr 1fr}.meta .t{grid-column:1/-1}}
+.meta input,.meta textarea{width:100%}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:600;font-size:14px;line-height:1.3}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.pri{color:#10131a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.pri{color:#10131a}}
+.btn.sm{padding:4px 9px;font-size:13px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.item{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:12px;overflow:hidden}
+.item.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.item .hd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:9px 12px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.item .no{font-weight:700;font-family:var(--mono);min-width:22px}
+.tag{font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.tag.k-compare{background:var(--warn-soft);color:var(--warn)}
+.tag.k-reason{background:var(--bad-soft);color:var(--bad)}
+.tag.k-coef,.tag.k-count{background:var(--good-soft);color:var(--good)}
+.badge{font-size:12px;padding:1px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted);cursor:pointer;background:var(--surface)}
+.badge.ok{border-color:var(--good);color:var(--good);background:var(--good-soft)}
+.badge.hard{border-color:var(--bad);color:var(--bad);background:var(--bad-soft)}
+.src{font-size:12px;color:var(--muted)}
+.hd .sp{flex:1}
+.item .bd{padding:12px 14px}
+.q{margin:0 0 8px}
+.ex{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:6px 0 8px;padding:8px 10px;background:var(--sunk);border-radius:8px}
+.ex .lb{font-weight:700;color:var(--muted)}
+.wrong{padding:8px 10px;border-left:3px solid var(--bad);background:var(--bad-soft);border-radius:0 8px 8px 0;margin:6px 0 8px}
+ol.ch{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+ol.ch li{padding:4px 8px;border-radius:7px;border:1px solid transparent}
+ol.ch li .n{font-weight:700;margin-right:6px}
+ol.ch li.ans{border-color:var(--good);background:var(--good-soft)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.err{color:var(--bad);font-size:13px}
+.note{font-size:13px;color:var(--muted)}
+.sol{font-size:14px}
+.sol p{margin:4px 0}
+.sol .why{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.stat{display:flex;gap:10px;flex-wrap:wrap;font-size:13px}
+.stat b{font-family:var(--mono)}
+.warnbox{padding:8px 10px;border-radius:8px;background:var(--warn-soft);color:var(--warn);font-size:13px}
+.okbox{padding:8px 10px;border-radius:8px;background:var(--good-soft);color:var(--good);font-size:13px}
+.lib{display:flex;flex-direction:column;gap:8px}
+.libi{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.libi .nm{font-weight:700}
+.libi .sp{flex:1}
+.libi .mt{font-size:12px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:14px;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;margin-top:12px}
+.katex{font-size:1.05em}
+/* 학생 화면 */
+.stu{max-width:720px;margin:0 auto;padding:20px 16px 80px}
+.stu .item .hd{background:var(--surface)}
+ol.pick li{cursor:pointer;border:1px solid var(--line);background:var(--surface);padding:8px 10px}
+ol.pick li.on{border-color:var(--accent);background:var(--accent-soft)}
+.copybar{position:sticky;bottom:0;background:var(--bg);padding:10px 0;border-top:1px solid var(--line);margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* 인쇄 */
+#print{display:none}
+@media print{
+  @page{size:A4;margin:14mm 13mm}
+  body{background:#fff;color:#000;font-size:11.5pt}
+  .wrap,.stu,.toast{display:none!important}
+  #print{display:block!important}
+  #print h1{font-size:15pt;margin:0 0 2mm}
+  #print .pm{font-size:9.5pt;color:#444;margin-bottom:5mm;border-bottom:1px solid #000;padding-bottom:2mm}
+  #print .cols{column-count:2;column-gap:9mm;column-rule:1px solid #bbb}
+  #print .pi{break-inside:avoid;margin-bottom:9mm}
+  #print .pi .pn{font-weight:700}
+  #print ol.ch li{padding:1px 0;border:0;background:none}
+  #print ol.ch li.ans{background:none;border:0;font-weight:700}
+  #print .ex{background:none;border:1px solid #999}
+  #print .wrong{background:none;border:1px solid #999;border-left:3px solid #000}
+  #print .space{height:26mm}
+  #print .quick{break-before:page}
+  #print table{border-collapse:collapse;width:100%;font-size:10.5pt}
+  #print td,#print th{border:1px solid #000;padding:2mm;text-align:center}
+  #print .sol{font-size:10.5pt}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header class="top">
+    <div>
+      <div class="eyebrow">초강스 에듀테크 LAB · 8주차 · 👑 초고수</div>
+      <h1>이차부등식 누테 스튜디오</h1>
+      <p class="sub">과제 원본을 저장하고 다시 불러와, 조건을 바꿔 다음 수업 누적테스트(누테)로 다시 씁니다 · 공통수학1 이차부등식 · 박유강</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="edit" aria-selected="true">과제 만들기</button>
+      <button role="tab" data-tab="nute" aria-selected="false">누테 만들기</button>
+      <button role="tab" data-tab="lib" aria-selected="false">보관함</button>
+    </div>
+  </header>
+  <ul class="flow">
+    <li><b>1</b>문항 고르기·추가</li><li><b>2</b>근·계수·부등호 바꾸기</li><li><b>3</b>재배치·검토</li><li><b>4</b>원본 저장·불러오기</li><li><b>5</b>학생 링크·인쇄</li><li><b>6</b>헷갈린 문항 → 누테</li>
+  </ul>
+
+  <!-- 과제 만들기 -->
+  <section id="tab-edit">
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="meta">
+            <label class="f t">과제 이름<input type="text" id="mTitle"></label>
+            <label class="f">반 별명<input type="text" id="mCls" placeholder="예) 고1 화목반"></label>
+            <label class="f">수업일<input type="text" id="mDate" placeholder="예) 11/10"></label>
+            <label class="f full">학생 안내<textarea id="mNote" rows="2"></textarea></label>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <select id="addKind" aria-label="추가할 문항 종류">
+              <option value="solve">풀기</option><option value="compare">조건 비교</option><option value="reason">이유 찾기</option><option value="coef">계수 구하기</option><option value="count">정수해 개수</option>
+            </select>
+            <button class="btn" id="addOne">＋ 문항 추가</button>
+            <button class="btn" id="addSet" title="같은 식에서 풀기 → 조건 비교 → 이유 찾기">＋ 3단계 세트</button>
+            <span class="sp" style="flex:1"></span>
+            <button class="btn ghost sm" id="rerollAll">🎲 전체 숫자 바꾸기</button>
+          </div>
+        </div>
+        <div id="items"></div>
+      </div>
+      <aside class="side">
+        <div class="card">
+          <h2>출고</h2>
+          <div id="review"></div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn pri" id="copyLink">학생 링크 복사</button>
+            <button class="btn" id="openStu">학생 화면 보기</button>
+          </div>
+          <div class="row" style="margin-top:8px">
+            <button class="btn sm" data-print="orig">원본 인쇄</button>
+            <button class="btn sm" data-print="prob">문제 인쇄</button>
+            <button class="btn sm" data-print="sol">해설 인쇄</button>
+          </div>
+          <p class="note" style="margin:8px 0 0">원본 = 문제+정답·해설, 문제 = 빠른정답 포함, 해설 = 풀이만. 답안은 학생이 ‘답안 복사’로 기존 채널(카톡 등)에 보냅니다. 사이트는 제출을 모으거나 채점하지 않아요.</p>
+        </div>
+        <div class="card">
+          <h2>원본 저장·불러오기</h2>
+          <div class="row">
+            <button class="btn pri" id="saveLib">보관함에 저장</button>
+            <button class="btn" id="saveFile">원본 파일(.json)</button>
+            <label class="btn" style="cursor:pointer">불러오기<input type="file" id="loadFile" accept=".json,application/json" hidden></label>
+          </div>
+          <p class="note" style="margin:8px 0 0">보관함은 이 브라우저에만 남아요. 다른 PC·조교와 나누려면 원본 파일로 저장하세요.</p>
+        </div>
+        <div class="card">
+          <h2 id="solTitle">해설</h2>
+          <div id="solBox" class="sol"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 누테 -->
+  <section id="tab-nute" hidden>
+    <div class="grid">
+      <div class="card">
+        <h2>지난 과제에서 누테 뽑기</h2>
+        <p class="note" style="margin-top:0">보관함의 과제를 고르면, ‘헷갈림’ 표시한 문항을 먼저 넣고 숫자를 바꿔 새 과제로 만듭니다. 만든 누테도 다시 고치고 저장할 수 있어요.</p>
+        <div id="nuteSrc" class="lib"></div>
+        <div class="row" style="margin-top:12px">
+          <label class="f">문항 수<input type="number" id="nN" value="8" min="1" max="30"></label>
+          <label class="f">순서<select id="nOrder"><option value="hard">헷갈림 먼저</option><option value="kind">종류별</option><option value="mix">섞기</option></select></label>
+          <label class="f" style="flex-direction:row;align-items:center;gap:6px;margin-top:16px"><input type="checkbox" id="nReroll" checked> 숫자 바꿔서</label>
+          <label class="f" style="flex-direction:row;align-items:center;gap:6px;margin-top:16px"><input type="checkbox" id="nTwin"> 헷갈림 문항은 쌍둥이 2개</label>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn pri" id="makeNute">누테 만들기 → 편집으로</button>
+          <span class="note" id="nuteInfo"></span>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="card">
+          <h2>누테 규칙</h2>
+          <div class="sol">
+            <p>1) 고른 과제의 ‘헷갈림’ 문항을 모두 넣는다(쌍둥이 체크 시 숫자 다른 2개)</p>
+            <p>2) 남은 칸은 종류가 겹치지 않게 나머지 문항에서 채운다</p>
+            <p>3) ‘숫자 바꿔서’면 종류·부등호·$x^2$ 계수 부호는 그대로, 두 근만 새로 뽑는다</p>
+            <p>4) 문항마다 출처(과제 이름·번호)가 남아 다음 수업에서 어디서 왔는지 보인다</p>
+            <p>5) 새로 만든 문항은 ‘미검토’로 시작 — 확인하고 내보낸다</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 보관함 -->
+  <section id="tab-lib" hidden>
+    <div class="card">
+      <h2>보관함</h2>
+      <div id="libList" class="lib"></div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn sm" id="libExport">보관함 전체 내보내기(.json)</button>
+        <label class="btn sm" style="cursor:pointer">보관함 파일 합치기<input type="file" id="libImport" accept=".json,application/json" hidden></label>
+        <button class="btn sm ghost" id="libDemo">예시 과제 다시 넣기</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="stu" id="stu" hidden></div>
+<div id="print"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+/* ───────── 수학 코어 ───────── */
+const SIGNS=['>','>=','<','<='];
+const SL={'>':'>','>=':'\\ge','<':'<','<=':'\\le'};
+const SN={'>':'>','>=':'≥','<':'<','<=':'≤'};
+const flip=s=>({'>':'<','>=':'<=','<':'>','<=':'>='}[s]);
+const strictToggle=s=>({'>':'>=','>=':'>','<':'<=','<=':'<'}[s]);
+const KIND={solve:'풀기',compare:'조건 비교',reason:'이유 찾기',coef:'계수 구하기',count:'정수해 개수'};
+const NUM=['①','②','③','④','⑤'];
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuffle(arr,seed){const r=mulberry32(seed),a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const rint=(r,lo,hi)=>lo+Math.floor(r()*(hi-lo+1));
+const newSeed=()=>Math.floor(Math.random()*2**31);
+
+/* 해 표현 rep = {region:'in'|'out', closed:bool, p, q} */
+function repOf(a,p,q,s){const t=a<0?flip(s):s;return{region:(t[0]==='>')?'out':'in',closed:t.length===2,p,q,norm:t}}
+function inRep(r,x){const {p,q}=r;if(r.region==='in')return r.closed?(x>=p&&x<=q):(x>p&&x<q);return r.closed?(x<=p||x>=q):(x<p||x>q)}
+function sat(s,v){return s==='>'?v>0:s==='>='?v>=0:s==='<'?v<0:v<=0}
+function setTex(r){const {p,q}=r;if(r.region==='in')return r.closed?`${p}\\le x\\le ${q}`:`${p}<x<${q}`;return r.closed?`x\\le ${p}\\text{ 또는 }x\\ge ${q}`:`x<${p}\\text{ 또는 }x>${q}`}
+function coefTex(a,first){ // a x^2 계수 표기
+  if(a===1)return'';if(a===-1)return'-';return String(a)}
+function polyTex(A,B,C){let s=coefTex(A)+'x^2';
+  if(B>0)s+='+'+(B===1?'':B)+'x';else if(B<0)s+='-'+(B===-1?'':-B)+'x';
+  if(C>0)s+='+'+C;else if(C<0)s+='-'+(-C);return s}
+function polyOf(a,p,q){return[a,-a*(p+q),a*p*q]}
+function ineqTex(a,p,q,s){const [A,B,C]=polyOf(a,p,q);return polyTex(A,B,C)+SL[s]+'0'}
+function fac(r){return r===0?'x':(r>0?`(x-${r})`:`(x+${-r})`)}
+function facTex(p,q){if(p===0)return'x'+fac(q);if(q===0)return'x'+fac(p);return fac(p)+fac(q)}
+const sameRep=(x,y)=>x.region===y.region&&x.closed===y.closed&&x.p===y.p&&x.q===y.q;
+const disp=s=>`$${s}$`;
+
+/* 문항 정규화 (규칙 위반을 고쳐 둔다) */
+function normalize(it){
+  it.a=+it.a;it.p=+it.p;it.q=+it.q;
+  if(it.kind==='reason'){
+    if(it.err==='noflip'&&it.a>0)it.a=-it.a;
+    if(it.err==='region'&&it.a<0)it.a=-it.a;
+    if(it.err==='rootsign'&&it.p+it.q===0)it.q+=1;
+  }
+  if(it.kind==='count'){const r=repOf(it.a,it.p,it.q,it.s);if(r.region==='out')it.s=flip(it.s);if(it.q-it.p<2)it.q=it.p+2;}
+  return it;
+}
+function validate(it){
+  if(!Number.isInteger(it.p)||!Number.isInteger(it.q))return'두 근은 정수로 넣어 주세요';
+  if(it.p>=it.q)return'두 근은 작은 근 < 큰 근 이어야 해요';
+  if(!Number.isInteger(it.a)||it.a===0)return'x² 계수는 0이 아닌 정수';
+  if(Math.abs(it.p)>20||Math.abs(it.q)>20)return'근은 -20~20 사이로';
+  return'';
+}
+function reroll(it,seed){ // 종류·부등호·a 부호 유지, 두 근 새로
+  const r=mulberry32(seed||newSeed());
+  for(let k=0;k<50;k++){
+    const p=rint(r,-6,5),d=rint(r,2,7),q=p+d;
+    if(q>8)continue;
+    if(it.kind==='reason'&&it.err==='rootsign'&&p+q===0)continue;
+    if(p===it.p&&q===it.q)continue;
+    it.p=p;it.q=q;break;
+  }
+  const sg=it.a<0?-1:1;it.a=sg*(r()<.6?1:2);
+  if(it.kind==='coef'&&r()<.4)it.a=sg*3;
+  it.seed=newSeed();return normalize(it);
+}
+
+/* 문항 → 화면용 데이터 {stem, extra, choices:[{t,ok,why}], ansIdx, sol:[...], model} */
+const REL={
+  S:'두 부등식의 해는 같다.',
+  P:'(나)의 해는 (가)의 해에 $x={p}$, $x={q}$를 더한 것이다.',
+  M:'(나)의 해는 (가)의 해에서 $x={p}$, $x={q}$를 뺀 것이다.',
+  C:'(나)의 해는 실수 전체에서 (가)의 해를 뺀 것이다.',
+  D:'(가), (나)의 해를 합치면 실수 전체이고, 겹치는 값은 $x={p}$, $x={q}$뿐이다.',
+  E:'(가), (나)의 해는 겹치지 않고, 합치면 실수 전체에서 $x={p}$, $x={q}$만 빠진다.'
+};
+function relOf(A,B){
+  if(A.region===B.region){if(A.closed===B.closed)return'S';return B.closed?'P':'M'}
+  if(A.closed!==B.closed)return'C';return A.closed?'D':'E';
+}
+function relHolds(A,B){ // 문장 그대로 참인 설명 모두 (선지 중복 정답 방지)
+  const {p,q}=A;const pts=[p-1,p,(p+q)/2,q,q+1];const root=x=>x===p||x===q;
+  const a=x=>inRep(A,x),b=x=>inRep(B,x);const all=f=>pts.every(f);
+  const P={S:x=>b(x)===a(x),P:x=>b(x)===(a(x)||root(x)),M:x=>b(x)===(a(x)&&!root(x)),C:x=>b(x)===!a(x),
+    D:x=>(a(x)||b(x))&&((a(x)&&b(x))===root(x)),E:x=>!(a(x)&&b(x))&&((a(x)||b(x))===!root(x))};
+  return Object.keys(P).filter(k=>all(P[k]));
+}
+function compareB(it){ // (나)의 계수·부등호
+  const k=it.k||2;
+  switch(it.chg){
+    case'eq':return{a:it.a,s:strictToggle(it.s)};
+    case'neg':return{a:-it.a,s:it.s};
+    case'mul':return{a:it.a*k,s:it.s};
+    case'negflip':return{a:-it.a,s:flip(it.s)};
+  }
+}
+const CHG={eq:'등호만 바꾸기',neg:'좌변 부호만 바꾸기',mul:'양변에 양수 곱하기',negflip:'−1 곱하고 부등호 바꾸기'};
+const ERR={noflip:'음수로 나누고 부등호 안 바꿈',endpoint:'등호(경계값) 실수',region:'사이/바깥 반대로',rootsign:'근의 부호 잘못 읽음'};
+const REASON={
+  noflip:'$x^2$의 계수가 음수인데, 양변을 음수로 나누면서 부등호 방향을 바꾸지 않았다.',
+  endpoint:'부등호에 등호가 있는지 보고 경계값(두 근)을 넣을지 뺄지를 반대로 정했다.',
+  region:'$x^2$의 계수가 양수인 식에서 해가 두 근 사이인지 바깥인지를 반대로 정했다.',
+  rootsign:'인수분해한 식에서 두 근의 부호를 반대로 읽었다.'
+};
+function solveSteps(a,p,q,s){
+  const L=[];const r=repOf(a,p,q,s);const mono=polyTex(1,-(p+q),p*q);
+  if(a<0)L.push(`양변을 $${a}$로 나누면 부등호 방향이 바뀌어 $${mono}${SL[r.norm]}0$`);
+  else if(a>1)L.push(`양변을 $${a}$로 나누면 $${mono}${SL[r.norm]}0$`);
+  L.push(`$${facTex(p,q)}${SL[r.norm]}0$ 이므로 $${setTex(r)}$`);
+  return{L,r};
+}
+function numChoices(ans,special,seed,min){ // 정답 위치가 고르게 퍼지도록 수 선지 5개
+  min=min??-Infinity;const r=mulberry32(seed*31+5);
+  const lo=[],hi=[];const add=v=>{if(v===ans||v<min||lo.includes(v)||hi.includes(v))return;(v<ans?lo:hi).push(v)};
+  shuffle(special,seed).forEach(add);for(let d=1;d<=8;d++){add(ans-d);add(ans+d)}
+  lo.sort((x,y)=>y-x);hi.sort((x,y)=>x-y); // 가까운 순(특수값 우선은 아래에서)
+  const sp=v=>special.includes(v)?0:1;lo.sort((x,y)=>sp(x)-sp(y)||y-x);hi.sort((x,y)=>sp(x)-sp(y)||x-y);
+  let pos=Math.floor(r()*5);pos=Math.min(pos,lo.length);if(4-pos>hi.length)pos=4-hi.length;
+  return[...lo.slice(0,pos),ans,...hi.slice(0,4-pos)].sort((x,y)=>x-y);
+}
+function build(it){
+  const {a,p,q,s}=it;const R=repOf(a,p,q,s);const seed=it.seed||1;
+  const out={stem:'',extra:'',choices:[],sol:[],model:'',ansText:''};
+  if(it.kind==='solve'){
+    out.stem=`이차부등식 $${ineqTex(a,p,q,s)}$의 해는?`;
+    const opts=[];
+    for(const region of['in','out'])for(const closed of[true,false]){
+      const rr={region,closed,p,q};const ok=sameRep(rr,R);let why='';
+      if(!ok){const dr=region!==R.region,dc=closed!==R.closed;
+        if(dr&&!dc)why=a<0?'음수로 나누고 부등호를 안 바꾸면 나오는 답':'두 근 사이/바깥을 반대로 정한 답';
+        else if(!dr&&dc)why='경계값(등호) 포함 실수';
+        else why='사이/바깥과 등호를 모두 반대로 한 답';}
+      opts.push({t:`$${setTex(rr)}$`,ok,why});
+    }
+    opts.push({t:'해는 모든 실수',ok:false,why:'부등식의 꼴만 보고 고른 답'});
+    out.choices=shuffle(opts,seed);
+    const st=solveSteps(a,p,q,s);out.sol=st.L;
+  }
+  else if(it.kind==='compare'){
+    const B=compareB(it);const RB=repOf(B.a,p,q,B.s);const rel=relOf(R,RB);
+    out.stem='두 이차부등식 (가), (나)의 해에 대한 설명으로 옳은 것은?';
+    out.extra=`<div class="ex"><span class="lb">(가)</span><span>$${ineqTex(a,p,q,s)}$</span><span class="lb">(나)</span><span>$${ineqTex(B.a,p,q,B.s)}$</span></div>`;
+    const hold=relHolds(R,RB);
+    const keys=['S','P','M','C','D','E'].filter(k=>!hold.includes(k));
+    const pick=[rel,...shuffle(keys,seed).slice(0,4)];
+    out.choices=shuffle(pick.map(k=>({k,t:REL[k].replace(/\{p\}/g,p).replace(/\{q\}/g,q),ok:k===rel,why:''})),seed+7);
+    out.sol=[`(가)의 해는 $${setTex(R)}$`,`(나)의 해는 $${setTex(RB)}$`];
+    const why={eq:'부등호의 등호만 달라졌으니 경계값 $x='+p+'$, $x='+q+'$에서만 해가 달라진다.',
+      neg:'좌변의 부호만 바뀌고 부등호는 그대로라서 해가 반대쪽으로 넘어간다.',
+      mul:'양변에 양수 $'+(it.k||2)+'$를 곱한 것뿐이라 해는 그대로다.',
+      negflip:'양변에 $-1$을 곱하면서 부등호 방향도 바꿨으니 같은 부등식이다.'}[it.chg];
+    out.sol.push(why);
+    out.model=why;
+  }
+  else if(it.kind==='reason'){
+    let W;const e=it.err;
+    if(e==='noflip')W={region:R.region==='in'?'out':'in',closed:R.closed,p,q};
+    else if(e==='endpoint')W={region:R.region,closed:!R.closed,p,q};
+    else if(e==='region')W={region:R.region==='in'?'out':'in',closed:R.closed,p,q};
+    else W={region:R.region,closed:R.closed,p:-q,q:-p};
+    out.stem=`이차부등식 $${ineqTex(a,p,q,s)}$을 어떤 학생이 아래처럼 풀었다. 틀린 이유로 가장 알맞은 것은?`;
+    out.extra=`<div class="wrong">학생 답 → $${setTex(W)}$</div>`;
+    const ks=['noflip','endpoint','region','rootsign'];
+    out.choices=shuffle(ks.map(k=>({t:REASON[k],ok:k===e,why:''})),seed);
+    out.writePrompt='왜 그 답이 틀렸는지, 바르게 고치면 무엇인지 한 문장으로 쓰기';
+    const st=solveSteps(a,p,q,s);out.sol=['바른 풀이',...st.L];
+    out.model={noflip:`$${a}<0$으로 나누면 부등호 방향이 바뀐다 → $${setTex(R)}$`,
+      endpoint:`부등호가 $${SL[R.norm]}$ 이므로 경계값 $${p},\\,${q}$ ${R.closed?'포함':'제외'} → $${setTex(R)}$`,
+      region:`$${R.norm[0]==='>'?'>':'<'}0$ 이면 두 근 ${R.region==='in'?'사이':'바깥'} → $${setTex(R)}$`,
+      rootsign:`$${facTex(p,q)}=0$ 의 근은 $x=${p},\\,${q}$ → $${setTex(R)}$`}[e];
+    out.sol.push('모범답안 → '+out.model);
+  }
+  else if(it.kind==='coef'){
+    const [A,Bc,Cc]=polyOf(a,p,q);const ask=it.ask||'sum';
+    const f=(b,c)=>ask==='sum'?b+c:ask==='diff'?b-c:b*c;
+    const ans=f(Bc,Cc);const askT={sum:'b+c',diff:'b-c',prod:'bc'}[ask];
+    out.stem=`$x$에 대한 이차부등식 $${coefTex(A)}x^2+bx+c${SL[s]}0$의 해가 $${setTex(R)}$일 때, 상수 $b$, $c$에 대하여 $${askT}$의 값은?`;
+    const five=numChoices(ans,[f(-Bc,Cc),f(Bc,-Cc),f(-Bc,-Cc),f(-(p+q),p*q),f(p+q,p*q)],seed);
+    out.choices=five.map(v=>({t:`$${v}$`,ok:v===ans,why:''}));
+    out.sol=[`해가 $${setTex(R)}$ 이고 $x^2$의 계수가 $${A}$ 이므로 좌변은 $${coefTex(A)}${facTex(p,q)}$`,
+      `$${coefTex(A)}${facTex(p,q)}=${polyTex(A,Bc,Cc)}$ 이므로 $b=${Bc}$, $c=${Cc}$`,
+      `$${askT}=${ans}$`];
+    if(a<0)out.sol.splice(1,0,`$x^2$의 계수가 음수라서 ${R.region==='in'?'사이':'바깥'}가 해가 되려면 부등호가 $${SL[s]}$ 이어야 맞다`);
+  }
+  else if(it.kind==='count'){
+    const ans=R.closed?q-p+1:q-p-1;const d=q-p;
+    const five=numChoices(ans,[d-1,d,d+1,d+2],seed,0);
+    out.stem=`이차부등식 $${ineqTex(a,p,q,s)}$을 만족시키는 정수 $x$의 개수는?`;
+    out.choices=five.map(v=>({t:`$${v}$`,ok:v===ans,why:''}));
+    const st=solveSteps(a,p,q,s);out.sol=st.L.slice();
+    const lo=R.closed?p:p+1,hi=R.closed?q:q-1;
+    const lst=ans<=6?Array.from({length:ans},(_,k)=>lo+k).join(',\\,'):`${lo},\\,${lo+1},\\,\\cdots,\\,${hi}`;
+    out.sol.push(`정수 $x$는 $${lst}$ 이므로 $${ans}$개`);
+  }
+  out.ansIdx=out.choices.findIndex(c=>c.ok);
+  return out;
+}
+
+/* ───────── 검산(브루트포스) ───────── */
+function selfTest(n=3000){
+  const errs=[];const xs=[];for(let x=-25;x<=25;x+=0.5)xs.push(x);
+  const kinds=['solve','compare','reason','coef','count'];
+  for(let i=0;i<n;i++){
+    const r=mulberry32(i*7919+13);
+    const it={kind:kinds[i%5],a:[-3,-2,-1,1,2,3][rint(r,0,5)],p:0,q:0,s:SIGNS[rint(r,0,3)],seed:i+1,
+      chg:['eq','neg','mul','negflip'][rint(r,0,3)],err:['noflip','endpoint','region','rootsign'][rint(r,0,3)],ask:['sum','diff','prod'][rint(r,0,2)],k:rint(r,2,3)};
+    it.p=rint(r,-8,6);it.q=it.p+rint(r,2,8);normalize(it);
+    if(validate(it)){errs.push([i,'invalid',validate(it)]);continue}
+    const o=build(it);const R=repOf(it.a,it.p,it.q,it.s);
+    const f=x=>it.a*(x-it.p)*(x-it.q);
+    if(o.choices.filter(c=>c.ok).length!==1)errs.push([i,it.kind,'정답 개수']);
+    const ts=o.choices.map(c=>c.t);if(new Set(ts).size!==ts.length)errs.push([i,it.kind,'선지 중복']);
+    for(const x of xs)if(inRep(R,x)!==sat(it.s,f(x))){errs.push([i,it.kind,'해 불일치',x]);break}
+    if(it.kind==='compare'){
+      const B=compareB(it);const g=x=>B.a*(x-it.p)*(x-it.q);
+      const iA=x=>sat(it.s,f(x)),iB=x=>sat(B.s,g(x)),root=x=>x===it.p||x===it.q;
+      const pred={S:x=>iB(x)===iA(x),P:x=>iB(x)===(iA(x)||root(x)),M:x=>iB(x)===(iA(x)&&!root(x)),C:x=>iB(x)===!iA(x),
+        D:x=>(iA(x)||iB(x))&&((iA(x)&&iB(x))===root(x)),E:x=>!(iA(x)&&iB(x))&&((iA(x)||iB(x))===!root(x))};
+      for(const c of o.choices){const tr=xs.every(pred[c.k]);if(tr!==c.ok)errs.push([i,'compare','선지 참거짓',c.k,tr,c.ok,it.chg,it.s,it.a]);}
+    }
+    if(it.kind==='coef'){
+      const [A,Bc,Cc]=polyOf(it.a,it.p,it.q);
+      for(const x of xs)if(sat(it.s,A*x*x+Bc*x+Cc)!==inRep(R,x)){errs.push([i,'coef','계수 재구성']);break}
+      const f2=it.ask==='sum'?Bc+Cc:it.ask==='diff'?Bc-Cc:Bc*Cc;
+      if(o.choices[o.ansIdx].t!==`$${f2}$`)errs.push([i,'coef','답']);
+    }
+    if(it.kind==='count'){
+      let c=0;for(let x=-40;x<=40;x++)if(sat(it.s,f(x)))c++;
+      if(o.choices[o.ansIdx].t!==`$${c}$`)errs.push([i,'count','개수',c]);
+      if(R.region!=='in')errs.push([i,'count','바깥 영역']);
+    }
+    if(it.kind==='reason'){
+      const W=o.extra;if(W.includes(`$${setTex(R)}$`))errs.push([i,'reason','학생 답이 정답과 같음']);
+      if(it.err==='noflip'&&it.a>0)errs.push([i,'reason','noflip인데 a>0']);
+      if(it.err==='region'&&it.a<0)errs.push([i,'reason','region인데 a<0']);
+    }
+    for(const line of o.sol)if(/[^\\]:/.test(line.replace(/\$[^$]*\$/g,'')))errs.push([i,it.kind,'해설에 콜론']);
+  }
+  const pos=[0,0,0,0,0];for(let i=0;i<2000;i++){const it=normalize({kind:i%2?'coef':'count',a:1+(i%3),p:-(i%5)-1,q:(i%7)+2,s:'<',seed:i+3,ask:'sum'});pos[build(it).ansIdx]++}
+  return{n,errors:errs.length,sample:errs.slice(0,10),ansPos:pos};
+}
+window.__selfTest=selfTest;
+
+/* ───────── 렌더 유틸 ───────── */
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function tex(html){ // $..$ 렌더 (html 안의 수식만)
+  return html.replace(/\$([^$]+)\$/g,(m,t)=>{try{return katex.renderToString(t,{throwOnError:false})}catch(e){return esc(t)}});
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1800)}
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+let memLib=null;
+function getLib(){return memLib||(memLib=store.get('w8lib',null))||(memLib=demoLib())}
+function setLib(l){memLib=l;if(!store.set('w8lib',l))toast('브라우저 저장이 막혀 있어요 — 원본 파일로 저장하세요')}
+const uid=()=>Math.random().toString(36).slice(2,9);
+function mk(kind,base){const it=Object.assign({id:uid(),kind,a:1,p:-2,q:3,s:'<=',seed:newSeed(),chg:'eq',err:'endpoint',ask:'sum',k:2,ok:false,hard:false},base||{});return normalize(it)}
+
+/* ───────── 예시 데이터 (가상) ───────── */
+function demoLib(){
+  const d1={id:'demo1',title:'이차부등식 ① 풀기·조건 비교',cls:'고1 예시반',date:'11/3',note:'선지에서 골라 답만 보내 주세요. 이유 찾기는 한 문장도 같이!',savedAt:'2026-11-03',
+    items:[mk('solve',{a:1,p:-2,q:3,s:'<=',seed:11,ok:true}),mk('solve',{a:-1,p:-1,q:4,s:'<',seed:12,ok:true,hard:true}),mk('compare',{a:1,p:1,q:5,s:'>',chg:'eq',seed:13,ok:true}),mk('compare',{a:2,p:-3,q:2,s:'<',chg:'neg',seed:14,ok:true,hard:true}),mk('reason',{a:-2,p:-3,q:1,s:'>=',err:'noflip',seed:15,ok:true})]};
+  const d2={id:'demo2',title:'이차부등식 ② 계수·정수해',cls:'고1 예시반',date:'11/5',note:'계산은 노트에, 답은 선지 번호로.',savedAt:'2026-11-05',
+    items:[mk('coef',{a:1,p:-4,q:2,s:'<',ask:'sum',seed:21,ok:true,hard:true}),mk('coef',{a:2,p:1,q:4,s:'>=',ask:'prod',seed:22,ok:true}),mk('count',{a:1,p:-3,q:4,s:'<',seed:23,ok:true}),mk('count',{a:-1,p:-2,q:5,s:'>=',seed:24,ok:true,hard:true}),mk('reason',{a:1,p:-5,q:2,s:'>',err:'rootsign',seed:25,ok:true}),mk('compare',{a:1,p:-1,q:6,s:'<=',chg:'mul',k:3,seed:26,ok:true})]};
+  return[d1,d2];
+}
+function blankDoc(){
+  const base={a:1,p:-2,q:3,s:'<='};
+  return{id:uid(),title:'이차부등식 후속 과제',cls:'',date:'',note:'선지에서 골라 번호만 보내 주세요. 이유 찾기는 한 문장도 같이!',
+    items:[mk('solve',Object.assign({},base)),mk('compare',Object.assign({},base,{chg:'eq'})),mk('reason',Object.assign({},base,{a:-1,s:'>=',err:'noflip'}))]};
+}
+
+/* ───────── 편집기 ───────── */
+let doc=store.get('w8cur',null)||blankDoc();let selId=doc.items[0]?.id;
+const saveCur=()=>store.set('w8cur',doc);
+
+function itemHTML(it,i,mode){ // mode: 'edit' | 'stu' | 'print-orig' | 'print-prob' | 'print-sol'
+  const o=build(it);const showAns=mode==='edit'||mode==='print-orig';
+  let h=`<p class="q">${o.stem}</p>${o.extra}`;
+  if(mode!=='print-sol'){
+    h+=`<ol class="ch ${mode==='stu'?'pick':''}">`+o.choices.map((c,j)=>`<li data-j="${j}" class="${showAns&&c.ok?'ans':''}"><span class="n">${NUM[j]}</span>${c.t}${mode==='edit'&&!c.ok&&c.why?` <span class="note">· ${c.why}</span>`:''}</li>`).join('')+`</ol>`;
+    if(o.writePrompt){h+=mode==='stu'?`<label class="f" style="margin-top:8px">${o.writePrompt}<textarea data-w="1" rows="2"></textarea></label>`:`<p class="note" style="margin:8px 0 0">✍ ${o.writePrompt}</p>`+(mode==='print-prob'?'<div class="space"></div>':'')}
+  }
+  if(mode==='print-orig'||mode==='print-sol'){h+=`<div class="sol">${(mode==='print-sol'?`<p><b>정답 ${NUM[o.ansIdx]}</b></p>`:'')+o.sol.map(l=>`<p>${l}</p>`).join('')}</div>`}
+  return tex(h);
+}
+
+function renderItems(){
+  const box=document.getElementById('items');
+  if(!doc.items.length){box.innerHTML='<div class="empty">문항이 없어요. 위에서 추가하거나 보관함에서 불러오세요.</div>';renderSide();return}
+  box.innerHTML=doc.items.map((it,i)=>{
+    const err=validate(it);
+    const kindCtl={
+      compare:`<label class="f">(나) 바꾸기<select data-f="chg">${Object.entries(CHG).map(([k,v])=>`<option value="${k}" ${it.chg===k?'selected':''}>${v}</option>`).join('')}</select></label>`+(it.chg==='mul'?`<label class="f">곱할 수<select data-f="k">${[2,3,4].map(k=>`<option ${+it.k===k?'selected':''}>${k}</option>`).join('')}</select></label>`:''),
+      reason:`<label class="f">심을 실수<select data-f="err">${Object.entries(ERR).map(([k,v])=>`<option value="${k}" ${it.err===k?'selected':''}>${v}</option>`).join('')}</select></label>`,
+      coef:`<label class="f">물을 값<select data-f="ask">${[['sum','b+c'],['diff','b−c'],['prod','bc']].map(([k,v])=>`<option value="${k}" ${it.ask===k?'selected':''}>${v}</option>`).join('')}</select></label>`
+    }[it.kind]||'';
+    return `<div class="item ${it.id===selId?'sel':''}" data-id="${it.id}">
+      <div class="hd"><span class="no">${i+1}</span><span class="tag k-${it.kind}">${KIND[it.kind]}</span>
+        <span class="badge ${it.ok?'ok':''}" data-act="ok" title="눌러서 검토 표시">${it.ok?'검토함':'미검토'}</span>
+        <span class="badge ${it.hard?'hard':''}" data-act="hard" title="학생들이 헷갈린 문항 → 누테 우선">${it.hard?'헷갈림':'헷갈림?'}</span>
+        ${it.src?`<span class="src">← ${esc(it.src)}</span>`:''}<span class="sp"></span>
+        <button class="btn ghost sm" data-act="up" aria-label="위로">↑</button><button class="btn ghost sm" data-act="down" aria-label="아래로">↓</button>
+        <button class="btn ghost sm" data-act="dup">복제</button><button class="btn ghost sm" data-act="del">삭제</button></div>
+      <div class="bd">${err?`<p class="err">${err}</p>`:itemHTML(it,i,'edit')}
+        <div class="ctl">
+          <label class="f">작은 근<input type="number" data-f="p" value="${it.p}"></label>
+          <label class="f">큰 근<input type="number" data-f="q" value="${it.q}"></label>
+          <label class="f">x² 계수<select data-f="a">${[-3,-2,-1,1,2,3].map(v=>`<option ${it.a===v?'selected':''}>${v}</option>`).join('')}</select></label>
+          <label class="f">부등호<select data-f="s">${SIGNS.map(v=>`<option value="${v}" ${it.s===v?'selected':''}>${SN[v]} 0</option>`).join('')}</select></label>
+          ${kindCtl}
+          <button class="btn sm" data-act="roll">🎲 숫자</button><button class="btn sm" data-act="shuf">선지 섞기</button>
+        </div></div></div>`}).join('');
+  renderSide();
+}
+function renderSide(){
+  const n=doc.items.length,ok=doc.items.filter(x=>x.ok).length,hard=doc.items.filter(x=>x.hard).length,bad=doc.items.filter(x=>validate(x)).length;
+  const kinds={};doc.items.forEach(x=>kinds[x.kind]=(kinds[x.kind]||0)+1);
+  document.getElementById('review').innerHTML=`<div class="stat"><span>문항 <b>${n}</b></span><span>검토 <b>${ok}/${n}</b></span><span>헷갈림 <b>${hard}</b></span></div>
+    <p class="note" style="margin:4px 0 8px">${Object.entries(kinds).map(([k,v])=>KIND[k]+' '+v).join(' · ')||'—'}</p>`+
+    (bad?`<div class="warnbox">조건 오류 ${bad}개 — 고쳐야 내보낼 수 있어요</div>`:ok<n?`<div class="warnbox">미검토 ${n-ok}개 — 정답·해설을 확인하고 ‘검토함’을 눌러 주세요</div>`:`<div class="okbox">모든 문항 검토 완료</div>`);
+  const it=doc.items.find(x=>x.id===selId)||doc.items[0];
+  const t=document.getElementById('solTitle'),b=document.getElementById('solBox');
+  if(!it){t.textContent='해설';b.innerHTML='';return}
+  const i=doc.items.indexOf(it);t.textContent=`${i+1}번 해설 · ${KIND[it.kind]}`;
+  if(validate(it)){b.innerHTML='<p class="err">조건을 먼저 고쳐 주세요</p>';return}
+  const o=build(it);
+  b.innerHTML=tex(`<p><b>정답 ${NUM[o.ansIdx]}</b></p>`+o.sol.map(l=>`<p>${l}</p>`).join('')+
+    (o.choices.some(c=>c.why)?`<div class="why">${o.choices.map((c,j)=>c.why?`${NUM[j]} ${c.why}`:'').filter(Boolean).join('<br>')}</div>`:''));
+}
+function syncMeta(){for(const [id,k] of[['mTitle','title'],['mCls','cls'],['mDate','date'],['mNote','note']])document.getElementById(id).value=doc[k]||''}
+function setDoc(d){doc=d;doc.items.forEach(normalize);selId=doc.items[0]?.id;syncMeta();renderItems();saveCur()}
+
+document.getElementById('items').addEventListener('click',e=>{
+  const card=e.target.closest('.item');if(!card)return;const id=card.dataset.id;const i=doc.items.findIndex(x=>x.id===id);const it=doc.items[i];
+  const act=e.target.closest('[data-act]')?.dataset.act;
+  if(!act){if(selId!==id){selId=id;document.querySelectorAll('.item').forEach(c=>c.classList.toggle('sel',c.dataset.id===id));renderSide()}return}
+  if(act==='ok')it.ok=!it.ok;
+  else if(act==='hard')it.hard=!it.hard;
+  else if(act==='up'&&i>0)[doc.items[i-1],doc.items[i]]=[doc.items[i],doc.items[i-1]];
+  else if(act==='down'&&i<doc.items.length-1)[doc.items[i+1],doc.items[i]]=[doc.items[i],doc.items[i+1]];
+  else if(act==='dup'){const c=Object.assign({},it,{id:uid(),ok:false});reroll(c);doc.items.splice(i+1,0,c);selId=c.id}
+  else if(act==='del'){doc.items.splice(i,1)}
+  else if(act==='roll'){reroll(it);it.ok=false}
+  else if(act==='shuf'){it.seed=newSeed()}
+  selId=act==='del'?doc.items[Math.min(i,doc.items.length-1)]?.id:selId||id;saveCur();renderItems();
+});
+document.getElementById('items').addEventListener('change',e=>{
+  const f=e.target.dataset.f;if(!f)return;const id=e.target.closest('.item').dataset.id;const it=doc.items.find(x=>x.id===id);
+  const v=e.target.value;it[f]=['p','q','a','k'].includes(f)?(v===''?NaN:Number(v)):v;
+  const before=JSON.stringify([it.a,it.s,it.q]);normalize(it);it.ok=false;selId=id;
+  if(JSON.stringify([it.a,it.s,it.q])!==before)toast(it.kind==='count'?'정수해 개수는 두 근 사이가 해가 되도록 맞췄어요':it.kind==='reason'?'심은 실수에 맞게 계수를 맞췄어요':'조건을 맞췄어요');
+  saveCur();renderItems();
+});
+for(const [id,k] of[['mTitle','title'],['mCls','cls'],['mDate','date'],['mNote','note']])document.getElementById(id).addEventListener('input',e=>{doc[k]=e.target.value;saveCur()});
+document.getElementById('addOne').onclick=()=>{const k=document.getElementById('addKind').value;const it=reroll(mk(k,{a:Math.random()<.35?-1:1,s:SIGNS[Math.floor(Math.random()*4)],chg:Object.keys(CHG)[Math.floor(Math.random()*4)],err:Object.keys(ERR)[Math.floor(Math.random()*4)]}));doc.items.push(it);selId=it.id;saveCur();renderItems();toast(KIND[k]+' 문항을 추가했어요')};
+document.getElementById('addSet').onclick=()=>{const b=reroll(mk('solve',{a:Math.random()<.4?-1:1,s:SIGNS[Math.floor(Math.random()*4)]}));const base={a:b.a,p:b.p,q:b.q,s:b.s};
+  const c=mk('compare',Object.assign({},base,{chg:Object.keys(CHG)[Math.floor(Math.random()*4)]}));const r=mk('reason',Object.assign({},base,{err:b.a<0?'noflip':['endpoint','region','rootsign'][Math.floor(Math.random()*3)]}));
+  doc.items.push(b,c,r);selId=b.id;saveCur();renderItems();toast('풀기 → 조건 비교 → 이유 찾기 세트를 추가했어요')};
+document.getElementById('rerollAll').onclick=()=>{doc.items.forEach(it=>{reroll(it);it.ok=false});saveCur();renderItems();toast('모든 문항의 숫자를 바꿨어요 — 다시 검토해 주세요')};
+
+/* 저장·불러오기 */
+function download(name,obj){const b=new Blob([JSON.stringify(obj,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const fname=s=>(s||'과제').replace(/[\\/:*?"<>|\s]+/g,'_');
+document.getElementById('saveFile').onclick=()=>download(`${fname(doc.title)}${doc.date?'_'+fname(doc.date):''}.json`,Object.assign({format:'w8-nute',v:1},doc));
+document.getElementById('saveLib').onclick=()=>{const lib=getLib();const copy=JSON.parse(JSON.stringify(doc));copy.savedAt=new Date().toISOString().slice(0,10);
+  const j=lib.findIndex(x=>x.id===doc.id);if(j>=0)lib[j]=copy;else lib.unshift(copy);setLib(lib);renderLib();toast(j>=0?'보관함의 같은 과제를 새로 덮었어요':'보관함에 저장했어요')};
+function readJSON(file,cb){const r=new FileReader();r.onload=()=>{try{cb(JSON.parse(r.result))}catch(e){toast('파일을 읽지 못했어요')}};r.readAsText(file)}
+function cleanDoc(d){if(!d||!Array.isArray(d.items))throw 0;return{id:d.id||uid(),title:d.title||'불러온 과제',cls:d.cls||'',date:d.date||'',note:d.note||'',savedAt:d.savedAt,
+  items:d.items.filter(x=>KIND[x.kind]).map(x=>normalize(Object.assign(mk(x.kind),x,{id:x.id||uid()})))}}
+document.getElementById('loadFile').onchange=e=>{const f=e.target.files[0];if(!f)return;readJSON(f,d=>{try{const list=Array.isArray(d)?d:[d];setDoc(cleanDoc(list[0]));tab('edit');toast('불러왔어요 — 조건을 바꾸고 다시 저장하세요')}catch(x){toast('과제 원본 파일이 아니에요')}});e.target.value=''};
+
+/* 학생 링크 */
+function packStu(d){const o={t:d.title,c:d.cls,d:d.date,n:d.note,i:d.items.filter(x=>!validate(x)).map(x=>[x.kind,x.a,x.p,x.q,x.s,x.seed,x.chg,x.err,x.ask,x.k])};
+  return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function unpackStu(s){s=s.replace(/-/g,'+').replace(/_/g,'/');const o=JSON.parse(decodeURIComponent(escape(atob(s))));
+  return{title:o.t,cls:o.c,date:o.d,note:o.n,items:o.i.map(a=>normalize({id:uid(),kind:a[0],a:a[1],p:a[2],q:a[3],s:a[4],seed:a[5],chg:a[6],err:a[7],ask:a[8],k:a[9]}))}}
+const stuURL=()=>location.href.split('#')[0]+'#s='+packStu(doc);
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}}
+document.getElementById('copyLink').onclick=async()=>{const un=doc.items.filter(x=>!x.ok).length;if(await copyText(stuURL()))toast(un?`링크 복사됨 · 미검토 ${un}개 주의`:'학생 링크를 복사했어요');else prompt('링크를 복사하세요',stuURL())};
+document.getElementById('openStu').onclick=()=>window.open(stuURL(),'_blank');
+
+function renderStudent(d){
+  document.getElementById('app').hidden=true;const s=document.getElementById('stu');s.hidden=false;
+  document.title=d.title||'과제';
+  s.innerHTML=`<div class="eyebrow">${esc(d.cls)}${d.date?' · '+esc(d.date):''}</div><h1>${esc(d.title)}</h1>${d.note?`<p class="sub">${esc(d.note)}</p>`:''}
+   <label class="f" style="margin-top:12px">별명 또는 번호<input type="text" id="sNick" placeholder="실명 대신 별명"></label>
+   ${d.items.map((it,i)=>`<div class="item" data-i="${i}"><div class="hd"><span class="no">${i+1}</span><span class="tag k-${it.kind}">${KIND[it.kind]}</span></div><div class="bd">${itemHTML(it,i,'stu')}</div></div>`).join('')}
+   <div class="copybar"><button class="btn pri" id="sCopy">답안 복사</button><span class="note" id="sLeft"></span></div>`;
+  const pick=new Array(d.items.length).fill(-1);
+  const left=()=>{const n=pick.filter(x=>x<0).length;document.getElementById('sLeft').textContent=n?`안 고른 문항 ${n}개`:'다 골랐어요 — 복사해서 보내 주세요'};left();
+  s.addEventListener('click',e=>{const li=e.target.closest('ol.pick li');if(!li)return;const card=li.closest('.item');const i=+card.dataset.i;pick[i]=+li.dataset.j;card.querySelectorAll('ol.pick li').forEach(x=>x.classList.toggle('on',x===li));left()});
+  document.getElementById('sCopy').onclick=async()=>{
+    const nick=document.getElementById('sNick').value.trim()||'(별명 없음)';
+    let t=`[${d.title}] ${nick}\n`+pick.map((p,i)=>`${i+1}) ${p<0?'-':NUM[p]}`).join('  ');
+    s.querySelectorAll('.item').forEach(c=>{const w=c.querySelector('textarea[data-w]');if(w&&w.value.trim())t+=`\n${+c.dataset.i+1}번 이유 → ${w.value.trim()}`});
+    if(await copyText(t))toast('복사했어요 — 카톡에 붙여넣어 보내 주세요');else prompt('복사해서 보내 주세요',t)};
+}
+
+/* 인쇄 */
+function doPrint(kind){
+  const P=document.getElementById('print');const items=doc.items.filter(x=>!validate(x));
+  const label={orig:'',prob:' 문제',sol:' 해설'}[kind];
+  let h=`<h1>${esc(doc.title)}${label}</h1><div class="pm">${esc(doc.cls)}${doc.date?' · '+esc(doc.date):''} · 공통수학1 이차부등식 · 수학은유강</div><div class="cols">`;
+  h+=items.map((it,i)=>`<div class="pi"><span class="pn">${i+1}.</span> ${itemHTML(it,i,'print-'+kind)}</div>`).join('')+'</div>';
+  if(kind==='prob')h+=`<div class="quick"><h1>빠른정답</h1><table><tr>${items.map((_,i)=>`<th>${i+1}</th>`).join('')}</tr><tr>${items.map(it=>`<td>${NUM[build(it).ansIdx]}</td>`).join('')}</tr></table></div>`;
+  P.innerHTML=h;setTimeout(()=>window.print(),60);
+}
+document.querySelectorAll('[data-print]').forEach(b=>b.onclick=()=>doPrint(b.dataset.print));
+
+/* 보관함 */
+function renderLib(){
+  const lib=getLib();const L=document.getElementById('libList');
+  L.innerHTML=lib.length?lib.map((d,i)=>`<div class="libi" data-i="${i}"><div><div class="nm">${esc(d.title)}</div><div class="mt">${esc(d.cls)}${d.date?' · '+esc(d.date):''} · ${d.items.length}문항 · 헷갈림 ${d.items.filter(x=>x.hard).length} · 저장 ${esc(d.savedAt||'')}</div></div><span class="sp"></span>
+    <button class="btn sm pri" data-l="open">불러오기</button><button class="btn sm" data-l="copy">복제해서 열기</button><button class="btn sm" data-l="file">파일</button><button class="btn sm ghost" data-l="del">삭제</button></div>`).join(''):'<div class="empty">보관함이 비어 있어요</div>';
+  const N=document.getElementById('nuteSrc');
+  N.innerHTML=lib.length?lib.map((d,i)=>`<label class="libi" style="cursor:pointer"><input type="checkbox" data-n="${i}" checked><div><div class="nm">${esc(d.title)}</div><div class="mt">${esc(d.date||'')} · ${d.items.length}문항 · 헷갈림 ${d.items.filter(x=>x.hard).length}</div></div></label>`).join(''):'<div class="empty">보관함에 과제를 먼저 저장하세요</div>';
+}
+document.getElementById('libList').addEventListener('click',e=>{
+  const b=e.target.closest('[data-l]');if(!b)return;const i=+b.closest('.libi').dataset.i;const lib=getLib();const d=lib[i];
+  if(b.dataset.l==='open'){setDoc(cleanDoc(JSON.parse(JSON.stringify(d))));tab('edit');toast('불러왔어요')}
+  else if(b.dataset.l==='copy'){const c=cleanDoc(JSON.parse(JSON.stringify(d)));c.id=uid();c.title=d.title+' (복사)';c.items.forEach(x=>{x.id=uid();x.ok=false;x.hard=false});setDoc(c);tab('edit');toast('복제본을 열었어요 — 조건을 바꿔 다음 수업용으로')}
+  else if(b.dataset.l==='file')download(`${fname(d.title)}.json`,Object.assign({format:'w8-nute',v:1},d));
+  else if(b.dataset.l==='del'){if(confirmInline(b)){lib.splice(i,1);setLib(lib);renderLib()}}
+});
+function confirmInline(b){if(b.dataset.armed){return true}b.dataset.armed=1;b.textContent='한 번 더 눌러 삭제';setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent='삭제'}},2500);return false}
+document.getElementById('libExport').onclick=()=>download('누테_보관함.json',getLib());
+document.getElementById('libImport').onchange=e=>{const f=e.target.files[0];if(!f)return;readJSON(f,d=>{try{const list=(Array.isArray(d)?d:[d]).map(cleanDoc);const lib=getLib();for(const x of list){const j=lib.findIndex(y=>y.id===x.id);if(j>=0)lib[j]=x;else lib.push(x)}setLib(lib);renderLib();toast(`${list.length}개 과제를 합쳤어요`)}catch(x){toast('보관함 파일이 아니에요')}});e.target.value=''};
+document.getElementById('libDemo').onclick=()=>{const lib=getLib().filter(x=>!String(x.id).startsWith('demo'));setLib([...demoLib(),...lib]);renderLib();toast('예시 과제 2개를 넣었어요')};
+
+/* 누테 */
+function makeNute(){
+  const lib=getLib();const chosen=[...document.querySelectorAll('[data-n]:checked')].map(c=>lib[+c.dataset.n]).filter(Boolean);
+  if(!chosen.length){toast('과제를 하나 이상 고르세요');return}
+  const N=Math.max(1,Math.min(30,+document.getElementById('nN').value||8)),order=document.getElementById('nOrder').value,re=document.getElementById('nReroll').checked,twin=document.getElementById('nTwin').checked;
+  const pool=[];chosen.forEach(d=>d.items.forEach((x,i)=>{if(!validate(x))pool.push(Object.assign(JSON.parse(JSON.stringify(x)),{src:`${d.date?d.date+' ':''}${d.title} ${i+1}번`}))}));
+  const hard=pool.filter(x=>x.hard),rest=shuffle(pool.filter(x=>!x.hard),newSeed());
+  let picks=[];for(const h of hard){picks.push(h);if(twin)picks.push(Object.assign(JSON.parse(JSON.stringify(h)),{twin:1}))}
+  // 종류가 겹치지 않게 채우기
+  const used={};picks.forEach(x=>used[x.kind]=(used[x.kind]||0)+1);
+  while(picks.length<N&&rest.length){rest.sort((a,b)=>(used[a.kind]||0)-(used[b.kind]||0));const x=rest.shift();picks.push(x);used[x.kind]=(used[x.kind]||0)+1}
+  picks=picks.slice(0,N);
+  picks.forEach(x=>{x.id=uid();x.ok=false;if(re||x.twin)reroll(x);delete x.twin;x.hard=false});
+  if(order==='kind'){const ord=Object.keys(KIND);picks.sort((a,b)=>ord.indexOf(a.kind)-ord.indexOf(b.kind))}
+  else if(order==='mix')picks=shuffle(picks,newSeed());
+  const today=new Date();const md=`${today.getMonth()+1}/${today.getDate()}`;
+  setDoc({id:uid(),title:`이차부등식 누테 (${chosen.length}개 과제 누적)`,cls:chosen[0].cls||'',date:md,note:'지난 과제에서 헷갈렸던 문항이 숫자만 바뀌어 다시 나왔어요. 선지 번호로 보내 주세요.',items:picks});
+  tab('edit');toast(`누테 ${picks.length}문항을 만들었어요 — 검토 후 내보내세요`);
+}
+document.getElementById('makeNute').onclick=makeNute;
+document.getElementById('nuteSrc').addEventListener('change',()=>{const lib=getLib();const ch=[...document.querySelectorAll('[data-n]:checked')].map(c=>lib[+c.dataset.n]);document.getElementById('nuteInfo').textContent=`고른 과제 ${ch.length}개 · 헷갈림 ${ch.reduce((s,d)=>s+d.items.filter(x=>x.hard).length,0)}문항`});
+
+/* 탭 */
+function tab(t){document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));for(const k of['edit','nute','lib'])document.getElementById('tab-'+k).hidden=k!==t;if(t!=='edit')renderLib();if(t==='nute')document.getElementById('nuteSrc').dispatchEvent(new Event('change'));try{sessionStorage.setItem('w8tab',t)}catch(e){}}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+
+/* 시작 */
+const m=location.hash.match(/^#s=(.+)$/);
+if(m){try{renderStudent(unpackStu(m[1]))}catch(e){document.body.innerHTML='<p style="padding:20px">링크가 잘렸어요. 선생님께 다시 받아 주세요.</p>'}}
+else{if(!store.get('w8lib',null))store.set('w8lib',getLib());syncMeta();renderItems();renderLib();}
+</script>
+</body>
+</html>
