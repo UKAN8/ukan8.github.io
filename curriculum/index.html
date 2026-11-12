@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>예비고1 커리큘럼 — 필탑학원 고등수학과</title>
+<meta name="description" content="2027 예비고1 정규 시즌(공통수학1)과 윈터특강(공통수학2) 주차별 커리큘럼.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="예비고1 커리큘럼 — 필탑학원 고등수학과">
+<meta property="og:description" content="12월 1일 개강 · 공통수학1 한 주에 한 단원 · 윈터특강 공통수학2">
+<meta property="og:url" content="https://ukan8.github.io/curriculum/">
+<meta property="og:image" content="https://ukan8.github.io/curriculum/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
+<style>
+:root{--bg:#0a0a0f;--card:rgba(255,255,255,.025);--card2:rgba(255,255,255,.045);--border:rgba(255,255,255,.08);--line:rgba(255,255,255,.06);--text:#f5f5fa;--sub:#b8b8c5;--dim:#8a8a98;--accent:#f5a0a0;--accent-bg:rgba(245,160,160,.12);--mid:#fce8c8}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Paperlogy','Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1000px;margin:0 auto;padding:0 28px}@media(max-width:600px){.wrap{padding:0 16px}}
+nav{position:sticky;top:0;background:rgba(10,10,15,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:700}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:20px;font-size:.86rem;font-weight:500;color:var(--dim)}.nav-links a:hover{color:var(--text)}.nav-links .on{color:var(--accent)}
+@media(max-width:600px){.nav-links{gap:12px;font-size:.78rem}}
+.hero{padding:80px 0 30px}
+.kicker{font-size:.8rem;font-weight:600;letter-spacing:.04em;color:var(--accent);margin-bottom:12px}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;line-height:1.18;letter-spacing:-.03em}h1 em{font-style:normal;color:var(--accent)}
+.lead{color:var(--sub);font-size:1.05rem;margin-top:16px;max-width:640px}
+section{padding:46px 0}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.sub{color:var(--sub);font-size:.95rem;margin-bottom:22px}
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:760px){.road{grid-template-columns:1fr 1fr}}
+.road div{padding:18px;border-radius:14px;background:var(--card);border:1px solid var(--border)}
+.road span{display:block;font-size:.8rem;color:var(--accent);font-weight:700}.road b{display:block;font-size:1.05rem;margin-top:4px}.road i{display:block;font-style:normal;font-size:.82rem;color:var(--sub);margin-top:2px}
+.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}@media(max-width:760px){.classes{grid-template-columns:1fr}}
+.cls{padding:20px 22px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.cls h3{font-size:1.15rem;font-weight:800}.cls h3 small{font-size:.8rem;color:var(--accent);font-weight:700;margin-left:6px}
+.cls p{color:var(--sub);font-size:.9rem;margin-top:6px}.cls b{color:var(--text);font-weight:600}
+.tw{overflow-x:auto;border-radius:16px;border:1px solid var(--border);background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:560px}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:.78rem;color:var(--dim);font-weight:600;letter-spacing:.03em;cursor:pointer;user-select:none;white-space:nowrap;background:rgba(255,255,255,.02)}
+th:hover{color:var(--text)}th .ar{color:var(--accent);margin-left:4px;font-size:.7rem}
+tr:last-child td{border-bottom:none}
+td.n{color:var(--dim);font-variant-numeric:tabular-nums;width:56px}
+td.d{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--sub)}
+td.u{font-weight:700}
+td.r{color:var(--sub);font-size:.85rem}
+tr.ex td.u,tr.ex td.r b{color:var(--accent)}
+tr.bo td{background:rgba(252,232,200,.035)}tr.bo td.u{color:var(--mid)}
+.note{margin-top:14px;color:var(--dim);font-size:.85rem;line-height:1.75}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}@media(max-width:760px){.cards2{grid-template-columns:1fr}}
+.box{padding:20px 22px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+.box b{display:block;font-size:1.02rem;color:var(--accent);margin-bottom:4px}.box p{color:var(--sub);font-size:.9rem}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--dim);font-size:.85rem}
+footer .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+footer .links a{padding:10px 18px;border-radius:12px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-weight:600}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{padding:9px 16px;border-radius:12px;background:var(--card2);border:1px solid var(--border);color:var(--sub);font:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+.tab small{font-weight:500;color:var(--dim);margin-left:6px}
+.tab.on{background:var(--accent-bg);border-color:rgba(245,160,160,.4);color:var(--accent)}
+.csum{color:var(--sub);font-size:.9rem;margin-bottom:12px}.csum b{color:var(--text)}
+tr.off td{color:var(--dim)}tr.off td.u{text-decoration:line-through}
+tr.wk td{border-top:1px solid rgba(255,255,255,.12)}
+tr.today td{background:rgba(245,160,160,.10)}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="/">수학은<span>유강</span></a>
+  <div class="nav-links"><a href="/guide/">시스템 안내</a><a class="on" href="/curriculum/">커리큘럼</a><a href="/review/">수강 후기</a><a href="/try/">학생 체험</a></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kicker">필탑학원 고등수학과 · 2027 예비고1</div>
+  <h1>공통수학1, 한 주에 한 단원씩 <em>깊게.</em></h1>
+  <p class="lead">12월 1일 정규 시즌 개강. 겨울방학엔 윈터특강으로 공통수학2까지 미리 끝내고, 고1 3월 첫 내신을 바로 준비합니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>일정 한눈에</h2>
+  <p class="sub">배치고사부터 고1 개학까지</p>
+  <div class="road">
+    <div><span>11/20 · 21</span><b>배치고사</b><i>반 배정</i></div>
+    <div><span>12/1</span><b>정규 시즌 개강</b><i>공통수학1 · 13주</i></div>
+    <div><span>1/11 ~ 2/27</span><b>윈터특강</b><i>공통수학2 · 두 반</i></div>
+    <div><span>3월</span><b>새 반으로 고1 시작</b><i>중간 + 기말 합산 재배치</i></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>정규 시즌 반</h2>
+  <p class="sub">교재는 반별 선생님의 시그니처 교재</p>
+  <div class="classes">
+    <div class="cls"><h3>예비고1 A<small>심화</small></h3><p><b>유강 선생님</b><br>화 · 목 18–20시 / 토 12–14시</p></div>
+    <div class="cls"><h3>예비고1 K<small>기본</small></h3><p><b>규진 선생님</b><br>월 · 수 · 금 20–22시</p></div>
+    <div class="cls"><h3>예비고1 M<small>기본</small></h3><p><b>다부 선생님</b><br>화 · 목 20–22시 / 토 12–14시</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>정규 시즌 · 공통수학1</h2>
+  <p class="sub">12/1 개강 · 한 주에 한 단원 · 6주차 자체 중간고사 · 12주차 자체 기말고사</p>
+  <div class="tw"><table class="sortable">
+    <thead><tr><th>주차</th><th>기간</th><th>단원</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="d">12/1 ~ 12/6</td><td class="u">다항식의 연산</td><td class="r">개강</td></tr>
+      <tr><td class="n">2</td><td class="d">12/7 ~ 12/13</td><td class="u">항등식과 나머지정리</td><td class="r"></td></tr>
+      <tr><td class="n">3</td><td class="d">12/14 ~ 12/20</td><td class="u">인수분해</td><td class="r"></td></tr>
+      <tr><td class="n">4</td><td class="d">12/21 ~ 12/27</td><td class="u">복소수</td><td class="r">12/25(금) 성탄절 휴강</td></tr>
+      <tr><td class="n">5</td><td class="d">12/28 ~ 1/3</td><td class="u">이차방정식</td><td class="r">1/1(금) 신정 휴강</td></tr>
+      <tr class="ex"><td class="n">6</td><td class="d">1/4 ~ 1/10</td><td class="u">이차방정식과 이차함수</td><td class="r"><b>자체 중간고사</b> · 1~6단원</td></tr>
+      <tr><td class="n">7</td><td class="d">1/11 ~ 1/17</td><td class="u">여러 가지 방정식</td><td class="r"></td></tr>
+      <tr><td class="n">8</td><td class="d">1/18 ~ 1/24</td><td class="u">일차부등식</td><td class="r"></td></tr>
+      <tr><td class="n">9</td><td class="d">1/25 ~ 1/31</td><td class="u">이차부등식</td><td class="r"></td></tr>
+      <tr><td class="n">10</td><td class="d">2/1 ~ 2/5</td><td class="u">경우의 수</td><td class="r">2/6(토) 설 연휴 휴강</td></tr>
+      <tr><td class="n">11</td><td class="d">2/10 ~ 2/14</td><td class="u">순열과 조합</td><td class="r">2/8 · 2/9 설 연휴 휴강</td></tr>
+      <tr class="ex"><td class="n">12</td><td class="d">2/15 ~ 2/21</td><td class="u">행렬</td><td class="r"><b>자체 기말고사</b> · 7~12단원</td></tr>
+      <tr class="bo"><td class="n">13</td><td class="d">2/22 ~ 2/27</td><td class="u">진도 보강</td><td class="r">휴강으로 빠진 회차 · 남은 진도</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">휴강은 그 요일에 수업이 있는 반만 해당합니다 (성탄절 · 신정은 월 · 수 · 금 반, 설 연휴 2/6 · 2/9는 화 · 목 · 토 반, 2/8은 월 · 수 · 금 반). 빠진 회차는 13주차 진도 보강에서 채웁니다.</p>
+</div></section>
+
+<section id="byclass"><div class="wrap">
+  <h2>반별 일정</h2>
+  <p class="sub">우리 아이 반을 고르면 날짜별 수업 · 휴강 · 시험이 나옵니다</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="csum" id="csum"></div>
+  <div class="tw"><table><thead><tr><th>주차</th><th>날짜</th><th>시간</th><th>회차</th><th>단원</th><th>비고</th></tr></thead><tbody id="cbody"></tbody></table></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>윈터특강 · 공통수학2</h2>
+  <p class="sub">1/11 ~ 2/27 · 7주 · 두 반 · 방학 중 낮 시간</p>
+  <div class="tw"><table class="sortable">
+    <thead><tr><th>주차</th><th>기간</th><th>단원</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="d">1/11 ~ 1/16</td><td class="u">평면좌표 · 직선의 방정식</td><td class="r"></td></tr>
+      <tr><td class="n">2</td><td class="d">1/18 ~ 1/23</td><td class="u">원의 방정식</td><td class="r"></td></tr>
+      <tr><td class="n">3</td><td class="d">1/25 ~ 1/30</td><td class="u">도형의 이동</td><td class="r"></td></tr>
+      <tr><td class="n">4</td><td class="d">2/1 ~ 2/5</td><td class="u">집합의 뜻과 연산</td><td class="r">2/6(토) 설 연휴 휴강</td></tr>
+      <tr><td class="n">5</td><td class="d">2/10 ~ 2/13</td><td class="u">명제</td><td class="r">2/8 · 2/9 설 연휴 휴강</td></tr>
+      <tr><td class="n">6</td><td class="d">2/15 ~ 2/20</td><td class="u">함수 (합성함수 · 역함수)</td><td class="r"></td></tr>
+      <tr><td class="n">7</td><td class="d">2/22 ~ 2/27</td><td class="u">유리함수 · 무리함수</td><td class="r"></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">윈터특강 요일 · 시간은 확정되는 대로 안내드립니다.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>반 재배치</h2>
+  <div class="cards2">
+    <div class="box"><b>중간 + 기말 합산</b><p>6주차 자체 중간고사와 12주차 자체 기말고사 성적을 합쳐 최상위반 · 심화반 · 기본반으로 다시 배치하고, 3월부터 새 반으로 시작합니다.</p></div>
+    <div class="box"><b>시즌 중에도 반 이동</b><p>수업 태도 · 과제 이행 · 주간고사 기록을 보고 발전 속도에 맞춰 반을 조정합니다.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  필탑학원 고등수학과 · 상담 010-6456-8959 (전화 · 카카오톡)
+  <div class="links"><a href="/guide/">시스템 안내</a><a href="/review/">수강 후기</a><a href="/try/">학생 체험</a></div>
+</div></footer>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const C=window.CUR, tabs=document.getElementById('tabs'), body=document.getElementById('cbody'), sum=document.getElementById('csum');
+  let cur; try{cur=localStorage.getItem('cur_cls')}catch(e){}
+  if(!C.CLASSES.some(c=>c.id===cur)) cur='A';
+  const todayIso=C.iso(new Date());
+  function draw(){
+    tabs.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.id===cur));
+    const cls=C.CLASSES.find(c=>c.id===cur), ss=C.sessions(cls);
+    const on=ss.filter(x=>!x.off).length, off=ss.length-on;
+    sum.innerHTML='<b>'+cls.name+'</b> · '+cls.teacher+' 선생님 · 수업 <b>'+on+'회</b>'+(off?' · 휴강 '+off+'회 (13주차 진도 보강에서 채움)':'');
+    let lastW=0;
+    body.innerHTML=ss.map(x=>{const wk=x.week!==lastW;lastW=x.week;
+      const cl=[x.off?'off':'',wk?'wk':'',x.iso===todayIso?'today':''].join(' ');
+      return '<tr class="'+cl+'"><td class="n">'+(wk?x.week:'')+'</td><td class="d">'+x.label+'</td><td class="d">'+x.time+'</td><td class="n">'+(x.off?'—':x.no+'회')+'</td><td class="u">'+x.unit+'</td><td class="r">'+(x.off?'휴강 · '+x.off:(wk&&x.memo?x.memo:''))+'</td></tr>';}).join('');
+  }
+  C.CLASSES.forEach(c=>{const b=document.createElement('button');b.className='tab';b.dataset.id=c.id;b.innerHTML=c.name+'<small>'+c.level+'</small>';
+    b.onclick=()=>{cur=c.id;try{localStorage.setItem('cur_cls',cur)}catch(e){};draw();};tabs.appendChild(b);});
+  draw();
+})();
+document.querySelectorAll('table.sortable').forEach(tb=>{
+  const ths=[...tb.querySelectorAll('th')], body=tb.tBodies[0], orig=[...body.rows];
+  let col=-1, dir=0;
+  const key=(r,i)=>{const t=r.cells[i].innerText.trim(); const n=parseFloat(t); return isNaN(n)?t:n;};
+  ths.forEach((th,i)=>th.addEventListener('click',()=>{
+    dir = col===i ? (dir+1)%3 : 1; col=i;
+    ths.forEach(h=>{const a=h.querySelector('.ar'); if(a) a.remove();});
+    let rows=[...orig];
+    if(dir){ rows.sort((a,b)=>{const x=key(a,i),y=key(b,i); return (x>y?1:x<y?-1:0)*(dir===1?1:-1);});
+      th.insertAdjacentHTML('beforeend','<span class="ar">'+(dir===1?'▲':'▼')+'</span>'); }
+    rows.forEach(r=>body.appendChild(r));
+  }));
+});
+</script>
+<script data-goatcounter="https://ukan8.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
