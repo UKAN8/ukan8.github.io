@@ -104,6 +104,7 @@ h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.25;le
 .stops li:last-child::before{display:none}
 .dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--forest-2);background:var(--mist);margin-top:4px;position:relative;z-index:1}
 .stops li.peak .dot{background:var(--forest-2)}
+.stops li.down .dot{border-color:var(--ink-soft);border-style:dashed}
 .stops b{font-weight:700}
 .stops .note{display:block;font-size:13px;color:var(--ink-soft)}
 .stops .km{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:3px}
@@ -217,7 +218,7 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
   </section>
 
   <section aria-labelledby="course-h">
-    <div class="head"><p class="label">Course</p><h2 id="course-h">경기대 → 형제봉, 원점회귀</h2></div>
+    <div class="head"><p class="label">Course</p><h2 id="course-h">경기대로 올라서 문암골로 하산</h2></div>
     <svg class="profile" viewBox="0 0 320 150" role="img" aria-label="경기대에서 형제봉, 종루봉, 시루봉까지 이어지는 능선 개념도">
       <line x1="20" y1="128" x2="304" y2="128" stroke="#d3dbd6"/>
       <path class="area" d="M20 120 C60 118 90 105 120 90 C150 75 170 58 187 50 L187 128 L20 128 Z" fill="#24453a" opacity=".1"/>
@@ -244,19 +245,22 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
         <text x="300" y="142" text-anchor="middle">+0.9</text>
       </g>
     </svg>
-    <div class="legend"><span><i></i>기본 코스</span><span><i class="dash"></i>옵션</span></div>
+    <div class="legend"><span><i></i>기본 코스 (오르막)</span><span><i class="dash"></i>옵션</span></div>
     <ol class="stops">
       <li><span class="dot"></span><span><b>경기대 정문</b><span class="note">카페에서 커피 들고 출발</span></span><span class="km">0</span></li>
       <li><span class="dot"></span><span><b>반딧불이화장실</b><span class="note">등산로 입구. 화장실은 여기서</span></span><span class="km"></span></li>
       <li><span class="dot"></span><span><b>천년수약수터</b><span class="note">용인 쪽 길과 합류</span></span><span class="km"></span></li>
-      <li><span class="dot"></span><span><b>백년수정상</b><span class="note">정상 직전 마지막 오르막</span></span><span class="km"></span></li>
+      <li><span class="dot"></span><span><b>백년수정상</b><span class="note">정상 직전 마지막 오르막 (483계단)</span></span><span class="km"></span></li>
       <li class="peak"><span class="dot"></span><span><b>형제봉 448m</b><span class="note">수원 시내 파노라마. 단체사진</span></span><span class="km">3.4km</span></li>
+      <li class="down"><span class="dot"></span><span><b>백년수정상 → 백년수약수터</b><span class="note">하산 시작. 계단 내리막이라 무릎 조심</span></span><span class="km">+0.4</span></li>
+      <li class="down"><span class="dot"></span><span><b>문암골 입구</b><span class="note">하산 완료. 식당 쪽으로 바로 빠짐</span></span><span class="km">+2.2</span></li>
     </ol>
     <div class="stats">
-      <div><b><span data-count="3.4" data-dec="1">3.4</span>km</b><small>편도</small></div>
-      <div><b>1~1.5h</b><small>올라가는 시간</small></div>
-      <div><b>쉬움</b><small>난이도</small></div>
+      <div><b><span data-count="3.4" data-dec="1">3.4</span>km</b><small>올라가기</small></div>
+      <div><b><span data-count="2.6" data-dec="1">2.6</span>km</b><small>내려오기</small></div>
+      <div><b>2~2.5h</b><small>전체</small></div>
     </div>
+    <p class="muted">차는 점심 먹고 광교저수지 데크길 따라 15분 걸어서 경기대 주차장으로 회수.</p>
   </section>
 
   <section aria-labelledby="time-h">
@@ -265,9 +269,9 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
       <li><time>10:00</time><span>카페워터쿨러 집결, 커피 수혈</span></li>
       <li><time>10:15</time><span>반딧불이화장실에서 산행 시작</span></li>
       <li class="hl"><time>11:30</time><span>형제봉 정상, 사진·간식, 옵션 결정</span></li>
-      <li><time>12:45</time><span>하산 완료, 차로 식당 이동</span></li>
-      <li class="hl"><time>13:00</time><span>점심, 어울더울</span></li>
-      <li><time>14:30</time><span>해산 (출근조는 바로 출근)</span></li>
+      <li><time>12:30</time><span>문암골 입구로 하산 완료</span></li>
+      <li class="hl"><time>12:45</time><span>점심, 어울더울</span></li>
+      <li><time>14:15</time><span>데크길 15분 걸어서 차 회수, 해산</span></li>
     </ol>
   </section>
 
