@@ -81,11 +81,15 @@ h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.25;le
 .fine-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .fine-top b{font-family:var(--display);font-weight:800;font-size:22px}
 .fine-top span{font-size:13px;opacity:.9}
-.ticks{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid rgba(255,255,255,.6)}
-.ticks div{padding-top:8px;position:relative;display:flex;flex-direction:column}
-.ticks div::before{content:"";position:absolute;top:-7px;left:0;width:2px;height:10px;background:#fff}
-.ticks b{font-family:var(--mono);font-size:15px}
-.ticks small{font-size:13px;opacity:.92}
+.ruler{margin:2px 20px 0}
+.ruler .line{position:relative;height:12px}
+.ruler .line::before{content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:rgba(255,255,255,.35)}
+.ruler .line::after{content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:#fff;transform-origin:left}
+.ruler .line i{position:absolute;top:0;width:2px;height:12px;background:#fff;transform:translateX(-1px)}
+.ruler .times{position:relative;height:22px;margin-top:6px}
+.ruler .times b{position:absolute;top:0;transform:translateX(-50%);font-family:var(--mono);font-size:15px;font-weight:700;white-space:nowrap}
+.ruler .fees{display:grid;grid-template-columns:repeat(3,1fr);margin-top:8px;text-align:center}
+.ruler .fees span{margin:0 6px;padding:3px 0;border-radius:999px;background:rgba(255,255,255,.2);font-size:14px;font-weight:700}
 
 /* 코스 */
 .profile{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--rule);border-radius:4px}
@@ -168,13 +172,11 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
 .profile .ping{opacity:0;transform-box:fill-box;transform-origin:center}
 .profile.in .ping{animation:ping 2.2s ease-out 2s infinite}
 /* 지각비 눈금 차오름 */
-.ticks{position:relative}
-.ticks::after{content:"";position:absolute;left:0;top:-2px;height:2px;width:100%;background:#fff;transform-origin:left;transform:scaleX(1)}
-.js .fine .ticks::after{transform:scaleX(0);transition:transform 1.4s cubic-bezier(.2,.7,.2,1) .3s}
-.js .fine.in .ticks::after{transform:scaleX(1)}
-.js .fine .ticks div{opacity:0;transition:opacity .4s ease}
-.js .fine.in .ticks div{opacity:1}
-.js .fine.in .ticks div:nth-child(1){transition-delay:.3s}.js .fine.in .ticks div:nth-child(2){transition-delay:.65s}.js .fine.in .ticks div:nth-child(3){transition-delay:1s}.js .fine.in .ticks div:nth-child(4){transition-delay:1.35s}
+.js .fine .ruler .line::after{transform:scaleX(0);transition:transform 1.4s cubic-bezier(.2,.7,.2,1) .3s}
+.js .fine.in .ruler .line::after{transform:scaleX(1)}
+.js .fine .ruler .fees span{opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.js .fine.in .ruler .fees span{opacity:1;transform:none}
+.js .fine.in .ruler .fees span:nth-child(1){transition-delay:.6s}.js .fine.in .ruler .fees span:nth-child(2){transition-delay:1s}.js .fine.in .ruler .fees span:nth-child(3){transition-delay:1.4s}
 .mate{transition:border-color .15s,transform .15s}
 .mate:active{transform:scale(.97)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.js .up,.js .rv,.js .profile *{opacity:1!important;transform:none!important}.js .profile .area{opacity:.1!important}}
@@ -205,12 +207,11 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
       <div class="row"><dt>주차</dt><dd>경기대 공영주차장<a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8C%80%20%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5">지도 ↗</a></dd></div>
     </dl>
     <div class="fine" role="group" aria-label="지각비">
-      <div class="fine-top"><b>지각비 10분에 만원</b><span>10시 1분부터 1만원</span></div>
-      <div class="ticks">
-        <div><b>10:00</b><small>정각까지 0원</small></div>
-        <div><b>~10:10</b><small>1만원</small></div>
-        <div><b>~10:20</b><small>2만원</small></div>
-        <div><b>~10:30</b><small>3만원</small></div>
+      <div class="fine-top"><b>지각비 10분에 만원</b><span>정각까지 0원</span></div>
+      <div class="ruler" aria-label="10:00~10:10 1만원, 10:10~10:20 2만원, 10:20~10:30 3만원">
+        <div class="line"><i style="left:0"></i><i style="left:33.333%"></i><i style="left:66.667%"></i><i style="left:100%"></i></div>
+        <div class="times"><b style="left:0">10:00</b><b style="left:33.333%">10:10</b><b style="left:66.667%">10:20</b><b style="left:100%">10:30</b></div>
+        <div class="fees"><span>1만원</span><span>2만원</span><span>3만원</span></div>
       </div>
     </div>
   </section>
@@ -383,7 +384,7 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
   if(base && base.getTotalLength){ var L=base.getTotalLength(); base.style.strokeDasharray=L; if(!RM) base.style.strokeDashoffset=L; }
 
   /* 스크롤 리빌: 섹션 안 요소를 차례로 */
-  var groups=['.stops','.time','.crew','.pack','.opts','.ticks'];
+  var groups=['.stops','.time','.crew','.pack','.opts'];
   document.querySelectorAll('main section').forEach(function(sec){
     var n=0;
     Array.prototype.forEach.call(sec.children,function(ch){
