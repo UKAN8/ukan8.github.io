@@ -137,7 +137,8 @@ h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.25;le
 /* 날씨 */
 .wx{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .wx-num{font-family:var(--mono);font-weight:600;font-size:34px;line-height:1}
-.wx-num small{font-size:15px;color:var(--ink-soft);margin:0 4px}
+.wx-num{display:inline-flex;align-items:center}
+.wx-arr{width:.8em;height:.46em;margin:0 .22em;color:var(--ink-soft)}
 .pack{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .pack li{font-size:14px;padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--paper)}
 .pack li.must{border-color:var(--forest-2);background:var(--forest-2);color:#fff}
@@ -309,7 +310,7 @@ footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;
   <section aria-labelledby="wx-h">
     <div class="head"><p class="label">Weather &amp; Gear</p><h2 id="wx-h">맑지만 춥고 바람 셈</h2></div>
     <div class="wx">
-      <p class="wx-num">영하<small>→</small>5~9℃</p>
+      <p class="wx-num">영하<svg class="wx-arr" viewBox="0 0 28 16" aria-label="에서"><path d="M2 8h22M17 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>5~9℃</p>
       <p class="muted">기상청 예보 기준. 아침엔 영하, 바람 때문에 체감은 더 낮음. 정상에선 바람막이 필수.</p>
     </div>
     <ul class="pack">
