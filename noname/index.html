@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NONAME 1회 산행 · 광교산 형제봉</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="11/22(일) 10:00 경기대 정문 카페 워터쿨러 집결. 형제봉 찍고 내려와서 점심 먹고 해산.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NONAME 1회 산행 · 광교산 형제봉">
+<meta property="og:description" content="11/22(일) 10:00 경기대 정문 카페 워터쿨러 집결. 지각비 10분에 만원.">
+<meta property="og:url" content="https://ukan8.github.io/noname/">
+<meta property="og:image" content="https://ukan8.github.io/noname/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"Paperlogy";font-weight:400;font-style:normal;font-display:swap;src:url("fonts/Paperlogy-4Regular.woff2") format("woff2")}
+@font-face{font-family:"Paperlogy";font-weight:500;font-style:normal;font-display:swap;src:url("fonts/Paperlogy-5Medium.woff2") format("woff2")}
+@font-face{font-family:"Paperlogy";font-weight:600 700;font-style:normal;font-display:swap;src:url("fonts/Paperlogy-7Bold.woff2") format("woff2")}
+@font-face{font-family:"Paperlogy";font-weight:800;font-style:normal;font-display:swap;src:url("fonts/Paperlogy-8ExtraBold.woff2") format("woff2")}
+:root{
+  /* 등산 지도 같은 초대장: 짙은 숲색 표지(등고선) + 차가운 안개색 본문 + 등산 리본 오렌지. 세로 한 줄 흐름, 섹션은 카드 대신 가는 선으로 구분 */
+  --forest:#13261f;
+  --forest-2:#24453a;
+  --mist:#eef1ee;
+  --paper:#fbfcfa;
+  --ink:#16221e;
+  --ink-soft:#5b6b65;
+  --rule:#d3dbd6;
+  --ribbon:#ff5b1f;
+  /* 서체: 수학은유강 안내문과 같은 Paperlogy 한 가족으로 통일 */
+  --display:"Paperlogy","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"Paperlogy","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"Paperlogy","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--mist)}
+body{background:var(--mist);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--ribbon);outline-offset:3px;border-radius:4px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+/* 표지 */
+.cover{position:relative;background:var(--forest);color:var(--paper);overflow:hidden}
+.cover canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cover-in{position:relative;max-width:520px;margin:0 auto;padding:40px 20px 28px;display:flex;flex-direction:column;gap:18px}
+.tag{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.06em;color:#b9cbc3}
+.tag::before{content:"";width:22px;height:10px;background:var(--ribbon);clip-path:polygon(0 0,100% 0,82% 50%,100% 100%,0 100%)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,12vw,58px);line-height:1.08;letter-spacing:-.035em;text-wrap:balance}
+.sub{font-size:16px;color:#cfdcd6;margin-top:-6px}
+.ticket{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22);margin-top:6px}
+.ticket div{padding:12px 0 12px 12px;display:flex;flex-direction:column;gap:2px}
+.ticket div:first-child{padding-left:0}
+.ticket div+div{border-left:1px solid rgba(255,255,255,.22)}
+.ticket small{font-size:11px;letter-spacing:.08em;color:#9fb5ab}
+.ticket b{font-family:var(--mono);font-weight:600;font-size:20px;color:#fff}
+
+/* 본문 */
+main{max-width:520px;margin:0 auto;padding:0 20px 56px}
+section{padding:28px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:14px}
+section:last-of-type{border-bottom:0}
+.label{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase}
+h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.25;letter-spacing:-.01em;text-wrap:balance}
+.head{display:flex;flex-direction:column;gap:4px}
+.muted{color:var(--ink-soft);font-size:14px}
+
+/* 정보 행 */
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--rule)}
+.row:first-child{border-top:0;padding-top:0}
+.row dt{font-size:13px;color:var(--ink-soft);padding-top:2px}
+.row dd{font-weight:500}
+.row dd a{text-decoration:none;border-bottom:1px solid var(--ribbon);font-size:13px;font-weight:700;color:var(--ribbon);margin-left:6px;white-space:nowrap}
+
+/* 지각비 */
+.fine{background:var(--ribbon);color:#fff;border-radius:4px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
+.fine-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.fine-top b{font-family:var(--display);font-weight:800;font-size:22px}
+.fine-top span{font-size:13px;opacity:.9}
+.ticks{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid rgba(255,255,255,.6)}
+.ticks div{padding-top:8px;position:relative;display:flex;flex-direction:column}
+.ticks div::before{content:"";position:absolute;top:-7px;left:0;width:2px;height:10px;background:#fff}
+.ticks b{font-family:var(--mono);font-size:15px}
+.ticks small{font-size:13px;opacity:.92}
+
+/* 코스 */
+.profile{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--rule);border-radius:4px}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:0;border-top:2.5px solid var(--forest-2)}
+.legend i.dash{border-top:2.5px dashed var(--ribbon)}
+.stops{list-style:none;display:flex;flex-direction:column}
+.stops li{display:grid;grid-template-columns:16px 1fr auto;gap:12px;position:relative;padding-bottom:14px}
+.stops li:last-child{padding-bottom:0}
+.stops li::before{content:"";position:absolute;left:7px;top:16px;bottom:0;width:2px;background:var(--rule)}
+.stops li:last-child::before{display:none}
+.dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--forest-2);background:var(--mist);margin-top:4px;position:relative;z-index:1}
+.stops li.peak .dot{background:var(--forest-2)}
+.stops b{font-weight:700}
+.stops .note{display:block;font-size:13px;color:var(--ink-soft)}
+.stops .km{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+.stats div{padding:10px 0 10px 12px;display:flex;flex-direction:column}
+.stats div:first-child{padding-left:0}
+.stats div+div{border-left:1px solid var(--rule)}
+.stats b{font-family:var(--mono);font-weight:600;font-size:19px}
+.stats small{font-size:12px;color:var(--ink-soft)}
+
+/* 옵션 */
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;position:relative}
+.opt::before{content:"";position:absolute;left:-1px;top:14px;width:4px;height:28px;background:var(--forest-2)}
+.opt.top::before{background:var(--ribbon)}
+.opt header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.opt h3{font-family:var(--display);font-weight:700;font-size:19px}
+.opt .alt{font-family:var(--mono);font-weight:600;font-size:17px;color:var(--forest-2)}
+.opt.top .alt{color:var(--ribbon)}
+.opt dl{display:grid;grid-template-columns:64px 1fr;gap:6px 12px;font-size:14px}
+.opt dt{color:var(--ink-soft)}
+
+/* 일정 */
+.time{list-style:none;display:flex;flex-direction:column}
+.time li{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--rule)}
+.time li:first-child{border-top:0;padding-top:0}
+.time time{font-family:var(--mono);font-weight:600;font-size:15px;padding-top:1px}
+.time li.hl time{color:var(--ribbon)}
+
+/* 날씨 */
+.wx{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.wx-num{font-family:var(--mono);font-weight:600;font-size:34px;line-height:1}
+.wx-num small{font-size:15px;color:var(--ink-soft);margin:0 4px}
+.pack{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.pack li{font-size:14px;padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--paper)}
+.pack li.must{border-color:var(--forest-2);background:var(--forest-2);color:#fff}
+
+/* 멤버 */
+.crew{display:flex;flex-wrap:wrap;gap:8px}
+.crew span{font-weight:700;padding:7px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--rule)}
+.crew span.host{border-color:var(--ribbon);color:var(--ribbon)}
+
+footer{background:var(--forest);color:#cfdcd6;text-align:center;padding:28px 20px;font-family:var(--display);font-size:17px}
+footer small{display:block;font-family:var(--body);font-size:12px;color:#8fa79c;margin-top:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="cover-in">
+    <p class="tag">NONAME · 1회 산행</p>
+    <h1>광교산<br>형제봉 산행</h1>
+    <p class="sub">올라가서 사진 찍고, 내려와서 고기 먹고 해산.</p>
+    <div class="ticket">
+      <div><small>DATE</small><b>11.22 일</b></div>
+      <div><small>MEET</small><b>10:00</b></div>
+      <div><small>PEAK</small><b>448m</b></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section aria-labelledby="meet-h">
+    <div class="head"><p class="label">Meeting point</p><h2 id="meet-h">경기대 정문에서 10시</h2></div>
+    <dl class="rows">
+      <div class="row"><dt>만나는 곳</dt><dd>카페 워터쿨러 (경기대 정문)<a href="https://map.naver.com/p/search/%EC%B9%B4%ED%8E%98%20%EC%9B%8C%ED%84%B0%EC%BF%A8%EB%9F%AC%20%EA%B2%BD%EA%B8%B0%EB%8C%80">지도 ↗</a></dd></div>
+      <div class="row"><dt>주차</dt><dd>경기대 공영주차장<a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8C%80%20%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5">지도 ↗</a></dd></div>
+    </dl>
+    <div class="fine" role="group" aria-label="지각비">
+      <div class="fine-top"><b>지각비 10분에 만원</b><span>모이면 점심값에 보탬</span></div>
+      <div class="ticks">
+        <div><b>10:00</b><small>0원</small></div>
+        <div><b>10:10</b><small>1만원</small></div>
+        <div><b>10:20</b><small>2만원</small></div>
+        <div><b>10:30</b><small>3만원</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="course-h">
+    <div class="head"><p class="label">Course</p><h2 id="course-h">경기대 → 형제봉, 원점회귀</h2></div>
+    <svg class="profile" viewBox="0 0 320 150" role="img" aria-label="경기대에서 형제봉, 종루봉, 시루봉까지 이어지는 능선 개념도">
+      <line x1="20" y1="128" x2="304" y2="128" stroke="#d3dbd6"/>
+      <path d="M20 120 C60 118 90 105 120 90 C150 75 170 58 187 50 L187 128 L20 128 Z" fill="#24453a" opacity=".1"/>
+      <path d="M187 50 C200 46 210 60 221 60 C235 60 245 44 256 42 C270 40 285 30 300 24" fill="none" stroke="#ff5b1f" stroke-width="2.5" stroke-dasharray="5 4" stroke-linecap="round"/>
+      <path d="M20 120 C60 118 90 105 120 90 C150 75 170 58 187 50" fill="none" stroke="#24453a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="20" cy="120" r="5" fill="#fbfcfa" stroke="#24453a" stroke-width="2"/>
+      <circle cx="187" cy="50" r="6" fill="#24453a"/>
+      <circle cx="256" cy="42" r="4.5" fill="#fbfcfa" stroke="#ff5b1f" stroke-width="2"/>
+      <circle cx="300" cy="24" r="4.5" fill="#fbfcfa" stroke="#ff5b1f" stroke-width="2"/>
+      <g font-family="Paperlogy, sans-serif" font-size="10.5" font-weight="700">
+        <text x="20" y="110" fill="#16221e">경기대</text>
+        <text x="180" y="38" fill="#16221e" text-anchor="middle">형제봉</text>
+        <text x="256" y="62" fill="#ff5b1f" text-anchor="middle">종루봉</text>
+        <text x="300" y="12" fill="#ff5b1f" text-anchor="end">시루봉</text>
+      </g>
+      <g font-family="Paperlogy, sans-serif" font-size="9.5" fill="#5b6b65">
+        <text x="180" y="27" text-anchor="middle">448m</text>
+        <text x="256" y="73" text-anchor="middle">490m</text>
+        <text x="262" y="12" text-anchor="end">582m</text>
+        <text x="20" y="142">0</text>
+        <text x="187" y="142" text-anchor="middle">3.4km</text>
+        <text x="256" y="142" text-anchor="middle">+1.4</text>
+        <text x="300" y="142" text-anchor="middle">+0.9</text>
+      </g>
+    </svg>
+    <div class="legend"><span><i></i>기본 코스</span><span><i class="dash"></i>옵션</span></div>
+    <ol class="stops">
+      <li><span class="dot"></span><span><b>경기대 정문</b><span class="note">카페에서 커피 들고 출발</span></span><span class="km">0</span></li>
+      <li><span class="dot"></span><span><b>반딧불이화장실</b><span class="note">등산로 입구. 화장실은 여기서</span></span><span class="km"></span></li>
+      <li><span class="dot"></span><span><b>천년수약수터</b><span class="note">용인 쪽 길과 합류</span></span><span class="km"></span></li>
+      <li><span class="dot"></span><span><b>백년수정상</b><span class="note">정상 직전 마지막 오르막</span></span><span class="km"></span></li>
+      <li class="peak"><span class="dot"></span><span><b>형제봉 448m</b><span class="note">수원 시내 파노라마. 단체사진</span></span><span class="km">3.4km</span></li>
+    </ol>
+    <div class="stats">
+      <div><b>3.4km</b><small>편도</small></div>
+      <div><b>1~1.5h</b><small>올라가는 시간</small></div>
+      <div><b>쉬움</b><small>난이도</small></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="opt-h">
+    <div class="head"><p class="label">Options</p><h2 id="opt-h">체력 남으면 더 올라가기</h2></div>
+    <p class="muted">11:30쯤 형제봉 정상에서 다수결. 오후 일정 있는 사람은 형제봉에서 먼저 내려가도 OK.</p>
+    <div class="opts">
+      <article class="opt">
+        <header><h3>A. 종루봉 (비로봉)</h3><span class="alt">490m</span></header>
+        <dl>
+          <dt>추가</dt><dd>형제봉에서 +1.4km</dd>
+          <dt>하산</dt><dd>형제봉으로 돌아와 문암골, 또는 하광교소류지 → 경동원입구</dd>
+          <dt>전체</dt><dd><span class="num">3.5~4h</span> · 점심 <span class="num">14:00</span>쯤</dd>
+        </dl>
+      </article>
+      <article class="opt top">
+        <header><h3>B. 시루봉 (정상)</h3><span class="alt">582m</span></header>
+        <dl>
+          <dt>추가</dt><dd>종루봉에서 +0.9km (형제봉에서 +2.3km)</dd>
+          <dt>하산</dt><dd>토끼재 → 상광교 버스종점, 버스로 경기대 와서 차 회수</dd>
+          <dt>전체</dt><dd><span class="num">4~4.5h</span> · 점심 <span class="num">14:30</span> 이후</dd>
+        </dl>
+      </article>
+    </div>
+    <p class="muted">형제봉 → 종루봉 구간은 오르내림이 있어서 체력이 더 듭니다.</p>
+  </section>
+
+  <section aria-labelledby="time-h">
+    <div class="head"><p class="label">Schedule</p><h2 id="time-h">기본 코스 일정</h2></div>
+    <ol class="time">
+      <li><time>10:00</time><span>카페 워터쿨러 집결, 커피 수혈</span></li>
+      <li><time>10:15</time><span>반딧불이화장실에서 산행 시작</span></li>
+      <li class="hl"><time>11:30</time><span>형제봉 정상, 사진·간식, 옵션 결정</span></li>
+      <li><time>12:45</time><span>하산 완료, 차로 식당 이동</span></li>
+      <li class="hl"><time>13:00</time><span>점심, 어울더울</span></li>
+      <li><time>14:30</time><span>해산 (출근조는 바로 출근)</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="eat-h">
+    <div class="head"><p class="label">Lunch</p><h2 id="eat-h">어울더울 (정육식당)</h2></div>
+    <dl class="rows">
+      <div class="row"><dt>주소</dt><dd>수원시 장안구 광교산로260번길 24-39 1층<a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%88%98%EC%9B%90%EC%8B%9C%20%EC%9E%A5%EC%95%88%EA%B5%AC%20%EA%B4%91%EA%B5%90%EC%82%B0%EB%A1%9C260%EB%B2%88%EA%B8%B8%2024-39">지도 ↗</a></dd></div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="wx-h">
+    <div class="head"><p class="label">Weather &amp; Gear</p><h2 id="wx-h">맑지만 춥고 바람 셈</h2></div>
+    <div class="wx">
+      <p class="wx-num">영하<small>→</small>5~9℃</p>
+      <p class="muted">기상청 예보 기준. 아침엔 영하, 바람 때문에 체감은 더 낮음. 정상에선 바람막이 필수.</p>
+    </div>
+    <ul class="pack">
+      <li class="must">바람막이·경량패딩</li>
+      <li class="must">장갑</li>
+      <li class="must">물</li>
+      <li>넥워머·비니</li>
+      <li>핫팩</li>
+      <li>초콜릿·간식</li>
+      <li>등산화 (없으면 운동화)</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="crew-h">
+    <div class="head"><p class="label">Crew · 5</p><h2 id="crew-h">같이 가는 사람</h2></div>
+    <div class="crew">
+      <span class="host">유강</span><span>장바</span><span>백송</span><span>지영</span><span>지후</span>
+    </div>
+    <p class="muted">더 오고 싶으면 단톡에 손. 막걸리 타임만 합류도 환영.</p>
+  </section>
+
+</main>
+
+<footer>일요일 10시, 경기대 정문에서<small>NONAME 1회 산행</small></footer>
+
+<script>
+(function(){
+  var c=document.getElementById('topo'); if(!c||!c.getContext) return;
+  var ctx=c.getContext('2d');
+  function draw(){
+    var r=c.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    c.width=r.width*d; c.height=r.height*d; ctx.setTransform(d,0,0,d,0,0);
+    ctx.clearRect(0,0,r.width,r.height);
+    var cx=r.width*0.82, cy=r.height*0.18, max=Math.max(r.width,r.height)*1.1;
+    for(var i=1;i<=22;i++){
+      var base=i*max/22; ctx.beginPath();
+      for(var a=0;a<=Math.PI*2+0.01;a+=0.05){
+        var k=1+0.13*Math.sin(3*a+i*0.35)+0.07*Math.sin(5*a+1.7+i*0.2)+0.04*Math.sin(9*a+i);
+        var x=cx+Math.cos(a)*base*k*1.15, y=cy+Math.sin(a)*base*k*0.85;
+        a===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle=i%5===0?'rgba(255,255,255,0.16)':'rgba(255,255,255,0.07)';
+      ctx.lineWidth=i%5===0?1.2:1; ctx.stroke();
+    }
+    ctx.fillStyle='#ff5b1f'; ctx.beginPath(); ctx.arc(cx,cy,3.5,0,Math.PI*2); ctx.fill();
+  }
+  draw(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(draw,150);});
+})();
+</script>
+</body>
+</html>
