@@ -49,6 +49,10 @@ a{color:inherit;text-decoration:none}
 .badge{font-family:'Pretendard';font-size:.62rem;font-weight:700;letter-spacing:.06em;background:var(--accent);color:#0a0a0f;padding:2px 7px;border-radius:4px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .row2 .link{padding:14px 18px}
+.how{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:7px}
+.how li{position:relative;padding-left:16px;font-size:.88rem;color:var(--sub);line-height:1.6}
+.how li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.how li b{color:var(--text);font-weight:600}
 .resident{margin-top:22px;font-size:.8rem;color:var(--dim);line-height:1.7}
 .resident a{color:var(--sub);border-bottom:1px solid var(--dim)}
 @media(hover:hover){.link:hover{border-color:var(--accent);transform:translateY(-2px)}.link:hover .arrow{color:var(--accent)}}
@@ -70,22 +74,27 @@ a{color:inherit;text-decoration:none}
     <div class="eyebrow">필탑학원 고등수학</div>
     <div class="mark">수학은<span>유강</span></div>
     <div class="name">유강T · 고1 · 고2 · 고3 · 예비고1</div>
-    <p class="quote">제대로 이해하고, 반복하고 반복하여 <b>완성한다.</b></p>
+    <p class="quote">왜 그렇게 푸는지 이해하고,<br>시험에서 <b>혼자 풀 수 있을 때까지</b> 연습합니다.</p>
+    <ul class="how">
+      <li><b>수업 첫 10분</b>, 지난 수업 개념부터 확인합니다</li>
+      <li><b>틀린 유형</b>은 학생마다 다른 다음 과제로 다시 풉니다</li>
+      <li><b>다음 날 아침</b>, 학부모님께 리포트가 갑니다</li>
+    </ul>
     <div class="stat">
       <div><div class="n"><em>17</em>회</div><div class="l">2026 수학 전교 1등<br>1학기 11 · 2학기 중간 6</div></div>
       <div><div class="n"><em>15</em>회</div><div class="l">2026 지필평가 100점<br>1학기 9 · 2학기 중간 6</div></div>
     </div>
     <div class="links">
-      <a class="link primary" href="/intro/"><div><div class="t">수업 안내</div><div class="d">CORE 루프 · 모의테스트 · 클리닉 · 반 안내</div></div><div class="arrow">→</div></a>
+      <a class="link primary" href="/intro/"><div><div class="t">수업 안내</div><div class="d">수업 방식 · 내신 대비 · 학년별 반 안내</div></div><div class="arrow">→</div></a>
       <a class="link" href="/hugi/"><div><div class="t">수강 후기</div><div class="d">시험이 끝난 뒤 학생 · 학부모님이 남긴 말</div></div><div class="arrow">→</div></a>
       <a class="link" href="/guide/"><div><div class="t">예비고1 겨울 학기 <span class="badge">12.1 개강</span></div><div class="d">공통수학1 심화반 · 레벨테스트 안내</div></div><div class="arrow">→</div></a>
-      <a class="link" href="https://pf.kakao.com/_xeqibn/chat" target="_blank" rel="noopener"><div><div class="t">카카오톡 상담</div><div class="d">상담 · 레벨테스트 문의 — 바로 채팅</div></div><div class="arrow">→</div></a>
+      <a class="link" href="https://pf.kakao.com/_xeqibn/chat" target="_blank" rel="noopener"><div><div class="t">카카오톡 상담</div><div class="d">반 배정 · 레벨테스트 문의</div></div><div class="arrow">→</div></a>
       <div class="row2">
         <a class="link" target="_blank" rel="noopener" href="https://youtube.com/channel/UCMtF5NKw5_COFwvgavNFOOg"><div><div class="t">YouTube</div><div class="d">수업 영상</div></div><div class="arrow">→</div></a>
         <a class="link" target="_blank" rel="noopener" href="https://www.instagram.com/ukan8_/"><div><div class="t">Instagram</div><div class="d">@ukan8_</div></div><div class="arrow">→</div></a>
       </div>
     </div>
-    <p class="resident">재원생 · 학부모님은 팀톡으로 받으신 학생 포털 링크로 확인하세요 · 주간고사 · 클리닉 예약 <a href="https://book.ukan.kr">book.ukan.kr</a></p>
+    <p class="resident">재원생 · 학부모님 — <a href="/help/">학생 포털 안내</a> · <a href="https://book.ukan.kr">주간고사 · 클리닉 예약</a></p>
   </div></div>
 </div>
 <script>window.goatcounter={path:function(){return location.pathname||"/"}}</script>

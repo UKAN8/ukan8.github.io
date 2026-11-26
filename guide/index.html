@@ -242,7 +242,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
 <section>
   <div class="wrap">
     <div class="kicker">올해의 기준</div>
-    <h2 class="rv">최고 수준의 학습 시스템을,<br><em>처인에서.</em></h2>
+    <h2 class="rv">공통수학1을 한 주에 한 단원씩 배우고,<br><em>매주 시험으로 확인합니다.</em></h2>
     <p class="lead rv">교재 · 테스트 · 과제 · 리포트를 전부 직접 만들고, 학생 한 명이 문제 하나를 어떻게 풀었는지까지 기록합니다. 그 기록으로 학생마다 문제를 세팅합니다.</p>
     <div class="cmp rv">
       <div class="c"><h3>중학교</h3><ul><li>개념 하나에 유형 몇 개</li><li>교과서 중심 시험</li><li>한두 문제는 만회 가능</li></ul></div>
@@ -291,12 +291,12 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
       <div class="ls s0"><b>잠김</b><span>개념 통과 전</span></div>
       <div class="ls s1"><b>열림</b><span>풀 수 있음</span></div>
       <div class="ls s2"><b>1회</b><span>정답 + 확실</span></div>
-      <div class="ls s3"><b>졸업</b><span>사흘 뒤 또 성공</span></div>
+      <div class="ls s3"><b>졸업</b><span>이틀 뒤 또 성공</span></div>
     </div>
     <div class="rules">
       <div><b>정답 + 확실 = 성공</b><span>찍어서 맞힌 날은 세지 않습니다.</span></div>
-      <div><b>3일 이상 간격 두 번 = 졸업</b><span>한 번 맞히고 잊어버리는 것을 막습니다.</span></div>
-      <div><b>다시 틀리면 처음부터</b><span>졸업 직전이어도 다시 셉니다.</span></div>
+      <div><b>이틀 이상 간격 두 번 = 졸업</b><span>한 번 맞히고 잊어버리는 것을 막습니다.</span></div>
+      <div><b>두 번 연속 틀리면 다시</b><span>한 번 실수로 처음부터 되돌리지는 않습니다.</span></div>
     </div>
     <p class="lead rv" style="margin-top:26px;color:var(--accent)">목표 — 시험 범위가 끝날 때, 모르는 개념 · 유형 0개.</p>
   </div>
@@ -405,7 +405,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
       <div class="c"><h3>예비고1 M <small>기본</small></h3><ul><li>다부 선생님</li><li>화 · 목 20–22시 / 토 12–14시</li></ul></div>
     </div>
     <div class="units rv">
-      <div class="ut">12월 1일 ~ 2월 · 공통수학1 · 12주 <span style="color:var(--sub);font-weight:500">· 교재는 반별 선생님의 시그니처 교재</span></div>
+      <div class="ut">12월 1일 ~ 2월 · 공통수학1 · 12주 진도 · 시험 + 1주 보강 <span style="color:var(--sub);font-weight:500">· 교재는 반별 선생님의 시그니처 교재</span></div>
       <ol>
         <li>다항식의 연산</li><li>항등식과 나머지정리</li><li>인수분해</li><li>복소수</li><li>이차방정식</li><li>이차방정식과 이차함수</li>
         <li>여러 가지 방정식</li><li>일차부등식</li><li>이차부등식</li><li>경우의 수</li><li>순열과 조합</li><li>행렬</li>
@@ -414,7 +414,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:.8rem;colo
     </div>
     <div class="road rv">
       <div><span>11/20 · 21</span><b>배치고사</b><span style="color:var(--sub);font-weight:500;margin-top:4px">반 배정</span></div>
-      <div><span>12/1</span><b>정규 시즌 개강</b><span style="color:var(--sub);font-weight:500;margin-top:4px">공통수학1 · 12주</span></div>
+      <div><span>12/1</span><b>정규 시즌 개강</b><span style="color:var(--sub);font-weight:500;margin-top:4px">공통수학1 · 12주 + 보강 1주</span></div>
       <div><span>1/11 ~ 2/27</span><b>윈터특강</b><span style="color:var(--sub);font-weight:500;margin-top:4px">공통수학2 · 두 반</span></div>
       <div><span>3월</span><b>중간 + 기말 합산 재배치</b><span style="color:var(--sub);font-weight:500;margin-top:4px">최상위 · 심화 · 기본</span></div>
       <div class="hi"><span>고1 3월</span><b>적응 기간 없이 첫 내신</b></div>
@@ -489,7 +489,7 @@ document.querySelectorAll('[data-count]').forEach(el=>{
 const LANES=[
  [['수업 첫 10분','리뷰테스트','개념 4 → 유형 3','<b>폰으로 보고, 풀이는 연습지에.</b> 지난 수업 개념 4문항을 먼저 보고, 개념을 통과해야 그 개념의 유형 3문항이 그 자리에서 열립니다. 문항마다 "확실해요 / 애매해요"를 같이 고릅니다. 수업 시간에만 열립니다.'],
   ['수업','개념 수업','시그니처 교재','<b>반마다 담당 선생님의 시그니처 교재로 수업합니다.</b> 선생님이 직접 만든 교재라 반의 수준에 맞춰져 있고, 리뷰테스트 · 과제에서 묻는 이름이 교재의 이름과 같아 틀리면 다시 펼 곳이 바로 보입니다.'],
-  ['과제 전에 먼저','루프 과제','15분 · 유강T 반 먼저','<b>과제를 하기 전에 먼저 15분.</b> 다시 볼 때가 된 개념 · 유형만 나옵니다. 정답 + 확실만 성공, 3일 이상 간격 두 번이면 졸업, 다시 틀리면 처음부터. 유강T 반에서 먼저 운영하고 고등수학과 전체로 넓혀 가는 중입니다.'],
+  ['과제 전에 먼저','루프 과제','15분 · 유강T 반 먼저','<b>과제를 하기 전에 먼저 15분.</b> 다시 볼 때가 된 개념 · 유형만 나옵니다. 정답 + 확실만 성공, 이틀 이상 간격 두 번이면 졸업, 두 번 연속 틀리면 다시 셉니다. 유강T 반에서 먼저 운영하고 고등수학과 전체로 넓혀 가는 중입니다.'],
   ['루프 다음','과제 · 해결 기록','공통 → 개별','<b>수업한 날은 공통과제, 그다음부터는 학생마다 다른 개별과제.</b> 다 하고 나면 문항마다 "한 번에 · 고쳐서 · 해설 보고 · 질문해서 · 해설 봐도 모름 · 안 풀었음" 중 하나를 남깁니다. "해설 봐도 모름"은 조교에게 바로 올라가고, 학원에 오지 않아도 온라인으로 손풀이 답변을 받습니다.'],
   ['다음 날','데일리 리포트','학부모님께','<b>수업 다음 날 학부모님께 데일리 리포트.</b> 리뷰테스트 점수, 과제 이행률, 반 평균, 추이가 한 화면에 담깁니다.']],
  [['주 1회','주간고사 예약','결시하면 그 주 재시','<b>학생이 자기 일정에 맞는 타임을 예약합니다.</b> 교실 화면의 QR로 입실이 기록되고, 결시하면 그 주 일요일까지 재시를 봅니다.'],
